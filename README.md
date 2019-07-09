@@ -16,8 +16,8 @@
   feature = feature/
   release = release/
   hotfix = hotfix/
-  versiontag = release/
   support = support/
+  versiontag = 
 ```
 
 ## 작업시작
