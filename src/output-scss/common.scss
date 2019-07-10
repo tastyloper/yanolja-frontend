@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+/* 
+  미디어 쿼리 설정
+*/
+// Break Point (Desktop First 기준 내림차순 설정)
+$under-mobile: 767px;
+$mobile-width: 768px;
+$tablet-width: 992px;
+$desktop-width: 1200px;
+
+// only 모바일
+@mixin only-mobile {
+  @media (max-width: #{$under-mobile}) {
+    @content;
+  }
+}
+// 모바일
+@mixin mobile-width {
+  @media (min-width: #{$mobile-width}) {
+    @content;
+  }
+}
+// 테블릿
+@mixin tablet-width {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+// PC
+@mixin desktop-width {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin both-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
