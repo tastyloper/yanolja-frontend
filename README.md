@@ -31,7 +31,6 @@
 5. [develop] `git push` 명령어로 merge된 최종 파일들을 develop에 올린다.
 6. fork한 repo(자기 repo)에서 **Pull Requests**를 보낸다.(develop -> develop)
 
-
 # Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
