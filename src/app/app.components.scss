@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}
+main {
+  flex: 1;
+  position: relative;
+}
+::ng-deep main > router-outlet ~ * {
+  overflow-y: scroll;
+  position: absolute;
+  top: 72px;
+  bottom: 0;
+  width: 100%;
+}
