@@ -1,24 +1,36 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
+
 import { SharedModule } from './shared/shared.module';
-import { YanoljaModule } from './yanolja/yanolja.module';
+import { CoreModule } from './core/core.module';
+import { AccommodationModule } from './accommodation/accommodation.module';
+import { AuthModule } from './auth/auth.module';
+import { MypageModule } from './mypage/mypage.module';
 
 import { AppComponent } from './app.component';
+import { MainComponent } from './components/main/main.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    SharedModule,
     BrowserAnimationsModule,
-    YanoljaModule
+    SharedModule,
+    CoreModule,
+    AccommodationModule,
+    AuthModule,
+    MypageModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
