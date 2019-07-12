@@ -30,7 +30,8 @@
    * 만든 feature 브런치가 없어지고 develop에 자동으로 merge 된다.
 5. [develop] `git push` 명령어로 merge된 최종 파일들을 develop에 올린다.
 6. fork한 repo(자기 repo)에서 **Pull Requests**를 보낸다.(develop -> develop)
-
+ 
+ 
 
 # Angular
 
