@@ -10,15 +10,26 @@ header {
   border-bottom: 1px solid #DEE2E6;
 }
 .logo {
-  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  a {
+    display: block;
+  }
   img {
+    display: block;
     height: 28px;
-    margin-bottom: -15px;
   }
 }
 .gnb-nav {
-  float: right;
+  padding-left: 100px;
   ul {
+    display: inline-block;
     list-style: none;
   }
   li {
@@ -48,4 +59,12 @@ header {
       }
     }
   }
+  .right-menu {
+    float: right;
+  }
+}
+.temp-header {
+  position: fixed;
+  top: 75px;
+  left: 0;
 }
