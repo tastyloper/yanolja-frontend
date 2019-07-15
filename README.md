@@ -19,7 +19,6 @@
   support = support/
   versiontag = 
 ```
-
 ## 작업시작
 1. [develop] 최신 상태로 만들기 위해 fork했던 주소에 데이터를 가져온다.
    1. `git fetch rmorigin`
@@ -29,9 +28,8 @@
 4. [feature로 만든 브런치] `git flow feature finish [원하는 브런치 이름]`
    * 만든 feature 브런치가 없어지고 develop에 자동으로 merge 된다.
 5. [develop] `git push` 명령어로 merge된 최종 파일들을 develop에 올린다.
-6. fork한 repo(자기 repo)에서 **Pull Requests**를 보낸다.(develop -> develop)
- 
- 
+6. fork한 repo(자기 repo)에서 **Pull Requests**를 보낸다.(develop -> develop).
+
 
 # Angular
 
