@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { SubTitleComponent } from './sub-title/sub-title.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SubTitleComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { FooterComponent } from './footer/footer.component';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SubTitleComponent
   ]
 })
 export class SharedModule {}
