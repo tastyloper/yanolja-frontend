@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { PasswordValidator } from '../password-validator';
 import { Router } from '@angular/router';
+
+import { SubTitleService } from 'src/app/core/services/sub-title.service';
+
+import { PasswordValidator } from '../password-validator';
 
 @Component({
   selector: 'app-signup',
@@ -12,11 +15,15 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
   constructor(
+    private subTitleService: SubTitleService,
     private fb: FormBuilder,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.subTitleService.pagaTitle = '회원가입';
+    this.subTitleService.pagaDescription = '회원가입하고, 혜택받으세요!';
+
     this.signupForm = this.fb.group({
       userName: ['', [
         Validators.required,
@@ -53,6 +60,7 @@ export class SignupComponent implements OnInit {
     });
     console.dir(this.signupForm);
   }
+
 
   onSubmit() {
     console.dir(this.signupForm);
