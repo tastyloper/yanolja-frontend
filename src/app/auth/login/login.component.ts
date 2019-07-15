@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
+import { SubTitleService } from '../../core/services/sub-title.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,9 +11,15 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private subTitleService: SubTitleService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
+    this.subTitleService.pagaTitle = '로그인';
+    this.subTitleService.pagaDescription = '로그인하고, 혜택받으세요!';
+
     this.loginForm = this.fb.group({
       userid: ['', [
         Validators.required,
