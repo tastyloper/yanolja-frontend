@@ -1,0 +1,369 @@
+/* You can add global styles to this file, and also import other style files */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*버튼 애니메이션*/
+button {
+  cursor: pointer;
+  transition: box-shadow .1s ease-out,background-color .1s ease-out,color .1s ease-out,border-bottom .1s ease-out;
+}
+/* 페이지 공통 마진/ width세팅*/
+.project-main-container {
+  width: 700px;
+}
+/* 헤더 디자인*/
+.header-section {
+  height: 115px;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: row; 
+  position: relative;
+  margin:48px 0 40px 0;
+  justify-content: space-between;
+}
+/*별점*/
+.stars {
+  width: 50px;
+  height: 10px;
+  background: salmon;
+  position: absolute;
+  top: 10px;
+}
+/*숙소 명*/
+.accomodation-name {
+  font-size: 32px;
+  margin-top: 32px;
+  font-weight: 600;
+}
+/*헤더- 숙소위치*/
+.header-location {
+  position: absolute;
+  bottom: 10px;
+  font-size: 13px;
+  color: #848c94;
+}
+/*flex 위치 배분을 위한 container 분리*/
+.review-container {
+  align-self: flex-end;
+  position: relative;
+  width: 160px;
+  height: 43px; 
+  padding-right: 45px;
+}
+
+.review-container span {
+  display: block;
+  text-align: right;
+}
+/*리뷰 간단 평가*/
+.evaluation {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+/*리뷰 수*/
+.review-count {
+  font-size: 12px;
+  color: #848c94;
+}
+/*평점*/
+.review-container i {
+  background: #003580;
+  position: absolute;
+  right: 0;
+  top: -5px;
+  height: 40px;
+  width: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 40px;
+  border-radius: 10px 10px 10px 0;
+  text-align: center;
+  color: #fff;
+}
+
+/*사진 섹션*/
+.accomodation-imgs-section {
+  width: 100%;
+  height: 605px;
+  background: cyan;
+  margin-bottom: 64px;
+}
+.accomodation-detail h1 {
+  height: 1px;
+  width: 1px;
+  padding: 1px;
+  overflow: hidden;
+}
+
+/*객실 가격 비교 섹션*/
+.compare-price-section {
+  width: 100%;
+}
+.compare-price-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* 객실 비교조건 선택*/
+.compare-condition {
+  width: 100%;
+  height: 136px;
+  padding: 45px;
+  /* 패딩 24px에서 45px로 변경*/
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #e9ecef;
+}
+.compare-condition h3 {
+  height: 1px;
+  width: 1px;
+  padding: 1px;
+  overflow: hidden;
+  display: flex;
+}
+.check-date {
+  width: 50%;
+  height: 45px;
+  margin-right: 30px;
+  border: 1px solid #e9ecef;
+
+}
+.check-person {
+  width: 35%;
+  height: 45px;
+  margin-right: 30px;
+  border: 1px solid #e9ecef;
+
+}
+.search {
+  line-height: 38px;
+  width: 84px;
+  height: 44px;
+  font-size: 14px;
+  background-color: #e7f4fd;
+  color: #2b96ed;
+  font-weight: 700;
+  border-radius: 2px;
+  border-width: 0;
+}
+.search:hover {
+  background-color: #cbe7fd;
+  box-shadow: 0 1px 3px 0 rgba(43,150,237,.2);
+  color: #2b96ed;
+}
+
+/*객실 리스트*/
+.room-list-section {
+  width: 100%;
+}
+.room-list-section h3{
+  height: 1px;
+  width: 1px;
+  padding: 1px;
+  overflow: hidden;
+}
+.room {
+  padding: 40px 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #e9ecef;
+}
+.room-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.room div {
+  /* align-self: flex-end; */
+  position: relative;
+}
+.room span {
+  display: block;
+  margin-right: 80px;
+}
+.room-price {
+  font-size: 12px;
+  color: #848c94;
+  text-align: end;
+}
+.room-shocking {
+  font-size: 22px;
+  font-weight: 600;
+}
+.select-room {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: #2b96ed;
+  border-radius: 2px;
+  color: #fff;
+  width: 40%;
+  height: 80%;
+  font-size: 16px;
+}
+.select-room:hover{
+  border: 1px solid #2b96ed;
+  background-color: #2b96ed;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+  color: #fff;
+}
+
+/*숙소 정보*/ 
+.accomodation-information-section {
+  margin-top: 130px;
+}
+.accomodation-information-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+/*숙소 위치*/
+.accomodation-location h3 {
+  height: 1px;
+  width: 1px;
+  padding: 1px;
+  overflow: hidden;
+}
+.accomodation-location {
+  padding: 20px 20px;
+  height: 80px;
+  width: 100%;
+  border: 1px solid #e9ecef;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+.accomodation-location button {
+  width: 106px;
+  height: 40px;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495056;
+  margin-left: 4px;
+  align-self: flex-end;
+}
+.accomodation-location button:hover {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+}
+.accomodation-location p {
+  align-self: flex-start;
+  order: -1;
+}
+
+/*편의시설*/
+.facilities {
+  height: 164px;
+  width: 100%;
+  padding: 32px 0;
+  border-bottom: 1px solid rgb(233, 236, 239);
+  display: flex;
+  flex-direction: row;
+}
+.facilities h3 {
+  font-size: 17px;
+  font-weight: 700;
+  width: 20%;
+}
+.facilities-list {
+  width: 80%;
+ display: flex;
+ padding: 0 10px;
+}
+.facilities-list li {
+  width: 92px;
+  height: 50px;
+  margin-bottom: 24px;
+  background-color: aliceblue;
+  margin-right: 10px;
+}
+
+/*소개*/
+.introduce {
+  padding: 32px 0;
+  border-bottom: 1px solid rgb(233, 236, 239);
+  width: 100%;
+}
+.introduce h3 {
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 700;
+  width: 20%;
+  height: 100px;
+  // float: left;
+}
+.introduce p {
+  float: right;
+  width: 80%;
+  font-size: 15px;
+  padding-right: 30px;
+}
+
+/*후기*/
+.review-section {
+  padding: 32px 0;
+  width: 100%;
+}
+.review-section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+}
+.grade {
+  width: 30%;
+  height: 154px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 236, 239);
+  border-radius: 2px;
+  float: left;
+}
+.grade-number {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  background-color: rgb(0, 53, 128);
+  font-size: 24px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 48px;
+  border-radius: 9px 9px 9px 0px;
+  margin: 40px auto 10px auto;
+}
+.grade-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(73, 80, 86);
+  text-align: center;
+}
+.grade-score {
+  width: 65%;
+  height: 154px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 236, 239);
+  border-radius: 2px;
+  display: inline-block;
+  margin-left: 10px;
+}
