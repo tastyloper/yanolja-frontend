@@ -199,13 +199,13 @@ button {
   margin-right: 80px;
 }
 .room-price {
-  font-size: 22px;
-  font-weight: 600;
-}
-.room-shocking {
   font-size: 12px;
   color: #848c94;
   text-align: end;
+}
+.room-shocking {
+  font-size: 22px;
+  font-weight: 600;
 }
 .select-room {
   position: absolute;
@@ -224,4 +224,146 @@ button {
   background-color: #2b96ed;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
   color: #fff;
+}
+
+/*숙소 정보*/ 
+.accomodation-information-section {
+  margin-top: 130px;
+}
+.accomodation-information-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+/*숙소 위치*/
+.accomodation-location h3 {
+  height: 1px;
+  width: 1px;
+  padding: 1px;
+  overflow: hidden;
+}
+.accomodation-location {
+  padding: 20px 20px;
+  height: 80px;
+  width: 100%;
+  border: 1px solid #e9ecef;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+.accomodation-location button {
+  width: 106px;
+  height: 40px;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495056;
+  margin-left: 4px;
+  align-self: flex-end;
+}
+.accomodation-location button:hover {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+}
+.accomodation-location p {
+  align-self: flex-start;
+  order: -1;
+}
+
+/*편의시설*/
+.facilities {
+  height: 164px;
+  width: 100%;
+  padding: 32px 0;
+  border-bottom: 1px solid rgb(233, 236, 239);
+  display: flex;
+  flex-direction: row;
+}
+.facilities h3 {
+  font-size: 17px;
+  font-weight: 700;
+  width: 20%;
+}
+.facilities-list {
+  width: 80%;
+ display: flex;
+ padding: 0 10px;
+}
+.facilities-list li {
+  width: 92px;
+  height: 50px;
+  margin-bottom: 24px;
+  background-color: aliceblue;
+  margin-right: 10px;
+}
+
+/*소개*/
+.introduce {
+  padding: 32px 0;
+  border-bottom: 1px solid rgb(233, 236, 239);
+  width: 100%;
+}
+.introduce h3 {
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 700;
+  width: 20%;
+  height: 100px;
+  // float: left;
+}
+.introduce p {
+  float: right;
+  width: 80%;
+  font-size: 15px;
+  padding-right: 30px;
+}
+
+/*후기*/
+.review-section {
+  padding: 32px 0;
+  width: 100%;
+}
+.review-section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+}
+.grade {
+  width: 30%;
+  height: 154px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 236, 239);
+  border-radius: 2px;
+  float: left;
+}
+.grade-number {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  background-color: rgb(0, 53, 128);
+  font-size: 24px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 48px;
+  border-radius: 9px 9px 9px 0px;
+  margin: 40px auto 10px auto;
+}
+.grade-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(73, 80, 86);
+  text-align: center;
+}
+.grade-score {
+  width: 65%;
+  height: 154px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 236, 239);
+  border-radius: 2px;
+  display: inline-block;
+  margin-left: 10px;
 }
