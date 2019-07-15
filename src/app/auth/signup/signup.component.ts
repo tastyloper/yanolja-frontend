@@ -61,6 +61,7 @@ export class SignupComponent implements OnInit {
     console.dir(this.signupForm);
   }
 
+
   onSubmit() {
     console.dir(this.signupForm);
     // this.signupForm.reset();
