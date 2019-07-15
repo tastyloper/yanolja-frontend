@@ -364,6 +364,93 @@ button {
   border-style: solid;
   border-color: rgb(233, 236, 239);
   border-radius: 2px;
+  margin-left: calc(30% + 10px);
+}
+.grade-score ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 32px;
+}
+.grade-item {
+  width: calc(45% - 16px);
+  margin-bottom: 20px;
+  margin-right: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.item-background {
+  width: 100%;
+  height: 4px;
+  position: relative;
+  background-color: rgb(233, 236, 239);
+  border-radius: 2px;
+}
+.grade-item p:nth-child(1) {
+  font-size: 13px;
+  color: rgb(73, 80, 86);
+  line-height: 18px;
+  margin-bottom: 2px;
+}
+.grade-item p:nth-last-child(1) {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(102, 109, 117);
+  position: absolute;
+  right: -24px;
+  top: 50%;
+}
+.item-foreground {
+  height: 4px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgb(81, 171, 243);
+  border-radius: 2px;
+  z-index: 2;
+  /*임시 width*/
+  width: 90%;
+}
+/*container 임시 width*/
+.my-container {
+  width: 1000px;
+  margin: 0 auto;
+}
+.review-item {
+  width: calc(90% + 10px);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(233, 236, 239);
+}
+.review-score {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  background-color: rgb(0, 53, 128);
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 32px;
+  border-radius: 6px 6px 6px 0px;
   display: inline-block;
-  margin-left: 10px;
+}
+.review-item span:nth-child(2) {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(52, 58, 64);
+  line-height: 32px;
+  margin-bottom: 0px;
+  margin-left: 6px;
+}
+.review-item p {
+  margin: 20px 0 20px 50px;
+  font-size: 14px;
+  color: rgb(73, 80, 86);
+}
+.review-item span:nth-last-child(1) {
+  padding-left: 50px;
+  font-size: 12px;
+  color: rgb(132, 140, 148);
 }
