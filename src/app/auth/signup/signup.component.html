@@ -1,5 +1,76 @@
-<section class="signup">
+<section class="signup member-section">
   <div class="container">
-    <p>회원가입 페이지</p>
+    <div class="member-panel">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" [class.has-error]="userName.errors && userName.touched">
+          <label for="userName" class="form-title">이름*</label>
+          <input type="text" id="userName" name="userName" class="form-input" placeholder="이름을 입력해주세요." minlength="2" formControlName="userName">
+          <em class="help-block" *ngIf="userName.errors?.required && userName.touched">멋진 이름이 있으시잖아요.</em>
+          <em class="help-block" *ngIf="userName.errors?.minlength && userName.touched">이름은 두 글자 이상 입력해주세요.</em>
+        </div>
+        <div class="form-group" [class.has-error]="userid.errors && userid.touched">
+          <label for="userid" class="form-title">이메일*</label>
+          <input type="text" id="userid" name="userid" class="form-input" placeholder="ID@example.com" formControlName="userid">
+          <em class="help-block" *ngIf="userid.errors?.required && userid.touched">꼭 필요해요.</em>
+          <em class="help-block" *ngIf="userid.errors?.pattern && userid.touched">이메일 주소가 맞나요?</em>
+        </div>
+        <div formGroupName="passwordGroup">
+          <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
+            <label for="userpw" class="form-title">비밀번호*</label>
+            <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호" minlength="6" formControlName="userpw">
+            <em class="help-block" *ngIf="userpw.errors?.required && userpw.touched">비밀번호를 입력해주세요.</em>
+            <em class="help-block" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
+          </div>
+          <div class="form-group" [class.has-error]="passwordGroup.errors && confirmPw.touched">
+            <label for="confirmPw" class="form-title">비밀번호 확인*</label>
+            <input type="password" id="confirmPw" name="confirmPw" class="form-input" placeholder="비밀번호 확인" formControlName="confirmPw">
+            <em class="help-block" *ngIf="passwordGroup.errors?.match && confirmPw.touched">비밀번호가 일치하지 않습니다.</em>
+          </div>
+        </div>
+        <div class="form-group" formGroupName="checkGroup">
+          <p class="form-title">약관동의</p>
+          <div class="checkbox allAgree">
+            <input type="checkbox" id="allAgree" name="allAgree" formControlName="allAgree">
+                  <!-- [checked]="adult.value && service.value && privacy.value && location.value && privacy2.value && notConnected.value"> -->
+            <label for="allAgree">전체동의</label>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="adult" name="adult" formControlName="adult">
+            <label for="adult">만 14세 이상입니다 <span class="point-text">(필수)</span></label>
+            <em class="help-block" *ngIf="adult.errors?.pattern && adult.touched">만 14세 이상인지 체크해 주세요.</em>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="service" name="service" formControlName="service">
+            <label for="service">서비스 이용약관 동의 <span class="point-text">(필수)</span></label>
+            <small>광고성 정보 수신동의 포함</small>
+            <em class="help-block" *ngIf="service.errors?.pattern && service.touched">서비스 이용약관 동의에 체크해 주세요.</em>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="privacy" name="privacy" formControlName="privacy">
+            <label for="privacy">개인정보 수집 이용 동의 <span class="point-text">(필수)</span></label>
+            <small>예약 및 서비스 이용을 위한 필수 개인정보 수집</small>
+            <em class="help-block" *ngIf="privacy.errors?.pattern && privacy.touched">개인정보 수집 이용 동의에 체크해 주세요.</em>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="location" name="location" formControlName="location">
+            <label for="location">위치 정보 이용약관 동의 (선택)</label>
+            <small>위치정보를 통한 내 주변 숙소정보 제공</small>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="privacy2" name="privacy2" formControlName="privacy2">
+            <label for="privacy2">개인정보 수집 이용 동의 (선택)</label>
+            <small>서비스 혜택 등의 정보 제공을 위한 개인정보 수집 및 활용</small>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="notConnected" name="notConnected" formControlName="notConnected">
+            <label for="notConnected">장기 미접속 시에도 계정 유지 (선택)</label>
+            <small>※ 미동의 시 1년 미접속 회원 탈퇴 전환</small>
+          </div>
+        </div>
+        <p class="member-text">*선택 항목을 동의하지 않아도 서비스를 이용하실 수 있습니다.</p>
+        <button class="submit-btn" [disabled]="signupForm.invalid">회원가입</button>
+      </form>
+    </div>
   </div>
 </section>
+<app-footer></app-footer>
