@@ -1,0 +1,168 @@
+@import "../../../output-scss/common.scss";
+
+footer {
+  padding: 0 0 30px;
+  color: #AAA;
+  font-size: 13px;
+  background-color: #292929;
+  .navbar {
+    padding: 20px 0;
+    .navbar-brand {
+      overflow: hidden;
+      display: inline-block;
+      width: 92px;
+      height: 26px;
+      font-size: 0;
+      line-height: 0;
+      text-indent: -9999px;
+      background-image: url("/assets/img/common/icon-comm.svg");
+      background-position: -55px -62px;
+    }
+  }
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .nav-item {
+    position: relative;
+    padding: 0 20px;
+    &:not(:first-child)::before {
+      content: "|";
+      @include vertical-center;
+      left: 0;
+      color: #666;
+    }
+    .nav-link {
+      color: #666;
+      font-size: 14px;
+      &:hover {
+        color: #AAA;
+      }
+    }
+  }
+  .btn-group {
+    .dropdown-toggle {
+      width: 220px;
+      color: #AAA;
+      font-size: 14px;
+      text-align: left;
+      border: 1px solid #AAA;
+      border-radius: 0;
+      &:focus {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      }
+      &::after {
+        @include vertical-center;
+        right: 12px;
+      }
+    }
+    .dropdown-menu {
+      width: 220px;
+      border-radius: 0;
+      .dropdown-item {
+        font-size: 14px;
+      }
+    }
+  }
+  .footer-info {
+    float: left;
+    width: calc(100% - 240px);
+    padding: 30px 0;
+    border-top: 1px solid #333;
+    address {
+      margin-bottom: 6px;
+      line-height: 1.9;
+      i {
+        display: inline-block;
+        width: 1px;
+        height: 12px;
+        margin: 0 10px;
+        vertical-align: middle;
+        background-color: #AAA;
+      }
+    }
+  }
+  .service-center {
+    float: right;
+    width: 220px;
+    padding: 30px 0;
+    a {
+      color: #AAA;
+      font-size: 14px;
+      &:hover {
+        color: #DDD;
+      }
+    }
+  }
+  .snslink {
+    margin-top: 12px;
+    a {
+      display: inline-block;
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+      .icon-comm {
+        overflow: hidden;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        font-size: 0;
+        line-height: 0;
+        text-indent: -9999px;
+        vertical-align: middle;
+        background: url("/assets/img/common/icon-comm.svg") no-repeat;
+      }
+      .icon-sns-facebook {
+        background-position: 0 -202px;
+      }
+      .icon-sns-instargram {
+        background-position: -25px -202px;
+      }
+      .icon-sns-youtube {
+        background-position: -50px -202px;
+      }
+      .icon-sns-navertv {
+        background-position: -300px -202px;
+      }
+      .icon-naverpost {
+        background: url("/assets/img/footer/naver-post.png") no-repeat;
+      }
+      .icon-sns-naverblog {
+        width: 36px;
+        background-position: -300px -152px;
+      }
+      &:hover {
+        .icon-sns-facebook {
+          background-position-y: -227px;
+        }
+        .icon-sns-instargram {
+          background-position-y: -227px;
+        }
+        .icon-sns-youtube {
+          background-position-y: -227px;
+        }
+        .icon-sns-navertv {
+          background-position: -300px -227px;
+        }
+        .icon-naverpost {
+          background: url("/assets/img/footer/naver-post-hover.png") no-repeat;
+        }
+        .icon-sns-naverblog {
+          background-position: -300px -177px;
+        }
+      }
+    }
+  }
+  .award {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .align-self-start {
+      margin-right: 10px;
+    }
+    .media-body {
+      font-size: 12px;
+      letter-spacing: -1px;
+    }
+  }
+}
