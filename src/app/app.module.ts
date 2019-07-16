@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { MainModule } from './main/main.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AccommodationModule } from './accommodation/accommodation.module';
@@ -11,18 +12,17 @@ import { AuthModule } from './auth/auth.module';
 import { MypageModule } from './mypage/mypage.module';
 
 import { AppComponent } from './app.component';
-import { MainComponent } from './components/main/main.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     NotFoundComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MainModule,
     SharedModule,
     CoreModule,
     AccommodationModule,
