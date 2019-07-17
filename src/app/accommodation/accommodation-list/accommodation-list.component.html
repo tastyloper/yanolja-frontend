@@ -25,25 +25,25 @@
           <div class="alist-search-date search-box">
               <div class="alist-search-frame">
                   <i class="fa fa-user" aria-hidden="true"></i>
-                <button class="alist-search-inputbox ">
+                <button class="alist-search-inputbox" (click)="toggle(test)" #test>
                   <div class="btn-date-inner">
-                    <span>객실 1개, 총 2명</span>
+                    <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                   </div>
                 </button>
               </div>
-              <div class="alist-date-popup-container">
+              <div class="alist-date-popup-container" [class.active]="person">
                 <div class="alist-date-popup-module">
-                  <h4 class="alist-date-popup-h4">객실 및 인원</h4>
+                  <h4 class="alist-date-popup-h4">인원</h4>
                   <div class="alist-date-popup-content">
                     <div class="alist-date-popup-content-person popup-adult">
                       <p class="popup-person-option">성인</p>
                       <div class="popup-btn-stepper">
-                        <button class="stepper-modifier">
+                        <button class="stepper-modifier" (click)="minus('adult')">
                           <i class="fa fa-minus" aria-hidden="true"></i>
                         </button>
-                        <p class="stepper-value">2</p>
-                        <button class="stepper-modifier">
+                        <p class="stepper-value">{{numberAdult}}</p>
+                        <button class="stepper-modifier" (click)="plus('adult')">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                           </button>
                       </div>
@@ -51,11 +51,11 @@
                     <div class="alist-date-popup-content-person popup-children">
                         <p class="popup-person-option">아동</p>
                         <div class="popup-btn-stepper">
-                          <button class="stepper-modifier">
+                          <button class="stepper-modifier" (click)="minus('children')">
                             <i class="fa fa-minus" aria-hidden="true"></i>
                           </button>
-                          <p class="stepper-value">1</p>
-                          <button class="stepper-modifier">
+                          <p class="stepper-value">{{numberChildren}}</p>
+                          <button class="stepper-modifier" (click)="plus('children')">
                               <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
