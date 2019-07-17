@@ -1,19 +1,22 @@
+@import "../../../output-scss/common.scss";
+
 .mypage {
   background-color: #f5f6f7;
-  padding:70px 70px;
-}
-.main {
-  margin: 20px 20px;
+  padding:70px 70px; 
 }
 .img-circle{
-  border: 2px solid #e9ecef;
   border-radius: 50%; 
-  // vertical-align: middle;
+  width: 80px;
+}
+.img-manage {
+  width: 11px;
+  height: 11px;
+  margin-right: 3px;
 }
 .mypage-side-bar {
   width: 250px;
   margin-right: 15px;
-  background: yellow;
+  background-color: #fff;
   color: #343a40;
   float: left;
   margin-right: 20px;
@@ -25,44 +28,47 @@
   text-align: center;
 }
 .side-top-name{
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   margin: 11px 0 23px;
+}
+.side-profile-manage {
+  font-size: 13px;
+}
+.profile-manage{
+  display: inline-block;
 }
 .side-bar-bottom {
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 0 0 #e9ecef;
-  margin-bottom: 8px;
-  padding: 13px 25px;
+  padding: 15px 25px;
 }
 .side-bottom-menu {
   font-size: 14px;
   display: block;
-  font-weight: 500;
-  margin: 7px 0;
+  margin: 10px 0;
+  .fa {
+    color: $primary-color;
+    display: inline-block;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-align: right;
+    width: 60%;
+  }
 }
 .side-sub-menu {
   display: inline-block;
   text-align: left;
   width: 40%;
 }
-.side-item {
-  color: #2b96ed;
-  display: inline-block;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-align: right;
-  width: 60%;
-}
+
 
 // body
 .mypage-body {
-  background-color: #fff;
   width: calc(100% - 270px);
   float: right;
   border-radius: 2px;
-  box-shadow: 0 1px 0 0 #e9ecef;
   margin-bottom: 8px;
   color: #495056;
   font-weight: 500;
@@ -73,11 +79,14 @@
   margin-bottom: 50px;
   position: relative;
   text-align: center;
+  
 }
 .img-profile {
-  margin-bottom: 50px;
-  position: relative;
-  text-align: center;
+  width: 98px;
+  border-radius: 50px;
+}
+.body-text {
+  margin-top: 15px;
 }
 .icon {
   width: 18px;
@@ -89,6 +98,9 @@
   font-size: 14px;
   padding: 50px 40px 40px;
   position: relative;
+  background-color: #fff;
+  box-shadow: 0 1px 0 0 #e9ecef;
+  // margin-bottom: 10px;
 }
 .btn-edit{
   // font-weight: 600;
@@ -106,7 +118,6 @@
 }
 .form-group {
   width: 100%;
-  background: pink;
   // display: inline;
   height: 29px;
   line-height: 27px;
@@ -114,9 +125,10 @@
   position: relative;
 }
 .form-key {
-  font-weight: 600;
+  font-weight: 500;
   float: left;
-  width: 122px;
+  width: 170px;
+  margin-left: 20px;
 }
 .form-value {
   border: 0;
@@ -127,12 +139,20 @@
   display: inline;
   display: inline-block;
 }
-
 .form-value-esp {
   display: block;
 }
-
-// .icon-text {
-//   line-height: 27px;
-//   vertical-align: middle;
-// }
+.certification {
+  color: $primary-color;
+  cursor: pointer;
+  margin-left: 16px;
+}
+.delete-id {
+  top: 500px;
+  text-align: center;
+  color: #848c94;
+  font-size: 11px;
+  text-decoration: underline;
+  line-height: 1.5;
+  padding-top: 10px;
+}
