@@ -1,6 +1,8 @@
 ::ng-deep main > router-outlet ~ * {
   position: absolute;
-  top: 72px;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: calc(100% - 72px);
+  height: 100%;
+  padding-top: 72px;
 }

@@ -132,6 +132,12 @@ a, button {
 .container {
   position: relative;
 }
+.fix-height {
+  min-height: 100%;
+}
+.fix-height-sub {
+  min-height: calc(100% - 82px); // 82: sub-title
+}
 /* custom checkbox */
 .checkbox {
   padding-left: 20px;
