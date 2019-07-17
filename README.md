@@ -27,8 +27,11 @@
 3. [feature로 만든 브런치] 작업하고 `git add`, `git commit`, `git push -u origin [feature로 만든 브런치]`
 4. [feature로 만든 브런치] `git flow feature finish [원하는 브런치 이름]`
    * 만든 feature 브런치가 없어지고 develop에 자동으로 merge 된다.
-5. [develop] `git push` 명령어로 merge된 최종 파일들을 develop에 올린다.
-6. fork한 repo(자기 repo)에서 **Pull Requests**를 보낸다.(develop -> develop).
+5. [develop] 혹시 갱신된 데이터가 있는지 확인하고 있으면 데이터를 가져와서 올리기 전에 합친다.
+   1. `git fetch rmorigin`
+   2. `git merge rmorigin/develop`
+6. [develop] `git push` 명령어로 merge된 최종 파일들을 develop에 올린다.
+7. fork한 repo(자기 repo)에서 **Pull Requests**를 보낸다.(develop -> develop).
 
 
 # Angular

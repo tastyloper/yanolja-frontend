@@ -1,0 +1,21 @@
+@import "../../output-scss/common.scss";
+@import '~swiper/dist/css/swiper.min.css';
+
+.main-header {
+  margin-bottom: 75px;
+  padding-top: 50px;
+  background-color: $primary-color;
+  h2 {
+    margin-bottom: 15px;
+    color: #FFF;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.39;
+    text-align: center;
+  }
+  .search-panel {
+    width: 880px;
+    height: 72px;
+    margin: 0 auto 50px;
+  }
+}

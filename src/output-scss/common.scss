@@ -1,6 +1,12 @@
 @charset "utf-8";
 
 /* 
+  색 설정
+*/
+$primary-color: #FF3478;
+$primary-dark-color: #E62E6B;
+
+/* 
   미디어 쿼리 설정
 */
 // Break Point (Desktop First 기준 내림차순 설정)
@@ -43,4 +49,22 @@ $desktop-width: 1200px;
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+@mixin horizontal-center {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+@mixin vertical-center {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
