@@ -1,0 +1,192 @@
+.alist-body{
+  position: relative;
+}
+
+.alist-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.alist-hrz {
+  width: 100%;
+  height: 72px;
+  background: #ff3478;
+  // position: relative;
+  z-index: 80;
+  // float: left;
+}
+
+
+.alist-container-sec {
+  width: 80%;
+  position: absolute;
+  top: -10px;
+  left: 10%;
+  margin-right:auto;
+  margin-left:auto; 
+}
+
+
+.alist-search-items-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.alist-search-container{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 72px;
+  background:#FF3478;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.alist-search-items-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alist-search-frame{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 2px;
+}
+
+.alist-search-frame i {
+  margin-left: 12px;
+  color: #FF3478;
+}
+
+.search-box {
+  border-radius: 2px;
+  background: #ffff;
+  height: 48px;
+  margin-right: 6px;
+  z-index: 100;
+  // padding-right: 10px; 
+}
+
+.alist-date-popup-content-person {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 ;
+}
+
+.popup-btn-stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stepper-value {
+  width: 36px;
+  height: 22px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #343a40;
+  text-align: center;
+  line-height: 20px;
+}
+
+.stepper-modifier {
+  border-radius: 24px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ced4da;
+}
+
+.search-box:first-child {
+  margin-left: 4px;
+}
+
+.search-box:last-child {
+  margin-right: 0px;
+  padding-right: 0px; 
+}
+
+.alist-search-type{
+  border:none;
+  width: 120px;
+}
+
+.alist-search-loc{
+  width: 260px;
+}
+
+.alist-search-date{
+  width: 315px;
+}
+
+.btn-date-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.alist-search-inputbox{
+  font-weight: 600;
+  border:none;
+  width: 256px;
+  height: 100%;
+  color: #343a40;
+  outline-style: none;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.alist-search-inputbox:last-child {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-submit-container{
+  width: 80px;
+
+}
+
+.alist-date-popup-module{
+  padding: 20px;
+}
+
+.alist-date-popup-container{
+  width: 100%;
+  margin-top: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
+  z-index: 100;
+}
+.alist-date-popup-h4 {
+  margin-bottom: 20px;
+  line-height: 16px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+
+.alist-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background: pink;
+}
+
+.alist-header-nav {
+  background: green;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
