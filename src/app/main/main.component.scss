@@ -2,6 +2,7 @@
 @import '~swiper/dist/css/swiper.min.css';
 
 .main-header {
+  height: 320px;
   margin-bottom: 75px;
   padding-top: 50px;
   background-color: $primary-color;
@@ -17,5 +18,90 @@
     width: 880px;
     height: 72px;
     margin: 0 auto 50px;
+  }
+  .swiper-panel {
+    position: relative;
+  }
+  .swiper-container {
+    padding-bottom: 20px;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -30px;
+    font-size: 25px;
+    background-color: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 2px 6px 0 rgba(0, 0, 0, .05), 0 4px 12px 0 rgba(0, 0, 0, .05);
+    -webkit-transition: all 0.35s;
+    -moz-transition: all 0.35s;
+    transition: all 0.35s;
+    .fa {
+      @include both-center;
+    }
+  }
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 6px 0 rgba(0, 0, 0, .05), 0 8px 12px 0 rgba(0, 0, 0, .2);
+  }
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    opacity: 0;
+  }
+  .swiper-button-next {
+    right: -20px;
+    background-image: none;
+    .fa {
+      left: 54%;
+    }
+  }
+  .swiper-button-prev {
+    left: -20px;
+    background-image: none;
+    .fa {
+      left: 46%;
+    }
+  }
+  .hash-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 107px;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 4px;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .3), 0 0 1px 0 rgba(0, 0, 0, .3);
+    transition: box-shadow .2s ease;
+    &:hover {
+      box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .3), 0 0 1px 0 rgba(0, 0, 0, .3);
+    }
+    &.franchise {
+      background-image: url("/assets/img/main/franchise.png");
+    }
+    &.remodeling {
+      background-image: url("/assets/img/main/remodeling.png");
+    }
+    &.super-special {
+      background-image: url("/assets/img/main/super-special.png");
+    }
+    &.party {
+      background-image: url("/assets/img/main/party.png");
+    }
+    .hash-bg {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(166deg,#fff 40%,hsla(0,0%,100%,0) 68%);
+      border-radius: 4px;
+    }
+    h3 {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      font-size: 18px;
+      font-weight: 700;
+    }
   }
 }
