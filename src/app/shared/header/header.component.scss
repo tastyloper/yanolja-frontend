@@ -1,3 +1,5 @@
+@import "../../../output-scss/common.scss";
+
 header {
   position: fixed;
   top: 0;
@@ -8,11 +10,18 @@ header {
   padding: 18px 0;
   background-color: #FFF;
   border-bottom: 1px solid #DEE2E6;
+  -webkit-transition: background-color 0.35s;
+  -moz-transition: background-color 0.35s;
+  transition: background-color 0.35s;
+  &.is-main {
+    background-color: $primary-color;
+    border-color: $primary-dark-color;
+  }
 }
 .logo {
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 15px;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -o-transform: translateY(-50%);
@@ -23,7 +32,7 @@ header {
   }
   img {
     display: block;
-    height: 28px;
+    width: 98px;
   }
 }
 .gnb-nav {
@@ -51,8 +60,8 @@ header {
       &.signup-btn {
         padding-left: 32px;
         padding-right: 32px;
-        color: #FF416F;
-        border: 1px solid #FF416F;
+        color: $primary-color;
+        border: 1px solid $primary-color;
       }
       &.signup-btn:hover {
         background-color: #FFF2F5;
@@ -67,4 +76,20 @@ header {
   position: fixed;
   top: 75px;
   left: 0;
+}
+.is-main {
+  .gnb-nav li a {
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0);
+    &:hover {
+      background-color: rgba(255, 255, 255, .2);
+    }
+    &.signup-btn {
+      color: #FFF;
+      border: 1px solid #FFF;
+      &:hover {
+        background-color: rgba(255, 255, 255, .2);
+      }
+    }
+  }
 }

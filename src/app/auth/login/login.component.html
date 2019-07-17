@@ -1,5 +1,31 @@
-<section class="login">
+<app-sub-title></app-sub-title>
+<section class="login member-section fix-height-sub">
   <div class="container">
-    <p>로그인 페이지</p>
+    <div class="member-panel">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" [class.has-error]="userid.errors && userid.touched">
+          <label for="userid" class="form-title">이메일*</label>
+          <input type="text" id="userid" name="userid" class="form-input" placeholder="이메일" formControlName="userid">
+          <em class="help-block" *ngIf="userid.errors?.required && userid.touched">꼭 필요해요.</em>
+          <em class="help-block" *ngIf="userid.errors?.pattern && userid.touched">이메일 주소가 맞나요?</em>
+        </div>
+        <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
+          <label for="userpw" class="form-title">비밀번호*</label>
+          <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호" minlength="6" formControlName="userpw">
+          <em class="help-block" *ngIf="userpw.errors?.required && userpw.touched">비밀번호를 입력해주세요.</em>
+          <em class="help-block" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label for="rememberMe">로그인 상태 유지</label>
+          </div>
+          <a routerLink="/" class="findpw-btn">비밀번호 찾기</a>
+        </div>
+        <button class="submit-btn" [disabled]="loginForm.invalid">이메일로 로그인</button>
+      </form>
+      <p class="member-text">아직 마이리얼트립 회원이 아니신가요? <a routerLink="/signup">회원가입</a></p>
+    </div>
   </div>
 </section>
+<app-footer></app-footer>
