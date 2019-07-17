@@ -1,17 +1,22 @@
+<app-sub-title></app-sub-title>
 <section class="mypage">
   <div class="container">
     <div class="main clearfix">
       <div class="mypage-side-bar">
         <div class="side-bar-top">
           <div class="side-img">
-            <img src="//d2yoing0loi5gh.cloudfront.net/assets/default/user_profile_image-414acc60b27f0a258bec14c82b70dc361fc6768da9289f924f887bec1fc33849.png" class="img-circle" width="80">
+            <img src="../../assets/img/mypage/profile.png" class="img-circle">
           </div>
-          <span class="side-top-name">이가영</span>
+          <div class="side-top-name">이가영</div>
+          <div class="side-top-profile">
+            <img src="https://d2yoing0loi5gh.cloudfront.net/assets/kitty/traveler/reservation/ic_setting@2x-832c08d9d38f208502f94e8d35e78a320024fc5f61630f2eba7801845e1eda78.png" class="img-manage"alt="프로필관리">
+            <a href="#" class="side-profile-manage">프로필관리</a>
+          </div>
         </div>
         <div class="side-bar-bottom"> 
           <div class="side-bottom-menu">
             <p class="side-sub-menu">숙소이용내역</p>
-            <span class="side-item">0건 ></span>
+            <span class="side-menu-text">0건</span><i class="fa fa-angle-right" aria-hidden="true"></i> 
           </div>
           <div class="side-bottom-menu">
             <p class="side-sub-menu">찜목록</p>
@@ -19,12 +24,13 @@
           </div>
         </div>
       </div>
-      <div class="mypage-body">
-        <div class="mypage-body-wrapper">
+      <div class="mypage-body" >
+        <div class="mypage-body-wrapper  clearfix">
           <button class="btn-edit">편집</button>
           <div class="body-content">
             <div class="body-img">
-              <img src="//d2yoing0loi5gh.cloudfront.net/assets/default/user_profile_image-414acc60b27f0a258bec14c82b70dc361fc6768da9289f924f887bec1fc33849.png" class="img-profile" width="98px">
+              <img src="../../assets/img/mypage/profile.png" class="img-profile">
+              <div class="body-text">이가영</div>
             </div>
             <div class="form-group clearfix">
               <div class="form-key">이름</div>
@@ -32,13 +38,10 @@
             </div>
             <div class="form-group clearfix">
               <div class="form-key">이메일</div>
-              <div class="form-value">happydy91@hanmail.net</div>
-              <a href="#">인증하기</a>
-            </div>
+              <div class="form-value">happydy91@hanmail.net</div>            </div>
             <div class="form-group clearfix">
                 <div class="form-key">연락처</div>
                 <div class="form-value">휴대폰 정보 없음</div>
-                <a href="#">인증하기</a>
             </div>
             <!-- <div class="form-group clearfix">
                 <div class="form-key">SNS 연동</div>
@@ -59,6 +62,7 @@
                 <div class="form-key">비밀번호</div>
                 <div class="form-value">*******</div>
             </div>
+             <!-- 
             <div class="form-group clearfix">
                 <div class="form-key">마케팅 수신동의</div>
                 <div>e-mail: 수신 거부</div>
@@ -70,10 +74,15 @@
             <div class="form-group clearfix">
                 <div class="form-key">&nbsp;</div>
                 <div class="form-value">앱푸시: 수신 거부</div>
-            </div>
+            </div> -->
           </div>
         </div>
+        <div class="delete-box">
+          <div class="delete-id">계정 삭제하기</div>
+        </div>
+        <!-- <div class="delete-id">계정 삭제하기</div> -->
       </div>
     </div> 
   </div>
 </section>
+<app-footer></app-footer>
