@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { MypageRoutingModule } from './mypage-routing.module';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { MypageComponent } from './mypage/mypage.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
@@ -17,6 +19,7 @@ import { ReservationCancelComponent } from './reservation-cancel/reservation-can
   ],
   imports: [
     CommonModule,
+    SharedModule,
     MypageRoutingModule
   ]
 })
