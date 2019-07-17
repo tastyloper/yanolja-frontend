@@ -10,7 +10,11 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interf
 export class MainComponent implements OnInit {
   headerConfig: SwiperConfigInterface = {
     slidesPerView: 6,
-    spaceBetween: 20
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
   };
 
   constructor() { }
