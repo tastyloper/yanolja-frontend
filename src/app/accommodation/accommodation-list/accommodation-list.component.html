@@ -1,41 +1,92 @@
-<div>
-  <section>
-    <div>
-      <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/640/599e2d1a9a8473.41618861.jpg">
-    </div>
-    <div>
-      <h2></h2>
-      <dl>
-        <dt></dt>
-          <dd>
-          </dd>
-        
-        <dt></dt>
-          <dd>
-          </dd>
-        
-        <dt></dt>
-          <dd>
-          </dd>
-        
-      </dl>
-      <div>
-        <i></i><span></span>
-      </div>
-      <div>
-        <dl>
-          <dt></dt>
-            <dd></dd>
-          
-          <dt></dt>
-            <dd></dd>
-          
-        </dl>
-      </div>
-      <div>
-        <strong></strong><span></span>
-      </div>
+<div class="alist-body">
+  <div class="alist-container">
+    <div class="alist-hrz"></div>
+    <section class="alist-container-sec">
+      <section class="alist-search-container">
+        <div class="alist-search-items-container">
+          <div class="alist-search-type search-box">
+            <div class="alist-search-frame">
+              <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
+              <button class="alist-search-inputbox">숙소유형</button>
+            </div>
+          </div>
+          <div class="alist-search-loc search-box">
+            <div class="alist-search-frame">
+              <i class="alist-search-icon fa fa-map-marker"></i>
+              <button class="alist-search-inputbox">지역</button>
+            </div>
+          </div>
+          <div class="alist-search-date search-box">
+            <div class="alist-search-frame">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+            <button class="alist-search-inputbox"><span>8월 8일 (목) - 8월 9일 (금)</span></button>
+            </div>
+          </div>
+          <div class="alist-search-date search-box">
+              <div class="alist-search-frame">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                <button class="alist-search-inputbox" (click)="toggle(test)" #test>
+                  <div class="btn-date-inner">
+                    <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="alist-date-popup-container" [class.active]="person">
+                <div class="alist-date-popup-module">
+                  <h4 class="alist-date-popup-h4">인원</h4>
+                  <div class="alist-date-popup-content">
+                    <div class="alist-date-popup-content-person popup-adult">
+                      <p class="popup-person-option">성인</p>
+                      <div class="popup-btn-stepper">
+                        <button class="stepper-modifier" (click)="minus('adult')">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <p class="stepper-value">{{numberAdult}}</p>
+                        <button class="stepper-modifier" (click)="plus('adult')">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                          </button>
+                      </div>
+                    </div>
+                    <div class="alist-date-popup-content-person popup-children">
+                        <p class="popup-person-option">아동</p>
+                        <div class="popup-btn-stepper">
+                          <button class="stepper-modifier" (click)="minus('children')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                          </button>
+                          <p class="stepper-value">{{numberChildren}}</p>
+                          <button class="stepper-modifier" (click)="plus('children')">
+                              <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="btn-submit-container search-box">
+            <div class="alist-search-frame">
+              <button class="alist-search-inputbox">검색</button>
+            </div>
+          </div>
+        </div>
+    </section>
+      <header class="alist-header">
+        <h2>검색된 숙소 418개</h2>
+        <ul class="alist-header-nav">
+          <li>추천순</li>
+          <li>가격 낮은순</li>
+          <li>가격 높은순</li>
+          <li>평점순</li>
+          <li>거리순</li>
+          <li>등급순</li>
+        </ul>
+      </header>
+      <section>
+        <ul>
 
-    </div>
-  </section>
+        </ul>
+      </section>
+    </section>
+  </div>
 </div>
