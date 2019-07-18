@@ -1,3 +1,4 @@
+@import '../../../output-scss/common.scss';
 
 /*버튼 애니메이션*/
 button {
@@ -21,11 +22,11 @@ button {
 }
 /*별점*/
 .stars {
-  width: 50px;
+  width: 100px;
   height: 10px;
-  background: salmon;
   position: absolute;
   top: 10px;
+  color: #ffbf00;
 }
 /*숙소 명*/
 .accomodation-name {
@@ -66,7 +67,7 @@ button {
 }
 /*평점*/
 .review-container i {
-  background: #003580;
+  background: #E2054F;
   position: absolute;
   right: 0;
   top: -5px;
@@ -122,34 +123,9 @@ button {
   display: flex;
 }
 .check-date {
-  width: 50%;
+  width: 100%;
   height: 45px;
-  margin-right: 30px;
   border: 1px solid #e9ecef;
-
-}
-.check-person {
-  width: 35%;
-  height: 45px;
-  margin-right: 30px;
-  border: 1px solid #e9ecef;
-
-}
-.search {
-  line-height: 38px;
-  width: 84px;
-  height: 44px;
-  font-size: 14px;
-  background-color: #e7f4fd;
-  color: #2b96ed;
-  font-weight: 700;
-  border-radius: 2px;
-  border-width: 0;
-}
-.search:hover {
-  background-color: #cbe7fd;
-  box-shadow: 0 1px 3px 0 rgba(43,150,237,.2);
-  color: #2b96ed;
 }
 
 /*객실 리스트*/
@@ -163,23 +139,26 @@ button {
   overflow: hidden;
 }
 .room {
-  padding: 40px 45px;
+  width: 100%;
+  height: 220px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border: 1px solid #e9ecef;
-}
-.room-name {
-  font-size: 14px;
-  font-weight: 600;
-}
-.room div {
-  /* align-self: flex-end; */
   position: relative;
 }
-.room span {
-  display: block;
-  margin-right: 80px;
+.room div {
+  padding: 28px;
+}
+.room img {
+  height: 218px;
+  float:left;
+}
+.room-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 20px;
+
 }
 .room-price {
   font-size: 12px;
@@ -195,7 +174,7 @@ button {
   top: 0;
   right: 0;
   border: none;
-  background-color: #2b96ed;
+  background-color: $primary-color;
   border-radius: 2px;
   color: #fff;
   width: 40%;
@@ -203,10 +182,9 @@ button {
   font-size: 16px;
 }
 .select-room:hover{
-  border: 1px solid #2b96ed;
-  background-color: #2b96ed;
+  border: none;
+  background-color: $primary-dark-color;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
-  color: #fff;
 }
 
 /*숙소 정보*/ 
@@ -233,6 +211,7 @@ button {
   border-radius: 2px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 .accomodation-location button {
   width: 106px;
@@ -252,6 +231,18 @@ button {
 .accomodation-location p {
   align-self: flex-start;
   order: -1;
+  @include vertical-center;
+  display: -webkit-box;
+  font-size: 13px;
+  color: #495056;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 60%;
+}
+.accomodation-map-marker {
+  color: $primary-dark-color;
+  margin: 0 20px 0 10px;
 }
 
 /*편의시설*/
@@ -269,9 +260,10 @@ button {
   width: 20%;
 }
 .facilities-list {
-  width: 80%;
+
  display: flex;
  padding: 0 10px;
+ overflow: hidden;
 }
 .facilities-list li {
   width: 92px;
@@ -286,18 +278,16 @@ button {
   padding: 32px 0;
   border-bottom: 1px solid rgb(233, 236, 239);
   width: 100%;
+  display: flex;
 }
 .introduce h3 {
   display: inline-block;
   font-size: 17px;
   font-weight: 700;
-  width: 20%;
-  height: 100px;
-  // float: left;
+  width: 200PX;
 }
 .introduce p {
-  float: right;
-  width: 80%;
+  width: 100%;
   font-size: 15px;
   padding-right: 30px;
 }
@@ -325,7 +315,7 @@ button {
   width: 48px;
   height: 48px;
   margin-bottom: 10px;
-  background-color: rgb(0, 53, 128);
+  background: #E2054F;
   font-size: 24px;
   font-weight: 600;
   color: rgb(255, 255, 255);
@@ -389,7 +379,7 @@ button {
   position: absolute;
   top: 0px;
   left: 0px;
-  background-color: rgb(81, 171, 243);
+  background-color: $primary-color;
   border-radius: 2px;
   z-index: 2;
   /*임시 width*/
@@ -410,7 +400,7 @@ button {
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  background-color: rgb(0, 53, 128);
+  background: #E2054F;
   font-size: 16px;
   font-weight: 600;
   color: rgb(255, 255, 255);
