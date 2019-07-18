@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       userpw: ['', [
         Validators.required,
         Validators.minLength(6)
-      ]],
+      ]]
     });
   }
 

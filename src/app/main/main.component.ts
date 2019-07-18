@@ -12,8 +12,17 @@ export class MainComponent implements OnInit {
     slidesPerView: 6,
     spaceBetween: 20,
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.main-swiper-button-next',
+      prevEl: '.main-swiper-button-prev',
+    }
+  };
+
+  contentConfig: SwiperConfigInterface = {
+    slidesPerView: 4,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.content-swiper-button-next',
+      prevEl: '.content-swiper-button-prev',
     }
   };
 
