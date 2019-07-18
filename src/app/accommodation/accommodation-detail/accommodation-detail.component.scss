@@ -146,47 +146,69 @@ button {
   justify-content: space-between;
   border: 1px solid #e9ecef;
   position: relative;
+  padding: 28px 0;
 }
-.room div {
-  padding: 28px;
+.room-div { 
+  display: flex;
+  width: 40%;
+}
+.room-div div{
+  padding-left: 28px;
+  width:50%;
+  border-left: 1px solid #e9ecef;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.room-type {
+  font-size: 20px;
+  font-weight: 600;
+}
+.room-available-time {
+  font-size: 14px;
+  color: #848c94;
+}
+.room-price {
+  align-self: flex-end;
+  margin-right: 20px;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 600;
 }
 .room img {
   height: 218px;
   float:left;
+  margin-top: -28px;
 }
 .room-name {
   font-size: 20px;
   font-weight: 600;
-  margin-left: 20px;
-
+  margin-left: 28px;
 }
-.room-price {
-  font-size: 12px;
+.room-standard {
+  white-space: nowrap;
+  margin-left: 30px;
+  font-size: 14px;
   color: #848c94;
-  text-align: end;
 }
-.room-shocking {
-  font-size: 22px;
-  font-weight: 600;
+.column-div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
 }
-.select-room {
+.reservation-status {
   position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
+  bottom: 0;
   background-color: $primary-color;
-  border-radius: 2px;
+  margin-left: 30px;
+  height: 35px;
+  width: 120px;
+  font-size: 600;
   color: #fff;
-  width: 40%;
-  height: 80%;
-  font-size: 16px;
+  text-align: center;
+  padding-top: 6px;
 }
-.select-room:hover{
-  border: none;
-  background-color: $primary-dark-color;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
-}
-
 /*숙소 정보*/ 
 .accomodation-information-section {
   margin-top: 130px;
@@ -387,7 +409,7 @@ button {
 }
 /*container 임시 width*/
 .my-container {
-  width: 1000px;
+  width: 1160px;
   margin: 0 auto;
 }
 .review-item {
