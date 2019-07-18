@@ -9,18 +9,18 @@
           </div>
           <div class="side-top-name">이가영</div>
           <div class="side-top-profile">
-            <img src="https://d2yoing0loi5gh.cloudfront.net/assets/kitty/traveler/reservation/ic_setting@2x-832c08d9d38f208502f94e8d35e78a320024fc5f61630f2eba7801845e1eda78.png" class="img-manage"alt="프로필관리">
+            <i class="fa fa-cog" aria-hidden="true"></i>
             <a href="#" class="side-profile-manage">프로필관리</a>
           </div>
         </div>
         <div class="side-bar-bottom"> 
           <div class="side-bottom-menu">
-            <p class="side-sub-menu">숙소이용내역</p>
-            <span class="side-menu-text">0건</span><i class="fa fa-angle-right" aria-hidden="true"></i> 
-          </div>
+            <span class="side-sub-menu">숙소이용내역</span>
+            <a class="side-link">0건 <i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+          </div> 
           <div class="side-bottom-menu">
-            <p class="side-sub-menu">찜목록</p>
-            <span class="side-item">></span>
+            <span class="side-sub-menu">찜목록</span>
+            <a class="side-link"><i class="fa fa-angle-right" aria-hidden="true"></i> </a>
           </div>
         </div>
       </div>
@@ -32,57 +32,50 @@
               <img src="../../assets/img/mypage/profile.png" class="img-profile">
               <div class="body-text">이가영</div>
             </div>
-            <div class="form-group clearfix">
-              <div class="form-key">이름</div>
-              <div class="form-value">이가영</div>
+            <div class="member-group clearfix">
+              <div class="member-key">이름</div>
+              <div class="member-value">이가영</div>
             </div>
-            <div class="form-group clearfix">
-              <div class="form-key">이메일</div>
-              <div class="form-value">happydy91@hanmail.net</div>            </div>
-            <div class="form-group clearfix">
-                <div class="form-key">연락처</div>
-                <div class="form-value">휴대폰 정보 없음</div>
+            <div class="member-group clearfix">
+              <div class="member-key">이메일</div>
+              <div class="member-value">happydy91@hanmail.net</div>            </div>
+            <div class="member-group clearfix">
+                <div class="member-key">연락처</div>
+                <div class="member-value">휴대폰 정보 없음</div>
             </div>
-            <!-- <div class="form-group clearfix">
-                <div class="form-key">SNS 연동</div>
-                <div class="form-value">
-                  <img src="https://d2yoing0loi5gh.cloudfront.net/assets/kitty/setting/fb-logo@2x-2a65bc6ab97a894a1baeca5b714f4201eb991cfc6d955ef657f86de8e56f89d5.png" alt="icon" class="icon">
-                  <span class="form-value icon-text">페이스북 연동</span>
-                  <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                      <label class="custom-control-label" for="customSwitch1"></label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group clearfix">
-                  <div class="form-key">&nbsp;</div>
-                  <div class="form-value form-value-esp">네이버 연동</div>
-            </div> -->
-            <div class="form-group clearfix">
-                <div class="form-key">비밀번호</div>
-                <div class="form-value">*******</div>
+            <div class="member-group clearfix">
+                <div class="member-key">비밀번호</div>
+                <div class="member-value">*******</div>
             </div>
-             <!-- 
-            <div class="form-group clearfix">
-                <div class="form-key">마케팅 수신동의</div>
-                <div>e-mail: 수신 거부</div>
-            </div>
-            <div class="form-group clearfix">
-                <div class="form-key">&nbsp;</div>
-                <div class="form-value">sms: 수신 거부</div>
-            </div>
-            <div class="form-group clearfix">
-                <div class="form-key">&nbsp;</div>
-                <div class="form-value">앱푸시: 수신 거부</div>
-            </div> -->
           </div>
         </div>
         <div class="delete-box">
-          <div class="delete-id">계정 삭제하기</div>
+          <a class="delete-id" (click)="openModal(template)">계정 삭제하기</a>
         </div>
-        <!-- <div class="delete-id">계정 삭제하기</div> -->
       </div>
     </div> 
   </div>
 </section>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">계정 삭제하기</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="modal-q">
+        회원탈퇴를 하시려면 <span class="modal-q-agree">안내 및 동의</span>가 필요합니다.
+        <p class="modal-q-color">정말로 회원탈퇴를 진행하시겠습니까?</p>
+      </div>
+      <form [formGroup]="secessionForm" (ngSubmit)="onSubmit()"> 
+        <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
+            <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호를 입력해주세요." minlength="6" formControlName="userpw">
+            <em class="form-error-msg" *ngIf="userpw.errors?.required && userpw.touched">비밀번호를 입력해주세요.</em>
+            <em class="form-error-msg" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
+        </div>
+        <button class="submit-btn" [disabled]="secessionForm.invalid">확인</button>
+      </form>
+  </div>
+</ng-template>
 <app-footer></app-footer>
