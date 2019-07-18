@@ -14,6 +14,7 @@ export class AccommodationListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   toggle() {
