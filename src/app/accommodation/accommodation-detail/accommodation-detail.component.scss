@@ -147,6 +147,11 @@ button {
   border: 1px solid #e9ecef;
   position: relative;
   padding: 28px 0;
+  cursor: pointer;
+  transition: box-shadow .1s ease-out,background-color .1s ease-out,color .1s ease-out,border-bottom .1s ease-out;
+}
+.room:hover {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
 }
 .room-div { 
   display: flex;
