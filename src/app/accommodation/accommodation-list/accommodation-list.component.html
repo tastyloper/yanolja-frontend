@@ -9,6 +9,15 @@
               <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
               <button class="alist-search-inputbox">숙소유형</button>
             </div>
+            
+            <div class="alist-popup-container alist-popup-container-type" style="display: block">
+              <ul class="alist-popup-type-container alist-popup-type-container-type">
+                <li class="alist-popup-type-item">모텔</li>
+                <li class="alist-popup-type-item">호텔</li>
+                <li class="alist-popup-type-item">게스트하우스</li>
+                <li class="alist-popup-type-item">팬션</li>
+              </ul>
+            </div>
           </div>
           <div class="alist-search-loc search-box">
             <div class="alist-search-frame">
@@ -28,11 +37,14 @@
                 <button class="alist-search-inputbox" (click)="toggle(test)" #test>
                   <div class="btn-date-inner">
                     <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down arrow" [class.active]="!person" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-up arrow" [class.active]="person" aria-hidden="true"></i>
+
                   </div>
                 </button>
               </div>
-              <div class="alist-date-popup-container" [class.active]="person">
+              <div class="alist-popup-container alist-popup-container-member" [class.active]="person">
+                <div class="alist-popup-wrapper">
                 <div class="alist-date-popup-module">
                   <h4 class="alist-date-popup-h4">인원</h4>
                   <div class="alist-date-popup-content">
@@ -47,6 +59,7 @@
                             <i class="fa fa-plus" aria-hidden="true"></i>
                           </button>
                       </div>
+                      
                     </div>
                     <div class="alist-date-popup-content-person popup-children">
                         <p class="popup-person-option">아동</p>
@@ -61,6 +74,12 @@
                         </div>
                       </div>
                   </div>
+                </div>
+                <div class="btn-popup-close">
+                  <button class="btn-close" (click)="toggle()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </div>
                 </div>
               </div>
           </div>

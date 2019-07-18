@@ -153,27 +153,69 @@
 
 .btn-submit-container{
   width: 80px;
+}
 
+// 상단 검색네비 옵션 클릭 팝업 wrapper
+.alist-popup-wrapper {
+  position: relative;
+}
+
+// 상단 검색네비 팝업 닫기 btn
+.btn-close {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.btn-close:focus {
+  outline: none;
+}
+
+.btn-popup-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
 }
 
 .alist-date-popup-module{
   padding: 20px;
 }
 
-.alist-date-popup-container{
-  width: 100%;
+// 상단 검색네비 옵션 클릭시 팝업
+.alist-popup-container {
   margin-top: 4px;
   border-radius: 2px;
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
   z-index: 100;
   display: none;
+  // transition: transform .12s ease,opacity .12s ease;
 }
+
+//  상단 검색네비 옵션 클릭 팝업 - 지역
+.alist-popup-type-container-type {
+  display: flex;
+
+}
+
+.alist-popup-type-item {
+
+}
+
+// 상단 검색네비 옵션 클릭 팝업 - 인원수
+.alist-popup-container-member{
+  width: 100%;
+}
+
 .alist-date-popup-h4 {
   margin-bottom: 20px;
   line-height: 16px;
   font-size: 14px;
   font-weight: 700;
+}
+
+.arrow {
+  display: none;
 }
 
 .active {

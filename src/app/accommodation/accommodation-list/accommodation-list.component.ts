@@ -16,7 +16,7 @@ export class AccommodationListComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggle(event) {
+  toggle() {
     this.person = this.person ? false : true ;
   }
 
