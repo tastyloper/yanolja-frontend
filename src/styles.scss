@@ -138,6 +138,71 @@ a, button {
 .fix-height-sub {
   min-height: calc(100% - 82px); // 82: sub-title
 }
+/* button */
+.btn {
+  color: inherit;
+  border-radius: 0;
+  cursor: pointer;
+}
+.btn-primary {
+  color: #FFF;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    background-color: $primary-dark-color;
+    border-color: $primary-dark-color;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
+  }
+}
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: $primary-dark-color;
+  border-color: $primary-dark-color;
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
+  }
+}
+.btn-secondary {
+  background-color: #E9ECEF;
+  border-color: #E9ECEF;
+  &:hover {
+    color: inherit;
+    background-color: #DEE2E6;
+    border-color: #DEE2E6;
+  }
+}
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-secondary.dropdown-toggle {
+  color: inherit;
+  background-color: #DEE2E6;
+  border-color: #DEE2E6;
+}
+.btn-outline-primary {
+  color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    color: $primary-color;
+    background-color: $primary-light-color;
+    border-color: $primary-color;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
+  }
+}
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show > .btn-outline-primary.dropdown-toggle {
+  color: #FFF;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
+  }
+}
 /* custom checkbox */
 .checkbox {
   padding-left: 20px;
@@ -205,7 +270,58 @@ a, button {
   content: "";
   color: #FFF;
   font-family: "Web Icons";
-  background: url(https://d2yoing0loi5gh.cloudfront.net/assets/kitty/common/ic_check_white@2x-9a30551178b488c1d70252068c0c2ed46e6fb678b2293a3aae447bde5493937a.png) no-repeat;
+  background: url(assets/img/common/check_white.png) no-repeat;
   background-size: 12px 10px;
   background-position: 4px;
+}
+/* radio */
+.custom-radio {
+  & + .custom-radio {
+    margin-top: 15px;
+  }
+  .custom-control-label {
+    font-size: 14px;
+    line-height: 24px;
+    cursor: pointer;
+  }
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #FFF;
+  border-color: $primary-color;
+  background-color: $primary-color;
+}
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
+}
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+  border-color: $primary-light-color;
+  background-color: $primary-light-color;
+}
+/* form-control */
+.form-control {
+  height: 40px;
+  padding: 3px 7px 3px 12px;
+  background-color: #FFF;
+  border: 1px solid #CED4DA;
+  border-radius: 2px;
+  transition: all 0.08s ease;
+  &:hover {
+    border-color: #848C94;
+  }
+  &:focus {
+    border-color: #FF416F;
+    box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
+    outline: none;
+  }
+}
+.has-error .form-control {
+  border-color: #FF8D7C;
+  &:focus {
+    border-color: #FF8D7C;
+    box-shadow: 0 0 0 0.2rem rgba(255, 141, 124, .25);
+  }
+}
+.help-block {
+  color: #FF8D7C;
+  font-size: 12px;
 }

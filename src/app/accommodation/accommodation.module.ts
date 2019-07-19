@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -25,8 +28,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     SwiperModule,
-    AccommodationRoutingModule
+    AccommodationRoutingModule,
+    ButtonsModule.forRoot()
   ],
   providers: [
     {
