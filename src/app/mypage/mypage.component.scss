@@ -1,0 +1,79 @@
+@import "../../output-scss/common.scss";
+
+.mypage {
+  background-color: #f5f6f7;
+  padding:70px 70px; 
+}
+.img-circle{
+  border-radius: 50%; 
+  width: 80px;
+}
+.fa-cog {
+  margin-right: 4px;
+  font-size: 14px;
+}
+.mypage-side-bar {
+  width: 250px;
+  margin-right: 15px;
+  background-color: #fff; 
+  float: left;
+  margin-right: 20px;
+}
+.side-bar-top {
+  border-bottom: 1px solid #e9ecef;
+  height: 250px;
+  padding: 42px 10px 30px;
+  text-align: center;
+}
+.side-top-name{
+  font-size: 16px;
+  font-weight: 500;
+  margin: 11px 0 23px;
+}
+.side-profile-manage {
+  font-size: 13px;
+}
+.side-bar-bottom {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 0 #e9ecef;
+  padding: 15px 25px;
+}
+.side-bottom-menu {
+  font-size: 14px;
+  display: block;
+  margin: 10px 0;
+  .side-link {
+    color: $primary-color;
+    float: right;
+  }                                                                                
+  .fa {
+    font-weight: 00;
+  }
+}
+.side-sub-menu {
+  display: inline-block;
+  text-align: left;
+  width: 40%;
+}
+
+
+// body
+.mypage-body {
+  width: calc(100% - 270px);
+  float: right;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  color: #495056;
+  font-weight: 500;
+  position: relative;
+  // margin: 20px 20px;
+}
+
+::ng-deep .mypage-body > router-outlet ~ * .mypage-router-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,33 @@
+<app-sub-title></app-sub-title>
+<section class="mypage">
+  <div class="container">
+    <div class="main clearfix">
+      <div class="mypage-side-bar">
+        <div class="side-bar-top">
+          <div class="side-img">
+            <img src="assets/img/mypage/profile.png" class="img-circle">
+          </div>
+          <div class="side-top-name">이가영</div>
+          <div class="side-top-profile">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <a routerLink="/mypage/account" class="side-profile-manage">프로필관리</a>
+          </div>
+        </div>
+        <div class="side-bar-bottom"> 
+          <div class="side-bottom-menu">
+            <span class="side-sub-menu">숙소이용내역</span>
+            <a class="side-link" routerLink="/mypage/reservation">0건 <i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+          </div> 
+          <div class="side-bottom-menu">
+            <span class="side-sub-menu">찜목록</span>
+            <a class="side-link" routerLink="/mypage/wishlists"><i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+          </div>
+        </div>
+      </div>
+      <div class="mypage-body" [@fadeAnimation]="getRouterOutletState(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </div> 
+  </div>
+</section>
+<app-footer></app-footer>
