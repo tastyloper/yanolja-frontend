@@ -8,6 +8,12 @@ import { AccommodationListComponent } from './accommodation-list/accommodation-l
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { PaymentComponent } from './payment/payment.component';
+import { SwiperModule, SWIPER_CONFIG, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 @NgModule({
   declarations: [
@@ -19,7 +25,14 @@ import { PaymentComponent } from './payment/payment.component';
   imports: [
     CommonModule,
     SharedModule,
+    SwiperModule,
     AccommodationRoutingModule
+  ],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ]
 })
 export class AccommodationModule {}
