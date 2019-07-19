@@ -13,11 +13,13 @@ import { MypageModule } from './mypage/mypage.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UiComponent } from './components/ui/ui.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UiComponent
   ],
   imports: [
     BrowserModule,

@@ -42,9 +42,9 @@ export class SignupComponent implements OnInit {
       }, { validator: PasswordValidator.match }),
       checkGroup: this.fb.group({
         allAgree: [false],
-        adult: [false, Validators.requiredTrue],
-        service: [false, Validators.requiredTrue],
-        privacy: [false, Validators.requiredTrue],
+        adult: [false, Validators.pattern('true')],
+        service: [false, Validators.pattern('true')],
+        privacy: [false, Validators.pattern('true')],
         location: [false],
         privacy2: [false],
         notConnected: [false]
