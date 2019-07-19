@@ -1,13 +1,11 @@
 @import '../../../output-scss/common.scss';
+@import '~swiper/dist/css/swiper.min.css';
 
 /*버튼 애니메이션*/
 button {
   cursor: pointer;
   transition: box-shadow .1s ease-out,background-color .1s ease-out,color .1s ease-out,border-bottom .1s ease-out;
-}
-/* 페이지 공통 마진/ width세팅*/
-.project-main-container {
-  width: 700px;
+  outline: none;
 }
 /* 헤더 디자인*/
 .header-section {
@@ -85,14 +83,42 @@ button {
 .accomodation-imgs-section {
   width: 100%;
   height: 605px;
-  background: cyan;
-  margin-bottom: 64px;
+  margin-bottom: 120px;
+  position: relative;
 }
 .accomodation-detail h1 {
   height: 1px;
   width: 1px;
   padding: 1px;
   overflow: hidden;
+}
+.accomodation-imgs-section h2 {
+  height: 1px;
+  width: 1px;
+  padding: 1px;
+  overflow: hidden;
+}
+/*캐러셀*/
+.gallery-top .swiper-slide {
+  text-align: center;
+  background-color: #fff;
+}
+.gallery-top .swiper-slide img {
+  height: 600px;
+}
+.gallery-thumbs {
+  width: 900px;
+  margin: 20px auto 0;
+}
+.gallery-thumbs .swiper-slide {
+  overflow: hidden;
+  opacity: 0.4;
+}
+.gallery-thumbs .swiper-slide img {
+  width: 100%;
+}
+.gallery-thumbs .swiper-slide-active {
+  opacity: 1;
 }
 
 /*객실 가격 비교 섹션*/
@@ -145,6 +171,7 @@ button {
   flex-direction: row;
   justify-content: space-between;
   border: 1px solid #e9ecef;
+  margin-bottom: 5px;
   position: relative;
   padding: 28px 0;
   cursor: pointer;
@@ -239,6 +266,7 @@ button {
   display: flex;
   justify-content: space-between;
   position: relative;
+  background-image: url('https://www.myrealtrip.com/webpack/590be932155f0683aadc57085981e444.svg');
 }
 .accomodation-location button {
   width: 106px;
@@ -257,21 +285,31 @@ button {
 }
 .accomodation-location p {
   align-self: flex-start;
-  order: -1;
-  @include vertical-center;
-  display: -webkit-box;
-  font-size: 13px;
+  font-size: 14px;
   color: #495056;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 60%;
+  order: -1;
+  z-index: 2;
 }
 .accomodation-map-marker {
   color: $primary-dark-color;
-  margin: 0 20px 0 10px;
+  margin: 0 10px 0 10px;
 }
-
+.map-overlay {
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(270deg,rgba(245,251,255,0),#fff);
+  z-index: 0;
+}
+.accomodation-location div:nth-last-child(1) {
+  z-index: 2;
+}
 /*편의시설*/
 .facilities {
   height: 164px;
