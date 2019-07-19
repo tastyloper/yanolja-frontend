@@ -5,13 +5,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
 
-
 @Component({
-  selector: 'app-mypage',
-  templateUrl: './mypage.component.html',
-  styleUrls: ['./mypage.component.scss']
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.scss']
 })
-export class MypageComponent implements OnInit {
+export class AccountComponent implements OnInit {
   secessionForm: FormGroup;
   modalRef: BsModalRef;
 
@@ -19,7 +18,7 @@ export class MypageComponent implements OnInit {
     private subTitleService: SubTitleService,
     private modalService: BsModalService,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.subTitleService.pagaTitle = '마이페이지';
@@ -32,7 +31,7 @@ export class MypageComponent implements OnInit {
       ]]
     });
   }
-  
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
@@ -45,5 +44,4 @@ export class MypageComponent implements OnInit {
   get userpw() {
     return this.secessionForm.get('userpw');
   }
-
 }
