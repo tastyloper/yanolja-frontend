@@ -32,7 +32,6 @@
           <p class="form-title">약관동의</p>
           <div class="checkbox allAgree">
             <input type="checkbox" id="allAgree" name="allAgree" formControlName="allAgree">
-                  <!-- [checked]="adult.value && service.value && privacy.value && location.value && privacy2.value && notConnected.value"> -->
             <label for="allAgree">전체동의</label>
           </div>
           <div class="checkbox">
@@ -43,23 +42,27 @@
           <div class="checkbox">
             <input type="checkbox" id="service" name="service" formControlName="service">
             <label for="service">서비스 이용약관 동의 <span class="point-text">(필수)</span></label>
+            <button type="button" class="modal-open-btn" (click)="termsOfServiceOpen()"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
             <small>광고성 정보 수신동의 포함</small>
             <em class="help-block" *ngIf="service.errors?.pattern && service.touched">서비스 이용약관 동의에 체크해 주세요.</em>
           </div>
           <div class="checkbox">
             <input type="checkbox" id="privacy" name="privacy" formControlName="privacy">
             <label for="privacy">개인정보 수집 이용 동의 <span class="point-text">(필수)</span></label>
+            <button type="button" class="modal-open-btn"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
             <small>예약 및 서비스 이용을 위한 필수 개인정보 수집</small>
             <em class="help-block" *ngIf="privacy.errors?.pattern && privacy.touched">개인정보 수집 이용 동의에 체크해 주세요.</em>
           </div>
           <div class="checkbox">
             <input type="checkbox" id="location" name="location" formControlName="location">
             <label for="location">위치 정보 이용약관 동의 (선택)</label>
+            <button type="button" class="modal-open-btn"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
             <small>위치정보를 통한 내 주변 숙소정보 제공</small>
           </div>
           <div class="checkbox">
             <input type="checkbox" id="privacy2" name="privacy2" formControlName="privacy2">
             <label for="privacy2">개인정보 수집 이용 동의 (선택)</label>
+            <button type="button" class="modal-open-btn"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
             <small>서비스 혜택 등의 정보 제공을 위한 개인정보 수집 및 활용</small>
           </div>
           <div class="checkbox">
