@@ -36,9 +36,11 @@ export class PaymentComponent implements OnInit {
       })
     });
     this.allAgree.valueChanges.subscribe(v => {
+      console.log(v);
       this.termsOfUse.setValue(v);
       this.cancelPolicy.setValue(v);
       this.thirdParty.setValue(v);
+      console.log(this.termsOfUse);
     });
     console.dir(this.reservationForm);
   }
