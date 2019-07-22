@@ -319,8 +319,14 @@ button {
   display: flex;
   flex-direction: row;
   position: relative;
+  transition-timing-function: ease;
+  transition-property: all;
+  transition-duration: 1s;
 }
 .facilities-active {
+  transition-timing-function: ease;
+  transition-property: all;
+  transition-duration: 1s;
   height: 240px;
 }
 .facilities h3 {

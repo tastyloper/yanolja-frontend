@@ -201,7 +201,7 @@
             지도 보기</button>
           </div>
         </section>
-        <section class="facilities">
+        <section class="facilities"  [class.facilities-active]="facilitiesStatus">
           <h3>편의 시설</h3>
           <ul class="facilities-list">
             <li class="facilities-item">
@@ -318,7 +318,8 @@
             <li>1</li>
             <li>1</li> -->
           </ul>
-          <p>편의시설 더 보기</p>
+          <p *ngIf="!facilitiesStatus" (click)="openMore()">편의시설 더 보기</p>
+          <p *ngIf="facilitiesStatus" (click)="openMore()">닫기</p>
         </section>
         <section class="introduce">
           <h3>소개</h3>
