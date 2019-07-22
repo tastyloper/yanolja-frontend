@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  height: 1000px;
+}
+.reservation-detail-header {
+  padding-left: 15px;
+  background: #fff;
+  height: 90px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.detail-title {
+  font-size: 16px;
+  line-height: 50px;
+}
+.detail-title-icon{
+  display: inline-block;
+  position: absolute;
+  top: 14px;
+  right: 20px;
+}
+.detail-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+}
+.subtitle {
+  margin-bottom: 3px;
+}
+.reservation-detail-table {
+  background: #fff;
+  padding: 20px 20px 15px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.box-title {
+  padding-bottom: 20px;
+  font-size: 14px;
+}
+.table {
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+}
+.table th {
+  width: 20%;
+  padding: 20px 20px;
+  background: #f5f6f7;
+  font-weight: 400;
+}
+.table td {
+  width: 80%;
+  padding: 20px 20px;
+  font-weight: 200;
+}
+.table tr:first-child td,
+.table tr:first-child th {
+  border-top: 1px solid #ccc;
+}
+.box-outline {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.payment-box {
+  width: 50%;
+  padding: 20px 20px;
+}
+.payment-box-left {
+  background: #f5f6f7;
+}
+.payment-box-right {
+  background: #fff;
+}
+.payment-box-group {
+  padding-bottom: 15px;
+}
+.payment-total-line {
+  border-top: 1px solid #dee2e6;
+}
+.box-strong {
+  font-size: 14px;
+  padding-bottom: 0px;
+}

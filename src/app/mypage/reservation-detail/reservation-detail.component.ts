@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SubTitleService } from '../../core/services/sub-title.service';
+
 @Component({
   selector: 'app-reservation-detail',
   templateUrl: './reservation-detail.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationDetailComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(
+    private subTitleService: SubTitleService
+  ) {}
+  
   ngOnInit() {
-  }
+    this.subTitleService.pagaTitle = '예약상세내역';
+    }
 
 }
