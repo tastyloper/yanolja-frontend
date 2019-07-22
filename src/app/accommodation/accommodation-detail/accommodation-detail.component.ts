@@ -31,7 +31,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   };
   facilitiesStatus = false;
   info = '1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다./r/n 2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다./r/n';
-
+  address = '강남구 봉은사로 134';
   ngAfterViewInit() {
     this.galleryTop.nativeElement.swiper.controller.control = this.galleryThumbs.nativeElement.swiper;
     this.galleryThumbs.nativeElement.swiper.controller.control = this.galleryTop.nativeElement.swiper;
@@ -45,5 +45,15 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
   openMore() {
     this.facilitiesStatus = !this.facilitiesStatus;
+  }
+  copyText() {
+    // document.execCommand('copy', true, this.address);
+    alert('주소가 클립보드에 저장되었어요!');
+    const text = document.createElement('textarea');
+    document.body.appendChild(text);
+    text.value = this.address;
+    text.select();
+    document.execCommand('copy');
+    document.body.removeChild(text);
   }
 }

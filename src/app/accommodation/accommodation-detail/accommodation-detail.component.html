@@ -190,10 +190,10 @@
           <h3>숙소 위치 보기</h3>
           <p>
             <i class="fa fa-map-marker accomodation-map-marker fa-3x" aria-hidden="true"></i>
-            강남구 봉은사로 134
+            {{address}}
           </p>
           <div>
-          <button class="copy-location">
+          <button class="copy-location" (click)="copyText()">
             <i class="fa fa-clone" aria-hidden="true"></i>
             주소 복사</button>
           <button class="location-map">
@@ -424,6 +424,7 @@
               <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
           </li>
         </ul>
+        <p>후기 더 보기</p>
       </section>
     </section>
     </div>

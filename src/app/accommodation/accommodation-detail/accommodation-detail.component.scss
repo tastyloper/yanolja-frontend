@@ -393,13 +393,22 @@ button {
 
 /*후기*/
 .review-section {
-  padding: 32px 0;
+  padding: 32px 0 60px 0;
   width: 100%;
+  position: relative;
 }
 .review-section h2 {
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: 700;
+}
+.review-section>p {
+  @include horizontal-center;
+  bottom: 20px;
+  cursor: pointer;
+  color: $primary-color;
+  font-size: 17px;
+  left: 45%;
 }
 .grade {
   width: 30%;
