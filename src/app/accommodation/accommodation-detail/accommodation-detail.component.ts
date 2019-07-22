@@ -27,6 +27,8 @@ export class AccommodationDetailComponent implements AfterViewInit {
     slideToClickedSlide: true,
   };
 
+  info = '1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다./r/n 2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다./r/n';
+
   ngAfterViewInit() {
     this.galleryTop.nativeElement.swiper.controller.control = this.galleryThumbs.nativeElement.swiper;
     this.galleryThumbs.nativeElement.swiper.controller.control = this.galleryTop.nativeElement.swiper;
