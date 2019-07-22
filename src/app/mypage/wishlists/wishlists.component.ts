@@ -15,4 +15,10 @@ export class WishlistsComponent implements OnInit {
     this.subTitleService.pagaTitle = '찜목록';
     this.subTitleService.pagaDescription = '찜한 숙소를 한 눈에!';
   }
+
+  likeAction(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('123');
+  }
 }
