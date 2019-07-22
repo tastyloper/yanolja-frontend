@@ -24,7 +24,7 @@ footer {
   }
   .nav-item {
     position: relative;
-    padding: 0 20px;
+    padding: 0 15px;
     &:not(:first-child)::before {
       content: "|";
       @include vertical-center;

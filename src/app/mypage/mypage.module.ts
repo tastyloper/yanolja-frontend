@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MypageRoutingModule } from './mypage-routing.module';
@@ -29,6 +30,7 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
   imports: [
     CommonModule,
     SharedModule,
+    RouterModule,
     MypageRoutingModule,
     ModalModule.forRoot(),
     ReactiveFormsModule

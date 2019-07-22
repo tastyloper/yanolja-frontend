@@ -140,6 +140,7 @@ button {
   display: flex;
   flex-direction: row;
   border: 1px solid #e9ecef;
+  margin-bottom: 30px;
 }
 .compare-condition h3 {
   height: 1px;
@@ -312,31 +313,65 @@ button {
 }
 /*편의시설*/
 .facilities {
-  height: 164px;
+  height: 150px;
   width: 100%;
   padding: 32px 0;
   border-bottom: 1px solid rgb(233, 236, 239);
   display: flex;
   flex-direction: row;
+  position: relative;
+  transition-timing-function: ease;
+  transition-property: all;
+  transition-duration: 1s;
+}
+.facilities-active {
+  transition-timing-function: ease;
+  transition-property: all;
+  transition-duration: 1s;
+  height: 240px;
 }
 .facilities h3 {
   font-size: 17px;
   font-weight: 700;
-  width: 20%;
+  width: 12%;
 }
 .facilities-list {
-
- display: flex;
- padding: 0 10px;
- overflow: hidden;
+  width: 1000px;
+  display: flex;
+  padding: 0 10px;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
-.facilities-list li {
+.facilities-item {
   width: 92px;
   height: 50px;
-  margin-bottom: 24px;
-  background-color: aliceblue;
+  margin-bottom: 44px;
   margin-right: 10px;
+  position: relative;
 }
+.facilities-item figure img {
+  width: 50px;
+  @include horizontal-center;
+}
+.facilities-item figure figcaption {
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  bottom: -15px;
+  @include horizontal-center;
+  white-space: nowrap;
+}
+.facilities p {
+  @include horizontal-center;
+  bottom: 10px;
+  cursor: pointer;
+  color: $primary-color;
+  font-size: 17px;
+}
+.facilities-text-active {
+  display: none;
+}
+
 
 /*소개*/
 .introduce {
@@ -359,13 +394,22 @@ button {
 
 /*후기*/
 .review-section {
-  padding: 32px 0;
+  padding: 32px 0 60px 0;
   width: 100%;
+  position: relative;
 }
 .review-section h2 {
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: 700;
+}
+.review-section>p {
+  @include horizontal-center;
+  bottom: 20px;
+  cursor: pointer;
+  color: $primary-color;
+  font-size: 17px;
+  left: 45%;
 }
 .grade {
   width: 30%;

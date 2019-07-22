@@ -1,3 +1,5 @@
+@import "../../../output-scss/common.scss";
+
 .payment {
   padding: 70px 0;
   background-color: #F5F6F7;
@@ -6,7 +8,109 @@
     border-radius: 2px;
     box-shadow: 0 1px 0 0 #E9ECEF;
     & + .box {
-      border-top: 1px solid #E9ECEF;
+      margin-top: 20px;
+    }
+    .box-panel {
+      padding: 16px;
+      &:first-child {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+      }
+      & + .box-panel:not(.point) {
+        border-top: 1px solid #E9ECEF;
+      }
+      &.point {
+        color: $primary-color;
+        font-weight: 700;
+        background-color: $primary-light-color;
+      }
+      .box-panel-title {
+        font-size: 18px;
+        .fa {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  .accommodation-name {
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .room-name {
+    font-size: 14px;
+  }
+  .check-in,
+  .check-out {
+    span {
+      float: left;
+      width: 90px;
+    }
+  }
+  .check-in {
+    margin-bottom: 5px;
+  }
+  .price span {
+    float: right;
+  }
+  .custom-radio {
+    .custom-control-label {
+      font-size: 14px;
+      img {
+        height: 17px;
+        margin-left: 5px;
+        vertical-align: sub;
+      }
+    }
+  }
+  .checkbox {
+    margin-bottom: 15px;
+    label {
+      font-size: 14px;
+      line-height: 19px;
+    }
+    .help-block {
+      float: right;
+    }
+  }
+  .allAgree-checkbox {
+    margin-bottom: 25px;
+    label {
+      font-weight: 700;
+    }
+  }
+  .policy-box {
+    overflow-y: scroll;
+    height: 100px;
+    margin-bottom: 15px;
+    padding: 15px;
+    color: #ADB5BD;
+    font-size: 12px;
+    background-color: #F5F6F7;
+    border: 1px solid #E9ECEF;
+    border-radius: 2px;
+    .table, caption {
+      color: #ADB5BD;
+    }
+  }
+  .last-guide {
+    display: block;
+    color: #AAA;
+    font-size: 10px;
+    line-height: 14px;
+  }
+  .btn-panel {
+    margin-top: 20px;
+    .btn {
+      width: calc(50% - 5px);
+      padding: 12px;
+      & + .btn {
+        margin-left: 10px;
+      }
     }
   }
 }
