@@ -103,7 +103,7 @@ body {
   margin: 0;
   color: #181818;
   font-family: "noto-sans-scott", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   text-align: left;
   background-color: #FFF;
@@ -141,6 +141,7 @@ a, button {
 /* button */
 .btn {
   color: inherit;
+  font-size: 14px;
   border-radius: 0;
   cursor: pointer;
 }
