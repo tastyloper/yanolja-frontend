@@ -5,35 +5,105 @@
       <section class="alist-search-container">
         <div class="alist-search-items-container">
           <div class="alist-search-type search-box">
-            <div class="alist-search-frame">
+            <div class="alist-search-frame" (click)="toggle('type')">
               <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
               <button class="alist-search-inputbox">숙소유형</button>
             </div>
+            
+            <div class="alist-popup-container" [class.active]="type">
+              <div class="alist-type-popup-module">
+                <ul class="alist-popup-type-container alist-type-container-type">
+                  <li class="alist-popup-type-item"><button>모텔</button></li>
+                  <li class="alist-popup-type-item"><button>호텔</button></li>
+                  <li class="alist-popup-type-item"><button>게스트하우스</button></li>
+                  <li class="alist-popup-type-item"><button>펜션</button></li>
+                </ul>
+            </div>
+            </div>
           </div>
           <div class="alist-search-loc search-box">
-            <div class="alist-search-frame">
+            <div class="alist-search-frame" (click)="toggle('location')" >
               <i class="alist-search-icon fa fa-map-marker"></i>
               <button class="alist-search-inputbox">지역</button>
             </div>
+            <div class="alist-search-location-container" [class.active]="location">
+              <div class="alist-search-location-header">
+                <ul class="alist-location-header-top">
+                  <li>서울</li>
+                  <li>경기</li>
+                  <li>인천</li>
+                  <li>강원</li>
+                  <li>제주</li>
+                  <li>대전</li>
+                  <li>충북</li>
+                  <li>충남/세종</li>
+                  <li>부산</li>
+                  <li>울산</li>
+                  <li>경남</li>
+                  <li>대구</li>
+                  <li>경북</li>
+                  <li>광주</li>
+                  <li>전남</li>
+                  <li>전주/전북</li>
+                </ul>
+              </div>
+              <div class="alist-search-location-bottom">
+                <ul class="alist-search-bottom-list">
+                  <li><a>강남/역삼/삼성/논현</a></li>
+                  <li><a>서초/신사/방배</a></li>
+                  <li><a>잠실/신천(잠실새내)</a></li>
+                  <li><a>영등포/여의도</a></li>
+                  <li><a>신림/서울대/사당/동작</a></li>
+                  <li><a>천호/길동/둔촌</a></li>
+                  <li><a>화곡/까치산/양천/목동</a></li>
+                  <li><a>구로/금천/오류/신도림</a></li>
+                  <li><a>신촌/홍대/합정</a></li>
+                  <li><a>연신내/불광/응암</a></li>
+                  <li><a>종로/대학로</a></li>
+                  <li><a>성신여대/성북/월곡</a></li>
+                  <li><a>이태원/용산/서울역/명동/회현</a></li>
+                  <li><a>동대문/동묘/신당/충무로/약수</a></li>
+                  <li><a>회기/고려대/청량리/신설동</a></li>
+                  <li><a>장안동/답십리</a></li>
+                  <li><a>건대/군자/구의</a></li>
+                  <li><a>왕십리/성수/금호</a></li>
+                  <li><a>수유/미아</a></li>
+                  <li><a>상봉/중량/면목</a></li>
+                  <li><a>태릉/노원/도봉/창동</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="alist-search-date search-box">
+          <div class="alist-search-date search-box" (click)="toggle()">
             <div class="alist-search-frame">
                 <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-            <button class="alist-search-inputbox"><span>8월 8일 (목) - 8월 9일 (금)</span></button>
+            <button class="alist-search-inputbox">
+              <div class="col-xs-12 col-12 col-md-4 form-group datePicker">
+                <input type="text"
+                       placeholder="Daterangepicker"
+                       class="form-control datePicker-input"
+                       [bsConfig]="datePickerConfig"
+                       bsDaterangepicker>
+              </div>
+
+            </button>
             </div>
           </div>
           <div class="alist-search-date search-box">
               <div class="alist-search-frame">
                   <i class="fa fa-user" aria-hidden="true"></i>
-                <button class="alist-search-inputbox" (click)="toggle(test)" #test>
+                <button class="alist-search-inputbox" (click)="toggle('member')">
                   <div class="btn-date-inner">
                     <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down arrow" [class.active]="!person" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-up arrow" [class.active]="person" aria-hidden="true"></i>
+
                   </div>
                 </button>
               </div>
-              <div class="alist-date-popup-container" [class.active]="person">
-                <div class="alist-date-popup-module">
+              <div class="alist-popup-container alist-popup-container-member" [class.active]="person">
+                <div class="alist-popup-wrapper">
+                <div class="alist-popup-module">
                   <h4 class="alist-date-popup-h4">인원</h4>
                   <div class="alist-date-popup-content">
                     <div class="alist-date-popup-content-person popup-adult">
@@ -47,6 +117,7 @@
                             <i class="fa fa-plus" aria-hidden="true"></i>
                           </button>
                       </div>
+                      
                     </div>
                     <div class="alist-date-popup-content-person popup-children">
                         <p class="popup-person-option">아동</p>
@@ -62,9 +133,16 @@
                       </div>
                   </div>
                 </div>
+
+                <div class="btn-popup-close">
+                  <button class="btn-close" (click)="toggle('member')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </div>
+                </div>
               </div>
           </div>
-          <div class="btn-submit-container search-box">
+          <div class="btn-submit-container search-box" (click)="submitNav()">
             <div class="alist-search-frame">
               <button class="alist-search-inputbox">검색</button>
             </div>

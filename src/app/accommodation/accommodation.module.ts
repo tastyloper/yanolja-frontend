@@ -11,6 +11,9 @@ import { AccommodationListComponent } from './accommodation-list/accommodation-l
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { PaymentComponent } from './payment/payment.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { SwiperModule, SWIPER_CONFIG, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -33,7 +36,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SwiperModule,
     HttpClientModule,
     AccommodationRoutingModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     {
