@@ -1,0 +1,67 @@
+.reservation-list {
+  background:pink;
+  width: 100%;
+  height: 170px;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
+  padding: 20px 20px 30px 30px;
+  margin-top: 20px;
+}
+
+.reservation-list:first-child {
+  margin-top: 0;
+}
+
+.reservation-list-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reservation-list-desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.reservation-list-header {
+  display: flex;
+  flex-direction: column-reverse;
+
+}
+
+.reservation-list-status {
+  border: 1px solid #ff3478;
+  background-color: #ffff;
+  height: 32px;
+  width: 60px;
+  padding: 5px;
+  color: #ff3478;
+  text-align: center;
+  line-height: 22px;
+}
+
+.reservation-list-title {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.reservation-list-details {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reservation-list-details p {
+  margin-top: 10px;
+}
+.reservation-list-details p:first-child {
+  margin-top: 0;
+}
+
+.reservation-more {
+  font-size: 18px;
+}
