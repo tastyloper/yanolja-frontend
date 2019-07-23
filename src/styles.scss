@@ -103,7 +103,7 @@ body {
   margin: 0;
   color: #181818;
   font-family: "noto-sans-scott", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   text-align: left;
   background-color: #FFF;
@@ -141,6 +141,7 @@ a, button {
 /* button */
 .btn {
   color: inherit;
+  font-size: 14px;
   border-radius: 0;
   cursor: pointer;
 }
@@ -324,4 +325,27 @@ a, button {
 .help-block {
   color: #FF8D7C;
   font-size: 12px;
+}
+/**/
+.pagination {
+  .page-item {
+    margin: 0 2px;
+    &.active .page-link {
+      color: #FFF;
+      background-color: $primary-color;
+    }
+    &.disabled .page-link {
+      color: #6C757D;
+    }
+    .page-link {
+      width: 33px;
+      margin-left: 0;
+      padding: 8px 0;
+      color: $primary-color;
+      font-size: 14px;
+      text-align: center;
+      border: 0;
+      border-radius: 50%;
+    }
+  }
 }
