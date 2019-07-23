@@ -15,11 +15,14 @@ import { MypageModule } from './mypage/mypage.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+
 import { UiComponent } from './components/ui/ui.component';
 import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 import { YouthProtectionPolicyComponent } from './shared/youth-protection-policy/youth-protection-policy.component';
 import { LocationInfoTermsComponent } from './shared/location-info-terms/location-info-terms.component';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { LocationInfoTermsComponent } from './shared/location-info-terms/locatio
     AccommodationModule,
     AuthModule,
     MypageModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BsDatepickerModule.forRoot()
   ],
   entryComponents: [
     TermsOfServiceComponent,

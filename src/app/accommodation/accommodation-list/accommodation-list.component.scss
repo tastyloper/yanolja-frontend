@@ -1,5 +1,13 @@
+
+
 .alist-body{
   position: relative;
+}
+
+button {
+  outline: none;
+  background: #ffff;
+  border: none;
 }
 
 .alist-container {
@@ -144,6 +152,7 @@
   outline-style: none;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .alist-search-inputbox:last-child {
@@ -153,27 +162,161 @@
 
 .btn-submit-container{
   width: 80px;
-
 }
 
-.alist-date-popup-module{
-  padding: 20px;
+// 상단 검색네비 옵션 클릭 팝업 wrapper
+.alist-popup-wrapper {
+  position: relative;
 }
 
-.alist-date-popup-container{
-  width: 100%;
+// 상단 검색네비 팝업 닫기 btn
+.btn-close {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.btn-close:focus {
+  outline: none;
+}
+
+.btn-popup-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+}
+
+// 상단 검색네비 옵션 클릭시 팝업
+.alist-popup-container {
   margin-top: 4px;
   border-radius: 2px;
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
   z-index: 100;
   display: none;
+  // transition: transform .12s ease,opacity .12s ease;
 }
+
+.alist-popup-module{
+  padding: 20px;
+ 
+}
+
+//  상단 검색네비 옵션 클릭 팝업 - 유형
+.alist-popup-type-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  
+}
+
+.alist-type-popup-module{
+  margin-top: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
+  padding: 20px;
+  width: 395px;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.alist-popup-type-item {
+  display: inline-block;
+  margin-right: 1px;
+}
+// 상단 검색네비 datePicker
+.datePicker {
+  width: 100%;
+  margin-bottom: 0;
+  border: none;
+}
+
+.datePicker-input {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.datePicker-input::placeholder {
+  color: #343a40;
+  font-family: inherit
+}
+
+// 상단 검색네비 옵션 클릭 팝업 - 지역
+
+.alist-search-location-container {
+  display: none;
+  padding: 20px 10px 15px 47px;
+  margin-top: 5px;
+  width: 785px;
+  background: #ffff;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
+  
+}
+
+.alist-search-location-header {
+  background: #eeee;
+}
+
+.alist-location-header-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #eeee;
+}
+
+.alist-location-header-top li{
+  display: block;
+  line-height: 40px;
+  background: #eeee;
+  width: 88px;
+  height: 40px;
+}
+
+.alist-search-location-bottom {
+  background: #f9f9f9;
+}
+
+.alist-search-bottom-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.alist-search-bottom-list li{
+  display:flex;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 177px;
+  background: #ffff;
+  height: 44px;
+  margin-right: 5px;
+}
+
+.alist-search-bottom-list li:last-child {
+  margin-right: 0;
+}
+
+// 상단 검색네비 옵션 클릭 팝업 - 인원수
+.alist-popup-container-member{
+  width: 100%;
+}
+
 .alist-date-popup-h4 {
   margin-bottom: 20px;
   line-height: 16px;
   font-size: 14px;
   font-weight: 700;
+}
+
+.arrow {
+  display: none;
 }
 
 .active {
