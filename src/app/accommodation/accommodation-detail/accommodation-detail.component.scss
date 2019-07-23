@@ -152,9 +152,15 @@ button {
 .check-date {
   width: 100%;
   height: 45px;
-  border: 1px solid #e9ecef;
 }
-
+.form-control {
+  width: 310%;
+  display: block;
+  cursor: pointer;
+}
+.form-group {
+  width: 100%;
+}
 /*객실 리스트*/
 .room-list-section {
   width: 100%;
@@ -386,7 +392,7 @@ button {
   font-weight: 700;
   width: 200PX;
 }
-.introduce p {
+.introduce pre {
   width: 100%;
   font-size: 15px;
   padding-right: 30px;

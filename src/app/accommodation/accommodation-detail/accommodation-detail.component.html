@@ -89,7 +89,25 @@
         <h2>객실 가격비교</h2>
         <section class="compare-condition">
           <h3>비교 조건 선택</h3>
-          <div class="check-date">날짜</div>
+          <div class="check-date">
+
+
+
+              <form [formGroup]="form">
+                  <div class="row">
+                    <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+                      <input
+                        class="form-control"
+                        #datePicker="bsDaterangepicker"
+                        bsDaterangepicker
+                        [(ngModel)]="bsRangeValue"
+                        formControlName="dateYMD"
+                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD, hh:mm a', containerClass: 'theme-red' }">
+                    </div>
+                  </div>
+                  </form>
+
+          </div>
         </section>
         <section class="room-list-section">
         <h3>객실 리스트</h3>
@@ -323,9 +341,9 @@
         </section>
         <section class="introduce">
           <h3>소개</h3>
-          <p>
+          <pre>
             {{info}}
-          </p>
+          </pre>
         </section>
       </section>
       <section class="review-section">
