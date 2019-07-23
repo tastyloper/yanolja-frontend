@@ -141,6 +141,7 @@ button {
   flex-direction: row;
   border: 1px solid #e9ecef;
   margin-bottom: 30px;
+  position: relative;
 }
 .compare-condition h3 {
   height: 1px;
@@ -157,6 +158,28 @@ button {
   width: 310%;
   display: block;
   cursor: pointer;
+  font-weight: 600;
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+
+&:focus {
+    outline: none;
+}
+}
+.fa-chevron-down {
+  position: absolute;
+  right: 85px;
+  @include vertical-center;
+
+}
+
+.check-date p {
+  position: absolute;
+  top: 10px;
+  left: 48px;
+  font-size: 20px;
+  font-weight: 600;
+  
 }
 .form-group {
   width: 100%;
@@ -178,7 +201,7 @@ button {
   flex-direction: row;
   justify-content: space-between;
   border: 1px solid #e9ecef;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   position: relative;
   padding: 28px 0;
   cursor: pointer;

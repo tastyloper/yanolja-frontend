@@ -90,23 +90,37 @@
         <section class="compare-condition">
           <h3>비교 조건 선택</h3>
           <div class="check-date">
+              <p>날짜 선택</p>
+<!-- 
 
-
-
-              <form [formGroup]="form">
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-12 col-md-5 col-lg-4 form-group">
                       <input
                         class="form-control"
-                        #datePicker="bsDaterangepicker"
                         bsDaterangepicker
+                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-red' }"
                         [(ngModel)]="bsRangeValue"
-                        formControlName="dateYMD"
-                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD, hh:mm a', containerClass: 'theme-red' }">
+                        >
                     </div>
-                  </div>
-                  </form>
-
+                  </div> -->
+                  <form [formGroup]="form">
+                      <div class="row">
+                        <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+                          <input
+                            class="form-control"
+                            #datepickerYMD="bsDaterangepicker"
+                            bsDaterangepicker
+                            (click)="trigger(datepickerYMD)"
+                            formControlName="dateYMD"
+                            [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-red', showWeekNumbers: false }"
+                            [(ngModel)]="bsRangeValue"
+                            [minDate]="minDate">
+                          </div>
+                        </div>
+                      </form>
+                      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                
+                  
           </div>
         </section>
         <section class="room-list-section">

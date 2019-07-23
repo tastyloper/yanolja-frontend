@@ -18,6 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
 
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { koLocale } from 'ngx-bootstrap/locale';
+defineLocale('ko', koLocale);
+
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',

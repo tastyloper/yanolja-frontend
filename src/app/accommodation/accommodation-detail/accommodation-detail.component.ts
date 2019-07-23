@@ -1,11 +1,8 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, HostListener } from '@angular/core';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
-
-import { defineLocale } from 'ngx-bootstrap/chronos';
-import { deLocale } from 'ngx-bootstrap/locale';
-defineLocale('de', deLocale);
+import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 
 
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -19,16 +16,18 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   @ViewChild('galleryTop', { static: true }) galleryTop;
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
+  @ViewChild(BsDatepickerDirective, { static: false }) datepicker: BsDatepickerDirective;
+
+  locale = 'ko';
+  locales = listLocales();
 
   constructor(private http: HttpClient, private localeService: BsLocaleService) {
-
-    this.maxDate.setDate(this.maxDate.getDate() + 1);
-    this.bsRangeValue = [this.bsValue, this.maxDate];
+    console.log(this.locales);
     this.localeService.use(this.locale);
-    // this.bsConfig = Object.assign({}, { containerClass: 'theme-red' });
-   }
-  locales = listLocales();
-  locale = 'ko';
+    this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.minDate.setDate(this.minDate.getDate());
+    this.bsRangeValue = [this.bsValue, this.maxDate];
+  }
 
   bsValue = new Date();
   bsRangeValue: Date[];
@@ -39,6 +38,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     dateMDY: new FormControl(new Date()),
     dateRange: new FormControl([new Date(), new Date()])
   });
+  minDate = new Date();
   // bsConfig: Partial<BsDatepickerConfig>;
 
   galleryTopConfig: SwiperConfigInterface = {
@@ -74,6 +74,13 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.http.get('http://13.125.164.121/stay/api/stay/', { headers }).subscribe(v => console.log(v));
 
   }
+  @HostListener('window:scroll')
+  onScrollEvent() {
+    this.datepicker.hide();
+  }
+  trigger(ref) {
+    this.datepicker = ref;
+  }
   openMore() {
     this.facilitiesStatus = !this.facilitiesStatus;
   }
@@ -87,4 +94,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     document.execCommand('copy');
     document.body.removeChild(text);
   }
+  // trigger(e) {
+  //   this.datepicker = e;
+  // }
 }
