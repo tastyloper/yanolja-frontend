@@ -13,6 +13,7 @@ import { MypageModule } from './mypage/mypage.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AccommodationModule,
     AuthModule,
     MypageModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

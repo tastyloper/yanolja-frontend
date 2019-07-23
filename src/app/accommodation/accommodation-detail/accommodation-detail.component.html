@@ -4,8 +4,15 @@
     <section class="header-section">
       <div class="header-div">
         <h1 class="accomodation-name">도미인 서울 강남</h1>
-        <i class="stars"></i>
-        <span class="header-location">강남구 봉은사로 134</span>
+        <i class="stars">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+        </i>
+        <span class="header-location">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            강남구 봉은사로 134</span>
       </div>
       <div class="review-container">
         <span class="evaluation">우수함</span>
@@ -14,60 +21,225 @@
       </div>
     </section>
   
-    <section class="navigation-bar">
-    </section>
-  
     <section class="accomodation-detail">
       <h1>숙소 상세 페이지</h1>
       <section class="accomodation-imgs-section">
         <h2>숙소 사진</h2>
+      <div class="all-wrpper">
+        <div class="swiper-container gallery-top" #galleryTop [swiper]="galleryTopConfig">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+            </div>
+            <div class="swiper-slide">
+                <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+              </div><div class="swiper-slide">
+                  <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+                </div><div class="swiper-slide">
+                    <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+                  </div><div class="swiper-slide">
+                      <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+                    </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fc882024-d547-45e7-b3a9-09b2bacc1257.jpg?aki_policy=x_large">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/cba32ec2-bf1a-4759-a14b-5811ef31311b.jpg?aki_policy=x_large">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/05ee8d99-95bd-4feb-b73c-d1e55f8dbcaa.jpg?aki_policy=x_large">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/22a34033-5c3e-4d79-92e7-3ac6be0cc83e.jpg?aki_policy=x_large">
+            </div>
+          </div>
+          <div class="swiper-button-next swiper-button-black"></div>
+          <div class="swiper-button-prev swiper-button-black"></div>
+        </div>
+        <div class="swiper-container gallery-thumbs" #galleryThumbs [swiper]="galleryThumbsConfig">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+            </div><div class="swiper-slide">
+                <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+              </div><div class="swiper-slide">
+                  <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+                </div><div class="swiper-slide">
+                    <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+                  </div><div class="swiper-slide">
+                      <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+                    </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fc882024-d547-45e7-b3a9-09b2bacc1257.jpg?aki_policy=small">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/cba32ec2-bf1a-4759-a14b-5811ef31311b.jpg?aki_policy=small">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/05ee8d99-95bd-4feb-b73c-d1e55f8dbcaa.jpg?aki_policy=small">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/22a34033-5c3e-4d79-92e7-3ac6be0cc83e.jpg?aki_policy=small">
+            </div>
+          </div>
+        </div>
+      </div>
       </section>
       <section class="compare-price-section">
         <h2>객실 가격비교</h2>
         <section class="compare-condition">
           <h3>비교 조건 선택</h3>
           <div class="check-date">날짜</div>
-          <div class="check-person">인원</div>
-          <button class="search">재검색</button>
         </section>
         <section class="room-list-section">
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
           <li class="room">
-            <span class="room-name">객실 A</span>
             <div>
-              <span class="room-price">50000원</span>
-              <span class="room-shocking">30000원</span>
-              <button class="select-room">선택</button>
+              <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
+              <div class="column-div">
+                <span class="room-name">객실 A</span>
+                <span class="room-standard">기준 2명/ 최대 2명</span>
+                <div class="reservation-status">예약가능</div>
+              </div>
+            </div>
+            <div class="room-div">
+              <div>
+                <span class="room-type">대실</span>
+                <span class="room-available-time">최대 18:00</span>
+              </div>
+              <span class="room-price">50,000원</span>
+              <div>
+                <span class="room-type">대실</span>
+                <span class="room-available-time">최대 18:00</span>
+              </div>
+              <span class="room-price">50,000원</span>
             </div>
           </li>
+          <li class="room">
+              <div>
+                <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
+                <div class="column-div">
+                  <span class="room-name">객실 A</span>
+                  <span class="room-standard">기준 2명/ 최대 2명</span>
+                  <div class="reservation-status">예약가능</div>
+                </div>
+              </div>
+              <div class="room-div">
+                <div>
+                  <span class="room-type">대실</span>
+                  <span class="room-available-time">최대 18:00</span>
+                </div>
+                <span class="room-price">50,000원</span>
+                <div>
+                  <span class="room-type">대실</span>
+                  <span class="room-available-time">최대 18:00</span>
+                </div>
+                <span class="room-price">50,000원</span>
+              </div>
+            </li><li class="room">
+                <div>
+                  <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
+                  <div class="column-div">
+                    <span class="room-name">객실 A</span>
+                    <span class="room-standard">기준 2명/ 최대 2명</span>
+                    <div class="reservation-status">예약가능</div>
+                  </div>
+                </div>
+                <div class="room-div">
+                  <div>
+                    <span class="room-type">대실</span>
+                    <span class="room-available-time">최대 18:00</span>
+                  </div>
+                  <span class="room-price">50,000원</span>
+                  <div>
+                    <span class="room-type">대실</span>
+                    <span class="room-available-time">최대 18:00</span>
+                  </div>
+                  <span class="room-price">50,000원</span>
+                </div>
+              </li><li class="room">
+                  <div>
+                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
+                    <div class="column-div">
+                      <span class="room-name">객실 A</span>
+                      <span class="room-standard">기준 2명/ 최대 2명</span>
+                      <div class="reservation-status">예약가능</div>
+                    </div>
+                  </div>
+                  <div class="room-div">
+                    <div>
+                      <span class="room-type">대실</span>
+                      <span class="room-available-time">최대 18:00</span>
+                    </div>
+                    <span class="room-price">50,000원</span>
+                    <div>
+                      <span class="room-type">대실</span>
+                      <span class="room-available-time">최대 18:00</span>
+                    </div>
+                    <span class="room-price">50,000원</span>
+                  </div>
+                </li>
         </ul>
         </section>
       </section>
       <section class="accomodation-information-section">
         <h2>숙소 정보</h2>
         <section class="accomodation-location">
+          <div class="map-overlay"></div>
           <h3>숙소 위치 보기</h3>
-          <p>숙소 위치</p>
+          <p>
+            <i class="fa fa-map-marker accomodation-map-marker fa-3x" aria-hidden="true"></i>
+            강남구 봉은사로 134
+          </p>
           <div>
           <button class="copy-location">
-            <i class="far fa-map"></i>
+            <i class="fa fa-clone" aria-hidden="true"></i>
             주소 복사</button>
-          <button class="location-map">지도 보기</button>
+          <button class="location-map">
+            <i class="fa fa-map-o" aria-hidden="true"></i>
+            지도 보기</button>
           </div>
         </section>
         <section class="facilities">
           <h3>편의 시설</h3>
           <ul class="facilities-list">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
+            <li>
+                <i class="fa fa-car" aria-hidden="true"></i>
+            </li>
+            <li>
+                <i class="fa fa-coffee" aria-hidden="true"></i>
+            </li>
+            <li>
+                <i class="fa fa-cutlery" aria-hidden="true"></i>
+            </li>
             <li>4</li>
+            <!-- <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li> -->
           </ul>
         </section>
         <section class="introduce">
           <h3>소개</h3>
-          <p>이 호텔에는 레스토랑, 24시간 운영되는 비즈니스 센터, 스파 서비스 등이 마련되어 있습니다. 공용 장소에서의 무료 WiFi, 무료 셀프 주차 및 무료 지역 셔틀도 제공됩니다. 또한, 드라이클리닝 서비스, 세탁 시설 및 24시간 운영 프런트 데스크도 이용하실 수 있습니다.</p>
+          <p>
+            1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다.<br>
+            2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다.<br>
+            3. 미성년자 혼숙예약으로 인해 발생하는 입실 거부에 대해서는 취소/환불이 불가합니다.<br>
+            4. 제휴점 사정에 의한 취소 발생 시 100% 환불 처리됩니다.<br>
+            5. 제휴점 사정으로 객실 정보가 수시로 변경될 수 있습니다. 이로 인한 불이익은 당사가 책임지지 않습니다.<br>
+            4. 제휴점 사정에 의한 취소 발생 시 100% 환불 처리됩니다.<br>
+            4. 제휴점 사정에 의한 취소 발생 시 100% 환불 처리됩니다.<br>
+            4. 제휴점 사정에 의한 취소 발생 시 100% 환불 처리됩니다.<br>
+            4. 제휴점 사정에 의한 취소 발생 시 100% 환불 처리됩니다.<br>
+          </p>
         </section>
       </section>
       <section class="review-section">
@@ -129,6 +301,34 @@
             <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
                 스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
             <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
+          </li>
+          <li class="review-item">
+              <div class="review-score">8.9</div>
+              <span class="review-title">좋았음.</span>
+              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
+                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
+              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
+          </li>
+          <li class="review-item">
+              <div class="review-score">8.9</div>
+              <span class="review-title">좋았음.</span>
+              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
+                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
+              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
+          </li>
+          <li class="review-item">
+              <div class="review-score">8.9</div>
+              <span class="review-title">좋았음.</span>
+              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
+                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
+              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
+          </li>
+          <li class="review-item">
+              <div class="review-score">8.9</div>
+              <span class="review-title">좋았음.</span>
+              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
+                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
+              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
           </li>
           <li class="review-item">
               <div class="review-score">8.9</div>
