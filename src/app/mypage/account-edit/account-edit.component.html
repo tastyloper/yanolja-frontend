@@ -1,5 +1,61 @@
 <div class="mypage-router-wrap">
   <section class="account-edit">
-    <p>회원정보수정 페이지</p>
+      <div class="mypage-router-wrap">
+          <div class="mypage-body-wrapper clearfix">
+            <!-- <a class="btn-edit" routerLink="/mypage/accountEdit">편집</a> -->
+            <div class="body-content">
+              <div class="member-group clearfix">
+                <div class="member-key">이름</div>
+                  <form [formGroup]="editForm" (ngSubmit)="onSubmit()"> 
+                    <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
+                      <input type="text" id="userpw" name="userpw" class="form-input" value="이가영" minlength="6" formControlName="userpw">
+                      <em class="form-error-msg" *ngIf="userpw.errors?.required && userpw.touched">닉네임을 입력해주세요.</em>
+                      <em class="form-error-msg" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
+                    </div>
+                  </form>
+                  <!-- <input type="text" value="이가영" class="member-value"> -->
+                </div>
+                <div class="member-group clearfix">
+                  <div class="member-key">이메일</div>
+                  <div class="member-value">happydy91@hanmail.net</div>
+                </div>
+                <div class="member-group clearfix">
+                  <div class="member-key">연락처</div>
+                  <div class="member-value">휴대폰 정보 없음</div>
+                </div>
+                <div class="member-group clearfix">
+                  <div class="member-key">비밀번호</div>
+                  <div class="member-value">*******</div>
+                </div>
+                <div class="memeber-edit-btn">
+                  <a class="cancel-btn btn">취소하기</a>
+                  <a class="save-btn btn">저장하기</a> 
+                </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #template>
+          <!-- <div class="modal-header">
+            <h4 class="modal-title pull-left">계정 삭제하기</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div> -->
+          <div class="modal-body">
+            <!-- <div class="modal-q">
+              회원탈퇴를 하시려면 <span class="modal-q-agree">안내 및 동의</span>가 필요합니다.
+              <p class="modal-q-color">정말로 회원탈퇴를 진행하시겠습니까?</p>
+            </div> -->
+            <!-- <form [formGroup]="editForm" (ngSubmit)="onSubmit()"> 
+              <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
+                <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호를 입력해주세요." minlength="6" formControlName="userpw">
+                <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호를 입력해주세요." minlength="6" formControlName="userpw">
+                <em class="form-error-msg" *ngIf="userpw.errors?.required && userpw.touched">닉네임을 입력해주세요.</em>
+                <em class="form-error-msg" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
+              </div>
+              <button class="submit-btn" [disabled]="editForm.invalid">확인</button>
+            </form> -->
+          </div>
+        </ng-template>
   </section>
 </div>
