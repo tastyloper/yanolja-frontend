@@ -13,10 +13,16 @@
           <a class="nav-link" href="http://yanolja.in/ko/category/recruit/" title="인재채용으로 이동" target="_blank">인재채용</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://policy.yanolja.com/?t=service" title="이용약관으로 이동" target="_blank">이용약관</a>
+          <a class="nav-link" (click)="privacyPolicyOpen()" title="개인정보처리방침으로 이동">개인정보처리방침</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://policy.yanolja.com/?t=privacy" title="개인정보처리방침으로 이동" target="_blank">개인정보처리방침</a>
+          <a class="nav-link" (click)="youthProtectionPolicyOpen()" title="청소년 보호 정책으로 이동">청소년 보호 정책</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="termsOfServiceOpen()" title="이용약관으로 이동">이용약관</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="locationInfoTermsOpen()" title="위치정보 이용약관으로 이동">위치정보 이용약관</a>
         </li>
       </ul>
       <div class="btn-group" dropdown>

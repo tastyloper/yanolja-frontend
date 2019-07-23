@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
 
@@ -7,19 +7,28 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interf
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   headerConfig: SwiperConfigInterface = {
     slidesPerView: 6,
     spaceBetween: 20,
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.main-swiper-button-next',
+      prevEl: '.main-swiper-button-prev',
     }
   };
 
-  constructor() { }
+  contentConfig: SwiperConfigInterface = {
+    slidesPerView: 4,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.content-swiper-button-next',
+      prevEl: '.content-swiper-button-prev',
+    }
+  };
 
-  ngOnInit() {
+  likeAction(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('123');
   }
-
 }

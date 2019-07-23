@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SubTitleService } from 'src/app/core/services/sub-title.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { SubTitleService } from '../../core/services/sub-title.service';
 
 import { PasswordValidator } from '../password-validator';
+
+import { TermsOfServiceComponent } from '../../shared/terms-of-service/terms-of-service.component';
 
 @Component({
   selector: 'app-signup',
@@ -13,11 +17,13 @@ import { PasswordValidator } from '../password-validator';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  bsModalRef: BsModalRef;
 
   constructor(
     private subTitleService: SubTitleService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
@@ -42,9 +48,9 @@ export class SignupComponent implements OnInit {
       }, { validator: PasswordValidator.match }),
       checkGroup: this.fb.group({
         allAgree: [false],
-        adult: [false, Validators.requiredTrue],
-        service: [false, Validators.requiredTrue],
-        privacy: [false, Validators.requiredTrue],
+        adult: [false, Validators.pattern('true')],
+        service: [false, Validators.pattern('true')],
+        privacy: [false, Validators.pattern('true')],
         location: [false],
         privacy2: [false],
         notConnected: [false]
@@ -61,11 +67,14 @@ export class SignupComponent implements OnInit {
     console.dir(this.signupForm);
   }
 
-
   onSubmit() {
     console.dir(this.signupForm);
     // this.signupForm.reset();
     this.router.navigate(['login']);
+  }
+
+  termsOfServiceOpen() {
+    this.bsModalRef = this.modalService.show(TermsOfServiceComponent, { class: 'modal-lg' });
   }
 
   get userName() {

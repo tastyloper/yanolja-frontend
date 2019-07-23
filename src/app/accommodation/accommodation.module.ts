@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -8,6 +11,13 @@ import { AccommodationListComponent } from './accommodation-list/accommodation-l
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { PaymentComponent } from './payment/payment.component';
+import { SwiperModule, SWIPER_CONFIG, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { HttpClientModule } from '@angular/common/http';
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 @NgModule({
   declarations: [
@@ -19,7 +29,17 @@ import { PaymentComponent } from './payment/payment.component';
   imports: [
     CommonModule,
     SharedModule,
-    AccommodationRoutingModule
+    ReactiveFormsModule,
+    SwiperModule,
+    HttpClientModule,
+    AccommodationRoutingModule,
+    ButtonsModule.forRoot()
+  ],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ]
 })
 export class AccommodationModule {}
