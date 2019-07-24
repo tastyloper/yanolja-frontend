@@ -8,16 +8,16 @@
           <div class="alist-search-type search-box">
             <div class="alist-search-frame" (click)="toggle('type')">
               <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
-              <button class="alist-search-inputbox">숙소유형</button>
+              <button class="alist-search-inputbox">{{searchBarShow}}</button>
             </div>
             
             <div class="alist-popup-container" [class.active]="type">
               <div class="alist-type-popup-module">
                 <ul class="alist-popup-type-container alist-type-container-type">
-                  <li class="alist-popup-type-item"><button>모텔</button></li>
-                  <li class="alist-popup-type-item"><button>호텔</button></li>
-                  <li class="alist-popup-type-item"><button>게스트하우스</button></li>
-                  <li class="alist-popup-type-item"><button>펜션</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('motel')"><button>모텔</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('hotel')"><button>호텔</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('guestHouse')"><button>게스트하우스</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('pension')"><button>펜션</button></li>
                 </ul>
             </div>
             </div>
@@ -25,7 +25,7 @@
           <div class="alist-search-loc search-box">
             <div class="alist-search-frame" (click)="toggle('location')" >
               <i class="alist-search-icon fa fa-map-marker"></i>
-              <button class="alist-search-inputbox">지역</button>
+              <button class="alist-search-inputbox">{{searchBarLocShow}}</button>
             </div>
             <div class="alist-search-location-container" [class.active]="location">
               <div class="alist-search-location-header">
@@ -50,7 +50,7 @@
               </div>
               <div class="alist-search-location-bottom">
                 <ul class="alist-search-bottom-list">
-                  <li><a>강남/역삼/삼성/논현</a></li>
+                  <li (click)="selectLoc(item)"><a #item>강남/역삼/삼성/논현</a></li>
                   <li><a>서초/신사/방배</a></li>
                   <li><a>잠실/신천(잠실새내)</a></li>
                   <li><a>영등포/여의도</a></li>
@@ -75,7 +75,7 @@
               </div>
             </div>
           </div>
-          <div class="alist-search-date search-box" (click)="toggle()">
+          <div class="alist-search-date search-box" (click)="selectDate(inputDate)">
             <div class="alist-search-frame">
                 <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             <button class="alist-search-inputbox">
@@ -84,9 +84,9 @@
                        placeholder="예약하실 날짜를 선택하세요"
                        class="form-control datePicker-input"
                        [bsConfig]="datePickerConfig"
-                       bsDaterangepicker>
+                       bsDaterangepicker
+                       #inputDate>
               </div>
-
             </button>
             </div>
           </div>
