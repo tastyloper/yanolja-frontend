@@ -18,6 +18,16 @@ export class AccommodationListComponent implements OnInit {
   numberChildren: number = 0;
   minDate: Date;
   maxDate: Date;
+  searchBar = {
+    type: '',
+    location: '',
+    date: '',
+    member: ''
+  }
+  searchBarShow: string ;
+  searchBarLocShow: string;
+  searchBarDateShow: string;
+  searchBarMemberShow: string;
 
   constructor(private route: ActivatedRoute) { 
 
@@ -38,14 +48,15 @@ export class AccommodationListComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.route.queryParams
     .subscribe(params => { 
       this.category = params.category;
       console.log(this.category , "dddd");
       return;
     })
+
+    this.searchBarShow = this.searchBar.type ? this.searchBar.type : '숙박유형';
+    this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
   }
 
   toggle(option:string) {
@@ -70,4 +81,17 @@ export class AccommodationListComponent implements OnInit {
     console.log('submitBtn')
   }
 
+  selectType(type:string) {
+    this.searchBar.type = type;
+    this.searchBarShow = type === 'motel' ? '모텔' : (type === 'hotel' ?  '호텔' : (type === 'guestHouse' ?  '게스트하우스' : (type === 'pension' ? '펜션' : '숙박종류')));
+  }
+
+  selectLoc(item) {
+    this.searchBar.location = item.text;
+    this.searchBarLocShow = item.text;
+  }
+
+  selectDate(dateRange) {
+    console.log(dateRange);
+  }
 }
