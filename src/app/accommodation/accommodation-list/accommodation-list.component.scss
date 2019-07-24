@@ -2,6 +2,8 @@
 
 .alist-body{
   position: relative;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 button {
@@ -29,10 +31,9 @@ button {
 
 
 .alist-container-sec {
-  width: 80%;
+  width: 97%;
   position: absolute;
   top: -10px;
-  left: 10%;
   margin-right:auto;
   margin-left:auto; 
 }
@@ -323,16 +324,298 @@ button {
   display: block;
 }
 
+// 숙소리스트 컨텐츠 전체 wrapper
+.alist-whole-wrapper {
+  width: 100%;
+  // background: gold;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .alist-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  background: pink;
+  margin-bottom: 20px;
+}
+
+.alist-header-h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #343a40;
 }
 
 .alist-header-nav {
-  background: green;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.alist-header-nav-item {
+  font-weight: 700;
+  color: #343a40;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.alist-header-nav-item::before {
+  background-color: #343a40;
+  width: 4px;
+  height: 4px;
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 6px;
+  border-radius: 2px;
+  // background-color: #ced4da;
+}
+
+.alist-sort-option {
+  color: #343a40;
+  font-weight: 700;
+  padding-left: 8px;
+  font-size: 13px;
+  background-color: rgba(0,0,0,0);
+}
+
+.alist-content-outter {
+
+}
+
+.alist-content-ul-item a {
+  display: flex;
+  justify-content: space-between;
+}
+
+.alist-item-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  height: 200px;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(102,109,117,.2);
+  transition: box-shadow .2s;
+
+}
+
+.alist-item-box-image-container {
+  width: 390px;
+  height: 200px;
+  vertical-align: top;
+  background: lime;
+}
+
+.alist-item-box-imgDetail{
+  width: 100%;
+  height: 100%;
+  background-image: url('https://i.travelapi.com/hotels/23000000/22140000/22135900/22135839/3978c2fa_z.jpg');
+  background-size: cover;
+  border-radius: 2px 0 0 2px;
+}
+
+.alist-box-right-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.alist-box-right-inner {
+  width: 480px;
+  max-width: 480px;
+  padding: 20px 24px 22px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+// 숙소박스 호텔이름
+.alist-hotel-name {
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.alist-hotel-name-desc {
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #33373a;
+}
+
+.alist-hotel-service{ 
+  margin-top: 12px;
+}
+
+.alist-hotel-service-label {
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid #33b893;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #27ab86;
+  line-height: 16px;
+  display: inline-block;
+}
+
+.alist-hotel-review-container {
+  display: flex;
+}
+
+.alist-hotel-score {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px 4px 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 28px;
+  background-color: #003580;
+  color: #ffff;
+  letter-spacing: 1px;
+}
+
+.alist-hotel-score span {
+  margin-left: 2.5px;
+}
+
+.alist-hotel-review-label {
+  margin-left: 10px;
+}
+
+.alist-hotel-review-label h3 {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.alist-hotel-review-label p {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 12px;
+} 
+
+// 숙소박스 오른쪽
+.alist-box-right-outter{
+  width: 250px;
+  position: relative;
+}
+
+.alist-box-right-outter::before {
+  content: "";
+  width: 1px;
+  height: calc(100% - 40px);
+  background-color: #e9ecef;
+  position: absolute;
+  top: 20px;
+  left: 1px;
+}
+
+.alist-rightbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 22px 24px 22px;
+}
+
+.alist-rightbox-price {
+
+}
+
+.alist-price-total {
+  line-height: 22px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.5px;
+  text-align: right;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.alist-price-total span {
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-bottom: 1px;
+  font-weight: 600;
+}
+
+.alist-price-avg {
+  line-height: 12px;
+  font-size: 11px;
+  color: #42484f;
+  text-align: right;
+}
+
+.alist-rightbox-btnBox {
+  width: 104px;
+  margin-top: 10px;
+  line-height: 30px;
+  z-index: 1;
+}
+
+.alist-rightbox-btn {
+  line-height: 30px;
+  width: 100%;
+  border: 1px solid #ff3478;
+  background-color: #ff3478;
+  color: #fff;
+  height: 32px;
+  padding-left: 11px;
+  padding-right: 11px;
+  font-size: 13px;
+  padding: 0;
+  position: relative;
+  border-radius: 2px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow .1s ease-out,background-color .1s ease-out,color .1s ease-out,border-bottom .1s ease-out;
+}
+
+.alist-rightbox-priceOption {
+  width: 100%;
+  position: relative;
+  padding: 10px 24px 18px;
+}
+
+.alist-rightbox-priceOption::before {
+  content: "";
+  width: calc(100% - 48px);
+  height: 1px;
+  background-color: #e9ecef;
+  position: absolute;
+  top: 0;
+  left: 24px;
+}
+
+.alist-priceOption {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border: 0;
+  background-color: rgba(0,0,0,0);
+  z-index: 1;
+  text-align: left;
+}
+
+.alist-priceOption h4 {
+  color: #495056;
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.alist-priceOption p {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: -.3px;
 }
