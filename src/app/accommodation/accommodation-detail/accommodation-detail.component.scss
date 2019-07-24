@@ -134,11 +134,10 @@ button {
 /* 객실 비교조건 선택*/
 .compare-condition {
   width: 100%;
-  height: 136px;
+  height: 120px;
   padding: 45px;
   /* 패딩 24px에서 45px로 변경*/
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border: 1px solid #e9ecef;
   margin-bottom: 30px;
   position: relative;
@@ -148,29 +147,36 @@ button {
   width: 1px;
   padding: 1px;
   overflow: hidden;
-  display: flex;
 }
 .check-date {
   width: 100%;
   height: 45px;
 }
 .form-control {
-  width: 310%;
+  width: 100%;
   display: block;
   cursor: pointer;
   font-weight: 600;
   color: transparent;
   text-shadow: 0 0 0 #000;
+  background: transparent;
+  padding-left: 40px;
 
 &:focus {
     outline: none;
 }
 }
-.fa-chevron-down {
-  position: absolute;
-  right: 85px;
+.fa-chevron-down, .fa-chevron-up {
   @include vertical-center;
-
+  right: 25px;
+  z-index: -1;
+  color: $primary-color;
+}
+.fa-calendar-check-o {
+  @include vertical-center;
+  left: 30px;
+  z-index: -1;
+  color: $primary-color;
 }
 
 .check-date p {
@@ -184,6 +190,100 @@ button {
 .form-group {
   width: 100%;
 }
+/* 인원 선택*/
+.check-person {
+  width: 33%;
+  height: 40px;
+  position: absolute;
+  top: 45px;
+  left: 40%;
+  border: 1px solid #e9ecef;
+  background: #fff;
+}
+.check-person-container {
+  padding: 7px 10px 8px 50px;
+}
+.check-person-container>p {
+  font-weight: 600;
+  font-size : 16px;
+  @include vertical-center;
+}
+.check-cursor>.fa-chevron-down, .check-cursor>.fa-chevron-up {
+  right: 10px;
+  z-index: 1;
+}
+.check-cursor {
+  cursor: pointer;
+  height: 100%;
+}
+.fa-times {
+  cursor: pointer;
+}
+.fa-user {
+  @include vertical-center;
+  color: $primary-color;
+  left: 20px;
+}
+.modal-person {
+  width: 100%;
+  position: absolute;
+  top: 45px;
+  z-index: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 5px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.modal-person>div {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.modal-person>.person-header {
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 16px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.person-button {
+  border-radius: 24px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ced4da;
+  background: #fff;
+}
+.adult>div, .children>div {
+  font-weight: 500;
+  font-size: 16px;
+}
+.plus-button {
+  margin-left: 10px;
+}
+.minus-button {
+  margin-right: 10px;
+}
+.search {
+  font-weight: 600;
+  border: 1px solid $primary-color;
+  border-radius: 2px;
+  width: 15%;
+  height: 100%;
+  color: #343a40;
+  outline-style: none;
+  align-items: center;
+  background-color: #fff;
+  @include vertical-center;
+  right: 50px;
+  height: 40px;
+}
+.search:hover {
+  background: #FFF2F5;
+}
+
 /*객실 리스트*/
 .room-list-section {
   width: 100%;
