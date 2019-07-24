@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-accommodation-list',
@@ -8,6 +10,9 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrls: ['./accommodation-list.component.scss']
 })
 export class AccommodationListComponent implements OnInit {
+  locale:string = 'ko';
+  locales = listLocales();
+
   navClicked: boolean = false;
   datePickerConfig:Partial<BsDatepickerConfig>;
   category: string;
@@ -29,7 +34,9 @@ export class AccommodationListComponent implements OnInit {
   searchBarDateShow: string;
   searchBarMemberShow: string;
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private localeService: BsLocaleService) { 
+
+    this.localeService.use(this.locale);
 
     this.minDate = new Date();
     this.maxDate = new Date();

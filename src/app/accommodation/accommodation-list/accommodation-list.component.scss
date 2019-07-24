@@ -1,4 +1,7 @@
 
+.container-wrapper {
+  background: #ff3478;
+}
 
 .alist-body{
   position: relative;
@@ -127,7 +130,7 @@ button {
 
 .alist-search-type{
   border:none;
-  width: 120px;
+  width: 130px;
 }
 
 .alist-search-loc{
@@ -135,7 +138,7 @@ button {
 }
 
 .alist-search-date{
-  width: 315px;
+  width: 300px;
 }
 
 .btn-date-inner {
