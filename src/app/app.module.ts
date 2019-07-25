@@ -15,13 +15,11 @@ import { MypageModule } from './mypage/mypage.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-
 import { UiComponent } from './components/ui/ui.component';
 import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 import { YouthProtectionPolicyComponent } from './shared/youth-protection-policy/youth-protection-policy.component';
 import { LocationInfoTermsComponent } from './shared/location-info-terms/location-info-terms.component';
-import { MapComponent } from './shared/map/map.component';
 import { CancellationPolicyComponent } from './shared/cancellation-policy/cancellation-policy.component';
 import { PersonalInfoThirdPartyComponent } from './shared/personal-info-third-party/personal-info-third-party.component';
 import { CollectionUsePersonalInfoComponent } from './shared/collection-use-personal-info/collection-use-personal-info.component';
@@ -48,7 +46,6 @@ import { CollectionUsePersonalInfoComponent } from './shared/collection-use-pers
     PrivacyPolicyComponent,
     YouthProtectionPolicyComponent,
     LocationInfoTermsComponent,
-    MapComponent,
     CancellationPolicyComponent,
     PersonalInfoThirdPartyComponent,
     CollectionUsePersonalInfoComponent

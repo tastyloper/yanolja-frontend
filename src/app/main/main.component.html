@@ -3,7 +3,7 @@
     <div class="container">
       <h2>야 너도 놀수있어</h2>
       <div class="search-panel">
-        <a (click)="mapOpen()">asd</a>
+        <!-- <a (click)="openModal(template)">asd</a> -->
       </div>
       <div class="swiper-panel">
         <div class="swiper-container" [swiper]="headerConfig">
@@ -253,3 +253,17 @@
   </section>
 </section>
 <app-footer></app-footer>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">지도로 위치지정</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="12" [zoomControl]="true"
+        [zoomControlOptions]="zoomControlOptions" [scrollwheel]="false" (mapClick)="mapClick()">
+        <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="icon"></agm-marker>
+      </agm-map> -->
+  </div>
+</ng-template>
