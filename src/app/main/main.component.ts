@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
+import { MapComponent } from '../shared/map/map.component';
 
 @Component({
   selector: 'app-main',
@@ -8,6 +11,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interf
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
+  bsModalRef: BsModalRef;
   headerConfig: SwiperConfigInterface = {
     slidesPerView: 6,
     spaceBetween: 20,
@@ -16,7 +20,6 @@ export class MainComponent {
       prevEl: '.main-swiper-button-prev',
     }
   };
-
   contentConfig: SwiperConfigInterface = {
     slidesPerView: 4,
     spaceBetween: 20,
@@ -26,9 +29,15 @@ export class MainComponent {
     }
   };
 
+  constructor(private modalService: BsModalService) {}
+
   likeAction(e) {
     e.preventDefault();
     e.stopPropagation();
     console.log('123');
+  }
+
+  mapOpen() {
+    this.bsModalRef = this.modalService.show(MapComponent, { class: 'modal-lg' });
   }
 }
