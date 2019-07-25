@@ -14,7 +14,8 @@ export class ReservationDetailComponent implements OnInit {
   ) {}
   
   ngOnInit() {
-    this.subTitleService.pagaTitle = '예약상세내역';
+    this.subTitleService.pagaTitle = '예약상세';
+    this.subTitleService.pagaDescription = '내역을 확인해보세요!';
     }
 
 }
