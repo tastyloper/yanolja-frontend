@@ -21,8 +21,7 @@ import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-serv
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 import { YouthProtectionPolicyComponent } from './shared/youth-protection-policy/youth-protection-policy.component';
 import { LocationInfoTermsComponent } from './shared/location-info-terms/location-info-terms.component';
-
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MapComponent } from './shared/map/map.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +38,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     AccommodationModule,
     AuthModule,
     MypageModule,
-    AppRoutingModule,
-    BsDatepickerModule.forRoot()
+    AppRoutingModule
   ],
   entryComponents: [
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
     YouthProtectionPolicyComponent,
-    LocationInfoTermsComponent
+    LocationInfoTermsComponent,
+    MapComponent
   ],
   providers: [BsModalRef],
   bootstrap: [AppComponent]
