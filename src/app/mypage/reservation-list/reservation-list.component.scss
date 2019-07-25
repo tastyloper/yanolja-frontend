@@ -1,67 +1,160 @@
-.reservation-list {
-  background:pink;
-  width: 100%;
-  height: 170px;
+@import "../../../output-scss/common.scss";
+
+:host {
+  display: block;
+  height: 440px;
+}
+.box {
+  padding: 16px;
+  background-color: #FFF;
   border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
-  padding: 20px 20px 30px 30px;
-  margin-top: 20px;
+  box-shadow: 0 1px 0 0 #E9ECEF;
+  & + .box {
+    margin-top: 20px;
+  }
 }
-
-.reservation-list:first-child {
-  margin-top: 0;
+.content-item {
+  position: relative;
+  display: block;
+  border-radius: 4px;
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .16);
+    transition: box-shadow .15s ease-out;
+  }
+  &:hover {
+    box-shadow: 0 2px 8px rgba(102, 109, 117, .32);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -o-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    transform: translateY(-2px);
+    &:after {
+      box-shadow: inset 0 0 0 1px rgba(102, 109, 117, .32)
+    }
+  }
+  .like-wrap {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    width: 24px;
+    height: 24px;
+    a {
+      color: #FFF;
+    }
+  }
+  .content-img-wrap {
+    overflow: hidden;
+    position: relative;
+    height: 166px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    img {
+      @include vertical-center;
+      width: 100%;
+    }
+  }
 }
+.content-text-wrap {
+  position: relative;
+  height: 157px;
+  padding: 10px 16px 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  .location {
+    color: #848c94;
+    font-size: 11px;
+  }
+  h3 {
+    margin-top: 10px;
+    color: #343a40;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 22px;
+    max-width: 207px;
+    overflow: hidden;
+  }
 
-.reservation-list-container {
-  display: flex;
-  justify-content: space-between;
-}
+  .reservation-list-header {
+    display: flex;
+    justify-content: space-between;
 
-.reservation-list-desc {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: space-between;
-}
+    .stats-box {
+      position: relative;
 
-.reservation-list-header {
-  display: flex;
-  flex-direction: column-reverse;
+      .done {
+        border-color: #919191;
+        color: #919191;
+      }
+    }
+  }
 
-}
+  .reservation-list-status {
+    border: 1px solid #ff3478;
+    background-color: #ffff;
+    height: 32px;
+    width: 60px;
+    padding: 4px;
+    color: #ff3478;
+    text-align: center;
+    line-height: 22px;
+    margin-top: 4px;
+    font-size: 12px;
+  }
 
-.reservation-list-status {
-  border: 1px solid #ff3478;
-  background-color: #ffff;
-  height: 32px;
-  width: 60px;
-  padding: 5px;
-  color: #ff3478;
-  text-align: center;
-  line-height: 22px;
-}
+  .review {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
 
-.reservation-list-title {
-  margin-top: 15px;
-  font-size: 20px;
-  font-weight: 700;
-}
+  .customer {
+    font-size: 12px;
+    .fa-star {
+      margin-right: 5px;
+      color: #FFCD34;
+    }
+    .fa-comments {
+      margin: 0 5px 0 10px;
+    }
+  }
 
-.reservation-list-details {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .options {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 
-.reservation-list-details p {
-  margin-top: 10px;
-}
-.reservation-list-details p:first-child {
-  margin-top: 0;
-}
+    h4 {
+      font-weight: 700;
+      font-size: 14px;
+      color: #919191;
+    }
 
-.reservation-more {
-  font-size: 18px;
+    .option {
+      display: flex;
+      justify-content: space-between;
+      color: #919191;
+      font-weight: 500;
+      font-size: 12px;
+
+      :first-child {
+        margin-bottom: 10px;
+      }
+    }
+
+    
+  }
+
 }
