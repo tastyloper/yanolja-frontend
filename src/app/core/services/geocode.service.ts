@@ -1,0 +1,48 @@
+import { Injectable, NgZone } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+​
+import { GoogleMapsAPIWrapper, MapsAPILoader } from '@agm/core';
+​
+declare var google: any;
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GeocodeService extends GoogleMapsAPIWrapper {
+
+  constructor(
+    private loader: MapsAPILoader,
+    private ngzone: NgZone
+  ) {
+    super(loader, ngzone);
+  }
+
+  getLatLan(address: string) {
+    return Observable.create(observer => {
+      try {
+        this.loader.load().then(() => {
+          const geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ address }, (results, status) => {
+            if (status === google.maps.GeocoderStatus.OK) {
+              const place = results[0].geometry.location;
+              observer.next(place);
+              observer.complete();
+            } else {
+              console.error('Error - ', results, ' & Status - ', status);
+              if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
+                observer.error('Address not found!');
+              } else {
+                observer.error(status);
+              }
+              observer.complete();
+            }
+          });
+        });
+      } catch (error) {
+        observer.error('error getGeocoding' + error);
+        observer.complete();
+      }
+    });
+  }
+}
