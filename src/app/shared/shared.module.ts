@@ -17,6 +17,9 @@ import { LocationInfoTermsComponent } from './location-info-terms/location-info-
 import { MapComponent } from './map/map.component';
 
 import { environment } from '../../environments/environment';
+import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
+import { PersonalInfoThirdPartyComponent } from './personal-info-third-party/personal-info-third-party.component';
+import { CollectionUsePersonalInfoComponent } from './collection-use-personal-info/collection-use-personal-info.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { environment } from '../../environments/environment';
     PrivacyPolicyComponent,
     YouthProtectionPolicyComponent,
     LocationInfoTermsComponent,
-    MapComponent
+    MapComponent,
+    CancellationPolicyComponent,
+    PersonalInfoThirdPartyComponent,
+    CollectionUsePersonalInfoComponent
   ],
   imports: [
     BsDropdownModule.forRoot(),
@@ -44,7 +50,9 @@ import { environment } from '../../environments/environment';
     PrivacyPolicyComponent,
     YouthProtectionPolicyComponent,
     LocationInfoTermsComponent,
-    MapComponent
+    MapComponent,
+    CancellationPolicyComponent,
+    PersonalInfoThirdPartyComponent
   ]
 })
 export class SharedModule {}

@@ -9,6 +9,8 @@ import { SubTitleService } from '../../core/services/sub-title.service';
 import { PasswordValidator } from '../password-validator';
 
 import { TermsOfServiceComponent } from '../../shared/terms-of-service/terms-of-service.component';
+import { LocationInfoTermsComponent } from '../../shared/location-info-terms/location-info-terms.component';
+import { CollectionUsePersonalInfoComponent } from '../../shared/collection-use-personal-info/collection-use-personal-info.component';
 
 @Component({
   selector: 'app-signup',
@@ -52,7 +54,7 @@ export class SignupComponent implements OnInit {
         service: [false, Validators.pattern('true')],
         privacy: [false, Validators.pattern('true')],
         location: [false],
-        privacy2: [false],
+        // privacy2: [false],
         notConnected: [false]
       })
     });
@@ -61,7 +63,7 @@ export class SignupComponent implements OnInit {
       this.service.setValue(v);
       this.privacy.setValue(v);
       this.location.setValue(v);
-      this.privacy2.setValue(v);
+      // this.privacy2.setValue(v);
       this.notConnected.setValue(v);
     });
     console.dir(this.signupForm);
@@ -75,6 +77,14 @@ export class SignupComponent implements OnInit {
 
   termsOfServiceOpen() {
     this.bsModalRef = this.modalService.show(TermsOfServiceComponent, { class: 'modal-lg' });
+  }
+
+  collectionUsePersonalInfoOpen() {
+    this.bsModalRef = this.modalService.show(CollectionUsePersonalInfoComponent, { class: 'modal-lg' });
+  }
+
+  locationInfoTermsOpen() {
+    this.bsModalRef = this.modalService.show(LocationInfoTermsComponent, { class: 'modal-lg' });
   }
 
   get userName() {
@@ -121,9 +131,9 @@ export class SignupComponent implements OnInit {
     return this.checkGroup.get('location');
   }
 
-  get privacy2() {
-    return this.checkGroup.get('privacy2');
-  }
+  // get privacy2() {
+  //   return this.checkGroup.get('privacy2');
+  // }
 
   get notConnected() {
     return this.checkGroup.get('notConnected');
