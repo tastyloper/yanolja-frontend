@@ -402,13 +402,27 @@ button {
 
 }
 
+
+
 .alist-item-box-image-container {
   width: 390px;
   height: 200px;
   vertical-align: top;
   background: lime;
+  position: relative;
 }
-
+.like-wrap {
+  position: absolute;
+  top: 8px;
+  font-size: 22px;
+  right: 8px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  a {
+    color: #FFF;
+  }
+}
 .alist-item-box-imgDetail{
   width: 100%;
   height: 100%;

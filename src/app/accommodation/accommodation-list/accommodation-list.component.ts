@@ -13,6 +13,8 @@ export class AccommodationListComponent implements OnInit {
   locale:string = 'ko';
   locales = listLocales();
 
+  bsValue = new Date();
+  bsRangeValue: Date[];
   navClicked: boolean = false;
   datePickerConfig:Partial<BsDatepickerConfig>;
   category: string;
@@ -64,6 +66,8 @@ export class AccommodationListComponent implements OnInit {
 
     this.searchBarShow = this.searchBar.type ? this.searchBar.type : '숙박유형';
     this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
+
+    this.bsRangeValue = [this.bsValue, this.maxDate]
   }
 
   toggle(option:string) {
@@ -99,6 +103,12 @@ export class AccommodationListComponent implements OnInit {
   }
 
   selectDate(dateRange) {
-    console.log(dateRange);
+    console.log(this.bsRangeValue[0]);
+  }
+
+  likeAction(e:Event) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('123');
   }
 }
