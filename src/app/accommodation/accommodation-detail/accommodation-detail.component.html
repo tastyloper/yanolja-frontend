@@ -33,13 +33,16 @@
             </div>
             <div class="swiper-slide">
                 <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-              </div><div class="swiper-slide">
-                  <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-                </div><div class="swiper-slide">
-                    <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-                  </div><div class="swiper-slide">
-                      <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-                    </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
+            </div>
             <div class="swiper-slide">
               <img src="https://a0.muscache.com/im/pictures/fc882024-d547-45e7-b3a9-09b2bacc1257.jpg?aki_policy=x_large">
             </div>
@@ -60,15 +63,19 @@
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-            </div><div class="swiper-slide">
-                <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-              </div><div class="swiper-slide">
-                  <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-                </div><div class="swiper-slide">
-                    <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-                  </div><div class="swiper-slide">
-                      <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-                    </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
+            </div>
             <div class="swiper-slide">
               <img src="https://a0.muscache.com/im/pictures/fc882024-d547-45e7-b3a9-09b2bacc1257.jpg?aki_policy=small">
             </div>
@@ -90,38 +97,69 @@
         <section class="compare-condition">
           <h3>비교 조건 선택</h3>
           <div class="check-date">
-              <p>날짜 선택</p>
-<!-- 
-
+            <p>날짜 선택</p>
+            <div>
+              <form [formGroup]="form">
                 <div class="row">
-                    <div class="col-xs-12 col-md-5 col-lg-4 form-group">
-                      <input
-                        class="form-control"
-                        bsDaterangepicker
-                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-red' }"
-                        [(ngModel)]="bsRangeValue"
-                        >
+                  <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    <input
+                      class="form-control"
+                      #datepicker="bsDaterangepicker"
+                      bsDaterangepicker
+                      formControlName="dateYMD"
+                      [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
+                      [(ngModel)]="bsRangeValue"
+                      [minDate]="minDate"
+                      >
+                      <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!datepicker.isOpen"></i>
+                      <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="datepicker.isOpen"></i>
                     </div>
-                  </div> -->
-                  <form [formGroup]="form">
-                      <div class="row">
-                        <div class="col-xs-12 col-md-5 col-lg-4 form-group">
-                          <input
-                            class="form-control"
-                            #datepickerYMD="bsDaterangepicker"
-                            bsDaterangepicker
-                            (click)="trigger(datepickerYMD)"
-                            formControlName="dateYMD"
-                            [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-red', showWeekNumbers: false }"
-                            [(ngModel)]="bsRangeValue"
-                            [minDate]="minDate">
-                          </div>
-                        </div>
-                      </form>
-                      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                
-                  
+                  </div>
+              </form>
+            </div>
           </div>
+          <div class="check-person">
+            <div class="check-cursor" (click)="modalToggle()">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <div class="check-person-container">
+                <p>총 2명 (어른: 1명, 아동: 0명) </p>
+              </div>
+              <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!checkPersonModalState"></i>
+              <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="checkPersonModalState"></i>
+            </div>
+            <div class="modal-person" *ngIf="checkPersonModalState">
+              <div class="person-header">
+                <p>인원</p>
+                <i class="fa fa-times" aria-hidden="true" (click)="modalToggle()"></i>
+              </div>
+              <div class="adult">
+                <p>성인</p>
+                <div>
+                  <button class="minus-button person-button">
+                      <i class="fa fa-minus" aria-hidden="true"></i>
+                  </button>
+                  0
+                  <button class="plus-button person-button">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="children">
+                <p>아동</p>
+                <div>
+                  <button class="minus-button person-button">
+                      <i class="fa fa-minus" aria-hidden="true"></i>
+                  </button>
+                  0
+                  <button class="plus-button person-button">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="search">검색</button>
         </section>
         <section class="room-list-section">
         <h3>객실 리스트</h3>
