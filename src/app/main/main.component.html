@@ -3,7 +3,11 @@
     <div class="container">
       <h2>야 너도 놀수있어</h2>
       <div class="search-panel">
-        <!-- <a (click)="openModal(template)">asd</a> -->
+        <a (click)="openModal(template)">asd</a>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="autocompleteInput" placeholder="주소" #addresstext>
+        </div>
+        <!-- <script src=”https://maps.googleapis.com/maps/api/js?libraries=places&key={{GOOGLE_KEY}}"></script> -->
       </div>
       <div class="swiper-panel">
         <div class="swiper-container" [swiper]="headerConfig">
@@ -261,9 +265,13 @@
     </button>
   </div>
   <div class="modal-body">
-      <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="12" [zoomControl]="true"
-        [zoomControlOptions]="zoomControlOptions" [scrollwheel]="false" (mapClick)="mapClick()">
-        <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="icon"></agm-marker>
-      </agm-map> -->
+    <h5>위치를 마우스로 선택해주세요</h5>
+    <div class="map-wrap">
+      <p>{{ address }}</p>
+      <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" (mapClick)="positionChange($event)">
+        <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
+      </agm-map>
+    </div>
+    <button class="btn btn-primary d-block w-100" (click)="locationComplete()">위치지정 완료</button>
   </div>
 </ng-template>
