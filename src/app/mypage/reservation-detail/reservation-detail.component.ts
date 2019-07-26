@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SubTitleService } from '../../core/services/sub-title.service';
 
 import { CancellationPolicyComponent } from 'src/app/shared/cancellation-policy/cancellation-policy.component';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { CancellationPolicyComponent } from 'src/app/shared/cancellation-policy/
   styleUrls: ['./reservation-detail.component.scss']
 })
 export class ReservationDetailComponent implements OnInit {
-  bsModalRef: BsModalRef;
+  modalRef: BsModalRef;
   isCheck: false;
  
   constructor(
@@ -27,7 +28,18 @@ export class ReservationDetailComponent implements OnInit {
   }
 
   cancellationPolicyOpen() {
-    this.bsModalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+    this.modalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+  }
+  
+  cancelConfirm(template: Template) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+ 
+  confirm(): void {
+    this.modalRef.hide();
+  }
+ 
+  decline(): void {
+    this.modalRef.hide();
   }
 }
-  

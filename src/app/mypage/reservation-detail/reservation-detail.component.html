@@ -60,10 +60,17 @@
         <div class="checkbox float-left"> 
           <input type="checkbox" id="cancelPolicy" [checked]="isCheck" (change)="isCheck = !isCheck">
           <label for="cancelPolicy">(필수)취소 규정 동의</label>
-          <a (click)="cancellationPolicyOpen()" class="modal-open-btn">보기</a>
+          <a (click)="cancellationPolicyOpen()" class         ="modal-open-btn">보기</a>
         </div>
-        <button class="btn btn-primary float-right" [disabled]="!isCheck" (click)="!isCheck">취소하기</button>
-      </div>  
+        <button class="btn btn-primary float-right" [disabled]="!isCheck" (click)="cancelConfirm(template)">취소하기</button>
+      </div> 
+      <ng-template #template>
+        <div class="modal-body text-center">
+          <p class="modal-text">정말 취소하시겠습니까?</p>
+          <button class="btn btn-primary" (click)="confirm()">확인</button>
+          <button type="button" class="btn btn-secondary" (click)="decline()">취소</button>
+        </div>
+      </ng-template>
     </div>
   </section>
 </div>
