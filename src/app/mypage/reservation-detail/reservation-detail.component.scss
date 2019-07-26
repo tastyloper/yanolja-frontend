@@ -5,9 +5,8 @@
 .reservation-detail-header {
   padding-left: 15px;
   background: #fff;
-  // height: 90px;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 10px;       
   padding-bottom: 15px;
 }
 .detail-title {
@@ -82,4 +81,52 @@
 .box-strong {
   font-size: 14px;
   padding-bottom: 0px;
+}
+
+// 체크박스
+.check-box {
+  background: #fff;
+  padding: 20px 20px;
+  text-align: left;
+  line-height: 35px;
+}
+.checkbox {
+  // margin-bottom: 15px;
+  label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .help-block {
+    float: right;
+  }
+}
+.modal-open-btn {
+  border-bottom: 1px solid #495056;
+  margin-left: 5px;
+  vertical-align: middle;
+  line-height: 20px;
+}
+.policy-box {
+  overflow-y: scroll;
+  height: 100px;
+  margin-bottom: 15px;
+  padding: 15px;
+  color: #ADB5BD;
+  font-size: 12px;
+  background-color: #F5F6F7;
+  border: 1px solid #E9ECEF;
+  border-radius: 2px;
+  .table, caption {
+    color: #ADB5BD;
+  }
+}
+.modal-text {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+.btn {
+  border-radius: 5px;
+}
+.btn-primary {
+  margin-right: 5px;
 }
