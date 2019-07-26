@@ -13,6 +13,9 @@ import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.com
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { YouthProtectionPolicyComponent } from './youth-protection-policy/youth-protection-policy.component';
 import { LocationInfoTermsComponent } from './location-info-terms/location-info-terms.component';
+import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
+import { PersonalInfoThirdPartyComponent } from './personal-info-third-party/personal-info-third-party.component';
+import { CollectionUsePersonalInfoComponent } from './collection-use-personal-info/collection-use-personal-info.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { LocationInfoTermsComponent } from './location-info-terms/location-info-
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
     YouthProtectionPolicyComponent,
-    LocationInfoTermsComponent
+    LocationInfoTermsComponent,
+    CancellationPolicyComponent,
+    PersonalInfoThirdPartyComponent,
+    CollectionUsePersonalInfoComponent
   ],
   imports: [
     BsDropdownModule.forRoot(),
@@ -34,7 +40,12 @@ import { LocationInfoTermsComponent } from './location-info-terms/location-info-
     HeaderComponent,
     FooterComponent,
     SubTitleComponent,
-    TermsOfServiceComponent
+    TermsOfServiceComponent,
+    PrivacyPolicyComponent,
+    YouthProtectionPolicyComponent,
+    LocationInfoTermsComponent,
+    CancellationPolicyComponent,
+    PersonalInfoThirdPartyComponent
   ]
 })
 export class SharedModule {}

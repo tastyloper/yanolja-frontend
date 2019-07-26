@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">개인정보 수집 이용</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-bordered">
+      <colgroup>
+        <col width="10%">
+        <col width="30%">
+        <col width="30%">
+        <col width="30%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>분류</th>
+          <th>수집∙이용동의 목적</th>
+          <th>항목</th>
+          <th>보유∙이용기간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>필수정보</td>
+          <td>서비스 가입, 계약의 이행 및 서비스 제공, 예약∙구매∙관심상품 내역, 결제대금의 청구, 상담∙불만∙민원처리, 고지∙안내사항 전달, 상품∙서비스 이용실적 정보 통계∙분석, 상품∙서비스 개선 및
+            추천, 불법∙부정이용방지, 개인정보 유효기간제 준수</td>
+          <td>
+            - <b>서비스 이용시</b>: 아이디(이메일), 비밀번호, 프로필 사진, 닉네임, 생년월일, 디바이스 ID, 휴대전화 번호, 서비스이용기록, 이용정지기록, 이용해지 기록, IP address,
+            접속로그, Cookie, 광고식별자, 단말기 OS와 버전, 단말기 모델명, 브라우저 버전<br>
+            - <b>예약∙구매시</b>: 예약자 및 구매자의 이름과 휴대전화 번호, 방문자의 이름과 휴대전화 번호(예약자와 방문자가 다른 경우), 결제정보<br>
+            - <b>현금환불요청시</b>: 계좌번호 및 예금주명<br>
+          </td>
+          <td>
+            - <b class="font-weight-bold">회원 탈퇴시 즉시 삭제</b>(단, 아이디는 부정이용 이슈 방지를 위해 탈퇴 DB에서 <b
+              class="font-weight-bold">7일 후</b> 삭제)<br>
+            - 관계법령에 따라 보존할 필요가 있는 경우 <b class="font-weight-bold">해당 법령에서 요구하는 기한까지</b> 보관 (예: 구매 회원의 경우 5년간, IP의 경우 3개월)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    ※ 위 개인정보 수집∙이용에 대한 동의를 거부할 경우 서비스 이용이 제한됩니다.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">닫기</button>
+  </div>

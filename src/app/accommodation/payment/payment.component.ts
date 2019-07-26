@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { SubTitleService } from 'src/app/core/services/sub-title.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
+import { SubTitleService } from '../../core/services/sub-title.service';
+
+import { CancellationPolicyComponent } from 'src/app/shared/cancellation-policy/cancellation-policy.component';
+import { TermsOfServiceComponent } from 'src/app/shared/terms-of-service/terms-of-service.component';
+import { PersonalInfoThirdPartyComponent } from 'src/app/shared/personal-info-third-party/personal-info-third-party.component';
 
 @Component({
   selector: 'app-payment',
@@ -10,10 +16,12 @@ import { SubTitleService } from 'src/app/core/services/sub-title.service';
 })
 export class PaymentComponent implements OnInit {
   reservationForm: FormGroup;
+  bsModalRef: BsModalRef;
 
   constructor(
     private subTitleService: SubTitleService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
@@ -47,6 +55,21 @@ export class PaymentComponent implements OnInit {
 
   onSubmit() {
 
+  }
+
+  termsOfServiceOpen() {
+    this.bsModalRef = this.modalService.show(TermsOfServiceComponent, { class: 'modal-lg' });
+  }
+
+  cancellationPolicyOpen() {
+    this.bsModalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+  }
+
+  personalInfoThirdPartyOpen() {
+    const initialState = {
+      stayName: '역삼 리치웰'
+    }
+    this.bsModalRef = this.modalService.show(PersonalInfoThirdPartyComponent, { class: 'modal-lg', initialState });
   }
 
   get bookerName() {

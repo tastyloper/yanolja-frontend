@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-accommodation-list',
@@ -8,6 +10,11 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrls: ['./accommodation-list.component.scss']
 })
 export class AccommodationListComponent implements OnInit {
+  locale:string = 'ko';
+  locales = listLocales();
+
+  bsValue = new Date();
+  bsRangeValue: Date[];
   navClicked: boolean = false;
   datePickerConfig:Partial<BsDatepickerConfig>;
   category: string;
@@ -29,7 +36,9 @@ export class AccommodationListComponent implements OnInit {
   searchBarDateShow: string;
   searchBarMemberShow: string;
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private localeService: BsLocaleService) { 
+
+    this.localeService.use(this.locale);
 
     this.minDate = new Date();
     this.maxDate = new Date();
@@ -57,6 +66,8 @@ export class AccommodationListComponent implements OnInit {
 
     this.searchBarShow = this.searchBar.type ? this.searchBar.type : '숙박유형';
     this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
+
+    this.bsRangeValue = [this.bsValue, this.maxDate]
   }
 
   toggle(option:string) {
@@ -92,6 +103,12 @@ export class AccommodationListComponent implements OnInit {
   }
 
   selectDate(dateRange) {
-    console.log(dateRange);
+    console.log(this.bsRangeValue[0]);
+  }
+
+  likeAction(e:Event) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('123');
   }
 }
