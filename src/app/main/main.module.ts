@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
-import { AgmCoreModule } from '@agm/core';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { AgmCoreModule } from '@agm/core';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -25,7 +26,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SharedModule,
     RouterModule,
     SwiperModule,
-    // AgmCoreModule.forRoot({ apiKey : environment.apiKey })
+    AgmCoreModule.forRoot({
+      apiKey: environment.apiKey
+    }),
+    FormsModule
   ],
   providers: [
     {
@@ -34,4 +38,4 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     }
   ]
 })
-export class MainModule { }
+export class MainModule {}

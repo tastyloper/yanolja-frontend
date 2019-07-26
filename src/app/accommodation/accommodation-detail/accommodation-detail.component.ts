@@ -2,8 +2,9 @@ import { Component, AfterViewInit, ViewChild, OnInit, HostListener } from '@angu
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+import { BsDaterangepickerDirective } from 'ngx-bootstrap/datepicker';
 
+import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
 
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
@@ -16,18 +17,14 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   @ViewChild('galleryTop', { static: true }) galleryTop;
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
-  @ViewChild(BsDatepickerDirective, { static: false }) datepicker: BsDatepickerDirective;
+  @ViewChild(BsDaterangepickerDirective, { static: false }) daterangepicker: BsDaterangepickerDirective;
 
   locale = 'ko';
   locales = listLocales();
+  dateCustomClasses: DatepickerDateCustomClasses[];
+  checkPersonModalState = false;
 
-  constructor(private http: HttpClient, private localeService: BsLocaleService) {
-    console.log(this.locales);
-    this.localeService.use(this.locale);
-    this.maxDate.setDate(this.maxDate.getDate() + 1);
-    this.minDate.setDate(this.minDate.getDate());
-    this.bsRangeValue = [this.bsValue, this.maxDate];
-  }
+  constructor(private http: HttpClient, private localeService: BsLocaleService) {  }
 
   bsValue = new Date();
   bsRangeValue: Date[];
@@ -72,17 +69,21 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     .set('Authorization', 'Token ad0ffa732e4bad6d27606fcb250a7923a6f13f0b');
 
     this.http.get('http://13.125.164.121/stay/api/stay/', { headers }).subscribe(v => console.log(v));
+    this.localeService.use(this.locale);
+    this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.minDate.setDate(this.minDate.getDate());
+    this.bsRangeValue = [this.bsValue, this.maxDate];
 
   }
   @HostListener('window:scroll')
   onScrollEvent() {
-    this.datepicker.hide();
-  }
-  trigger(ref) {
-    this.datepicker = ref;
+    this.daterangepicker.hide();
   }
   openMore() {
     this.facilitiesStatus = !this.facilitiesStatus;
+  }
+  modalToggle() {
+    this.checkPersonModalState = !this.checkPersonModalState;
   }
   copyText() {
     // document.execCommand('copy', true, this.address);
