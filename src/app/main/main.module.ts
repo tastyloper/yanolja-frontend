@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { MainComponent } from './main.component';
 
-import { environment } from '../../environments/environment';
+// import { environment } from '../../environments/environments';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',

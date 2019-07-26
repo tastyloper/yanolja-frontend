@@ -10,14 +10,14 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 /*객실 정보*/
 .room-container {
   width: 771px;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 /*객실 명, 지역*/
 .room-title {
   margin-bottom: 34px;
 }
 .room-title>h3 {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 500;
   margin-bottom: 10px;
 }
@@ -30,7 +30,7 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 }
 /*객실 사진 캐러셀*/
 .room-img{
-  width: 710px;
+  width: 750px;
   margin-bottom: 70px;
   position: relative;
 }
@@ -40,13 +40,12 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
   padding: 1px;
   overflow: hidden;
 }
-/*캐러셀*/
 .gallery-top .swiper-slide {
   text-align: center;
   background-color: #fff;
 }
 .gallery-top .swiper-slide img {
-  height: 500px;
+  height: 400px;
 }
 .gallery-thumbs {
   width: 710px;
@@ -66,7 +65,7 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 .reservation-notice, .cancel-rule {
   border: solid #e8ebee;
   border-width: 1px 0;
-  padding: 32px 0;
+  padding: 32px 16px 32px 0;
 }
 .reservation-notice>h3, .cancel-rule>h3 {
   font-size: 20px;
@@ -107,8 +106,8 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 .nav-container {
   width: 320px;
   position: fixed;
-  left: 1005px;
-  top: 124px;
+  left: calc(65% + 10px);
+  top: 110px;
 }
 .nav-container>section {
   position: relative;
