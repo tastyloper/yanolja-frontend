@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
 import { AccommodationRoutingModule } from './accommodation-routing.module';
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { koLocale } from 'ngx-bootstrap/locale';
+
 defineLocale('ko', koLocale);
 
 
@@ -46,7 +47,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ButtonsModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
-    FormsModule
+    FormsModule,
+    RouterModule,
+    AccommodationRoutingModule
   ],
   providers: [
     {

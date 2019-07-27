@@ -230,6 +230,11 @@ button {
 .alist-popup-type-item {
   display: inline-block;
   margin-right: 1px;
+
+  :hover {
+    font-weight: 700;
+    color: #FF3478;
+  }
 }
 // 상단 검색네비 datePicker
 .datePicker {
@@ -280,6 +285,10 @@ button {
   background: #eeee;
   width: 88px;
   height: 40px;
+  :hover {
+    font-weight: 700;
+    color: #FF3478;
+  }
 }
 
 .alist-search-location-bottom {
@@ -301,6 +310,10 @@ button {
   background: #ffff;
   height: 44px;
   margin-right: 5px;
+  :hover {
+    font-weight: 700;
+    color: #FF3478;
+  }
 }
 
 .alist-search-bottom-list li:last-child {
