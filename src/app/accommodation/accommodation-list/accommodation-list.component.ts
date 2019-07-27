@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
+// StayListService import
+import { StayListService } from 'src/app/core/services/stay-list.service';
+// Interface of Stay import
+import { Stay } from '../../core/types/stay.interface'
 
 @Component({
   selector: 'app-accommodation-list',
@@ -10,6 +14,7 @@ import { listLocales } from 'ngx-bootstrap/chronos';
   styleUrls: ['./accommodation-list.component.scss']
 })
 export class AccommodationListComponent implements OnInit {
+
   locale:string = 'ko';
   locales = listLocales();
 
@@ -36,7 +41,9 @@ export class AccommodationListComponent implements OnInit {
   searchBarDateShow: string;
   searchBarMemberShow: string;
 
-  constructor(private route: ActivatedRoute, private localeService: BsLocaleService) { 
+  sstayList;
+
+  constructor(private route: ActivatedRoute, private localeService: BsLocaleService, private stayList: StayListService) { 
 
     this.localeService.use(this.locale);
 
@@ -54,6 +61,8 @@ export class AccommodationListComponent implements OnInit {
         minDate : this.minDate,
         // maxDate : this.maxDate
       });
+    
+    this.getList();
   }
 
   ngOnInit() {
@@ -70,11 +79,30 @@ export class AccommodationListComponent implements OnInit {
     // this.bsRangeValue = [this.bsValue, this.maxDate]
   }
 
+  getList() {
+    this.stayList.getAList().subscribe(list => this.sstayList = list)
+    console.log('list', this.sstayList);
+  }
+
   toggle(option:string) {
-    console.log(this.navClicked , this.person);
-    if(option === "member") this.person = this.person ? false : true ;
-    if(option === "type") this.type = this.type  ? false : true;
-    if(option === "location") this.location = this.location  ? false : true;
+    if(option === "member") {
+      this.type = false;
+      this.location = false;
+      this.person = this.person ? false : true 
+    } else if(option === "type") {
+      this.person = false;
+      this.location = false;
+      this.type = this.type  ? false : true
+    }
+    else if(option === "location") {
+      this.person = false;
+      this.type = false;
+      this.location = this.location  ? false : true
+    } else if(option === "calendar") {
+      this.person = false;
+      this.type = false;
+      this.location = false;
+    }
   }
 
   minus(person:string) {
@@ -89,6 +117,9 @@ export class AccommodationListComponent implements OnInit {
   }
 
   submitNav() {
+    this.person = false;
+    this.location = false;
+    this.type = false;
     console.log('submitBtn')
   }
 
@@ -103,7 +134,7 @@ export class AccommodationListComponent implements OnInit {
   }
 
   selectDate(dateRange) {
-    console.log(this.bsRangeValue[0]);
+    // console.log(this.bsRangeValue[0]);
   }
 
   likeAction(e:Event) {

@@ -49,32 +49,32 @@
               </div>
               <div class="alist-search-location-bottom">
                 <ul class="alist-search-bottom-list">
-                  <li (click)="selectLoc(item)"><a #item>강남/역삼/삼성/논현</a></li>
-                  <li><a>서초/신사/방배</a></li>
-                  <li><a>잠실/신천(잠실새내)</a></li>
-                  <li><a>영등포/여의도</a></li>
-                  <li><a>신림/서울대/사당/동작</a></li>
-                  <li><a>천호/길동/둔촌</a></li>
-                  <li><a>화곡/까치산/양천/목동</a></li>
-                  <li><a>구로/금천/오류/신도림</a></li>
-                  <li><a>신촌/홍대/합정</a></li>
-                  <li><a>연신내/불광/응암</a></li>
-                  <li><a>종로/대학로</a></li>
-                  <li><a>성신여대/성북/월곡</a></li>
-                  <li><a>이태원/용산/서울역/명동/회현</a></li>
-                  <li><a>동대문/동묘/신당/충무로/약수</a></li>
-                  <li><a>회기/고려대/청량리/신설동</a></li>
-                  <li><a>장안동/답십리</a></li>
-                  <li><a>건대/군자/구의</a></li>
-                  <li><a>왕십리/성수/금호</a></li>
-                  <li><a>수유/미아</a></li>
-                  <li><a>상봉/중량/면목</a></li>
-                  <li><a>태릉/노원/도봉/창동</a></li>
+                  <li (click)="selectLoc(item)"><button #item>강남/역삼/삼성/논현</button></li>
+                  <li><button>서초/신사/방배</button></li>
+                  <li><button>잠실/신천(잠실새내)</button></li>
+                  <li><button>영등포/여의도</button></li>
+                  <li><button>신림/서울대/사당/동작</button></li>
+                  <li><button>천호/길동/둔촌</button></li>
+                  <li><button>화곡/까치산/양천/목동</button></li>
+                  <li><button>구로/금천/오류/신도림</button></li>
+                  <li><button>신촌/홍대/합정</button></li>
+                  <li><button>연신내/불광/응암</button></li>
+                  <li><button>종로/대학로</button></li>
+                  <li><button>성신여대/성북/월곡</button></li>
+                  <li><button>이태원/용산/서울역/명동/회현</button></li>
+                  <li><button>동대문/동묘/신당/충무로/약수</button></li>
+                  <li><button>회기/고려대/청량리/신설동</button></li>
+                  <li><button>장안동/답십리</button></li>
+                  <li><button>건대/군자/구의</button></li>
+                  <li><button>왕십리/성수/금호</button></li>
+                  <li><button>수유/미아</button></li>
+                  <li><button>상봉/중량/면목</button></li>
+                  <li><button>태릉/노원/도봉/창동</button></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="alist-search-date search-box" (click)="selectDate(inputDate)">
+          <div class="alist-search-date search-box" (click)="selectDate(inputDate)" (click)="toggle('calendar')">
             <div class="alist-search-frame">
                 <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             <button class="alist-search-inputbox">
