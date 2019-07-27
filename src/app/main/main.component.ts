@@ -1,18 +1,18 @@
-import { Component, TemplateRef, NgZone } from '@angular/core';
+import { Component, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-// import { InfoWindowManager, AgmInfoWindow } from '@agm/core';
-// import { ZoomControlOptions, ControlPosition, ZoomControlStyle } from '@agm/core/services/google-maps-types';
+import { MapsAPILoader } from '@agm/core';
 
-// import { GeocodeService } from '../core/services/geocode.service';
+declare const google: any;
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
+export class MainComponent{
+  @ViewChild('addresstext', { static: false }) addresstext: ElementRef;
   modalRef: BsModalRef;
   headerConfig: SwiperConfigInterface = {
     slidesPerView: 6,
@@ -30,30 +30,14 @@ export class MainComponent {
       prevEl: '.content-swiper-button-prev',
     }
   };
-
-  // 지도관련 변수
-  // latitude = 33.36995865711402;
-  // longitude = 126.52811723292518;
-  // selectedMarker;
-  // infowindowManager: InfoWindowManager;
-  // currentIW: AgmInfoWindow;
-  // previousIW: AgmInfoWindow;
-  // zoomControlOptions: ZoomControlOptions = {
-  //   position: ControlPosition.LEFT_TOP,
-  //   style: ZoomControlStyle.LARGE
-  // };
-  // previous: any;
-  // icon = {
-  //   url: 'https://i.dlpng.com/static/png/510666_thumb.png',
-  //   scaledSize: { width: 50, height: 60 }
-  // };
-  // Glat: number;
-  // Glng: number;
+  lat = 37.543934;
+  lng = 127.061167;
+  zoom = 15;
+  address = '서울특별시 성동구 성수동2가 277-43';
 
   constructor(
     private modalService: BsModalService,
-    // private geocodeService: GeocodeService,
-    private ngzone: NgZone
+    private mapsAPILoader: MapsAPILoader
   ) {}
 
   likeAction(e) {
@@ -62,25 +46,53 @@ export class MainComponent {
     console.log('123');
   }
 
-
   openModal(template: TemplateRef<any>) {
-    // this.geocodeService.getLatLan('대화2로 121').subscribe(console.log);
     this.modalRef = this.modalService.show(
       template,
       Object.assign({}, { class: 'modal-lg' })
     );
+    this.mapsAPILoader.load().then(() => {
+      this.findCurrentLocation();
+    });
   }
 
-//   selectMarker(event) {
-//     this.selectedMarker = {
-//       lat: event.latitude,
-//       lng: event.longitude
-//     };
-//   }
-// ​
-//   mapClick() {
-//     if (this.previousIW) {
-//       this.previousIW.close();
-//     }
-//   }
+  findCurrentLocation() {
+    if (navigator) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        this.lng = +pos.coords.longitude;
+        this.lat = +pos.coords.latitude;
+        this.getCurrentAddress(+pos.coords.latitude, +pos.coords.longitude);
+      });
+    }
+  }
+
+  getCurrentAddress(lat: number, lng: number) {
+    if (navigator.geolocation) {
+      const geocoder = new google.maps.Geocoder();
+      const latlng = new google.maps.LatLng(lat, lng);
+      const request = { latLng: latlng };
+      geocoder.geocode(request, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          const result = results[0];
+          if (result != null) {
+            const splitAddress = (result.formatted_address).split('대한민국 ');
+            this.address = splitAddress[1];
+          } else {
+            alert('No address available!');
+          }
+        }
+      });
+    }
+  }
+
+  positionChange(e) {
+    this.lng = e.coords.lng;
+    this.lat = e.coords.lat;
+    this.getCurrentAddress(e.coords.lat, e.coords.lng);
+  }
+
+  locationComplete() {
+    this.modalRef.hide();
+    this.addresstext.nativeElement.value = this.address;
+  }
 }

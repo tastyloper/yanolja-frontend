@@ -1,92 +1,32 @@
 <div class="mypage-router-wrap">
   <div class="box">
     <div class="row">
-      <div class="col-4">
-        <a routerLink="/accommodation/1" class="content-item">
+      <div class="col-4" *ngFor="let like of likes">
+        <a routerLink="/accommodation/{{ like.id }}" class="content-item">
           <div class="like-wrap">
             <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
           </div>
           <div class="content-img-wrap">
-            <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
+            <img src="{{ like.mainImage }}" alt="{{ like.name }}">
           </div>
           <div class="content-text-wrap">
-            <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-            <h3>역삼 리치웰</h3>
+            <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ like.directions }}</div>
+            <h3>{{ like.name }}</h3>
             <div class="customer">
               <i class="fa fa-star" aria-hidden="true"></i>
-              <span>4.7</span>
+              <span>{{ like.averageGrade }}</span>
               <i class="fa fa-comments" aria-hidden="true"></i>
-              <span>3,401</span>
+              <span>{{ like.totalComments | number }}</span>
             </div>
             <div class="type borrow">
-              <h4>대실 <span>최대 6시간</span></h4>
-              <p>30.000원</p>
-              <div class="price">25,000<small>원</small></div>
+              <h4>대실 <span>최대 {{ like.hoursAvailable }}시간</span></h4>
+              <p>{{ like.hoursPrice | number }}원</p>
+              <div class="price">{{ like.saleHoursPrice | number }}<small>원</small></div>
             </div>
             <div class="type one-night">
-              <h4>숙박 <span>16:00 ~</span></h4>
-              <p>70.000원</p>
-              <div class="price">59,800<small>원</small></div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-4">
-        <a routerLink="/accommodation/1" class="content-item">
-          <div class="like-wrap">
-            <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-          </div>
-          <div class="content-img-wrap">
-            <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-          </div>
-          <div class="content-text-wrap">
-            <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-            <h3>역삼 리치웰</h3>
-            <div class="customer">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <span>4.7</span>
-              <i class="fa fa-comments" aria-hidden="true"></i>
-              <span>3,401</span>
-            </div>
-            <div class="type borrow">
-              <h4>대실 <span>최대 6시간</span></h4>
-              <p>30.000원</p>
-              <div class="price">25,000<small>원</small></div>
-            </div>
-            <div class="type one-night">
-              <h4>숙박 <span>16:00 ~</span></h4>
-              <p>70.000원</p>
-              <div class="price">59,800<small>원</small></div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-4">
-        <a routerLink="/accommodation/1" class="content-item">
-          <div class="like-wrap">
-            <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-          </div>
-          <div class="content-img-wrap">
-            <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-          </div>
-          <div class="content-text-wrap">
-            <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-            <h3>역삼 리치웰</h3>
-            <div class="customer">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <span>4.7</span>
-              <i class="fa fa-comments" aria-hidden="true"></i>
-              <span>3,401</span>
-            </div>
-            <div class="type borrow">
-              <h4>대실 <span>최대 6시간</span></h4>
-              <p>30.000원</p>
-              <div class="price">25,000<small>원</small></div>
-            </div>
-            <div class="type one-night">
-              <h4>숙박 <span>16:00 ~</span></h4>
-              <p>70.000원</p>
-              <div class="price">59,800<small>원</small></div>
+              <h4>숙박 <span>{{ like.hoursAvailable }}:00 ~</span></h4>
+              <p>{{ like.daysPrice | number }}원</p>
+              <div class="price">{{ like.saleDaysPrice | number }}<small>원</small></div>
             </div>
           </div>
         </a>

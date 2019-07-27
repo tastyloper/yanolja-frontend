@@ -7,7 +7,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-
 import { SubTitleComponent } from './sub-title/sub-title.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
