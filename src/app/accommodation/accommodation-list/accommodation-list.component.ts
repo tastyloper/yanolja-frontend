@@ -67,7 +67,7 @@ export class AccommodationListComponent implements OnInit {
     this.searchBarShow = this.searchBar.type ? this.searchBar.type : '숙박유형';
     this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
 
-    this.bsRangeValue = [this.bsValue, this.maxDate]
+    // this.bsRangeValue = [this.bsValue, this.maxDate]
   }
 
   toggle(option:string) {
