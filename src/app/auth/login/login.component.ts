@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { ToastrService } from 'ngx-toastr';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +17,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private subTitleService: SubTitleService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -27,14 +34,32 @@ export class LoginComponent implements OnInit {
       ]],
       userpw: ['', [
         Validators.required,
-        Validators.minLength(6)
+        Validators.pattern('^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$')
       ]]
     });
   }
 
   onSubmit() {
-    console.log(this.loginForm);
-    this.loginForm.reset();
+    const payload = {
+      email: this.loginForm.value.userid,
+      password: this.loginForm.value.userpw,
+    };
+    this.authService.login(payload).subscribe(
+      login => {
+        this.authService.setToken(login['token']);
+        this.toastr.success('로그인되었습니다.');
+        this.loginForm.reset();
+        this.router.navigate(['']);
+      },
+      error => {
+        const errors = error.error;
+        for (const key in errors) {
+          if (key === 'non_field_errors') {
+            this.toastr.error('회원정보가 존재하지 않습니다.');
+          }
+        }
+      }
+    );
   }
 
   get userid() {
