@@ -3,8 +3,10 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
+import { AuthService } from '../../core/services/auth.service';
 
 import { PasswordValidator } from '../password-validator';
 
@@ -25,7 +27,9 @@ export class SignupComponent implements OnInit {
     private subTitleService: SubTitleService,
     private fb: FormBuilder,
     private router: Router,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -41,10 +45,14 @@ export class SignupComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$')
       ]],
+      phoneNumber: ['', [
+        Validators.required,
+        Validators.pattern('^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$')
+      ]],
       passwordGroup: this.fb.group({
         userpw: ['', [
           Validators.required,
-          Validators.minLength(6)
+          Validators.pattern('^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$')
         ]],
         confirmPw: ['', Validators.required]
       }, { validator: PasswordValidator.match }),
@@ -66,13 +74,33 @@ export class SignupComponent implements OnInit {
       // this.privacy2.setValue(v);
       this.notConnected.setValue(v);
     });
-    console.dir(this.signupForm);
   }
 
   onSubmit() {
-    console.dir(this.signupForm);
-    // this.signupForm.reset();
-    this.router.navigate(['login']);
+    const payload = {
+      username: this.signupForm.value.userid,
+      password: this.signupForm.value.passwordGroup.userpw,
+      realname: this.signupForm.value.userName,
+      phoneNumber: this.signupForm.value.phoneNumber,
+      email: this.signupForm.value.userid
+    };
+    this.authService.createAccount(payload).subscribe(
+      userInfo => {
+        this.toastr.success('회원가입이 완료되었습니다.');
+        this.signupForm.reset();
+        this.router.navigate(['login']);
+      },
+      error => {
+        const errors = error.error;
+        for (const key in errors) {
+          if (key === 'email') {
+            this.toastr.error('이미 사용중인 이메일입니다.');
+          } else if (key === 'phoneNumber') {
+            this.toastr.error('이미 사용중인 핸드폰번호입니다.');
+          }
+        }
+      }
+    );
   }
 
   termsOfServiceOpen() {
@@ -93,6 +121,10 @@ export class SignupComponent implements OnInit {
 
   get userid() {
     return this.signupForm.get('userid');
+  }
+
+  get phoneNumber() {
+    return this.signupForm.get('phoneNumber');
   }
 
   get passwordGroup() {
