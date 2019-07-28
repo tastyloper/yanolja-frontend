@@ -7,8 +7,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  appUrl = `${environment.appUrl}`;
-  TOKEN_NAME = 'yanolja_token';
+  private appUrl = environment.appUrl;
+  private TOKEN_NAME = environment.tokenName;
 
   constructor(private http: HttpClient) {}
 

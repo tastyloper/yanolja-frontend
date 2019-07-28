@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -33,7 +34,8 @@ import { CollectionUsePersonalInfoComponent } from './collection-use-personal-in
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     CommonModule,
-    RouterModule
+    RouterModule,
+    ToastrModule
   ],
   exports: [
     HeaderComponent,
