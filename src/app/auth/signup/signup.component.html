@@ -15,12 +15,18 @@
           <em class="help-block" *ngIf="userid.errors?.required && userid.touched">꼭 필요해요.</em>
           <em class="help-block" *ngIf="userid.errors?.pattern && userid.touched">이메일 주소가 맞나요?</em>
         </div>
+        <div class="form-group" [class.has-error]="phoneNumber.errors && phoneNumber.touched">
+          <label for="phoneNumber" class="form-title">핸드폰번호*('-' 제외)</label>
+          <input type="text" id="phoneNumber" name="phoneNumber" class="form-input" placeholder="01012345678" formControlName="phoneNumber">
+          <em class="help-block" *ngIf="phoneNumber.errors?.required && phoneNumber.touched">꼭 필요해요.</em>
+          <em class="help-block" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched">핸드폰번호가 맞나요?</em>
+        </div>
         <div formGroupName="passwordGroup">
           <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
             <label for="userpw" class="form-title">비밀번호*</label>
             <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호" minlength="6" formControlName="userpw">
             <em class="help-block" *ngIf="userpw.errors?.required && userpw.touched">비밀번호를 입력해주세요.</em>
-            <em class="help-block" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
+            <em class="help-block" *ngIf="userpw.errors?.pattern && userpw.touched">8~20자리 영소문자, 숫자, 특수문자 조합으로 설정 해주세요.</em>
           </div>
           <div class="form-group" [class.has-error]="passwordGroup.errors && confirmPw.touched">
             <label for="confirmPw" class="form-title">비밀번호 확인*</label>
