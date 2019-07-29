@@ -105,9 +105,9 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 /*객실 예약 네비게이션*/
 .nav-container {
   width: 320px;
-  position: fixed;
-  left: calc(65% + 10px);
-  top: 110px;
+  position: absolute;
+  left: calc(70% + 10px);
+  top: 0px;
 }
 .nav-container>section {
   position: relative;
@@ -165,16 +165,13 @@ tr>.td-body {
 }
 /*네비게이션 에약버튼*/
 .book-room {
-  width: 100%;
-  padding: 20px 0;
-  border: none;
-  background: $primary-color;
-  border-radius: 5px;
-  font-size: 17px;
-  font-weight: 600;
-  color: #fff;
-  outline: none;
-}
-.book-room:hover {
-  box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, 0.25);
-}
+  // width: 100%;
+  // padding: 20px 0;
+  // border: none;
+  // background: $primary-color;
+  // border-radius: 5px;
+  // font-size: 17px;
+  // font-weight: 600;
+  // color: #fff;
+  // outline: none;
+} 
