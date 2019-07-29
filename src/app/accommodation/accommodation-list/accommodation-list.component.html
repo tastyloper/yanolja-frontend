@@ -49,7 +49,7 @@
               </div>
               <div class="alist-search-location-bottom">
                 <ul class="alist-search-bottom-list">
-                  <li (click)="selectLoc(item)"><button #item>강남/역삼/삼성/논현</button></li>
+                  <li ><button (click)="selectLoc(item)" #item value="강남/역삼/삼성/논현">강남/역삼/삼성/논현</button></li>
                   <li><button>서초/신사/방배</button></li>
                   <li><button>잠실/신천(잠실새내)</button></li>
                   <li><button>영등포/여의도</button></li>
@@ -85,7 +85,8 @@
                   [bsConfig]="datePickerConfig"
                   bsDaterangepicker
                   [(ngModel)]="bsRangeValue"
-                  #inputDate>
+                  #inputDate
+                  >
               </div>
             </button>
             </div>
@@ -134,7 +135,6 @@
                       </div>
                   </div>
                 </div>
-
                 <div class="btn-popup-close">
                   <button class="btn-close" (click)="toggle('member')">
                     <i class="fa fa-times" aria-hidden="true"></i>
