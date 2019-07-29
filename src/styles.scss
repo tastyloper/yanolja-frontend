@@ -170,6 +170,12 @@ a, button {
     box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
   }
 }
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #CCC;
+  border-color: #CCC;
+  cursor: not-allowed;
+}
 .btn-secondary {
   background-color: #E9ECEF;
   border-color: #E9ECEF;
