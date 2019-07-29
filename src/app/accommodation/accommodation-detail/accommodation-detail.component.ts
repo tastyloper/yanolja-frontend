@@ -30,6 +30,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   url: string = environment.appUrl;
   key: string = environment.apiKey;
 
+  adultCount = 0;
+  childrenCount = 0;
+
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
@@ -102,4 +105,19 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   // trigger(e) {
   //   this.datepicker = e;
   // }
+  adultCountUp() {
+    this.adultCount = this.adultCount + 1;
+  }
+  adultCountDown() {
+    if (this.adultCount <= 0) { return; }
+    this.adultCount = this.adultCount - 1;
+  }
+
+  childrenCountUp() {
+    this.childrenCount = this.childrenCount + 1;
+  }
+  childrenCountDown() {
+    if (this.childrenCount <= 0) { return; }
+    this.childrenCount = this.childrenCount - 1;
+  }
 }
