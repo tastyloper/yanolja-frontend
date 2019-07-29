@@ -121,7 +121,7 @@
             </div>
           </div>
           <div class="check-person">
-            <div class="check-cursor" (click)="modalToggle()" (blur)="modalToggle()">
+            <div class="check-cursor" (click)="modalToggle()" appPersonCheck tabindex="0" (hidePerson)="modalHide()">
               <i class="fa fa-user" aria-hidden="true"></i>
               <div class="check-person-container">
                 <p>총 {{adultCount + childrenCount}}명 (어른: {{adultCount}}명, 아동: {{childrenCount}}명) </p>

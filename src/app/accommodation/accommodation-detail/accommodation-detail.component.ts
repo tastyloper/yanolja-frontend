@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, OnInit, HostListener } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, HostListener, Host } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from '../../../environments/environment';
@@ -92,6 +92,10 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   modalToggle() {
     this.checkPersonModalState = !this.checkPersonModalState;
   }
+  modalHide() {
+    this.checkPersonModalState = false;
+    console.log('b');
+  }
   copyText() {
     // document.execCommand('copy', true, this.address);
     alert('주소가 클립보드에 저장되었어요!');
@@ -102,9 +106,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     document.execCommand('copy');
     document.body.removeChild(text);
   }
-  // trigger(e) {
-  //   this.datepicker = e;
-  // }
   adultCountUp() {
     this.adultCount = this.adultCount + 1;
   }
@@ -119,5 +120,8 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   childrenCountDown() {
     if (this.childrenCount <= 0) { return; }
     this.childrenCount = this.childrenCount - 1;
+  }
+  test() {
+    console.log('a');
   }
 }

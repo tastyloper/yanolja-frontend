@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { koLocale } from 'ngx-bootstrap/locale';
 import { ReviewComponent } from './review/review.component';
+import { PersonCheckDirective } from './accommodation-detail/person-check.directive';
 
 defineLocale('ko', koLocale);
 
@@ -37,7 +38,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AccommodationDetailComponent,
     RoomDetailComponent,
     PaymentComponent,
-    ReviewComponent
+    ReviewComponent,
+    PersonCheckDirective
   ],
   imports: [
     CommonModule,
