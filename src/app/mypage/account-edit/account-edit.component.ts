@@ -14,7 +14,7 @@ export class AccountEditComponent implements OnInit {
   accountForm: FormGroup;
 
   constructor(
-    private subTitleService: SubTitleService,                                                        e: SubTitleService,
+    private subTitleService: SubTitleService,
     private fb: FormBuilder  
   ) {}
 

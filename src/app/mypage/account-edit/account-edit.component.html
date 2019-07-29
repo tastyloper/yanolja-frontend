@@ -18,15 +18,15 @@
           <div class="form-group">
             <input type="password" class="form-control" placeholder="현재 비밀번호 입력" formControlName="currentpw">
             <em class="help-block" *ngIf="currentpw.errors?.required && currentpw.touched">현재 비밀번호를 입력해주세요.</em>
-            <em class="help-block" *ngIf="currentpw.errors?.pattern && currentpw.touched">8자 이상, 영문, 숫자, 특수문자 조합으로 설정 해주세요.</em>
+            <em class="help-block" *ngIf="currentpw.errors?.pattern && currentpw.touched">8~20자 영대소문자, 숫자, 특수문자 조합으로 입력해주세요.</em>
           </div>
             <!-- <button class="btn btn-primary btn-certification">인증하기</button> -->
            <div formGroupName="passwordGroup">
              <div class="member-key" [class.has-error]="userpw.errors && userpw.touched">&nbsp;</div>
              <div class="form-group">
                <input type="password" class="form-control" placeholder="새 비밀번호 - 영문+숫자+특문 8~20자" formControlName="userpw">
-               <em class="help-block" *ngIf="userpws.errors?.required && userpw.touched">현재 비밀번호를 입력해주세요.</em>
-               <em class="help-block" *ngIf="userpw.errors?.pattern && userpw.touched">8자 이상, 영문, 숫자, 특수문자 조합으로 설정 해주세요.</em>
+               <em class="help-block" *ngIf="userpw.errors?.required && userpw.touched">새 비밀번호를 입력해주세요.</em>
+               <em class="help-block" *ngIf="userpw.errors?.pattern && userpw.touched">8~20자 영대소문자, 숫자, 특수문자 조합으로 입력해주세요.</em>
               </div>
               <div class="member-key">&nbsp;</div>
               <div class="form-group">
