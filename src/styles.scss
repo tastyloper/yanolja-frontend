@@ -170,6 +170,12 @@ a, button {
     box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, .25);
   }
 }
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: #CCC;
+  border-color: #CCC;
+  cursor: not-allowed;
+}
 .btn-secondary {
   background-color: #E9ECEF;
   border-color: #E9ECEF;
@@ -330,7 +336,7 @@ a, button {
   color: #FF8D7C;
   font-size: 12px;
 }
-/**/
+/* pagination */
 .pagination {
   .page-item {
     margin: 0 2px;
@@ -352,4 +358,14 @@ a, button {
       border-radius: 50%;
     }
   }
+}
+/* datepicker */
+.theme-yanolja .bs-datepicker-head {
+  background-color: $primary-color;
+}
+.theme-yanolja .bs-datepicker-body table td span.selected,
+.theme-yanolja .bs-datepicker-body table td.selected span,
+.theme-yanolja .bs-datepicker-body table td span[class*="select-"]:after,
+.theme-yanolja .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: $primary-color;
 }
