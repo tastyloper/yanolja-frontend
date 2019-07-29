@@ -336,7 +336,7 @@ a, button {
   color: #FF8D7C;
   font-size: 12px;
 }
-/**/
+/* pagination */
 .pagination {
   .page-item {
     margin: 0 2px;
@@ -358,4 +358,14 @@ a, button {
       border-radius: 50%;
     }
   }
+}
+/* datepicker */
+.theme-yanolja .bs-datepicker-head {
+  background-color: $primary-color;
+}
+.theme-yanolja .bs-datepicker-body table td span.selected,
+.theme-yanolja .bs-datepicker-body table td.selected span,
+.theme-yanolja .bs-datepicker-body table td span[class*="select-"]:after,
+.theme-yanolja .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: $primary-color;
 }

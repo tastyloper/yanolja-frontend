@@ -111,6 +111,7 @@
                       [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
                       [(ngModel)]="bsRangeValue"
                       [minDate]="minDate"
+                      [container]="'.accommodation-detail'"
                       >
                       <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!datepicker.isOpen"></i>
                       <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="datepicker.isOpen"></i>
