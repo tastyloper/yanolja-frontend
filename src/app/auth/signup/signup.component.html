@@ -26,7 +26,7 @@
             <label for="userpw" class="form-title">비밀번호*</label>
             <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호" minlength="6" formControlName="userpw">
             <em class="help-block" *ngIf="userpw.errors?.required && userpw.touched">비밀번호를 입력해주세요.</em>
-            <em class="help-block" *ngIf="userpw.errors?.pattern && userpw.touched">8~20자리 영소문자, 숫자, 특수문자 조합으로 설정 해주세요.</em>
+            <em class="help-block" *ngIf="userpw.errors?.pattern && userpw.touched">8~20자 영대소문자, 숫자, 특수문자 조합으로 입력해주세요.</em>
           </div>
           <div class="form-group" [class.has-error]="passwordGroup.errors && confirmPw.touched">
             <label for="confirmPw" class="form-title">비밀번호 확인*</label>

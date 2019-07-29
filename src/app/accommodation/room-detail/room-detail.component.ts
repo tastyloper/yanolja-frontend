@@ -1,4 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { CancellationPolicyComponent } from '../../shared/cancellation-policy/cancellation-policy.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
+
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
@@ -9,7 +14,10 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 export class RoomDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('galleryTop', { static: true }) galleryTop;
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
-  constructor() { }
+
+  constructor(private modalService: BsModalService) { }
+
+  bsModalRef: BsModalRef;
 
   galleryTopConfig: SwiperConfigInterface = {
     spaceBetween: 10,
@@ -36,4 +44,7 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
+  openPolicy() {
+    this.bsModalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+  }
 }
