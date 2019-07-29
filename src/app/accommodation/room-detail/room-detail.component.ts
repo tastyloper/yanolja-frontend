@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CancellationPolicyComponent } from '../../shared/cancellation-policy/cancellation-policy.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
