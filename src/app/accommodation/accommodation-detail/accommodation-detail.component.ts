@@ -1,9 +1,11 @@
 import { Component, AfterViewInit, ViewChild, OnInit, HostListener } from '@angular/core';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BsDaterangepickerDirective } from 'ngx-bootstrap/datepicker';
+import { environment } from '../../../environments/environment';
 
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
+import { BsDaterangepickerDirective } from 'ngx-bootstrap/datepicker';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
 
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -25,6 +27,8 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   checkPersonModalState = false;
 
   constructor(private http: HttpClient, private localeService: BsLocaleService) {  }
+  url: string = environment.appUrl;
+  key: string = environment.apiKey;
 
   bsValue = new Date();
   bsRangeValue: Date[];
@@ -66,9 +70,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     const headers = new HttpHeaders()
-    .set('Authorization', 'Token ad0ffa732e4bad6d27606fcb250a7923a6f13f0b');
+    .set('Authorization', this.key);
 
-    this.http.get('http://13.125.164.121/stay/api/stay/', { headers }).subscribe(v => console.log(v));
+    this.http.get(this.url + 'room/', { headers }).subscribe(v => console.log(v));
     this.localeService.use(this.locale);
     this.maxDate.setDate(this.maxDate.getDate() + 1);
     this.minDate.setDate(this.minDate.getDate());
