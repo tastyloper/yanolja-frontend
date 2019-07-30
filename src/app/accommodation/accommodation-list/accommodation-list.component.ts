@@ -1,5 +1,5 @@
 import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
@@ -23,6 +23,7 @@ export class AccommodationListComponent implements OnInit {
   navClicked: boolean = false;
   datePickerConfig:Partial<BsDatepickerConfig>;
   category: string;
+  selectRegion: string = `강남/역삼/선릉/삼성`;
   person:boolean = false;
   type:boolean = false;
   location:boolean = false;
@@ -41,7 +42,9 @@ export class AccommodationListComponent implements OnInit {
   searchBarDateShow: string;
   searchBarMemberShow: string;
 
-  sstayList;
+  sstayList:object;
+
+  searchParams;
 
   constructor(private route: ActivatedRoute, private localeService: BsLocaleService, private stayList: StayListService) { 
 
@@ -69,19 +72,28 @@ export class AccommodationListComponent implements OnInit {
     this.route.queryParams
     .subscribe(params => { 
       this.category = params.category;
-      console.log(this.category , "dddd");
+      this.searchBarShow = this.category;
       return;
     })
+    this.searchBarShow = this.category;
 
     this.searchBarShow = this.searchBar.type ? this.searchBar.type : '숙박유형';
     this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
-
+    
     // this.bsRangeValue = [this.bsValue, this.maxDate]
   }
 
   getList() {
-    this.stayList.getAList().subscribe(list => this.sstayList = list)
-    console.log('list', this.sstayList);
+    const payLoad = {
+      // selectRegion: '강남',
+      // category: '모텔',
+      // personnel: 2,
+      // requestCheckIn: '2019-07-01+22:00:00'
+    }
+
+    let slist = this.sstayList;
+    this.stayList.getAList(payLoad).subscribe(list => this.sstayList = Object.assign(slist, list));
+    console.log('list',this.sstayList);
   }
 
   toggle(option:string) {
@@ -120,17 +132,26 @@ export class AccommodationListComponent implements OnInit {
     this.person = false;
     this.location = false;
     this.type = false;
-    console.log('submitBtn')
+
+    this.searchParams = {
+      category: this.category,
+      personnel: this.numberAdult,
+      selectRegion: this.selectRegion
+    }
+    console.log(this.searchParams);
+    console.log([this.bsValue.toDateString(), this.maxDate]);
   }
 
   selectType(type:string) {
+    this.toggle('type');
     this.searchBar.type = type;
     this.searchBarShow = type === 'motel' ? '모텔' : (type === 'hotel' ?  '호텔' : (type === 'guestHouse' ?  '게스트하우스' : (type === 'pension' ? '펜션' : '숙박종류')));
   }
 
   selectLoc(item) {
-    this.searchBar.location = item.text;
-    this.searchBarLocShow = item.text;
+    this.toggle('location');
+    this.selectRegion = item.value;
+    this.searchBarLocShow = item.value;
   }
 
   selectDate(dateRange) {
