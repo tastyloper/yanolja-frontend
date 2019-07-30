@@ -532,7 +532,7 @@ button {
   font-size: 28px;
   font-weight: 700;
 }
-.review-section>p {
+.review-section>a {
   @include horizontal-center;
   bottom: 20px;
   cursor: pointer;
@@ -664,4 +664,26 @@ button {
   padding-left: 50px;
   font-size: 12px;
   color: rgb(132, 140, 148);
+}
+.modal-title {
+  font-size: 16px;
+}
+/*scss*/
+.modal-body {
+  .map-wrap {
+    position: relative;
+    margin-bottom: 15px;
+    p {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      padding: 5px 10px;
+      background-color: rgba(255, 255, 255, .8);
+    }
+  }
+  agm-map {
+    height: 600px;
+  }
 }
