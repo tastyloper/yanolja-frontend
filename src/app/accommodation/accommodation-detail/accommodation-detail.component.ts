@@ -26,12 +26,42 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
   @ViewChild(BsDaterangepickerDirective, { static: false }) daterangepicker: BsDaterangepickerDirective;
 
-  locale: string;
-  locales = listLocales();
+
+  // datepicker
   dateCustomClasses: DatepickerDateCustomClasses[];
-  checkPersonModalState = false;
-  facilitiesStatus = false;
+  bsValue: Date;
+  bsRangeValue: Date[];
+  maxDate: Date;
+  minDate: Date;
+  form: FormGroup;
+    // for using locale-chronos
+    locale: string;
+    locales: string[];
+
+  // modal
   modalRef: BsModalRef;
+
+  // carousel
+  galleryTopConfig: SwiperConfigInterface;
+  galleryThumbsConfig: SwiperConfigInterface;
+
+  // component status
+  checkPersonModalStatus: boolean;
+  facilitiesStatus: boolean;
+  adultCount: number;
+  childrenCount: number;
+
+  // data for server communication
+  url: string;
+  token: string;
+
+
+  // dummy data
+  info = '\r\n1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다.\r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n';
+  address = '강남구 봉은사로 134';
+  lat: number;
+  lng: number;
+  zoom = 15;
 
   constructor(
     private http: HttpClient,
@@ -40,46 +70,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     private mapsAPILoader: MapsAPILoader
   ) {}
 
-  url: string = environment.appUrl;
-  key: string = environment.apiKey;
-
-  adultCount = 0;
-  childrenCount = 0;
-
-  bsValue = new Date();
-  bsRangeValue: Date[];
-  maxDate = new Date();
-  form = new FormGroup({
-    dateYMD: new FormControl(new Date()),
-    dateFull: new FormControl(new Date()),
-    dateMDY: new FormControl(new Date()),
-    dateRange: new FormControl([new Date(), new Date()])
-  });
-  minDate = new Date();
-  // bsConfig: Partial<BsDatepickerConfig>;
-
-  galleryTopConfig: SwiperConfigInterface = {
-    spaceBetween: 10,
-    effect: 'fade',
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    }
-  };
-  galleryThumbsConfig: SwiperConfigInterface = {
-    spaceBetween: 10,
-    slidesPerView: 9,
-    centeredSlides: true,
-    watchSlidesVisibility: true,
-    watchSlidesProgress: true,
-    slideToClickedSlide: true,
-  };
-
-  info = '\r\n1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다.\r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n';
-  address = '강남구 봉은사로 134';
-  lat: number;
-  lng: number;
-  zoom = 15;
 
   ngAfterViewInit() {
     this.galleryTop.nativeElement.swiper.controller.control = this.galleryThumbs.nativeElement.swiper;
@@ -87,10 +77,45 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    this.bsValue = new Date();
+    this.maxDate = new Date();
+    this.minDate = new Date();
+    this.form = new FormGroup({
+      dateYMD: new FormControl(new Date()),
+      dateFull: new FormControl(new Date()),
+      dateMDY: new FormControl(new Date()),
+      dateRange: new FormControl([new Date(), new Date()])
+    });
     this.locale = 'ko';
+    this.locales = listLocales();
+
+    this.galleryTopConfig = {
+      spaceBetween: 10,
+      effect: 'fade',
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    };
+    this.galleryThumbsConfig = {
+      spaceBetween: 10,
+      slidesPerView: 9,
+      centeredSlides: true,
+      watchSlidesVisibility: true,
+      watchSlidesProgress: true,
+      slideToClickedSlide: true,
+    };
+
+    this.checkPersonModalStatus = false;
+    this.facilitiesStatus = false;
+    this.url = environment.appUrl;
+    this.token = environment.tokenName;
+    this.adultCount = 0;
+    this.childrenCount = 0;
+
 
     const headers = new HttpHeaders()
-    .set('Authorization', this.key);
+    .set('Authorization', this.token);
 
     this.http.get(this.url + 'room/', { headers }).subscribe(v => console.log(v));
     this.localeService.use(this.locale);
@@ -111,10 +136,12 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.facilitiesStatus = !this.facilitiesStatus;
   }
   modalToggle() {
-    this.checkPersonModalState = !this.checkPersonModalState;
+    this.checkPersonModalStatus = !this.checkPersonModalStatus;
+    console.log('a');
   }
   modalHide() {
-    this.checkPersonModalState = false;
+    this.checkPersonModalStatus = false;
+    console.log('a');
   }
   copyText() {
     // document.execCommand('copy', true, this.address);
