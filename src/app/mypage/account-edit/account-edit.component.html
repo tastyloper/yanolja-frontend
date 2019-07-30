@@ -5,13 +5,13 @@
         <div class="member-group input-group clearfix">
           <div class="member-key">닉네임</div>
           <div class="form-group" [class.has-error]="nickName.errors && nickName.touched">
-            <input type="text" class="form-control" placeholder="이가영" formControlName="nickName">
+            <input type="text" class="form-control" placeholder="이가영" value="{{ account.nickname }}" formControlName="nickName">
             <em class="help-block" *ngIf="nickName.errors?.required && nickName.touched">닉네임을 입력해주세요.</em>
           </div>
         </div>
         <div class="member-group clearfix">
           <div class="member-key">아이디(이메일)</div>
-          <div class="member-value">happydy91@hanmail.net</div>
+          <div class="member-value">{{ account.email }}</div>
         </div>
         <div class="member-group input-group clearfix">
           <div class="member-key">비밀번호</div>
