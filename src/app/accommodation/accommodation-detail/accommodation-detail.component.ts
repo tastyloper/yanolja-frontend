@@ -13,6 +13,7 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MapsAPILoader } from '@agm/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 declare const google: any;
 
@@ -55,19 +56,26 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   url: string;
   token: string;
 
+  // mapConfig
+  zoom = 15;
 
   // dummy data
   info = '\r\n1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다.\r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n';
   address = '강남구 봉은사로 134';
   lat: number;
   lng: number;
-  zoom = 15;
+  totalComments: number;
+  averageGrade: number;
+  totalGrade1: number;
+  totalGrade2: number;
+  totalGrade3: number;
+  totalGrade4: number;
 
   constructor(
     private http: HttpClient,
     private localeService: BsLocaleService,
     private modalService: BsModalService,
-    private mapsAPILoader: MapsAPILoader
+    private mapsAPILoader: MapsAPILoader,
   ) {}
 
 
@@ -113,6 +121,12 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.adultCount = 0;
     this.childrenCount = 0;
 
+    this.totalComments = 1000;
+    this.totalGrade1 = 4;
+    this.totalGrade2 = 4;
+    this.totalGrade3 = 4;
+    this.totalGrade4 = 4;
+    this.averageGrade = 4;
 
     const headers = new HttpHeaders()
     .set('Authorization', this.token);

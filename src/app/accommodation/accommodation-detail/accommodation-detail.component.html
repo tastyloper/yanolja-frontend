@@ -483,7 +483,17 @@
               <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
           </li>
         </ul>
-        <a routerLink="/accommodation/1/review" [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7 }">후기 더 보기</a>
+        <a routerLink="/accommodation/1/review"
+        [queryParams]=
+        "{ totalComments: this.totalComments, 
+          averageGrade: this.averageGrade, 
+          totalGrade1: this.totalGrade1, 
+          totalGrade2: this.totalGrade2, 
+          totalGrade3: this.totalGrade3, 
+          totalGrade4: this.totalGrade4 }"
+        >
+        후기 더 보기
+        </a>
       </section>
     </section>
     </div>
