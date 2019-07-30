@@ -5,6 +5,8 @@ import { SubTitleService } from 'src/app/core/services/sub-title.service';
 
 import { PasswordValidator } from '../../auth/password-validator';
 
+import { User } from '../../core/types/user.interface';
+
 @Component({
   selector: 'app-account-edit',
   templateUrl: './account-edit.component.html',
@@ -12,6 +14,7 @@ import { PasswordValidator } from '../../auth/password-validator';
 })
 export class AccountEditComponent implements OnInit {
   accountForm: FormGroup;
+  account: User;
 
   constructor(
     private subTitleService: SubTitleService,
@@ -36,11 +39,21 @@ export class AccountEditComponent implements OnInit {
         confirmPw:['', Validators.required]
       }, { validator: PasswordValidator.match })
       })
+      
+      this.getData();
     
   }
 
   onSubmit() {
   
+  }
+
+  getData() {
+    this.account = {
+      nickname: '연희내꺼야',
+      email: 'tak@gmail.com',
+      phoneNumber: '01042221234'
+    };
   }
   
   get nickName() {
