@@ -1,9 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -13,11 +16,15 @@ import { SubTitleService } from '../../core/services/sub-title.service';
 export class AccountComponent implements OnInit {
   secessionForm: FormGroup;
   modalRef: BsModalRef;
+  accountdata = {};
 
   constructor(
     private subTitleService: SubTitleService,
     private modalService: BsModalService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -30,6 +37,20 @@ export class AccountComponent implements OnInit {
         Validators.minLength(6)
       ]]
     });
+    this.getData();
+  }
+
+  getData() {
+    this.authService.getUser().subscribe(
+      success => {
+        this.accountdata = success;
+      },
+      error => {
+        this.authService.removeToken();
+        this.toastr.error('유저 정보를 찾을 수 없습니다.');
+        this.router.navigate(['login']);
+      }
+    );
   }
 
   openModal(template: TemplateRef<any>) {

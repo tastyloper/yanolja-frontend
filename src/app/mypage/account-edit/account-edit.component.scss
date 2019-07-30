@@ -62,9 +62,7 @@
 .form-control {
   font-size: 14px;
 }
-// .help-block {
-//   padding-top: 5px;
-// }
+
 .form-group {
   width: 50%;
   display: inline-block;
@@ -80,18 +78,16 @@
   }
 
   .btn {
-    width: calc(50% - 5px);
+    width: calc(20% - 5px);
+    float: right;
     line-height: 15px;
     padding: 12px;
     & + .btn {
       margin-left: 10px;
     }
   }
-  .btn-certification {
-    width: 70px;
-    padding: 5px;
-    line-height: 18px;
-    border-radius: 5px;
-    font-size: 12px;
-  }
 
+  .btn-secondary {
+    margin-left: 10px;
+  }
+ 
