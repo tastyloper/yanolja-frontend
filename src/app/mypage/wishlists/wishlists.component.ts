@@ -38,8 +38,6 @@ export class WishlistsComponent implements OnInit {
         daysCheckIn: 16,
         hoursPrice: '25000',
         daysPrice: '25000',
-        saleHoursPrice: '25000',
-        saleDaysPrice: '25000',
         directions: '선릉역 4번출구 도보10분',
         mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
       },
@@ -54,8 +52,6 @@ export class WishlistsComponent implements OnInit {
         daysCheckIn: 16,
         hoursPrice: '25000',
         daysPrice: '25000',
-        saleHoursPrice: '25000',
-        saleDaysPrice: '25000',
         directions: '선릉역 4번출구 도보10분',
         mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
       },
@@ -70,8 +66,6 @@ export class WishlistsComponent implements OnInit {
         daysCheckIn: 16,
         hoursPrice: '25000',
         daysPrice: '25000',
-        saleHoursPrice: '25000',
-        saleDaysPrice: '25000',
         directions: '선릉역 4번출구 도보10분',
         mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
       },
@@ -86,8 +80,6 @@ export class WishlistsComponent implements OnInit {
         daysCheckIn: 16,
         hoursPrice: '25000',
         daysPrice: '25000',
-        saleHoursPrice: '25000',
-        saleDaysPrice: '25000',
         directions: '선릉역 4번출구 도보10분',
         mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
       },
@@ -102,8 +94,6 @@ export class WishlistsComponent implements OnInit {
         daysCheckIn: 16,
         hoursPrice: '25000',
         daysPrice: '25000',
-        saleHoursPrice: '25000',
-        saleDaysPrice: '25000',
         directions: '선릉역 4번출구 도보10분',
         mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
       }
@@ -156,11 +146,5 @@ export class WishlistsComponent implements OnInit {
       endIndex,
       pages
     };
-  }
-
-  likeAction(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('123');
   }
 }
