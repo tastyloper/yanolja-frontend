@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 
@@ -18,6 +18,13 @@ export class AuthService {
 
   login(payload: object) {
     return this.http.post(`${this.appUrl}email/get_token/`, payload);
+  }
+
+  getUser() {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Token ${this.getToken()}`);
+
+    return this.http.get(`${this.appUrl}mypage/`, { headers });
   }
 
   getToken(): string {
