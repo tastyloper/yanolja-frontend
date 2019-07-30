@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MypageRoutingModule } from './mypage-routing.module';
 
@@ -33,7 +34,8 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
     RouterModule,
     MypageRoutingModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class MypageModule {}
