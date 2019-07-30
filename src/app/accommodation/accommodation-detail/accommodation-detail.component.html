@@ -120,8 +120,8 @@
               </form>
             </div>
           </div>
-          <div class="check-person">
-            <div class="check-cursor" (click)="modalToggle()" appPersonCheck tabindex="0" (hidePerson)="modalHide()">
+          <div class="check-person"  appPersonCheck tabindex="0" (hidePerson)="modalHide()">
+            <div class="check-cursor" (click)="modalToggle()">
               <i class="fa fa-user" aria-hidden="true"></i>
               <div class="check-person-container">
                 <p>총 {{adultCount + childrenCount}}명 (어른: {{adultCount}}명, 아동: {{childrenCount}}명) </p>
@@ -412,21 +412,7 @@
             <li class="grade-item">
               <p>청결도</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="'40%'"></div>
-              </div>
-              <p>9.2</p>
-            </li>
-            <li class="grade-item">
-              <p>청결도</p>
-              <div class="item-background">
-                <div class="item-foreground"></div>
-              </div>
-              <p>9.2</p>
-            </li>
-            <li class="grade-item">
-              <p>청결도</p>
-              <div class="item-background">
-                <div class="item-foreground"></div>
+                <div class="item-foreground" [style.width]="4.2 * 20 + '%'"></div>
               </div>
               <p>9.2</p>
             </li>
@@ -497,7 +483,7 @@
               <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
           </li>
         </ul>
-        <p>후기 더 보기</p>
+        <a routerLink="/accommodation/1/review" [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7 }">후기 더 보기</a>
       </section>
     </section>
     </div>

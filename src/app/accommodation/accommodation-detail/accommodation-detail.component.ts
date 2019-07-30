@@ -127,17 +127,12 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     });
 
   }
-  @HostListener('window:scroll')
-  onScrollEvent() {
-    this.daterangepicker.hide();
-  }
 
   openMore() {
     this.facilitiesStatus = !this.facilitiesStatus;
   }
   modalToggle() {
     this.checkPersonModalStatus = !this.checkPersonModalStatus;
-    console.log('a');
   }
   modalHide() {
     this.checkPersonModalStatus = false;
@@ -156,6 +151,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
   adultCountUp() {
     this.adultCount = this.adultCount + 1;
+    this.checkPersonModalStatus = true;
   }
   adultCountDown() {
     if (this.adultCount <= 0) { return; }

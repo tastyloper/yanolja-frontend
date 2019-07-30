@@ -5,6 +5,8 @@ import { Directive, HostListener, EventEmitter, Output, Input } from '@angular/c
 })
 export class PersonCheckDirective {
   @Output() hidePerson = new EventEmitter();
+  @Output() showPerson = new EventEmitter();
+
   @HostListener('blur') hideDropDown() {
     this.hidePerson.emit();
   }
