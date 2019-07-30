@@ -40,7 +40,7 @@
   <ul class="temp-header">
     <li><a routerLink="/accommodation">숙소리스트</a></li>
     <li><a routerLink="/accommodation/1">숙소상세</a></li>
-    <li><a routerLink="/accommodation/1/review">후기페이지</a></li>
+    <li><a routerLink="/accommodation/1/review" [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7 }">후기페이지</a></li>
     <li><a routerLink="/accommodation/1/1">룸상세</a></li>
     <li><a routerLink="/accommodation/1/1/payment">결제</a></li>
     <li><a routerLink="/mypage">마이페이지</a></li>
