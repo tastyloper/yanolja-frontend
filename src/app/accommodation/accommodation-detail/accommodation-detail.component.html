@@ -269,7 +269,7 @@
           <button class="copy-location" (click)="copyText()">
             <i class="fa fa-clone" aria-hidden="true"></i>
             주소 복사</button>
-          <button class="location-map">
+          <button class="location-map" (click)="openLocation(template)">
             <i class="fa fa-map-o" aria-hidden="true"></i>
             지도 보기</button>
           </div>
@@ -504,3 +504,20 @@
     </div>
 </section>
 <app-footer></app-footer>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">숙소 위치 보기</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="map-wrap">
+      <p>{{ address }}</p>
+      <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+        <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
+      </agm-map>
+    </div>
+    <button class="btn btn-primary d-block w-100" (click)="closeLocation()">닫기</button>
+  </div>
+</ng-template>

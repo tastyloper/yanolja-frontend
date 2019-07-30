@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, OnInit, HostListener, Host } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, HostListener, Host, TemplateRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from '../../../environments/environment';
@@ -11,6 +11,11 @@ import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MapsAPILoader } from '@agm/core';
+
+declare const google: any;
+
 @Component({
   selector: 'app-accommodation-detail',
   templateUrl: './accommodation-detail.component.html',
@@ -21,12 +26,20 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
   @ViewChild(BsDaterangepickerDirective, { static: false }) daterangepicker: BsDaterangepickerDirective;
 
-  locale = 'ko';
+  locale: string;
   locales = listLocales();
   dateCustomClasses: DatepickerDateCustomClasses[];
   checkPersonModalState = false;
+  facilitiesStatus = false;
+  modalRef: BsModalRef;
 
-  constructor(private http: HttpClient, private localeService: BsLocaleService) {  }
+  constructor(
+    private http: HttpClient,
+    private localeService: BsLocaleService,
+    private modalService: BsModalService,
+    private mapsAPILoader: MapsAPILoader
+  ) {}
+
   url: string = environment.appUrl;
   key: string = environment.apiKey;
 
@@ -62,9 +75,11 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     slideToClickedSlide: true,
   };
 
-  facilitiesStatus = false;
   info = '\r\n1. 객실요금은 2인 입실 기준이며, 파티룸 등 특수객실의 경우, 직접 입실 인원 확인이 필요합니다.\r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n2. 미성년자의 입실 가능여부는 직접 제휴점에 확인 후 예약 진행하시기 바랍니다. \r\n';
   address = '강남구 봉은사로 134';
+  lat: number;
+  lng: number;
+  zoom = 15;
 
   ngAfterViewInit() {
     this.galleryTop.nativeElement.swiper.controller.control = this.galleryThumbs.nativeElement.swiper;
@@ -72,6 +87,8 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    this.locale = 'ko';
+
     const headers = new HttpHeaders()
     .set('Authorization', this.key);
 
@@ -80,12 +97,16 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.maxDate.setDate(this.maxDate.getDate() + 1);
     this.minDate.setDate(this.minDate.getDate());
     this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.mapsAPILoader.load().then(() => {
+      this.getLocationAddress();
+    });
 
   }
   @HostListener('window:scroll')
   onScrollEvent() {
     this.daterangepicker.hide();
   }
+
   openMore() {
     this.facilitiesStatus = !this.facilitiesStatus;
   }
@@ -94,7 +115,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
   modalHide() {
     this.checkPersonModalState = false;
-    console.log('b');
   }
   copyText() {
     // document.execCommand('copy', true, this.address);
@@ -106,6 +126,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     document.execCommand('copy');
     document.body.removeChild(text);
   }
+
   adultCountUp() {
     this.adultCount = this.adultCount + 1;
   }
@@ -120,6 +141,34 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   childrenCountDown() {
     if (this.childrenCount <= 0) { return; }
     this.childrenCount = this.childrenCount - 1;
+  }
+
+  openLocation(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'modal-lg' })
+    );
+  }
+  closeLocation() {
+    this.modalRef.hide();
+  }
+  getLocationAddress() {
+    if (navigator.geolocation) {
+      const geocoder = new google.maps.Geocoder();
+      const address = this.address;
+      const request = { address };
+      geocoder.geocode(request, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          const result = results[0];
+          if (result != null) {
+            this.lat = result.geometry.location.lat();
+            this.lng = result.geometry.location.lng();
+          } else {
+            alert('No address available!');
+          }
+        }
+      });
+    }
   }
   test() {
     console.log('a');

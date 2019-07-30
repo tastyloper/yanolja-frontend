@@ -24,6 +24,8 @@ import { koLocale } from 'ngx-bootstrap/locale';
 import { ReviewComponent } from './review/review.component';
 import { PersonCheckDirective } from './accommodation-detail/person-check.directive';
 
+import { AgmCoreModule } from '@agm/core';
+import { environment } from 'src/environments/environment';
 defineLocale('ko', koLocale);
 
 
@@ -53,6 +55,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BsDatepickerModule.forRoot(),
     FormsModule,
     RouterModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.apiKey
+    }),
     AccommodationRoutingModule
   ],
   providers: [
