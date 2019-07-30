@@ -3,9 +3,6 @@
     <div class="row">
       <div class="col-4" *ngFor="let like of pagedItems">
         <a routerLink="/accommodation/{{ like.id }}" class="content-item">
-          <div class="like-wrap">
-            <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-          </div>
           <div class="content-img-wrap">
             <img src="{{ like.mainImage }}" alt="{{ like.name }}">
           </div>
@@ -20,13 +17,11 @@
             </div>
             <div class="type borrow">
               <h4>대실 <span>최대 {{ like.hoursAvailable }}시간</span></h4>
-              <p>{{ like.hoursPrice | number }}원</p>
-              <div class="price">{{ like.saleHoursPrice | number }}<small>원</small></div>
+              <p class="price">{{ like.hoursPrice | number }}<small>원</small></p>
             </div>
             <div class="type one-night">
               <h4>숙박 <span>{{ like.hoursAvailable }}:00 ~</span></h4>
-              <p>{{ like.daysPrice | number }}원</p>
-              <div class="price">{{ like.saleDaysPrice | number }}<small>원</small></div>
+              <p class="price">{{ like.daysPrice | number }}<small>원</small></p>
             </div>
           </div>
         </a>
