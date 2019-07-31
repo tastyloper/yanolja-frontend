@@ -117,17 +117,32 @@
   }
 }
 .main-contents {
-  .content-panel h2 {
-    margin-bottom: 15px;
-    font-size: 24px;
-    font-weight: 700;
+  padding-bottom: 100px;
+  .content-panel {
+    & + .content-panel {
+      margin-top: 60px;
+    }
+    h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: 700;
+    }
   }
   .swiper-container {
     padding: 10px 0;
   }
+  .swiper-panel {
+    position: relative;
+  }
   .swiper-button-next,
   .swiper-button-prev {
-    margin-top: 0;
+    margin-top: -20px;
+  }
+  .swiper-button-next {
+    right: -20px;
+  }
+  .swiper-button-prev {
+    left: -20px;
   }
   .content-item {
     position: relative;

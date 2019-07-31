@@ -3,11 +3,10 @@
     <div class="container">
       <h2>야 너도 놀수있어</h2>
       <div class="search-panel">
-        <a (click)="openModal(template)">asd</a>
+        <a (click)="openModal(template)">지도</a>
         <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="autocompleteInput" placeholder="주소" #addresstext>
+          <input type="text" class="form-control" placeholder="주소" #addresstext>
         </div>
-        <!-- <script src=”https://maps.googleapis.com/maps/api/js?libraries=places&key={{GOOGLE_KEY}}"></script> -->
       </div>
       <div class="swiper-panel">
         <div class="swiper-container" [swiper]="headerConfig">
@@ -74,181 +73,127 @@
   <section class="main-contents">
     <div class="container">
       <div class="content-panel">
-        <h2>올여름 트랜드는 여~기</h2>
+        <h2>더위 사냥엔 물놀이가 최고!</h2>
         <div class="swiper-panel">
-          <div class="swiper-container" [swiper]="contentConfig">
+          <div class="swiper-container" [swiper]="contentConfig1">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <a routerLink="/accommodation/1" class="content-item">
-                  <div class="like-wrap">
-                    <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                  </div>
+              <div class="swiper-slide" *ngFor="let swimmingPool of swimmingPools">
+                <a routerLink="/accommodation/{{ swimmingPool.stayId }}" class="content-item">
                   <div class="content-img-wrap">
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
+                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="{{ swimmingPool.stay }}">
                   </div>
                   <div class="content-text-wrap">
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-                    <h3>역삼 리치웰</h3>
+                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ swimmingPool.directions }}</div>
+                    <h3>{{ swimmingPool.stay }}</h3>
                     <div class="customer">
                       <i class="fa fa-star" aria-hidden="true"></i>
-                      <span>4.7</span>
+                      <span>{{ swimmingPool.averageGrade }}</span>
                       <i class="fa fa-comments" aria-hidden="true"></i>
-                      <span>3,401</span>
+                      <span>{{ swimmingPool.totalComments | number }}</span>
                     </div>
                     <div class="type borrow">
-                      <h4>대실 <span>최대 6시간</span></h4>
-                      <p>30.000원</p>
-                      <div class="price">25,000<small>원</small></div>
+                      <h4>대실 <span>최대 {{ swimmingPool.hoursAvailable }}시간</span></h4>
+                      <p>{{ swimmingPool.hoursPrice | number }}원</p>
+                      <div class="price">{{ swimmingPool.saleHoursPrice | number }}<small>원</small></div>
                     </div>
                     <div class="type one-night">
-                      <h4>숙박 <span>16:00 ~</span></h4>
-                      <p>70.000원</p>
-                      <div class="price">59,800<small>원</small></div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a routerLink="/accommodation/1" class="content-item">
-                  <div class="like-wrap">
-                    <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                  </div>
-                  <div class="content-img-wrap">
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-                  </div>
-                  <div class="content-text-wrap">
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-                    <h3>역삼 리치웰</h3>
-                    <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <span>4.7</span>
-                      <i class="fa fa-comments" aria-hidden="true"></i>
-                      <span>3,401</span>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>16:00 ~</span></h4>
-                      <p>70.000원</p>
-                      <div class="price">59,800<small>원</small></div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a routerLink="/accommodation/1" class="content-item">
-                  <div class="like-wrap">
-                    <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                  </div>
-                  <div class="content-img-wrap">
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-                  </div>
-                  <div class="content-text-wrap">
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-                    <h3>역삼 리치웰</h3>
-                    <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <span>4.7</span>
-                      <i class="fa fa-comments" aria-hidden="true"></i>
-                      <span>3,401</span>
-                    </div>
-                    <div class="type borrow">
-                      <h4>대실 <span>최대 6시간</span></h4>
-                      <p>30.000원</p>
-                      <div class="price">25,000<small>원</small></div>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>16:00 ~</span></h4>
-                      <p>70.000원</p>
-                      <div class="price">59,800<small>원</small></div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a routerLink="/accommodation/1" class="content-item">
-                  <div class="like-wrap">
-                    <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                  </div>
-                  <div class="content-img-wrap">
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-                  </div>
-                  <div class="content-text-wrap">
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-                    <h3>역삼 리치웰</h3>
-                    <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <span>4.7</span>
-                      <i class="fa fa-comments" aria-hidden="true"></i>
-                      <span>3,401</span>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>16:00 ~</span></h4>
-                      <p>70.000원</p>
-                      <div class="price">59,800<small>원</small></div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a routerLink="/accommodation" class="content-item">
-                  <div class="like-wrap">
-                    <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                  </div>
-                  <div class="content-img-wrap">
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-                  </div>
-                  <div class="content-text-wrap">
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-                    <h3>역삼 리치웰</h3>
-                    <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <span>4.7</span>
-                      <i class="fa fa-comments" aria-hidden="true"></i>
-                      <span>3,401</span>
-                    </div>
-                    <div class="type borrow">
-                      <h4>대실 <span>최대 6시간</span></h4>
-                      <p>30.000원</p>
-                      <div class="price">25,000<small>원</small></div>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>16:00 ~</span></h4>
-                      <p>70.000원</p>
-                      <div class="price">59,800<small>원</small></div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a routerLink="/accommodation" class="content-item">
-                  <div class="like-wrap">
-                    <a (click)="likeAction($event)"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                  </div>
-                  <div class="content-img-wrap">
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-                  </div>
-                  <div class="content-text-wrap">
-                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> 서울 강남구 테헤란로37길 13-10</div>
-                    <h3>역삼 리치웰</h3>
-                    <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <span>4.7</span>
-                      <i class="fa fa-comments" aria-hidden="true"></i>
-                      <span>3,401</span>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>16:00 ~</span></h4>
-                      <p>70.000원</p>
-                      <div class="price">59,800<small>원</small></div>
+                      <h4>숙박 <span>{{ swimmingPool.daysCheckIn }}:00 ~</span></h4>
+                      <p>{{ swimmingPool.daysPrice | number }}원</p>
+                      <div class="price">{{ swimmingPool.saleDaysPrice | number }}<small>원</small></div>
                     </div>
                   </div>
                 </a>
               </div>
             </div>
           </div>
-          <div class="swiper-button-prev content-swiper-button-prev">
+          <div class="swiper-button-prev content1-swiper-button-prev">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
           </div>
-          <div class="swiper-button-next content-swiper-button-next">
+          <div class="swiper-button-next content1-swiper-button-next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div> 
+      <div class="content-panel">
+        <h2>초특가 할인!!!</h2>
+        <div class="swiper-panel">
+          <div class="swiper-container" [swiper]="contentConfig2">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" *ngFor="let bigSale of bigSales">
+                <a routerLink="/accommodation/{{ bigSale.stayId }}" class="content-item">
+                  <div class="content-img-wrap">
+                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="{{ bigSale.stay }}">
+                  </div>
+                  <div class="content-text-wrap">
+                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ bigSale.directions }}</div>
+                    <h3>{{ bigSale.stay }}</h3>
+                    <div class="customer">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <span>{{ bigSale.averageGrade }}</span>
+                      <i class="fa fa-comments" aria-hidden="true"></i>
+                      <span>{{ bigSale.totalComments | number }}</span>
+                    </div>
+                    <div class="type borrow">
+                      <h4>대실 <span>최대 {{ bigSale.hoursAvailable }}시간</span></h4>
+                      <p>{{ bigSale.hoursPrice | number }}원</p>
+                      <div class="price">{{ bigSale.saleHoursPrice | number }}<small>원</small></div>
+                    </div>
+                    <div class="type one-night">
+                      <h4>숙박 <span>{{ bigSale.daysCheckIn }}:00 ~</span></h4>
+                      <p>{{ bigSale.daysPrice | number }}원</p>
+                      <div class="price">{{ bigSale.saleDaysPrice | number }}<small>원</small></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev content2-swiper-button-prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </div>
+          <div class="swiper-button-next content2-swiper-button-next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div> 
+      <div class="content-panel">
+        <h2>파티룸 밤새 놀기 좋은 숙소</h2>
+        <div class="swiper-panel">
+          <div class="swiper-container" [swiper]="contentConfig3">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" *ngFor="let partyRoom of partyRooms">
+                <a routerLink="/accommodation/{{ partyRoom.stayId }}" class="content-item">
+                  <div class="content-img-wrap">
+                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="{{ partyRoom.stay }}">
+                  </div>
+                  <div class="content-text-wrap">
+                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ partyRoom.directions }}</div>
+                    <h3>{{ partyRoom.stay }}</h3>
+                    <div class="customer">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <span>{{ partyRoom.averageGrade }}</span>
+                      <i class="fa fa-comments" aria-hidden="true"></i>
+                      <span>{{ partyRoom.totalComments | number }}</span>
+                    </div>
+                    <div class="type borrow">
+                      <h4>대실 <span>최대 {{ partyRoom.hoursAvailable }}시간</span></h4>
+                      <p>{{ partyRoom.hoursPrice | number }}원</p>
+                      <div class="price">{{ partyRoom.saleHoursPrice | number }}<small>원</small></div>
+                    </div>
+                    <div class="type one-night">
+                      <h4>숙박 <span>{{ partyRoom.daysCheckIn }}:00 ~</span></h4>
+                      <p>{{ partyRoom.daysPrice | number }}원</p>
+                      <div class="price">{{ partyRoom.saleDaysPrice | number }}<small>원</small></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev content3-swiper-button-prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </div>
+          <div class="swiper-button-next content3-swiper-button-next">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </div>
         </div>
