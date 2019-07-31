@@ -37,7 +37,8 @@ export class AccountEditComponent implements OnInit {
           Validators.pattern('^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$')
         ]],
         confirmPw:['', Validators.required]
-      }, { validator: PasswordValidator.match })
+      }, { validator: PasswordValidator.match }),
+      phoneNumber: ['', Validators.required]
       })
       
       this.getData();
@@ -73,5 +74,9 @@ export class AccountEditComponent implements OnInit {
 
   get confirmPw() {
     return this.passwordGroup.get('confirmPw');
+  }
+  
+  get phoneNumber() {
+    return this.accountForm.get('phoneNumber');
   }
 }
