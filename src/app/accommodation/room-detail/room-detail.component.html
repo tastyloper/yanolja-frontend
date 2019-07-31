@@ -6,14 +6,14 @@
       <section class="room-title">
         <h3>{{data.name}}</h3>
         <i class="fa fa-map-marker" aria-hidden="true"></i>
-        <span>역삼 리치웰 (백엔드와 협의 필요)</span>
+        <span>{{data.stay}}</span>
       </section>
       <section class="room-img">
         <h3>객실 사진 캐러셀</h3>
           <div class="all-wrpper">
             <div class="swiper-container gallery-top" #galleryTop [swiper]="galleryTopConfig">
               <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let img of data.images">
+                <div class="swiper-slide" *ngFor="let img of data.urlImage">
                   <img [src]="img">
                 </div>
               </div>
@@ -22,7 +22,7 @@
             </div>
             <div class="swiper-container gallery-thumbs" #galleryThumbs [swiper]="galleryThumbsConfig">
               <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let img of data.images">
+                <div class="swiper-slide" *ngFor="let img of data.urlImage">
                   <img [src]="img">
                 </div>
               </div>
@@ -31,11 +31,11 @@
       </section>
       <section class="reservation-notice">
         <h3>예약공지</h3>
-        <pre>{{data.reservationNotice}}</pre>
+        <pre *ngFor="let text of data.reservationNotice">{{text}}</pre>
       </section>
       <section class="cancel-rule">
         <h3>취소규정</h3>
-        <pre>{{data.cancelRegulation}}</pre>
+        <pre *ngFor="let text of data.cancelRegulation">{{text}}</pre>
         <button (click)="openPolicy()">자세히 보기</button>
       </section>
     </section>
@@ -45,8 +45,9 @@
         <h3>대실 예약</h3>
         <span class="nav-common-title">대실</span>
         <div class="rental-price">
-          <span class="original-price">{{data.hoursPrice.substring(0, data.hoursPrice.length - 3)}},{{data.hoursPrice.substring(data.hoursPrice.length - 3)}}원</span>
-          <span class="sale-price">{{data.saleHoursPrice}}원</span>
+          <span class="original-price" *ngIf="data.saleHoursPrice">{{data.hoursPrice | number}}원</span>
+          <span class="sale-price" *ngIf="data.saleHoursPrice">{{data.saleHoursPrice | number}}원</span>
+          <span class="sale-price no-sale" *ngIf="!data.saleHoursPrice">{{data.hoursPrice | number}}원</span>
         </div>
         <table class="rental-time nav-table">
           <tbody>
@@ -65,9 +66,10 @@
       <section class="stay-room">
           <h3>숙박 예약</h3>
           <span class="nav-common-title">숙박</span>
-          <div class="stay-price">
-            <span class="original-price">{{data.daysPrice}}원</span>
-            <span class="sale-price">{{data.saleDaysPrice}}원</span>
+          <div class="stay-price">            
+            <span class="original-price" *ngIf="data.saleDaysPrice">{{data.daysPrice | number}}원</span>
+            <span class="sale-price" *ngIf="data.saleDaysPrice">{{data.saleDaysPrice | number}}원</span>
+            <span class="sale-price no-sale" *ngIf="!data.saleDaysPrice">{{data.daysPrice | number}}원</span>
           </div>
           <table class="stay-time nav-table">
             <tbody>
@@ -83,7 +85,6 @@
           </table>
           <button class="book-room btn btn-primary">예약하기</button>
         </section>
-        
     </nav>
   </div>
 </section>

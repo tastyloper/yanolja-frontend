@@ -16,6 +16,7 @@ import { LocationInfoTermsComponent } from './location-info-terms/location-info-
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { PersonalInfoThirdPartyComponent } from './personal-info-third-party/personal-info-third-party.component';
 import { CollectionUsePersonalInfoComponent } from './collection-use-personal-info/collection-use-personal-info.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CollectionUsePersonalInfoComponent } from './collection-use-personal-in
     LocationInfoTermsComponent,
     CancellationPolicyComponent,
     PersonalInfoThirdPartyComponent,
-    CollectionUsePersonalInfoComponent
+    CollectionUsePersonalInfoComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BsDropdownModule.forRoot(),
@@ -46,7 +48,8 @@ import { CollectionUsePersonalInfoComponent } from './collection-use-personal-in
     YouthProtectionPolicyComponent,
     LocationInfoTermsComponent,
     CancellationPolicyComponent,
-    PersonalInfoThirdPartyComponent
+    PersonalInfoThirdPartyComponent,
+    ClickOutsideDirective
   ]
 })
 export class SharedModule {}
