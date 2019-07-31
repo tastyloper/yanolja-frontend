@@ -15,9 +15,13 @@
             {{data.location}}</span>
       </div>
       <div class="review-container">
-        <span class="evaluation">우수함</span>
-        <span class="review-count">{{data.reviewCount}}개의 이용 후기</span>
-        <i>{{data.grade}}</i>
+        <span class="evaluation" *ngIf="data.averageGrade >= 4.5">우수함</span>
+        <span class="evaluation" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</span>
+        <span class="evaluation" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</span>
+        <span class="evaluation" *ngIf="data.averageGrade < 3.5">비추</span>
+
+        <span class="review-count">{{data.totalComments}}개의 이용 후기</span>
+        <i>{{data.averageGrade}}</i>
       </div>
     </section>
   
@@ -28,7 +32,7 @@
       <div class="all-wrpper">
         <div class="swiper-container gallery-top" #galleryTop [swiper]="galleryTopConfig">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" *ngFor="let img of data.images">
+            <div class="swiper-slide" *ngFor="let img of data.urlImage">
               <img [src]="img">
             </div>
           </div>
@@ -37,7 +41,7 @@
         </div>
         <div class="swiper-container gallery-thumbs" #galleryThumbs [swiper]="galleryThumbsConfig">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" *ngFor="let img of data.images">
+            <div class="swiper-slide" *ngFor="let img of data.urlImage">
               <img [src]="img">
             </div>
           </div>
@@ -72,7 +76,7 @@
               </form>
             </div>
           </div>
-          <div class="check-person"  appPersonCheck tabindex="0" (hidePerson)="modalHide()">
+          <div class="check-person" appClickOutside (clickOutSide)="modalHide()">
             <div class="check-cursor" (click)="modalToggle()">
               <i class="fa fa-user" aria-hidden="true"></i>
               <div class="check-person-container">
@@ -117,14 +121,14 @@
         <section class="room-list-section">
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
-          <li class="room" [routerLink]="room.id" *ngFor="let room of data.rooms">
+          <li class="room" [routerLink]="room.roomId" *ngFor="let room of rooms">
             <div>
-              <img [src]="room.image">
+              <img [src]="room.urlImage[0]">
               <div class="column-div">
                 <span class="room-name">{{room.name}}</span>
                 <span class="room-standard">기준 {{room.standardPersonnel}}명/ 최대 {{room.maximumPersonnel}}명</span>
-                <div class="reservation-status" *ngIf="!room.checkHours">예약가능</div>
-                <div class="reservation-status not-available" *ngIf="room.checkHours">예약불가</div>
+                <div class="reservation-status" *ngIf="!true">예약가능</div>
+                <div class="reservation-status not-available" *ngIf="true">예약불가</div>
               </div>
             </div>
             <div class="room-div">
@@ -132,12 +136,12 @@
                 <span class="room-type">대실</span>
                 <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
               </div>
-              <span class="room-price">{{room.hoursPrice}}원</span>
+              <span class="room-price">{{room.saleHoursPrice | number}}원</span>
               <div>
                 <span class="room-type">숙박</span>
                 <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
               </div>
-              <span class="room-price">{{room.daysPrice}}원</span>
+              <span class="room-price">{{room.saleDaysPrice | number}}원</span>
             </div>
           </li>
         </ul>
@@ -167,83 +171,87 @@
             <li class="facilities-item" *ngFor="let serviceKind of data.serviceKinds">
               <figure>
               <img [src]="'../../../assets/img/accommodation/icon/' + serviceKind + '.png'">
-              <figcaption *ngIf="serviceKind === 'park'">공원</figcaption>
+              <figcaption *ngIf="serviceKind === 'park'">주차</figcaption>
               <figcaption *ngIf="serviceKind === 'restaurant'">레스토랑</figcaption>
+              <figcaption *ngIf="serviceKind === 'coffeeShop'">카페</figcaption>
+              <figcaption *ngIf="serviceKind === 'paidLaundry'">유료 세탁</figcaption>
+              <figcaption *ngIf="serviceKind === 'noSmoking'">금연</figcaption>
+              <figcaption *ngIf="serviceKind === 'banquetHall'">연회장</figcaption>
+              <figcaption *ngIf="serviceKind === 'business'">비즈니스</figcaption>
+              <figcaption *ngIf="serviceKind === 'wifi'">와이파이</figcaption>
+              <figcaption *ngIf="serviceKind === 'breakfast'">조식 제공</figcaption>
               <figcaption *ngIf="serviceKind === 'spa'">스파</figcaption>
+              <figcaption *ngIf="serviceKind === 'swimmingPool'">수영장</figcaption>
               <figcaption *ngIf="serviceKind === 'partyRoom'">파티룸</figcaption>
-              <figcaption *ngIf="serviceKind === 'couplePC'">커플PC</figcaption>
               <figcaption *ngIf="serviceKind === 'unmanned'">무인텔</figcaption>
+              <figcaption *ngIf="serviceKind === 'couplePC'">커플PC</figcaption>
+              <figcaption *ngIf="serviceKind === 'barbecue'">바베큐</figcaption>
               <figcaption *ngIf="serviceKind === 'jokgu'">족구장</figcaption>
               </figure>
             </li>
-            
-            <!-- <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li> -->
           </ul>
           <p *ngIf="!facilitiesStatus && data.serviceKinds.length > 9" (click)="openMore()">편의시설 더 보기</p>
           <p *ngIf="facilitiesStatus" (click)="openMore()">닫기</p>
         </section>
         <section class="introduce">
           <h3>소개</h3>
-          <pre>
-            {{info}}
-          </pre>
+          <ul>
+            <li *ngFor="let info of data.serviceNotice">
+              {{info}}
+            </li>
+          </ul>
         </section>
       </section>
       <section class="review-section">
-        <h2>후기 {{data.review.count}}</h2>
+        <h2>후기 {{data.totalComments}}</h2>
         <div class="grade">
-          <div class="grade-number">{{data.review.grade}}</div>
-          <div class="grade-text">우수함</div>
+          <div class="grade-number">{{data.averageGrade}}</div>
+          <div class="grade-text" *ngIf="data.averageGrade >= 4.5">우수함</div>
+        <div class="grade-text" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</div>
+        <div class="grade-text" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</div>
+        <div class="grade-text" *ngIf="data.averageGrade < 3.5">비추</div>
         </div>
         <div class="grade-score">
           <ul>
             <li class="grade-item">
               <p>청결도</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="data.review.evaluation_items1 * 20 + '%'"></div>
+                <div class="item-foreground" [style.width]="data.totalGrade[0] * 20 + '%'"></div>
               </div>
-              <p>{{data.review.evaluation_items1}}</p>
+              <p>{{data.totalGrade[0]}}</p>
             </li>
             <li class="grade-item">
               <p>편의성</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="data.review.evaluation_items2 * 20 + '%'"></div>
+                <div class="item-foreground" [style.width]="data.totalGrade[1] * 20 + '%'"></div>
               </div>
-              <p>{{data.review.evaluation_items2}}</p>
+              <p>{{data.totalGrade[1]}}</p>
             </li>
             <li class="grade-item">
               <p>위치만족도</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="data.review.evaluation_items3 * 20 + '%'"></div>
+                <div class="item-foreground" [style.width]="data.totalGrade[2] * 20 + '%'"></div>
               </div>
-              <p>{{data.review.evaluation_items3}}</p>
+              <p>{{data.totalGrade[2]}}</p>
             </li>
             <li class="grade-item">
               <p>친절도</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="data.review.evaluation_items4 * 20 + '%'"></div>
+                <div class="item-foreground" [style.width]="data.totalGrade[3] * 20 + '%'"></div>
               </div>
-              <p>{{data.review.evaluation_items4}}</p>
+              <p>{{data.totalGrade[3]}}</p>
             </li>
           </ul>
         </div>
         <ul class="review-list">
-          <li class="review-item" *ngFor="let preview of data.review.previews">
-            <div class="review-score">{{preview.grade}}</div>
-            <span class="review-title">{{preview.roomName}}</span>
-            <p class="review-detail">{{preview.contents}}</p>
-            <span>{{preview.userid}} · {{preview.date}} · {{preview.roomKind}}</span>
+          <ng-container *ngFor="let review of reviews">
+          <li class="review-item" *ngIf="review">
+            <div class="review-score" [innerText]="getGrade(review.grade)"></div>
+            <span class="review-title">{{review.stay}}</span>
+            <p class="review-detail">{{review.text}}</p>
+            <span>{{review.nickname}} · {{splitDate(review.created)}} · {{review.reservedRoom}}</span>
           </li>
+        </ng-container>
         </ul>
         <a routerLink="/accommodation/1/review"
         [queryParams]=
