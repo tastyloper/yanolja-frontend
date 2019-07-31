@@ -3,7 +3,7 @@
     <div class="my-container">
     <section class="header-section">
       <div class="header-div">
-        <h1 class="accomodation-name">도미인 서울 강남</h1>
+        <h1 class="accomodation-name">{{data.name}}</h1>
         <i class="stars">
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
@@ -12,12 +12,12 @@
         </i>
         <span class="header-location">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
-            강남구 봉은사로 134</span>
+            {{data.location}}</span>
       </div>
       <div class="review-container">
         <span class="evaluation">우수함</span>
-        <span class="review-count">이용후기 개수</span>
-        <i>8.9</i>
+        <span class="review-count">{{data.reviewCount}}개의 이용 후기</span>
+        <i>{{data.grade}}</i>
       </div>
     </section>
   
@@ -28,32 +28,8 @@
       <div class="all-wrpper">
         <div class="swiper-container gallery-top" #galleryTop [swiper]="galleryTopConfig">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-            </div>
-            <div class="swiper-slide">
-                <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=xx_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fc882024-d547-45e7-b3a9-09b2bacc1257.jpg?aki_policy=x_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/cba32ec2-bf1a-4759-a14b-5811ef31311b.jpg?aki_policy=x_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/05ee8d99-95bd-4feb-b73c-d1e55f8dbcaa.jpg?aki_policy=x_large">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/22a34033-5c3e-4d79-92e7-3ac6be0cc83e.jpg?aki_policy=x_large">
+            <div class="swiper-slide" *ngFor="let img of data.images">
+              <img [src]="img">
             </div>
           </div>
           <div class="swiper-button-next swiper-button-black"></div>
@@ -61,32 +37,8 @@
         </div>
         <div class="swiper-container gallery-thumbs" #galleryThumbs [swiper]="galleryThumbsConfig">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fa07aa7b-0936-42a4-8b24-8dc85d7204c0.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/fc882024-d547-45e7-b3a9-09b2bacc1257.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/cba32ec2-bf1a-4759-a14b-5811ef31311b.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/05ee8d99-95bd-4feb-b73c-d1e55f8dbcaa.jpg?aki_policy=small">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://a0.muscache.com/im/pictures/22a34033-5c3e-4d79-92e7-3ac6be0cc83e.jpg?aki_policy=small">
+            <div class="swiper-slide" *ngFor="let img of data.images">
+              <img [src]="img">
             </div>
           </div>
         </div>
@@ -165,94 +117,29 @@
         <section class="room-list-section">
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
-          <li class="room" [routerLink]="1">
+          <li class="room" [routerLink]="room.id" *ngFor="let room of data.rooms">
             <div>
-              <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
+              <img [src]="room.image">
               <div class="column-div">
-                <span class="room-name">객실 A</span>
-                <span class="room-standard">기준 2명/ 최대 2명</span>
-                <div class="reservation-status">예약가능</div>
+                <span class="room-name">{{room.name}}</span>
+                <span class="room-standard">기준 {{room.standardPersonnel}}명/ 최대 {{room.maximumPersonnel}}명</span>
+                <div class="reservation-status" *ngIf="!room.checkHours">예약가능</div>
+                <div class="reservation-status not-available" *ngIf="room.checkHours">예약불가</div>
               </div>
             </div>
             <div class="room-div">
               <div>
                 <span class="room-type">대실</span>
-                <span class="room-available-time">최대 18:00</span>
+                <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
               </div>
-              <span class="room-price">50,000원</span>
+              <span class="room-price">{{room.hoursPrice}}원</span>
               <div>
-                <span class="room-type">대실</span>
-                <span class="room-available-time">최대 18:00</span>
+                <span class="room-type">숙박</span>
+                <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
               </div>
-              <span class="room-price">50,000원</span>
+              <span class="room-price">{{room.daysPrice}}원</span>
             </div>
           </li>
-          <li class="room" [routerLink]="1">
-              <div>
-                <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
-                <div class="column-div">
-                  <span class="room-name">객실 A</span>
-                  <span class="room-standard">기준 2명/ 최대 2명</span>
-                  <div class="reservation-status">예약가능</div>
-                </div>
-              </div>
-              <div class="room-div">
-                <div>
-                  <span class="room-type">대실</span>
-                  <span class="room-available-time">최대 18:00</span>
-                </div>
-                <span class="room-price">50,000원</span>
-                <div>
-                  <span class="room-type">대실</span>
-                  <span class="room-available-time">최대 18:00</span>
-                </div>
-                <span class="room-price">50,000원</span>
-              </div>
-            </li>
-            <li class="room" [routerLink]="1">
-                <div>
-                  <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
-                  <div class="column-div">
-                    <span class="room-name">객실 A</span>
-                    <span class="room-standard">기준 2명/ 최대 2명</span>
-                    <div class="reservation-status">예약가능</div>
-                  </div>
-                </div>
-                <div class="room-div">
-                  <div>
-                    <span class="room-type">대실</span>
-                    <span class="room-available-time">최대 18:00</span>
-                  </div>
-                  <span class="room-price">50,000원</span>
-                  <div>
-                    <span class="room-type">대실</span>
-                    <span class="room-available-time">최대 18:00</span>
-                  </div>
-                  <span class="room-price">50,000원</span>
-                </div>
-              </li>
-            <li class="room" [routerLink]="1">
-                  <div>
-                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/10/1280/599e2e0a990332.78278503.jpg">
-                    <div class="column-div">
-                      <span class="room-name">객실 A</span>
-                      <span class="room-standard">기준 2명/ 최대 2명</span>
-                      <div class="reservation-status">예약가능</div>
-                    </div>
-                  </div>
-                  <div class="room-div">
-                    <div>
-                      <span class="room-type">대실</span>
-                      <span class="room-available-time">최대 18:00</span>
-                    </div>
-                    <span class="room-price">50,000원</span>
-                    <div>
-                      <span class="room-type">대실</span>
-                      <span class="room-available-time">최대 18:00</span>
-                    </div>
-                    <span class="room-price">50,000원</span>
-                  </div>
-                </li>
         </ul>
         </section>
       </section>
@@ -263,7 +150,7 @@
           <h3>숙소 위치 보기</h3>
           <p>
             <i class="fa fa-map-marker accomodation-map-marker fa-3x" aria-hidden="true"></i>
-            {{address}}
+            {{data.location}}
           </p>
           <div>
           <button class="copy-location" (click)="copyText()">
@@ -277,108 +164,19 @@
         <section class="facilities"  [class.facilities-active]="facilitiesStatus">
           <h3>편의 시설</h3>
           <ul class="facilities-list">
-            <li class="facilities-item">
+            <li class="facilities-item" *ngFor="let serviceKind of data.serviceKinds">
               <figure>
-              <img src="../../../assets/img/accommodation/icon/icons8-bbq-grill-100.png">
-              <figcaption>바베큐</figcaption>
+              <img [src]="'../../../assets/img/accommodation/icon/' + serviceKind + '.png'">
+              <figcaption *ngIf="serviceKind === 'park'">공원</figcaption>
+              <figcaption *ngIf="serviceKind === 'restaurant'">레스토랑</figcaption>
+              <figcaption *ngIf="serviceKind === 'spa'">스파</figcaption>
+              <figcaption *ngIf="serviceKind === 'partyRoom'">파티룸</figcaption>
+              <figcaption *ngIf="serviceKind === 'couplePC'">커플PC</figcaption>
+              <figcaption *ngIf="serviceKind === 'unmanned'">무인텔</figcaption>
+              <figcaption *ngIf="serviceKind === 'jokgu'">족구장</figcaption>
               </figure>
             </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-bread-loaf-100.png">
-                <figcaption>조식 운영</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
-            <li class="facilities-item">
-              <figure>
-                <img src="../../../assets/img/accommodation/icon/icons8-room-service-90.png">
-                <figcaption>연회장</figcaption>
-              </figure>
-            </li>
+            
             <!-- <li>1</li>
             <li>1</li>
             <li>1</li>
@@ -391,7 +189,7 @@
             <li>1</li>
             <li>1</li> -->
           </ul>
-          <p *ngIf="!facilitiesStatus" (click)="openMore()">편의시설 더 보기</p>
+          <p *ngIf="!facilitiesStatus && data.serviceKinds.length > 9" (click)="openMore()">편의시설 더 보기</p>
           <p *ngIf="facilitiesStatus" (click)="openMore()">닫기</p>
         </section>
         <section class="introduce">
@@ -402,9 +200,9 @@
         </section>
       </section>
       <section class="review-section">
-        <h2>후기 1,730</h2>
+        <h2>후기 {{data.review.count}}</h2>
         <div class="grade">
-          <div class="grade-number">8.9</div>
+          <div class="grade-number">{{data.review.grade}}</div>
           <div class="grade-text">우수함</div>
         </div>
         <div class="grade-score">
@@ -412,78 +210,52 @@
             <li class="grade-item">
               <p>청결도</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="4.2 * 20 + '%'"></div>
+                <div class="item-foreground" [style.width]="data.review.evaluation_items1 * 20 + '%'"></div>
               </div>
-              <p>9.2</p>
+              <p>{{data.review.evaluation_items1}}</p>
             </li>
             <li class="grade-item">
-              <p>청결도</p>
+              <p>편의성</p>
               <div class="item-background">
-                <div class="item-foreground"></div>
+                <div class="item-foreground" [style.width]="data.review.evaluation_items2 * 20 + '%'"></div>
               </div>
-              <p>9.2</p>
+              <p>{{data.review.evaluation_items2}}</p>
             </li>
             <li class="grade-item">
-              <p>청결도</p>
+              <p>위치만족도</p>
               <div class="item-background">
-                <div class="item-foreground"></div>
+                <div class="item-foreground" [style.width]="data.review.evaluation_items3 * 20 + '%'"></div>
               </div>
-              <p>9.2</p>
+              <p>{{data.review.evaluation_items3}}</p>
             </li>
             <li class="grade-item">
-              <p>청결도</p>
+              <p>친절도</p>
               <div class="item-background">
-                <div class="item-foreground"></div>
+                <div class="item-foreground" [style.width]="data.review.evaluation_items4 * 20 + '%'"></div>
               </div>
-              <p>9.2</p>
+              <p>{{data.review.evaluation_items4}}</p>
             </li>
           </ul>
         </div>
         <ul class="review-list">
-          <li class="review-item">
-            <div class="review-score">8.9</div>
-            <span class="review-title">좋았음.</span>
-            <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
-                스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
-            <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
-          </li>
-          <li class="review-item">
-              <div class="review-score">8.9</div>
-              <span class="review-title">좋았음.</span>
-              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
-                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
-              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
-          </li>
-          <li class="review-item">
-              <div class="review-score">8.9</div>
-              <span class="review-title">좋았음.</span>
-              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
-                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
-              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
-          </li>
-          <li class="review-item">
-              <div class="review-score">8.9</div>
-              <span class="review-title">좋았음.</span>
-              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
-                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
-              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
-          </li>
-          <li class="review-item">
-              <div class="review-score">8.9</div>
-              <span class="review-title">좋았음.</span>
-              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
-                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
-              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
-          </li>
-          <li class="review-item">
-              <div class="review-score">8.9</div>
-              <span class="review-title">좋았음.</span>
-              <p class="review-detail">굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다.
-                  스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?</p>
-              <span>가족 여행 · 2019-05-19 · 대한민국 · Entpbc</span>
+          <li class="review-item" *ngFor="let preview of data.review.previews">
+            <div class="review-score">{{preview.grade}}</div>
+            <span class="review-title">{{preview.roomName}}</span>
+            <p class="review-detail">{{preview.contents}}</p>
+            <span>{{preview.userid}} · {{preview.date}} · {{preview.roomKind}}</span>
           </li>
         </ul>
-        <a routerLink="/accommodation/1/review" [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7 }">후기 더 보기</a>
+        <a routerLink="/accommodation/1/review"
+        [queryParams]=
+        "{ totalComments: this.totalComments, 
+          averageGrade: this.averageGrade, 
+          totalGrade1: this.totalGrade1, 
+          totalGrade2: this.totalGrade2, 
+          totalGrade3: this.totalGrade3, 
+          totalGrade4: this.totalGrade4 }"
+        >
+        후기 더 보기
+        </a>
       </section>
     </section>
     </div>

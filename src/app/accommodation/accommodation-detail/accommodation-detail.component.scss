@@ -371,6 +371,9 @@ button {
   text-align: center;
   padding-top: 6px;
 }
+.not-available {
+  background-color: #848c94;
+}
 /*숙소 정보*/ 
 .accomodation-information-section {
   margin-top: 130px;
@@ -486,7 +489,7 @@ button {
   font-size: 14px;
   text-align: center;
   position: absolute;
-  bottom: -15px;
+  bottom: -20px;
   @include horizontal-center;
   white-space: nowrap;
 }
