@@ -2,92 +2,54 @@
 
 :host {
   display: block;
-  height: 467px;
+  height: 561px;
 }
 .mypage-body-wrapper {
   font-size: 14px;
-  padding: 40px 40px 40px;
+  padding: 20px 40px 20px;
   position: relative;
   background-color: #fff;
   box-shadow: 0 1px 0 0 #e9ecef;
 }
 .member-group {
-  margin-bottom: 25px;
-  position: relative;
-}
-.member-key {
-  font-weight: 500;
-  float: left;
-  width: 170px;
-  margin-left: 20px;
-  padding-top: 10px;
-}
-.member-value {
-  border: 0;
-  line-height: 27px;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-}
-
-.form-input {
-  font-size: 12px;
-  height: 40px;
-  padding: 3px 7px 3px 12px;
-  background-color: #FFF;
-  border: 1px solid #CED4DA;
-  border-radius: 2px;
-  transition: all 0.08s ease;
-  width: 100%;
-  border-color: $primary-color;
-  &:focus {
-    border-color: #FF416F;
-    box-shadow: inset 0 0 0 1px #FF5983;
-    outline: none;
-  } 
-}
-.form-error-msg {
-  display: block;
-  padding: 5px 12px;
-  color: $primary-color;
-  font-size: 12px;
+  padding: 10px;
+  height: 70px;
+  
+  .member-key {
+    font-weight: 500;
+    float: left;
+    width: 170px;
+    line-height: 40px;
+  }
+  
+  .member-value {
+    width: 420px;
+    float: left;
+  }
+  
+  .value-spe {
+    line-height: 40px;
+  }
 }
 
-
-
-// 여기서부터
-.input-group {
-  margin-bottom: 7px;
-}
 .form-control {
   font-size: 14px;
 }
-
-.form-group {
-  width: 50%;
-  display: inline-block;
-  margin-right: 10px;
-  .form-control {
-    height: 30px;
-    float: right;
-  }
+.help-block {
+  margin-bottom: 10px;
 }
-  .bottom-line {
-  border: 1px solid #dee2e6;
-  margin-bottom: 20px;
-  }
 
-  .btn {
-    width: calc(20% - 5px);
-    float: right;
-    line-height: 15px;
-    padding: 12px;
-    & + .btn {
-      margin-left: 10px;
-    }
-  }
-
-  .btn-secondary {
+.btn {
+  
+  width: calc(20% - 5px);
+  float: right;
+  line-height: 15px;
+  padding: 12px;
+  & + .btn {
     margin-left: 10px;
   }
- 
+}
+.btn-secondary {
+  margin-left: 10px;
+}
+
