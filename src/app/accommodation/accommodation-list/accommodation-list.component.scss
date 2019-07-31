@@ -248,11 +248,14 @@ button {
   border: none;
   box-shadow: none;
   cursor: pointer;
+  
 }
 
 .datePicker-input::placeholder {
   color: #343a40;
-  font-family: inherit
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
 }
 
 // 상단 검색네비 옵션 클릭 팝업 - 지역
@@ -439,7 +442,7 @@ button {
 .alist-item-box-imgDetail{
   width: 100%;
   height: 100%;
-  background-image: url('https://i.travelapi.com/hotels/23000000/22140000/22135900/22135839/3978c2fa_z.jpg');
+  // background-image: url('https://i.travelapi.com/hotels/23000000/22140000/22135900/22135839/3978c2fa_z.jpg');
   background-size: cover;
   border-radius: 2px 0 0 2px;
 }
