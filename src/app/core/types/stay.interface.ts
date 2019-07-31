@@ -1,14 +1,16 @@
 export interface Stay {
-  id: number;
-  name: string;
   directions: string;
-  category: number;
+  mainImage: string;
+  category: string;
+  stay: string;
+  stayId: number;
   totalComments: number;
   averageGrade: number;
   ownerComments: number;
   hoursPrice: string;
   hoursAvailable: number;
+  saleHoursPrice: string;
   daysCheckIn: number;
   daysPrice: string;
-  mainImage: string;
+  saleDaysPrice: string;
 }

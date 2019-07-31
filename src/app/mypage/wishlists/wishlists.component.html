@@ -2,13 +2,13 @@
   <div class="box">
     <div class="row">
       <div class="col-4" *ngFor="let like of pagedItems">
-        <a routerLink="/accommodation/{{ like.id }}" class="content-item">
+        <a routerLink="/accommodation/{{ like.stayId }}" class="content-item">
           <div class="content-img-wrap">
-            <img src="{{ like.mainImage }}" alt="{{ like.name }}">
+            <img src="{{ like.mainImage }}" alt="{{ like.stay }}">
           </div>
           <div class="content-text-wrap">
             <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ like.directions }}</div>
-            <h3>{{ like.name }}</h3>
+            <h3>{{ like.stay }}</h3>
             <div class="customer">
               <i class="fa fa-star" aria-hidden="true"></i>
               <span>{{ like.averageGrade }}</span>
