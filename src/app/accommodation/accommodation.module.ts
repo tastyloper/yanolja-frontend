@@ -1,33 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { koLocale } from 'ngx-bootstrap/locale';
+import { SwiperModule, SWIPER_CONFIG, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { AgmCoreModule } from '@agm/core';
 
 import { AccommodationRoutingModule } from './accommodation-routing.module';
+
+import { SharedModule } from '../shared/shared.module';
+
 import { AccommodationListComponent } from './accommodation-list/accommodation-list.component';
 import { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { PaymentComponent } from './payment/payment.component';
-
-import { SwiperModule, SWIPER_CONFIG, SwiperConfigInterface } from 'ngx-swiper-wrapper';
-import { HttpClientModule } from '@angular/common/http';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { FormsModule } from '@angular/forms';
-
-import { defineLocale } from 'ngx-bootstrap/chronos';
-import { koLocale } from 'ngx-bootstrap/locale';
 import { ReviewComponent } from './review/review.component';
-import { PersonCheckDirective } from './accommodation-detail/person-check.directive';
 
-import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
-defineLocale('ko', koLocale);
 
+defineLocale('ko', koLocale);
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -40,8 +38,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AccommodationDetailComponent,
     RoomDetailComponent,
     PaymentComponent,
-    ReviewComponent,
-    PersonCheckDirective
+    ReviewComponent
   ],
   imports: [
     CommonModule,

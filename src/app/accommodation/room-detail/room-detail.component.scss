@@ -86,7 +86,7 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 .cancel-rule>button {
   position: absolute;
   right: 0;
-  top: 42px;
+  top: 36px;
   outline: none;
   height: 40px;
   background-color: #fff;
@@ -138,6 +138,9 @@ section>h1, section>h2, nav>h2, .nav-container>section>h3 {
 .sale-price {
   font-size: 22px;
   font-weight: 600;
+}
+.no-sale {
+  margin-top: 10px;
 }
 /*이용시간 테이블*/
 .rental-time, .stay-time {
