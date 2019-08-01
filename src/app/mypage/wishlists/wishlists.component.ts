@@ -38,7 +38,7 @@ export class WishlistsComponent implements OnInit {
         ownerComments: 7,
         hoursPrice: '25000',
         hoursAvailable: 4,
-        saleHoursPrice: '18500',
+        saleHoursPrice: '10000',
         daysCheckIn: 22,
         daysPrice: '50000',
         saleDaysPrice: '41200'
@@ -56,8 +56,8 @@ export class WishlistsComponent implements OnInit {
         hoursAvailable: 3,
         saleHoursPrice: '18500',
         daysCheckIn: 22,
-        daysPrice: '50000',
-        saleDaysPrice: '41200'
+        daysPrice: '',
+        saleDaysPrice: ''
       },
       {
         directions: '강남역 초인접 위치(도로 5분 거리)',
@@ -68,9 +68,9 @@ export class WishlistsComponent implements OnInit {
         totalComments: 9,
         averageGrade: 4.5,
         ownerComments: 7,
-        hoursPrice: '25000',
+        hoursPrice: '',
         hoursAvailable: 4,
-        saleHoursPrice: '18500',
+        saleHoursPrice: '',
         daysCheckIn: 22,
         daysPrice: '50000',
         saleDaysPrice: '41200'
@@ -86,7 +86,7 @@ export class WishlistsComponent implements OnInit {
         ownerComments: 0,
         hoursPrice: '30000',
         hoursAvailable: 3,
-        saleHoursPrice: '18500',
+        saleHoursPrice: '',
         daysCheckIn: 22,
         daysPrice: '50000',
         saleDaysPrice: '41200'
@@ -105,7 +105,7 @@ export class WishlistsComponent implements OnInit {
         saleHoursPrice: '18500',
         daysCheckIn: 22,
         daysPrice: '50000',
-        saleDaysPrice: '41200'
+        saleDaysPrice: ''
       }
     ];
 

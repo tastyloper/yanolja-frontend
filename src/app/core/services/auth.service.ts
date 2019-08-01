@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { User } from '../types/user.interface';
+
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -23,8 +25,13 @@ export class AuthService {
   getUser() {
     const headers = new HttpHeaders()
       .set('Authorization', `Token ${this.getToken()}`);
+    return this.http.get<User>(`${this.appUrl}mypage/`, { headers });
+  }
 
-    return this.http.get(`${this.appUrl}mypage/`, { headers });
+  upadteUser(payload: object) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Token ${this.getToken()}`);
+    return this.http.patch(`${this.appUrl}mypage/update/`, payload, { headers });
   }
 
   getToken(): string {
