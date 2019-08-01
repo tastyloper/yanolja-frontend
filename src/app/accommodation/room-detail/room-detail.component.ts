@@ -6,6 +6,15 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
+// DateRangePicker
+import { BsDaterangepickerDirective } from 'ngx-bootstrap/datepicker';
+import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
+
+// Locales
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
+import { FormGroup, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-room-detail',
   templateUrl: './room-detail.component.html',
@@ -14,19 +23,28 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 export class RoomDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('galleryTop', { static: true }) galleryTop;
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
+  @ViewChild(BsDaterangepickerDirective, { static: false }) daterangepicker: BsDaterangepickerDirective;
 
   bsModalRef: BsModalRef;
-  galleryTopConfig: SwiperConfigInterface  = {
-    spaceBetween: 10,
-    slidesPerView: 9,
-    centeredSlides: true,
-    watchSlidesVisibility: true,
-    watchSlidesProgress: true,
-    slideToClickedSlide: true,
-  }; ;
+  galleryTopConfig: SwiperConfigInterface;
   galleryThumbsConfig: SwiperConfigInterface;
 
-  constructor(private modalService: BsModalService) { }
+  // datepicker
+  dateCustomClasses: DatepickerDateCustomClasses[];
+  bsValue: Date;
+  bsRangeValue: Date[];
+  maxDate: Date;
+  minDate: Date;
+  form: FormGroup;
+    // for using locale-chronos
+    locale: string;
+    locales: string[];
+
+
+  constructor(
+    private modalService: BsModalService,
+    private localeService: BsLocaleService
+    ) { }
     data = {
       stay: '역삼마레',
       name: '일반실',
@@ -65,6 +83,18 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.bsValue = new Date();
+    this.maxDate = new Date();
+    this.minDate = new Date();
+    this.form = new FormGroup({
+      dateYMD: new FormControl(new Date()),
+      dateFull: new FormControl(new Date()),
+      dateMDY: new FormControl(new Date()),
+      dateRange: new FormControl([new Date(), new Date()])
+    });
+    this.locale = 'ko';
+    this.locales = listLocales();
+
     this.galleryTopConfig = {
       spaceBetween: 10,
       effect: 'fade',
@@ -81,6 +111,11 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
       watchSlidesProgress: true,
       slideToClickedSlide: true,
     };
+    this.localeService.use(this.locale);
+    this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.minDate.setDate(this.minDate.getDate());
+    this.bsRangeValue = [this.bsValue, this.maxDate];
+
   }
 
   openPolicy() {

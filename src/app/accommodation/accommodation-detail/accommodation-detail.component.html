@@ -132,16 +132,27 @@
               </div>
             </div>
             <div class="room-div">
-              <div>
-                <span class="room-type">대실</span>
-                <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
-              </div>
-              <span class="room-price">{{room.saleHoursPrice | number}}원</span>
-              <div>
-                <span class="room-type">숙박</span>
-                <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
-              </div>
-              <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+              <ng-container *ngIf="room.hoursAvailable">
+                <div>
+                  <ng-container *ngIf="true">
+                  <div>
+                    <span class="room-type">대실</span>
+                    <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
+                  </div>
+                  <span class="room-price">{{room.saleHoursPrice | number}}원</span>
+                </ng-container>
+                <span class="reservation-done" *ngIf="false">예약마감</span>
+                </div>  
+              </ng-container>
+              <ng-container *ngIf="room.daysCheckIn">
+                <div>
+                  <div>
+                    <span class="room-type">숙박</span>
+                    <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
+                  </div>
+                  <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                </div>
+              </ng-container>
             </div>
           </li>
         </ul>
@@ -255,12 +266,12 @@
         </ul>
         <a routerLink="/accommodation/1/review"
         [queryParams]=
-        "{ totalComments: this.totalComments, 
-          averageGrade: this.averageGrade, 
-          totalGrade1: this.totalGrade1, 
-          totalGrade2: this.totalGrade2, 
-          totalGrade3: this.totalGrade3, 
-          totalGrade4: this.totalGrade4 }"
+        "{ totalComments: data.totalComments, 
+          averageGrade: data.averageGrade, 
+          totalGrade1: data.totalGrade[0], 
+          totalGrade2: data.totalGrade[1], 
+          totalGrade3: data.totalGrade[2], 
+          totalGrade4: data.totalGrade[3] }"
         >
         후기 더 보기
         </a>
