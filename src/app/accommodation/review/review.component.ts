@@ -57,7 +57,9 @@ export class ReviewComponent implements OnInit {
         stayId: 1,
         nickname: '해비턴스',
         reservedRoom: '특실 - 대실',
-        grade: [1, 1, 2, 3]
+        grade: [1, 1, 2, 3],
+        'ownerComment-1': '사장입니다. 감사해요',
+        'ownerCommentCreated-1': '2019-07-25T21:07:26.593032',
       },
       {
         text: '2이렇게 좋나요?',
@@ -66,7 +68,15 @@ export class ReviewComponent implements OnInit {
         stayId: 1,
         nickname: '해비턴스',
         reservedRoom: '특실 - 대실',
-        grade: [1, 1, 2, 3]
+        grade: [1, 1, 2, 3],
+        'ownerComment-1': '사장입니다. 감사해요',
+        'ownerCommentCreated-1': '2019-07-25T21:07:26.593032',
+        'ownerComment-2': '두번째 댓글다는 사장입니다. 정말 감사합니다.',
+        'ownerCommentCreated-2': '2019-07-26T04:39:04.795462',
+        'ownerComment-3': '사장님 댓글',
+        'ownerCommentCreated-3': '2019-07-27T02:19:08.022662',
+        'ownerComment-4': '사장님 댓글',
+        'ownerCommentCreated-4': '2019-07-27T02:19:09.268493'
       }
     ];
   }
