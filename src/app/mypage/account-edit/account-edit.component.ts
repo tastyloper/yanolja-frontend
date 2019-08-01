@@ -74,8 +74,8 @@ export class AccountEditComponent implements OnInit {
     };
     this.authService.upadteUser(payload).subscribe(
       data => {
-        this.toastr.success('성공적으로 변경하였습니다.');
-        this.router.navigate(['mypage']);
+        this.toastr.success('성공적으로 변경하였습니다.'); // 백앤드 없을 시 이것만 뺴고 다 주석처리
+        this.router.navigate(['mypage']); // 백앤드 없을 시 이것만 뺴고 다 주석처리
       },
       error => {
         console.log(error);
@@ -85,21 +85,23 @@ export class AccountEditComponent implements OnInit {
   }
 
   getData() {
-    this.account = {
-      nickname: '연희내꺼야',
-      email: 'tak@gmail.com',
-      phoneNumber: '01042221234'
-    };
-    // this.authService.getUser().subscribe(
-    //   data => {
-    //     this.account = data;
-    //   },
-    //   error => {
-    //     this.authService.removeToken();
-    //     this.toastr.error('유저 정보를 찾을 수 없습니다.');
-    //     this.router.navigate(['login']);
-    //   }
-    // );
+    // 가데이터
+    // this.account = {
+    //   nickname: '연희내꺼야',
+    //   email: 'tak@gmail.com',
+    //   phoneNumber: '01042221234'
+    // };
+    this.authService.getUser().subscribe(
+      data => {
+        this.account = data;
+      },
+      error => {
+        console.log(error);
+        this.authService.removeToken();
+        this.toastr.error('유저 정보를 찾을 수 없습니다.');
+        this.router.navigate(['login']);
+      }
+    );
   }
 
   get nickName() {
