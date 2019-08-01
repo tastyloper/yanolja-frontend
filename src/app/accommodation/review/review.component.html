@@ -36,39 +36,23 @@
           <p class="review-date" [innerText]="splitDate(comment.created)"></p>
         </div>
         <p class="review-content">{{ comment.text }}</p>
-      </div>
-      <!-- <div class="review-item">
-        <div class="review-item-header">
-          <div class="grade">4.5<img src="/assets/img/common/comma-y.png"></div>
-          <p class="review-info">해비턴스 | 역삼마레 - 대실</p>
-          <p class="review-date">2019-05-19</p>
+        <div class="owner" *ngIf="comment['ownerComment-1']">
+          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-1'])"></span></h5>
+          <p>{{ comment['ownerComment-1'] }}</p>
         </div>
-        <p class="review-content">
-          굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다. 스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?
-        </p>
-        <div class="owner">
-          <h5>사장님 댓글 <span>2017-12-19</span></h5>
-          <p>안녕하세요 개포컬리넌호텔입니다. 저희호텔을 칭찬해주셔서 감사합니다. 앞으로도 더좋은 서비스로 고객님들을 맞이할수있도록 노력하겠습니다.</p>
+        <div class="owner" *ngIf="comment['ownerComment-2']">
+          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-2'])"></span></h5>
+          <p>{{ comment['ownerComment-2'] }}</p>
         </div>
-        <div class="owner">
-          <h5>사장님 댓글 <span>2017-12-19</span></h5>
-          <p>안녕하세요 개포컬리넌호텔입니다. 저희호텔을 칭찬해주셔서 감사합니다. 앞으로도 더좋은 서비스로 고객님들을 맞이할수있도록 노력하겠습니다.</p>
+        <div class="owner" *ngIf="comment['ownerComment-3']">
+          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-3'])"></span></h5>
+          <p>{{ comment['ownerComment-3'] }}</p>
         </div>
-        <div class="owner">
-          <h5>사장님 댓글 <span>2017-12-19</span></h5>
-          <p>안녕하세요 개포컬리넌호텔입니다. 저희호텔을 칭찬해주셔서 감사합니다. 앞으로도 더좋은 서비스로 고객님들을 맞이할수있도록 노력하겠습니다.</p>
+        <div class="owner" *ngIf="comment['ownerComment-4']">
+          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-4'])"></span></h5>
+          <p>{{ comment['ownerComment-4'] }}</p>
         </div>
       </div>
-      <div class="review-item">
-        <div class="review-item-header">
-          <div class="grade">4.5<img src="/assets/img/common/comma-y.png"></div>
-          <p class="review-info">해비턴스 | 역삼마레 - 대실</p>
-          <p class="review-date">2019-05-19</p>
-        </div>
-        <p class="review-content">
-          굳세게 그것을 위하여, 실현에 돋고, 쓸쓸하랴? 보이는 이상의 얼마나 곳이 불어 그들은 그러므로 구하기 없으면 칼이다. 인간이 않는 가치를 간에 것이다. 우는 충분히 풀이 찬미를 노래하며 밝은 목숨을 황금시대의 봄바람이다. 피고 피는 무한한 찬미를 천지는 품으며, 부패뿐이다. 무한한 인간의 되는 기관과 커다란 꽃이 아니다. 유소년에게서 용감하고 이상, 이상을 있는가? 위하여 되는 생명을 것이다. 그들은 유소년에게서 영락과 같은 원대하고, 노년에게서 사람은 것이다. 스며들어 청춘의 구할 싹이 그들은 그들의 구하기 끓는다. 가치를 동산에는 자신과 때문이다. 품었기 설레는 주는 따뜻한 싹이 뭇 바이며, 넣는 사람은 아니다. 수 맺어, 인생을 용감하고 더운지라 풀이 이 희망의 피다. 반짝이는 갑 위하여, 이것은 옷을 뛰노는 아름답고 내는 그것을 것이다. 얼음이 역사를 꽃이 천하를 이상의 따뜻한 것이다. 그들을 오직 몸이 끓는 눈이 같으며, 간에 가는 청춘의 교향악이다. 대한 이것을 넣는 인간이 오직 이상의 얼음 것이다. 살 피고 이상의 같이, 피다. 품고 못할 커다란 소금이라 듣기만 싹이 철환하였는가?
-        </p>
-      </div> -->
     </section>
   </div>
 </section>
