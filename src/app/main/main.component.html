@@ -86,20 +86,36 @@
                     <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ swimmingPool.directions }}</div>
                     <h3>{{ swimmingPool.stay }}</h3>
                     <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <img src="/assets/img/common/comma-y.png" class="comma">
                       <span>{{ swimmingPool.averageGrade }}</span>
                       <i class="fa fa-comments" aria-hidden="true"></i>
                       <span>{{ swimmingPool.totalComments | number }}</span>
                     </div>
-                    <div class="type borrow">
-                      <h4>대실 <span>최대 {{ swimmingPool.hoursAvailable }}시간</span></h4>
-                      <p>{{ swimmingPool.hoursPrice | number }}원</p>
-                      <div class="price">{{ swimmingPool.saleHoursPrice | number }}<small>원</small></div>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>{{ swimmingPool.daysCheckIn }}:00 ~</span></h4>
-                      <p>{{ swimmingPool.daysPrice | number }}원</p>
-                      <div class="price">{{ swimmingPool.saleDaysPrice | number }}<small>원</small></div>
+                    <div class="type-wrap">
+                      <div class="type borrow clearfix" *ngIf="swimmingPool.hoursPrice">
+                        <div class="float-left">
+                          <h4>대실</h4>
+                          <span>최대 {{ swimmingPool.hoursAvailable }}시간</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="swimmingPool.saleHoursPrice">{{ swimmingPool.hoursPrice | number }}원</p>
+                          <div *ngIf="swimmingPool.saleHoursPrice" class="price">{{ swimmingPool.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!swimmingPool.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!swimmingPool.saleHoursPrice" class="price">{{ swimmingPool.hoursPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
+                      <div class="type one-night clearfix" *ngIf="swimmingPool.daysPrice">
+                        <div class="float-left">
+                          <h4>숙박</h4>
+                          <span>{{ swimmingPool.hoursAvailable }}:00 ~</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="swimmingPool.saleDaysPrice">{{ swimmingPool.daysPrice | number }}원</p>
+                          <div *ngIf="swimmingPool.saleDaysPrice" class="price">{{ swimmingPool.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!swimmingPool.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!swimmingPool.saleDaysPrice" class="price">{{ swimmingPool.daysPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -128,20 +144,36 @@
                     <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ bigSale.directions }}</div>
                     <h3>{{ bigSale.stay }}</h3>
                     <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <img src="/assets/img/common/comma-y.png" class="comma">
                       <span>{{ bigSale.averageGrade }}</span>
                       <i class="fa fa-comments" aria-hidden="true"></i>
                       <span>{{ bigSale.totalComments | number }}</span>
                     </div>
-                    <div class="type borrow">
-                      <h4>대실 <span>최대 {{ bigSale.hoursAvailable }}시간</span></h4>
-                      <p>{{ bigSale.hoursPrice | number }}원</p>
-                      <div class="price">{{ bigSale.saleHoursPrice | number }}<small>원</small></div>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>{{ bigSale.daysCheckIn }}:00 ~</span></h4>
-                      <p>{{ bigSale.daysPrice | number }}원</p>
-                      <div class="price">{{ bigSale.saleDaysPrice | number }}<small>원</small></div>
+                    <div class="type-wrap">
+                      <div class="type borrow clearfix" *ngIf="bigSale.hoursPrice">
+                        <div class="float-left">
+                          <h4>대실</h4>
+                          <span>최대 {{ bigSale.hoursAvailable }}시간</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="bigSale.saleHoursPrice">{{ bigSale.hoursPrice | number }}원</p>
+                          <div *ngIf="bigSale.saleHoursPrice" class="price">{{ bigSale.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!bigSale.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!bigSale.saleHoursPrice" class="price">{{ bigSale.hoursPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
+                      <div class="type one-night clearfix" *ngIf="bigSale.daysPrice">
+                        <div class="float-left">
+                          <h4>숙박</h4>
+                          <span>{{ bigSale.hoursAvailable }}:00 ~</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="bigSale.saleDaysPrice">{{ bigSale.daysPrice | number }}원</p>
+                          <div *ngIf="bigSale.saleDaysPrice" class="price">{{ bigSale.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!bigSale.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!bigSale.saleDaysPrice" class="price">{{ bigSale.daysPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -170,20 +202,36 @@
                     <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ partyRoom.directions }}</div>
                     <h3>{{ partyRoom.stay }}</h3>
                     <div class="customer">
-                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <img src="/assets/img/common/comma-y.png" class="comma">
                       <span>{{ partyRoom.averageGrade }}</span>
                       <i class="fa fa-comments" aria-hidden="true"></i>
                       <span>{{ partyRoom.totalComments | number }}</span>
                     </div>
-                    <div class="type borrow">
-                      <h4>대실 <span>최대 {{ partyRoom.hoursAvailable }}시간</span></h4>
-                      <p>{{ partyRoom.hoursPrice | number }}원</p>
-                      <div class="price">{{ partyRoom.saleHoursPrice | number }}<small>원</small></div>
-                    </div>
-                    <div class="type one-night">
-                      <h4>숙박 <span>{{ partyRoom.daysCheckIn }}:00 ~</span></h4>
-                      <p>{{ partyRoom.daysPrice | number }}원</p>
-                      <div class="price">{{ partyRoom.saleDaysPrice | number }}<small>원</small></div>
+                    <div class="type-wrap">
+                      <div class="type borrow clearfix" *ngIf="partyRoom.hoursPrice">
+                        <div class="float-left">
+                          <h4>대실</h4>
+                          <span>최대 {{ partyRoom.hoursAvailable }}시간</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="partyRoom.saleHoursPrice">{{ partyRoom.hoursPrice | number }}원</p>
+                          <div *ngIf="partyRoom.saleHoursPrice" class="price">{{ partyRoom.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!partyRoom.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!partyRoom.saleHoursPrice" class="price">{{ partyRoom.hoursPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
+                      <div class="type one-night clearfix" *ngIf="partyRoom.daysPrice">
+                        <div class="float-left">
+                          <h4>숙박</h4>
+                          <span>{{ partyRoom.hoursAvailable }}:00 ~</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="partyRoom.saleDaysPrice">{{ partyRoom.daysPrice | number }}원</p>
+                          <div *ngIf="partyRoom.saleDaysPrice" class="price">{{ partyRoom.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!partyRoom.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!partyRoom.saleDaysPrice" class="price">{{ partyRoom.daysPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </a>
