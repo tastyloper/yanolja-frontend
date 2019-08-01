@@ -13,6 +13,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class HeaderComponent implements OnInit {
   isMain = false;
   isLogin = false;
+  nickname: string;
 
   constructor(
     private router: Router,
@@ -30,14 +31,17 @@ export class HeaderComponent implements OnInit {
 
       if (this.authService.getToken()) {
         this.isLogin = true;
+        this.nickname = this.authService.getToken().nickname;
       } else {
         this.isLogin = false;
+        this.nickname = '';
       }
     });
   }
 
   logout() {
     this.isLogin = false;
+    this.nickname = '';
     this.authService.removeToken();
     this.toastr.success('성공적으로 로그아웃 되었습니다.');
     this.router.navigate(['']);
