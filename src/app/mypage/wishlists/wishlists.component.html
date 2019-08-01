@@ -16,7 +16,7 @@
               <span>{{ like.totalComments | number }}</span>
             </div>
             <div class="type-wrap">
-              <div class="type borrow clearfix" *ngIf="like.hoursPrice">
+              <div class="type borrow clearfix" *ngIf="+like.hoursPrice">
                 <div class="float-left">
                   <h4>대실</h4>
                   <span>최대 {{ like.hoursAvailable }}시간</span>
@@ -28,7 +28,7 @@
                   <div *ngIf="!like.saleHoursPrice" class="price">{{ like.hoursPrice | number }}<small>원</small></div>
                 </div>
               </div>
-              <div class="type one-night clearfix" *ngIf="like.daysPrice">
+              <div class="type one-night clearfix" *ngIf="+like.daysPrice">
                 <div class="float-left">
                   <h4>숙박</h4>
                   <span>{{ like.hoursAvailable }}:00 ~</span>
@@ -60,7 +60,7 @@
           </a>
         </li>
         <li *ngFor="let page of pager.pages" class="page-item" [ngClass]="{active:pager.currentPage === page}">
-          <a class="page-link" (click)="setPage(page)">{{page}}</a>
+          <a class="page-link" (click)="setPage(page)">{{ page }}</a>
         </li>
         <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
           <a class="page-link" (click)="setPage(pager.currentPage + 1)">
