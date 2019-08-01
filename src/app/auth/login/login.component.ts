@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     };
     this.authService.login(payload).subscribe(
       login => {
+        // this.authService.setToken('93acbdfa37f88c816f3db85f38870d31e642d0e3); // 백엔드 없을 떄 이것만 살리고 다 주석처리
         this.authService.setToken(login['token']);
         this.toastr.success('로그인되었습니다.');
         this.loginForm.reset();
