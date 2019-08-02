@@ -53,14 +53,14 @@ export class ReservationDetailComponent implements OnInit {
 
   getData() {
     this.bookData = {
-        "checkIn": "2019-08-01T15:00:00",
-        "checkOut": "2019-08-02T12:00:00",
-        "booker": "조현근대리인",
-        "phoneNumber": "01086075857",
-        "created": "2019-07-30T20:37:30.837850",
-        "finalPrice": "55,000",
-        "stay": "역삼마레",
-        "room": "준특실 - 숙박"
+      checkIn: '2019-08-01T15:00:00',
+      checkOut: '2019-08-02T12:00:00',
+      booker: '조현근대리인',
+      phoneNumber: '01086075857',
+      created: '2019-07-30T20:37:30.837850',
+      finalPrice: '55,000',
+      stay: '역삼마레',
+      room: '준특실 - 숙박'
     }
   }
 }
