@@ -77,6 +77,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   lng: number;
 
   // dummy data
+  averageGrade = 0;
   // data: any = {
   //   name: '역삼마레',
   //   category: '모텔',
@@ -317,7 +318,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
     // const headers = new HttpHeaders()
     // .set('Authorization', this.token);
-
     this.http.get<StayDetail>(this.url + 'stay/detail/333/').subscribe(data => {
       this.data = data;
       this.address = data.location;
@@ -342,7 +342,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
   modalHide() {
     this.checkPersonModalStatus = false;
-    console.log('a');
   }
   copyText() {
     // document.execCommand('copy', true, this.address);
@@ -360,6 +359,12 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
   splitDate(date: string) {
     return date.split('T')[0];
+  }
+  evaluationText() {
+    if (this.data.averageGrade >= 4.5) { return '우수함'; }
+    if (this.data.averageGrade >= 4 && this.data.averageGrade < 4.5) { return '좋음'; }
+    if (this.data.averageGrade >= 3.5 && this.data.averageGrade < 4) { return '보통'; }
+    if (this.data.averageGrade < 3.5) { return '비추'; }
   }
 
   adultCountUp() {

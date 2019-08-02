@@ -1,3 +1,4 @@
+
 <section class="accommodation-detail fix-height">
   <div class="container">
     <div class="my-container">
@@ -15,10 +16,7 @@
             {{data.location}}</span>
       </div>
       <div class="review-container">
-        <span class="evaluation" *ngIf="data.averageGrade >= 4.5">우수함</span>
-        <span class="evaluation" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</span>
-        <span class="evaluation" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</span>
-        <span class="evaluation" *ngIf="data.averageGrade < 3.5">비추</span>
+        <span class="evaluation">{{evaluationText()}}</span>
 
         <span class="review-count">{{data.totalComments}}개의 이용 후기</span>
         <i>{{data.averageGrade}}</i>
@@ -127,30 +125,33 @@
               <div class="column-div">
                 <span class="room-name">{{room.name}}</span>
                 <span class="room-standard">기준 {{room.standardPersonnel}}명/ 최대 {{room.maximumPersonnel}}명</span>
-                <div class="reservation-status" *ngIf="!true">예약가능</div>
-                <div class="reservation-status not-available" *ngIf="true">예약불가</div>
+                <div class="reservation-status" *ngIf="room.hoursAvailable || room.stayAvailable">예약가능</div>
+                <div class="reservation-status not-available" *ngIf="room.hoursAvailable && room.stayAvailable">예약불가</div>
               </div>
             </div>
             <div class="room-div">
               <ng-container *ngIf="room.hoursAvailable">
                 <div>
-                  <ng-container *ngIf="true">
+                  <ng-container *ngIf="!room.rentalAvailable">
                   <div>
                     <span class="room-type">대실</span>
                     <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
                   </div>
                   <span class="room-price">{{room.saleHoursPrice | number}}원</span>
                 </ng-container>
-                <span class="reservation-done" *ngIf="false">예약마감</span>
-                </div>  
+                <span class="reservation-done" *ngIf="room.rentalAvailable">예약마감</span>
+                </div>
               </ng-container>
               <ng-container *ngIf="room.daysCheckIn">
                 <div>
+                  <ng-container *ngIf="!room.stayAvailable">
                   <div>
                     <span class="room-type">숙박</span>
                     <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
                   </div>
                   <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                  </ng-container>
+                  <span class="reservation-done" *ngIf="room.stayAvailable">예약마감</span>
                 </div>
               </ng-container>
             </div>
