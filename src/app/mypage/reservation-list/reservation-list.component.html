@@ -3,105 +3,85 @@
     <div class="box">
       <h3 class="box-title">예약된 숙소</h3>
       <div class="row">
-        <div class="col-4">
-          <a routerLink="/mypage/reservation/1" class="content-item">
+        <div class="col-4" *ngFor="let list of pagedItems">
+          <a routerLink="/mypage/reservation/{{ list.reservationId }}" class="content-item">
             <div class="content-text-wrap">
               <div class="reservation-list-header">
-                <h3>역삼 리치웰</h3>
                 <p class="reservation-list-status">
-                    입실전
+                  입실전
                 </p>
+                <h3>{{ list.stay }}</h3>
               </div>
               <div class="options">
                 <section class="option">
                 <h4>객실정보</h4>
-                <p>초특가 특실A</p>
+                <p>{{ list.room }}</p>
                 </section>
                 <section class="option">
-                <h4>방문일자</h4>
-                <p>2019-08-11 ~ 2029-08-11</p>
+                  <h4>방문일자</h4>
+                  <span [innerText]="splitDate(list.checkIn)"></span>~
+                  <span [innerText]="splitDate(list.checkOut)"></span>
                 </section>
               </div>
             </div>
           </a>
         </div>
-        
       </div>
     </div>
-    <div class="box">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-            </li>
-          </ul>
-        </nav>
+    <div class="box" *ngIf="pager.pages && pager.pages.length">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(1)" aria-disabled="true">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(pager.currentPage - 1)"aria-disabled="true">
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li *ngFor="let page of pager.pages" class="page-item" [ngClass]="{active:pager.currentPage === page}">
+            <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.totalPages)">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
   <div class="reservation-ing"> 
       <div class="box">
         <h3 class="box-title">이용 완료한 숙소</h3>
         <div class="row">
-          <div class="col-4">
+          <div class="col-4" *ngFor="let list of pagedItems">
             <a routerLink="/reservation/1" class="content-item">
-              <!-- <div class="content-img-wrap">
-                <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="역삼 리치웰">
-              </div> -->
               <div class="content-text-wrap">
                 <div class="reservation-list-header">
-                  <h3>역삼 리치웰</h3>
                   <div class="stats-box">
                     <p class="reservation-list-status done">
-                        퇴실완료
+                      퇴실완료
                     </p>
-                    <p class="reservation-list-status review">
-                        리뷰쓰기
-                    </p>
+                    <h3>{{ list.stay }}</h3>
                 </div>
                 </div>
                 <div class="options">
                   <section class="option">
                   <h4>객실정보</h4>
-                  <p>초특가 특실A</p>
+                  <p>{{ list.room }}</p>
                   </section>
                   <section class="option">
                   <h4>방문일자</h4>
-                  <p>2019-08-11 ~ 2029-08-11</p>
-                  </section>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-4">
-            <a routerLink="/reservation/1" class="content-item"> 
-              <div class="content-text-wrap">
-                <div class="reservation-list-header">
-                  <h3>역삼 리치웰</h3>
-                  <div class="stats-box">
-                    <p class="reservation-list-status done">
-                        퇴실완료
-                    </p>
-                    <p class="reservation-list-status review">
-                        리뷰쓰기
-                    </p>
-                </div>
-                </div>
-                <div class="options">
-                  <section class="option">
-                  <h4>객실정보</h4>
-                  <p>초특가 특실A</p>
-                  </section>
-                  <section class="option">
-                  <h4>방문일자</h4>
-                  <p>2019-08-11 ~ 2029-08-11</p>
+                  <span [innerText]="splitDate(list.checkIn)"></span>~
+                  <span [innerText]="splitDate(list.checkOut)"></span>
                   </section>
                 </div>
               </div>
@@ -109,22 +89,34 @@
           </div>
         </div>
       </div>
-      <div class="box">
+      <div class="box" *ngIf="pager.pages && pager.pages.length">
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+              <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                <a class="page-link" (click)="setPage(1)" aria-disabled="true">
+                  <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                </a>
               </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+              <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                <a class="page-link" (click)="setPage(pager.currentPage - 1)"aria-disabled="true">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li *ngFor="let page of pager.pages" class="page-item" [ngClass]="{active:pager.currentPage === page}">
+                <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+              </li>
+              <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a class="page-link" (click)="setPage(pager.totalPages)">
+                  <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </a>
               </li>
             </ul>
           </nav>
-      </div>
+        </div>
     </div>
 </div>
