@@ -42,6 +42,29 @@
     <nav class="nav-container">
       <h2>객실 예약 네비게이션</h2>
       <section class="rental-room">
+          <h3>날짜 선택</h3>
+          <form [formGroup]="form">
+            <div class="row">
+              <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                <input
+                  class="form-control"
+                  #datepicker="bsDaterangepicker"
+                  bsDaterangepicker
+                  formControlName="dateYMD"
+                  [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
+                  [(ngModel)]="bsRangeValue"
+                  [minDate]="minDate"
+                  [container]="'.room-detail'"
+                  >
+                  <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!datepicker.isOpen"></i>
+                  <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="datepicker.isOpen"></i>
+                </div>
+              </div>
+          </form>
+          
+        </section>
+      <section class="rental-room">
         <h3>대실 예약</h3>
         <span class="nav-common-title">대실</span>
         <div class="rental-price">

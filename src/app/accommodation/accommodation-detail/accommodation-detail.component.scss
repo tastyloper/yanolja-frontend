@@ -313,17 +313,21 @@ button {
 .room-div { 
   display: flex;
   width: 40%;
+  max-width: 40%;
+  flex-direction: row-reverse;
 }
-.room-div div{
+.room-div>div{
   padding-left: 28px;
-  width:50%;
+  width: 50%;
   border-left: 1px solid #e9ecef;
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .room-type {
   font-size: 20px;
+  display: block;
   font-weight: 600;
 }
 .room-available-time {
@@ -341,6 +345,7 @@ button {
   height: 218px;
   float:left;
   margin-top: -28px;
+  max-width: 326px;
 }
 .room-name {
   font-size: 20px;
@@ -373,6 +378,18 @@ button {
 }
 .not-available {
   background-color: #848c94;
+}
+.reservation-done {
+  color: #E2054F;
+  background-color: $primary-light-color;
+  height: 40px;
+  width: 120px;
+  text-align: center;
+  padding: 10px 0;
+  font-weight: 600;
+  align-self: flex-end;
+  margin-right: 28px;
+
 }
 /*숙소 정보*/ 
 .accomodation-information-section {
