@@ -13,4 +13,6 @@ export interface Room {
   roomId: number;
   stayId: number;
   stay: string;
+  rentalAvailable: boolean;
+  stayAvailable: boolean;
 }

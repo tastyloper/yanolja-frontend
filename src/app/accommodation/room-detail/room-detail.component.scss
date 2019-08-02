@@ -221,4 +221,8 @@ tr>.td-body {
   display: block;
   width: 100%;
   font-size: 16px;
-} 
+}
+.book-disabled {
+  background-color: #848c94;
+  cursor: default;
+}
