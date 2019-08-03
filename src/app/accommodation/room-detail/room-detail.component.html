@@ -42,8 +42,32 @@
     <nav class="nav-container">
       <h2>객실 예약 네비게이션</h2>
       <section class="rental-room">
+          <h3>날짜 선택</h3>
+          <form [formGroup]="form">
+            <div class="row">
+              <div class="col-xs-12 col-md-5 col-lg-4 form-group">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                <input
+                  class="form-control"
+                  #datepicker="bsDaterangepicker"
+                  bsDaterangepicker
+                  formControlName="dateYMD"
+                  [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
+                  [(ngModel)]="bsRangeValue"
+                  [minDate]="minDate"
+                  [container]="'.room-detail'"
+                  >
+                  <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!datepicker.isOpen"></i>
+                  <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="datepicker.isOpen"></i>
+                </div>
+              </div>
+          </form>
+          
+        </section>
+      <section class="rental-room" *ngIf="data.hoursAvailable">
         <h3>대실 예약</h3>
         <span class="nav-common-title">대실</span>
+        <ng-container *ngIf="data.hoursPrice !== '예약마감'">
         <div class="rental-price">
           <span class="original-price" *ngIf="data.saleHoursPrice">{{data.hoursPrice | number}}원</span>
           <span class="sale-price" *ngIf="data.saleHoursPrice">{{data.saleHoursPrice | number}}원</span>
@@ -62,10 +86,13 @@
           </tbody>
         </table>
         <button class="book-room btn btn-primary">예약하기</button>
+        </ng-container>
+        <button class="book-room btn btn-primary book-disabled" *ngIf="data.hoursPrice === '예약마감'">예약마감</button>
       </section>
-      <section class="stay-room">
+      <section class="stay-room" *ngIf="data.daysPrice">
           <h3>숙박 예약</h3>
           <span class="nav-common-title">숙박</span>
+          <ng-container *ngIf="data.daysPrice !== '예약마감'">
           <div class="stay-price">            
             <span class="original-price" *ngIf="data.saleDaysPrice">{{data.daysPrice | number}}원</span>
             <span class="sale-price" *ngIf="data.saleDaysPrice">{{data.saleDaysPrice | number}}원</span>
@@ -84,6 +111,8 @@
             </tbody>
           </table>
           <button class="book-room btn btn-primary">예약하기</button>
+        </ng-container>
+          <button class="book-room btn btn-primary book-disabled" *ngIf="data.daysPrice === '예약마감'">예약마감</button>
         </section>
     </nav>
   </div>

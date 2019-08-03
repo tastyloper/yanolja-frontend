@@ -16,6 +16,8 @@ import { Template } from '@angular/compiler/src/render3/r3_ast';
 export class ReservationDetailComponent implements OnInit {
   modalRef: BsModalRef;
   isCheck: false;
+  bookData = {};
+  Date: string;
  
   constructor(
     private subTitleService: SubTitleService,
@@ -25,6 +27,8 @@ export class ReservationDetailComponent implements OnInit {
   ngOnInit() {
     this.subTitleService.pagaTitle = '예약상세';
     this.subTitleService.pagaDescription = '내역을 확인해보세요!';
+
+    this.getData();
   }
 
   cancellationPolicyOpen() {
@@ -41,5 +45,22 @@ export class ReservationDetailComponent implements OnInit {
  
   decline(): void {
     this.modalRef.hide();
+  }
+
+  splitDate(date: string) {
+    return `${date.split('T')[0]} ${date.split('T')[1].split(':')[0]}:${date.split('T')[1].split(':')[1]}`
+  }
+
+  getData() {
+    this.bookData = {
+      checkIn: '2019-08-01T15:00:00',
+      checkOut: '2019-08-02T12:00:00',
+      booker: '조현근대리인',
+      phoneNumber: '01086075857',
+      created: '2019-07-30T20:37:30.837850',
+      finalPrice: '55,000',
+      stay: '역삼마레',
+      room: '준특실 - 숙박'
+    }
   }
 }
