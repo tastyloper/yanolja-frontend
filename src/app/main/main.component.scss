@@ -207,9 +207,13 @@
       font-size: 11px;
     }
     h3 {
+      overflow: hidden;
       color: #343a40;
       font-weight: 600;
       font-size: 18px;
+      white-space: nowrap;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
     }
     .customer {
       font-size: 12px;
@@ -283,4 +287,8 @@
   agm-map {
     height: 600px;
   }
+}
+.loading-wrap {
+  position: relative;
+  height: 343px;
 }

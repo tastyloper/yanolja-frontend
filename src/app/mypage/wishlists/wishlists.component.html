@@ -25,10 +25,10 @@
                   <span>최대 {{ like.hoursAvailable }}시간</span>
                 </div>
                 <div class="float-right text-right">
-                  <p *ngIf="like.saleHoursPrice">{{ like.hoursPrice | number }}원</p>
-                  <div *ngIf="like.saleHoursPrice" class="price">{{ like.saleHoursPrice | number }}<small>원</small></div>
-                  <p *ngIf="!like.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
-                  <div *ngIf="!like.saleHoursPrice" class="price">{{ like.hoursPrice | number }}<small>원</small></div>
+                  <p *ngIf="!!+like.saleHoursPrice">{{ like.hoursPrice | number }}원</p>
+                  <div *ngIf="!!+like.saleHoursPrice" class="price">{{ like.saleHoursPrice | number }}<small>원</small></div>
+                  <p *ngIf="!+like.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                  <div *ngIf="!+like.saleHoursPrice" class="price">{{ like.hoursPrice | number }}<small>원</small></div>
                 </div>
               </div>
               <div class="type one-night clearfix" *ngIf="+like.daysPrice">
@@ -37,10 +37,10 @@
                   <span>{{ like.hoursAvailable }}:00 ~</span>
                 </div>
                 <div class="float-right text-right">
-                  <p *ngIf="like.saleDaysPrice">{{ like.daysPrice | number }}원</p>
-                  <div *ngIf="like.saleDaysPrice" class="price">{{ like.saleDaysPrice | number }}<small>원</small></div>
-                  <p *ngIf="!like.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
-                  <div *ngIf="!like.saleDaysPrice" class="price">{{ like.daysPrice | number }}<small>원</small></div>
+                  <p *ngIf="!!+like.saleDaysPrice">{{ like.daysPrice | number }}원</p>
+                  <div *ngIf="!!+like.saleDaysPrice" class="price">{{ like.saleDaysPrice | number }}<small>원</small></div>
+                  <p *ngIf="!+like.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                  <div *ngIf="!+like.saleDaysPrice" class="price">{{ like.daysPrice | number }}<small>원</small></div>
                 </div>
               </div>
             </div>

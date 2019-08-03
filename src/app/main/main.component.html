@@ -74,7 +74,10 @@
     <div class="container">
       <div class="content-panel">
         <h2>더위 사냥엔 물놀이가 최고!</h2>
-        <div class="swiper-panel">
+        <div *ngIf="swimmingPoolIsLoading$ | async" class="loading-wrap">
+          <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+        </div>
+        <div class="swiper-panel" *ngIf="!(swimmingPoolIsLoading$ | async)">
           <div class="swiper-container" [swiper]="contentConfig1">
             <div class="swiper-wrapper">
               <div class="swiper-slide" *ngFor="let swimmingPool of swimmingPools">
@@ -92,28 +95,28 @@
                       <span>{{ swimmingPool.totalComments | number }}</span>
                     </div>
                     <div class="type-wrap">
-                      <div class="type borrow clearfix" *ngIf="swimmingPool.hoursPrice">
+                      <div class="type borrow clearfix" *ngIf="!!+swimmingPool.hoursPrice">
                         <div class="float-left">
                           <h4>대실</h4>
                           <span>최대 {{ swimmingPool.hoursAvailable }}시간</span>
                         </div>
                         <div class="float-right text-right">
-                          <p *ngIf="swimmingPool.saleHoursPrice">{{ swimmingPool.hoursPrice | number }}원</p>
-                          <div *ngIf="swimmingPool.saleHoursPrice" class="price">{{ swimmingPool.saleHoursPrice | number }}<small>원</small></div>
-                          <p *ngIf="!swimmingPool.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
-                          <div *ngIf="!swimmingPool.saleHoursPrice" class="price">{{ swimmingPool.hoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!!+swimmingPool.saleHoursPrice">{{ swimmingPool.hoursPrice | number }}원</p>
+                          <div *ngIf="!!+swimmingPool.saleHoursPrice" class="price">{{ swimmingPool.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+swimmingPool.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+swimmingPool.saleHoursPrice" class="price">{{ swimmingPool.hoursPrice | number }}<small>원</small></div>
                         </div>
                       </div>
-                      <div class="type one-night clearfix" *ngIf="swimmingPool.daysPrice">
+                      <div class="type one-night clearfix" *ngIf="!!+swimmingPool.daysPrice">
                         <div class="float-left">
                           <h4>숙박</h4>
                           <span>{{ swimmingPool.hoursAvailable }}:00 ~</span>
                         </div>
                         <div class="float-right text-right">
-                          <p *ngIf="swimmingPool.saleDaysPrice">{{ swimmingPool.daysPrice | number }}원</p>
-                          <div *ngIf="swimmingPool.saleDaysPrice" class="price">{{ swimmingPool.saleDaysPrice | number }}<small>원</small></div>
-                          <p *ngIf="!swimmingPool.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
-                          <div *ngIf="!swimmingPool.saleDaysPrice" class="price">{{ swimmingPool.daysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!!+swimmingPool.saleDaysPrice">{{ swimmingPool.daysPrice | number }}원</p>
+                          <div *ngIf="!!+swimmingPool.saleDaysPrice" class="price">{{ swimmingPool.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+swimmingPool.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+swimmingPool.saleDaysPrice" class="price">{{ swimmingPool.daysPrice | number }}<small>원</small></div>
                         </div>
                       </div>
                     </div>
@@ -132,7 +135,10 @@
       </div> 
       <div class="content-panel">
         <h2>초특가 할인!!!</h2>
-        <div class="swiper-panel">
+        <div *ngIf="bigSaleIsLoading$ | async" class="loading-wrap">
+          <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+        </div>
+        <div class="swiper-panel" *ngIf="!(bigSaleIsLoading$ | async)">
           <div class="swiper-container" [swiper]="contentConfig2">
             <div class="swiper-wrapper">
               <div class="swiper-slide" *ngFor="let bigSale of bigSales">
@@ -150,28 +156,28 @@
                       <span>{{ bigSale.totalComments | number }}</span>
                     </div>
                     <div class="type-wrap">
-                      <div class="type borrow clearfix" *ngIf="bigSale.hoursPrice">
+                      <div class="type borrow clearfix" *ngIf="!!+bigSale.hoursPrice">
                         <div class="float-left">
                           <h4>대실</h4>
                           <span>최대 {{ bigSale.hoursAvailable }}시간</span>
                         </div>
                         <div class="float-right text-right">
-                          <p *ngIf="bigSale.saleHoursPrice">{{ bigSale.hoursPrice | number }}원</p>
-                          <div *ngIf="bigSale.saleHoursPrice" class="price">{{ bigSale.saleHoursPrice | number }}<small>원</small></div>
-                          <p *ngIf="!bigSale.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
-                          <div *ngIf="!bigSale.saleHoursPrice" class="price">{{ bigSale.hoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!!+bigSale.saleHoursPrice">{{ bigSale.hoursPrice | number }}원</p>
+                          <div *ngIf="!!+bigSale.saleHoursPrice" class="price">{{ bigSale.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+bigSale.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+bigSale.saleHoursPrice" class="price">{{ bigSale.hoursPrice | number }}<small>원</small></div>
                         </div>
                       </div>
-                      <div class="type one-night clearfix" *ngIf="bigSale.daysPrice">
+                      <div class="type one-night clearfix" *ngIf="!!+bigSale.daysPrice">
                         <div class="float-left">
                           <h4>숙박</h4>
                           <span>{{ bigSale.hoursAvailable }}:00 ~</span>
                         </div>
                         <div class="float-right text-right">
-                          <p *ngIf="bigSale.saleDaysPrice">{{ bigSale.daysPrice | number }}원</p>
-                          <div *ngIf="bigSale.saleDaysPrice" class="price">{{ bigSale.saleDaysPrice | number }}<small>원</small></div>
-                          <p *ngIf="!bigSale.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
-                          <div *ngIf="!bigSale.saleDaysPrice" class="price">{{ bigSale.daysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!!+bigSale.saleDaysPrice">{{ bigSale.daysPrice | number }}원</p>
+                          <div *ngIf="!!+bigSale.saleDaysPrice" class="price">{{ bigSale.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+bigSale.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+bigSale.saleDaysPrice" class="price">{{ bigSale.daysPrice | number }}<small>원</small></div>
                         </div>
                       </div>
                     </div>
@@ -190,7 +196,10 @@
       </div> 
       <div class="content-panel">
         <h2>파티룸 밤새 놀기 좋은 숙소</h2>
-        <div class="swiper-panel">
+        <div *ngIf="partyRoomIsLoading$ | async" class="loading-wrap">
+          <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+        </div>
+        <div class="swiper-panel" *ngIf="!(partyRoomIsLoading$ | async)">
           <div class="swiper-container" [swiper]="contentConfig3">
             <div class="swiper-wrapper">
               <div class="swiper-slide" *ngFor="let partyRoom of partyRooms">
@@ -208,28 +217,28 @@
                       <span>{{ partyRoom.totalComments | number }}</span>
                     </div>
                     <div class="type-wrap">
-                      <div class="type borrow clearfix" *ngIf="partyRoom.hoursPrice">
+                      <div class="type borrow clearfix" *ngIf="!!+partyRoom.hoursPrice">
                         <div class="float-left">
                           <h4>대실</h4>
                           <span>최대 {{ partyRoom.hoursAvailable }}시간</span>
                         </div>
                         <div class="float-right text-right">
-                          <p *ngIf="partyRoom.saleHoursPrice">{{ partyRoom.hoursPrice | number }}원</p>
-                          <div *ngIf="partyRoom.saleHoursPrice" class="price">{{ partyRoom.saleHoursPrice | number }}<small>원</small></div>
-                          <p *ngIf="!partyRoom.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
-                          <div *ngIf="!partyRoom.saleHoursPrice" class="price">{{ partyRoom.hoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!!+partyRoom.saleHoursPrice">{{ partyRoom.hoursPrice | number }}원</p>
+                          <div *ngIf="!!+partyRoom.saleHoursPrice" class="price">{{ partyRoom.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+partyRoom.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+partyRoom.saleHoursPrice" class="price">{{ partyRoom.hoursPrice | number }}<small>원</small></div>
                         </div>
                       </div>
-                      <div class="type one-night clearfix" *ngIf="partyRoom.daysPrice">
+                      <div class="type one-night clearfix" *ngIf="!!+partyRoom.daysPrice">
                         <div class="float-left">
                           <h4>숙박</h4>
                           <span>{{ partyRoom.hoursAvailable }}:00 ~</span>
                         </div>
                         <div class="float-right text-right">
-                          <p *ngIf="partyRoom.saleDaysPrice">{{ partyRoom.daysPrice | number }}원</p>
-                          <div *ngIf="partyRoom.saleDaysPrice" class="price">{{ partyRoom.saleDaysPrice | number }}<small>원</small></div>
-                          <p *ngIf="!partyRoom.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
-                          <div *ngIf="!partyRoom.saleDaysPrice" class="price">{{ partyRoom.daysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!!+partyRoom.saleDaysPrice">{{ partyRoom.daysPrice | number }}원</p>
+                          <div *ngIf="!!+partyRoom.saleDaysPrice" class="price">{{ partyRoom.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+partyRoom.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+partyRoom.saleDaysPrice" class="price">{{ partyRoom.daysPrice | number }}<small>원</small></div>
                         </div>
                       </div>
                     </div>
@@ -242,6 +251,67 @@
             <i class="fa fa-angle-left" aria-hidden="true"></i>
           </div>
           <div class="swiper-button-next content3-swiper-button-next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div> 
+      <div class="content-panel">
+        <h2>워터파크 부럽지 않은 Cool캉스</h2>
+        <div *ngIf="spaIsLoading$ | async" class="loading-wrap">
+          <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+        </div>
+        <div class="swiper-panel" *ngIf="!(spaIsLoading$ | async)">
+          <div class="swiper-container" [swiper]="contentConfig4">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" *ngFor="let spa of spas">
+                <a routerLink="/accommodation/{{ spa.stayId }}" class="content-item">
+                  <div class="content-img-wrap">
+                    <img src="https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg" alt="{{ spa.stay }}">
+                  </div>
+                  <div class="content-text-wrap">
+                    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ spa.directions }}</div>
+                    <h3>{{ spa.stay }}</h3>
+                    <div class="customer">
+                      <img src="/assets/img/common/comma-y.png" class="comma">
+                      <span>{{ spa.averageGrade }}</span>
+                      <i class="fa fa-comments" aria-hidden="true"></i>
+                      <span>{{ spa.totalComments | number }}</span>
+                    </div>
+                    <div class="type-wrap">
+                      <div class="type borrow clearfix" *ngIf="!!+spa.hoursPrice">
+                        <div class="float-left">
+                          <h4>대실</h4>
+                          <span>최대 {{ spa.hoursAvailable }}시간</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="!!+spa.saleHoursPrice">{{ spa.hoursPrice | number }}원</p>
+                          <div *ngIf="!!+spa.saleHoursPrice" class="price">{{ spa.saleHoursPrice | number }}<small>원</small></div>
+                          <p *ngIf="!+spa.saleHoursPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!+spa.saleHoursPrice" class="price">{{ spa.hoursPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
+                      <div class="type one-night clearfix" *ngIf="spa.daysPrice">
+                        <div class="float-left">
+                          <h4>숙박</h4>
+                          <span>{{ spa.hoursAvailable }}:00 ~</span>
+                        </div>
+                        <div class="float-right text-right">
+                          <p *ngIf="spa.saleDaysPrice">{{ spa.daysPrice | number }}원</p>
+                          <div *ngIf="spa.saleDaysPrice" class="price">{{ spa.saleDaysPrice | number }}<small>원</small></div>
+                          <p *ngIf="!spa.saleDaysPrice" class="text-decoration-none">&nbsp;</p>
+                          <div *ngIf="!spa.saleDaysPrice" class="price">{{ spa.daysPrice | number }}<small>원</small></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev content4-swiper-button-prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </div>
+          <div class="swiper-button-next content4-swiper-button-next">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </div>
         </div>
