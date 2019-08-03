@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,6 +14,7 @@ import { Stay } from '../../core/types/stay.interface';
   styleUrls: ['./wishlists.component.scss']
 })
 export class WishlistsComponent implements OnInit {
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private likes: Stay[];
   pager: any = {};
   pagedItems: any[];
@@ -114,6 +116,7 @@ export class WishlistsComponent implements OnInit {
     //   }
     // ];
 
+    this.isLoading$.next(true);
     this.wishlistsService.getWishlist().subscribe(
       data => {
         this.likes = data;
@@ -122,6 +125,9 @@ export class WishlistsComponent implements OnInit {
       error => {
         console.log(error);
         this.toastr.error('치명적인 오류가 발생했습니다. 관리자에게 문의하세요.');
+      },
+      () => {
+        this.isLoading$.next(false);
       }
     );
   }
