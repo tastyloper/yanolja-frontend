@@ -13,7 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 import { MypageComponent } from './mypage.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
-import { ReservationCancelComponent } from './reservation-cancel/reservation-cancel.component';
 import { AccountComponent } from './account/account.component';
 import { WishlistsComponent } from './wishlists/wishlists.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
@@ -23,7 +22,6 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
     MypageComponent,
     ReservationListComponent,
     ReservationDetailComponent,
-    ReservationCancelComponent,
     AccountComponent,
     WishlistsComponent,
     AccountEditComponent

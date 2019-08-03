@@ -1,4 +1,5 @@
-<div class="mypage-router-wrap">
+<div *ngIf="isLoading$ | async" class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+<div class="mypage-router-wrap" *ngIf="!(isLoading$ | async)">
   <section class="account-edit">
     <form [formGroup]="accountForm" class="mypage-body-wrapper clearfix" (ngSubmit)="onSubmit()">
       <div class="body-content">
