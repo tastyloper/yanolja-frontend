@@ -135,6 +135,8 @@ a, button {
 /* container */
 .container {
   position: relative;
+  width: 1140px;
+  min-width: 1140px;
 }
 .fix-height {
   min-height: 100%;
