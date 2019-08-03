@@ -1,6 +1,9 @@
 <div class="mypage-router-wrap">
   <div class="box">
     <div class="row">
+      <div class="col-12" *ngIf="!pagedItems?.length">
+        찜한 숙소가 없습니다.
+      </div>
       <div class="col-4" *ngFor="let like of pagedItems">
         <a routerLink="/accommodation/{{ like.stayId }}" class="content-item">
           <div class="content-img-wrap">
