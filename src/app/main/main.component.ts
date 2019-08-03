@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MapsAPILoader } from '@agm/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { Stay } from '../core/types/stay.interface';
 
@@ -75,7 +76,8 @@ export class MainComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private mapsAPILoader: MapsAPILoader,
-    private mainService: MainService
+    private mainService: MainService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -422,6 +424,7 @@ export class MainComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.toastr.error('치명적인 오류가 발생했습니다. 관리자에게 문의하세요.');
       },
       () => {
         this.bigSaleIsLoading$.next(false);
