@@ -25,7 +25,7 @@
             <li role="menuitem">
               <a class="dropdown-item" routerLink="/mypage">
                 <img class="rounded-circle" src="assets/img/mypage/profile.png" alt="mypage">
-                <p>조항민</p>
+                <p>{{ nickname }}</p>
                 <p>프로필관리</p>
               </a>
             </li>
@@ -40,14 +40,15 @@
   <ul class="temp-header">
     <li><a routerLink="/accommodation">숙소리스트</a></li>
     <li><a routerLink="/accommodation/1">숙소상세</a></li>
-    <li><a routerLink="/accommodation/1/review" [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7 }">후기페이지</a></li>
+    <li><a routerLink="/accommodation/1/review"
+      [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7 }">후기페이지</a></li>
     <li><a routerLink="/accommodation/1/1">룸상세</a></li>
-    <li><a routerLink="/accommodation/1/1/payment">결제</a></li>
+    <li><a routerLink="/accommodation/1/37/payment"
+      [queryParams]="{ stay: '역삼 Hotel The Artist', hoursUntil: 22, hoursAvailable: 6, daysCheckIn: 15, daysCheckOut: 13, checkIn: '2019-08-10', checkOut: '2019-08-11', type: 0 }">결제</a></li> <!-- type : 0 = 대실, type : 1 = 숙박  -->
     <li><a routerLink="/mypage">마이페이지</a></li>
     <li><a routerLink="/mypage/accountEdit">회원정보수정</a></li>
     <li><a routerLink="/mypage/reservation">예약내역</a></li>
     <li><a routerLink="/mypage/reservation/1">예약상세</a></li>
-    <li><a routerLink="/mypage/reservation/1/cancel">예약취소</a></li>
     <li><a routerLink="/mypage/wishlists">찜목록</a></li>
     <li><a routerLink="/ui">UI 모음</a></li>
   </ul>

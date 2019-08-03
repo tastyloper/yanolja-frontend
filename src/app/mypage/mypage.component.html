@@ -7,7 +7,7 @@
           <div class="side-img">
             <img src="assets/img/mypage/profile.png" class="img-circle">
           </div>
-          <div class="side-top-name">이가영</div>
+          <div class="side-top-name">{{ nickname }}</div>
           <div class="side-top-profile">
             <i class="fa fa-cog" aria-hidden="true"></i>
             <a routerLink="/mypage/account" class="side-profile-manage">프로필관리</a>
@@ -16,7 +16,9 @@
         <div class="side-bar-bottom"> 
           <div class="side-bottom-menu">
             <span class="side-sub-menu">숙소이용내역</span>
-            <a class="side-link" routerLink="/mypage/reservation">0건 <i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+            <a class="side-link" routerLink="/mypage/reservation">{{ reservedCount }}건
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
           </div> 
           <div class="side-bottom-menu">
             <span class="side-sub-menu">찜목록</span>

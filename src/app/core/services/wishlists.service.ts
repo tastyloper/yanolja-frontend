@@ -20,7 +20,7 @@ export class WishlistsService {
 
   getWishlist() {
     const headers = new HttpHeaders()
-      .set('Authorization', `Token ${this.authService.getToken()}`);
+      .set('Authorization', `Token ${this.authService.getToken().token}`);
     return this.http.get<Stay[]>(`${this.appUrl}mypage/like/`, { headers });
   }
 }

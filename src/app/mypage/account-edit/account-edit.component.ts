@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,6 +18,7 @@ import { User } from '../../core/types/user.interface';
   styleUrls: ['./account-edit.component.scss']
 })
 export class AccountEditComponent implements OnInit {
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   accountForm: FormGroup;
   account: User;
 
@@ -61,9 +63,32 @@ export class AccountEditComponent implements OnInit {
     });
 
     this.getData();
+  }
 
-    this.nickName.setValue(this.account.nickname);
-    this.phoneNumber.setValue(this.account.phoneNumber);
+  getData() {
+    // 가데이터
+    // this.account = {
+    //   nickname: '연희내꺼야',
+    //   email: 'tak@gmail.com',
+    //   phoneNumber: '01042221234'
+    // };
+    this.isLoading$.next(true);
+    this.authService.getUser().subscribe(
+      data => {
+        this.nickName.setValue(data.nickname);
+        this.phoneNumber.setValue(data.phoneNumber);
+        this.account = data;
+      },
+      error => {
+        console.log(error);
+        this.authService.removeToken();
+        this.toastr.error('유저 정보를 찾을 수 없습니다.');
+        this.router.navigate(['login']);
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
   }
 
   onSubmit() {
@@ -80,26 +105,6 @@ export class AccountEditComponent implements OnInit {
       error => {
         console.log(error);
         this.toastr.error('에러가 발생했습니다. 다시한번 시도해주세요.');
-      }
-    );
-  }
-
-  getData() {
-    // 가데이터
-    // this.account = {
-    //   nickname: '연희내꺼야',
-    //   email: 'tak@gmail.com',
-    //   phoneNumber: '01042221234'
-    // };
-    this.authService.getUser().subscribe(
-      data => {
-        this.account = data;
-      },
-      error => {
-        console.log(error);
-        this.authService.removeToken();
-        this.toastr.error('유저 정보를 찾을 수 없습니다.');
-        this.router.navigate(['login']);
       }
     );
   }
