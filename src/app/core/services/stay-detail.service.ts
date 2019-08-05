@@ -21,9 +21,9 @@ export class StayDetailService {
     return this.http.get<StayDetail>(this.url + `stay/detail/${stayId}/`);
   }
   getRoomList(stayId: number) {
-    return this.http.get<Room[]>(this.url + `stay/${stayId}/room/`)
+    return this.http.get<Room[]>(this.url + `stay/${stayId}/room/`);
   }
   getReviewList(stayId: number) {
-    return this.http.get<Review[]>(this.url + `stay/${stayId}/comments/`)
+    return this.http.get<Review[]>(this.url + `stay/${stayId}/comments/`);
   }
 }
