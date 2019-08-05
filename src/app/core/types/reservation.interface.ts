@@ -1,3 +1,15 @@
+export interface ReservationDetail {
+  checkIn: string;
+  checkOut: string;
+  booker: string;
+  phoneNumber: string;
+  reservationId: string;
+  created: string;
+  finalPrice: string;
+  stay: string;
+  room: string;
+}
+
 export interface Reservation {
   stay: string;
   room: string;
