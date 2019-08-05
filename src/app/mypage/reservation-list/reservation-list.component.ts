@@ -35,7 +35,7 @@ export class ReservationListComponent implements OnInit {
   }
 
   getData() {
-    this.reservationService.getReservation().subscribe(
+    this.reservationService.getListReservation().subscribe(
       data => {
         this.lists = data;
         this.setPage(1);
