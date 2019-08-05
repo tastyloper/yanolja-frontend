@@ -1,45 +1,51 @@
+<ng-container>
 <section class="room-detail">
   <h1>객실 상세 페이지</h1>
   <div class="container">
+    
     <section class="room-container">
       <h2>객실 정보</h2>
-      <section class="room-title">
+      <section class="room-title" *ngIf="!!data">
         <h3>{{data.name}}</h3>
         <i class="fa fa-map-marker" aria-hidden="true"></i>
         <span>{{data.stay}}</span>
       </section>
-      <section class="room-img">
+      <section class="room-img" >
         <h3>객실 사진 캐러셀</h3>
           <div class="all-wrpper">
-            <div class="swiper-container gallery-top" #galleryTop [swiper]="galleryTopConfig">
-              <div class="swiper-wrapper">
+            <div class="swiper-container gallery-top" [swiper]="galleryTopConfig" #galleryTop>
+              <div class="swiper-wrapper" >
+                <ng-container *ngIf="!!data">
                 <div class="swiper-slide" *ngFor="let img of data.urlImage">
                   <img [src]="img">
                 </div>
+              </ng-container>
               </div>
               <div class="swiper-button-next swiper-button-black"></div>
               <div class="swiper-button-prev swiper-button-black"></div>
             </div>
-            <div class="swiper-container gallery-thumbs" #galleryThumbs [swiper]="galleryThumbsConfig">
+            <div class="swiper-container gallery-thumbs" [swiper]="galleryThumbsConfig" #galleryThumbs>
               <div class="swiper-wrapper">
+                <ng-container *ngIf="!!data">
                 <div class="swiper-slide" *ngFor="let img of data.urlImage">
                   <img [src]="img">
                 </div>
+              </ng-container>
               </div>
             </div>
           </div>
       </section>
-      <section class="reservation-notice">
+      <section class="reservation-notice" *ngIf="!!data">
         <h3>예약공지</h3>
         <pre *ngFor="let text of data.reservationNotice">{{text}}</pre>
       </section>
-      <section class="cancel-rule">
+      <section class="cancel-rule" *ngIf="!!data">
         <h3>취소규정</h3>
         <pre *ngFor="let text of data.cancelRegulation">{{text}}</pre>
         <button (click)="openPolicy()">자세히 보기</button>
       </section>
     </section>
-    <nav class="nav-container">
+    <nav class="nav-container" *ngIf="!!data">
       <h2>객실 예약 네비게이션</h2>
       <section class="rental-room">
           <h3>날짜 선택</h3>
@@ -53,7 +59,6 @@
                   bsDaterangepicker
                   formControlName="dateYMD"
                   [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
-                  [(ngModel)]="bsRangeValue"
                   [minDate]="minDate"
                   [container]="'.room-detail'"
                   >
@@ -85,9 +90,14 @@
             </tr>
           </tbody>
         </table>
-        <button class="book-room btn btn-primary">예약하기</button>
+        <button class="book-room btn btn-primary" routerLink="payment" 
+        [queryParams]="{
+          stay: data.stay, hoursUntil: data.hoursUntil, hoursAvailable: data.hoursAvailable,
+          daysCheckIn: data.daysCheckIn, daysCheckOut: data.daysCheckOut, 
+          checkIn: formatDate(this.form.get('dateYMD').value[0]), checkOut: this.formatDate(this.form.get('dateYMD').value[1]), type: 0 }"
+          >예약하기</button>
         </ng-container>
-        <button class="book-room btn btn-primary book-disabled" *ngIf="data.hoursPrice === '예약마감'">예약마감</button>
+        <button class="book-room btn btn-primary book-disabled" *ngIf="data.hoursPrice === '예약마감'" disabled>예약마감</button>
       </section>
       <section class="stay-room" *ngIf="data.daysPrice">
           <h3>숙박 예약</h3>
@@ -110,11 +120,18 @@
               </tr>
             </tbody>
           </table>
-          <button class="book-room btn btn-primary">예약하기</button>
+          <button class="book-room btn btn-primary"
+          routerLink="payment"
+          [queryParams]="{
+            stay: data.stay, hoursUntil: data.hoursUntil, hoursAvailable: data.hoursAvailable,
+            daysCheckIn: data.daysCheckIn, daysCheckOut: data.daysCheckOut, 
+            checkIn: formatDate(this.form.get('dateYMD').value[0]), checkOut: this.formatDate(this.form.get('dateYMD').value[1]), type: 1 }"
+          >예약하기</button>
         </ng-container>
-          <button class="book-room btn btn-primary book-disabled" *ngIf="data.daysPrice === '예약마감'">예약마감</button>
+          <button class="book-room btn btn-primary book-disabled" *ngIf="data.daysPrice === '예약마감'" disabled>예약마감</button>
         </section>
     </nav>
   </div>
 </section>
+</ng-container>
 <app-footer></app-footer>

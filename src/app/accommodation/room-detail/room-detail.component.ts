@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+
 // modal
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 // swiper
@@ -16,24 +16,27 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 // component
 import { CancellationPolicyComponent } from '../../shared/cancellation-policy/cancellation-policy.component';
-import { FooterComponent } from '../../shared/footer/footer.component';
 
 // interface
 import { RoomDetail } from 'src/app/core/types/room-detail.interface';
 
-// environment
-import { environment } from '../../../environments/environment';
+// service
+import { RoomDetailService } from 'src/app/core/services/room-detail.service';
+
 @Component({
   selector: 'app-room-detail',
   templateUrl: './room-detail.component.html',
   styleUrls: ['./room-detail.component.scss']
 })
 export class RoomDetailComponent implements OnInit, AfterViewInit {
+
   @ViewChild('galleryTop', { static: true }) galleryTop;
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
+
   @ViewChild(BsDaterangepickerDirective, { static: false }) daterangepicker: BsDaterangepickerDirective;
 
   bsModalRef: BsModalRef;
+
   galleryTopConfig: SwiperConfigInterface;
   galleryThumbsConfig: SwiperConfigInterface;
 
@@ -55,12 +58,11 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
   // server Communication
   url: string;
 
-
   constructor(
     private modalService: BsModalService,
     private localeService: BsLocaleService,
-    private http: HttpClient,
-    private route: ActivatedRoute
+    private dataService: RoomDetailService,
+    private route: ActivatedRoute,
     ) { }
   //   data = {
   //     stay: '역삼마레',
@@ -104,13 +106,16 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     this.maxDate = new Date();
     this.minDate = new Date();
     this.form = new FormGroup({
-      dateYMD: new FormControl(new Date()),
-      dateFull: new FormControl(new Date()),
-      dateMDY: new FormControl(new Date()),
-      dateRange: new FormControl([new Date(), new Date()])
+      dateYMD: new FormControl(new Date())
     });
     this.locale = 'ko';
     this.locales = listLocales();
+
+    this.localeService.use(this.locale);
+    this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.minDate.setDate(this.minDate.getDate());
+    this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.form.get('dateYMD').setValue(this.bsRangeValue);
 
     this.galleryTopConfig = {
       spaceBetween: 10,
@@ -118,7 +123,8 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-      }
+      },
+      observer: true
     };
     this.galleryThumbsConfig  = {
       spaceBetween: 10,
@@ -127,27 +133,31 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
       watchSlidesVisibility: true,
       watchSlidesProgress: true,
       slideToClickedSlide: true,
+      observer: true,
     };
-    this.localeService.use(this.locale);
-    this.maxDate.setDate(this.maxDate.getDate() + 1);
-    this.minDate.setDate(this.minDate.getDate());
-    this.bsRangeValue = [this.bsValue, this.maxDate];
     this.route.paramMap
       .subscribe(param => this.roomId = +param.get('id'));
 
-    this.url = environment.appUrl;
-    const params = new HttpParams()
-    .set('requestCheckIn', '2019-07-01+22:00:00')
-    .set('requestCheckOut', '2019-07-02+11:00:00');
-    this.http.get<RoomDetail>(this.url + `/stay/room/detail/${this.roomId}/`, { params }).subscribe(
+    this.dataService.getRoomDetail(this.roomId, '2019-07-01+22:00:00', '2019-07-02+11:00:00').subscribe(
       data => {
-      this.data = data;
-      console.log(data);
+        this.data = data;
       }
     );
   }
 
   openPolicy() {
     this.bsModalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+  }
+
+  formatDate(date: Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
   }
 }
