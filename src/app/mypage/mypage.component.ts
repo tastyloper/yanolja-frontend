@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthService } from '../core/services/auth.service';
+import { Router } from '@angular/router';
 
 import { fadeAnimation } from '../core/animation/fade.animation';
+
+import { AuthService } from '../core/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mypage',
@@ -14,11 +16,27 @@ export class MypageComponent implements OnInit {
   nickname: string;
   reservedCount: number;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.nickname = this.authService.getToken().nickname;
     this.reservedCount = this.authService.getToken().reservedCount;
+
+    this.router.events.subscribe(_ => {
+      this.authService.getUser().subscribe(
+        data => {
+          this.nickname = data.nickname;
+          this.reservedCount = data.reservedCount;
+        },
+        error => {
+          this.toastr.error('회원정보를 가져오는데 에러가 났습니다.');
+        }
+      );
+    });
   }
 
   getRouterOutletState(outlet) {
