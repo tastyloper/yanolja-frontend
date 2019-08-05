@@ -18,12 +18,12 @@ export class ReservationDetailComponent implements OnInit {
   isCheck: false;
   bookData = {};
   Date: string;
- 
+
   constructor(
     private subTitleService: SubTitleService,
     private modalService: BsModalService
   ) {}
-  
+
   ngOnInit() {
     this.subTitleService.pagaTitle = '예약상세';
     this.subTitleService.pagaDescription = '내역을 확인해보세요!';
@@ -34,15 +34,15 @@ export class ReservationDetailComponent implements OnInit {
   cancellationPolicyOpen() {
     this.modalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
   }
-  
+
   cancelConfirm(template: Template) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
- 
+
   confirm(): void {
     this.modalRef.hide();
   }
- 
+
   decline(): void {
     this.modalRef.hide();
   }
