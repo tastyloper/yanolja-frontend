@@ -47,16 +47,16 @@
           <div class="payment-box">
             <div class="payment-box-group clearfix">
               <p class="d-inline-block payment-box-right">판매금액</p>
-              <p class="float-right">₩ {{ bookData.finalPrice }}</p>
+              <p class="float-right">{{ bookData.finalPrice | number }}원</p>
             </div>
             <div class="payment-box-group clearfix">
               <p class="d-inline-block">총 할인금액</p>
-              <p class="float-right">- ₩ 0</p>
+              <p class="float-right">- 0원</p>
             </div>
             <div class="payment-box-group box-strong clearfix">
               <div class="payment-box-group payment-total-line"></div>
               <p class="d-inline-block">결제금액</p>
-              <p class="float-right">₩ {{ bookData.finalPrice }}</p>
+              <p class="float-right">{{ bookData.finalPrice | number }}원</p>
             </div>
           </div>
         </div>

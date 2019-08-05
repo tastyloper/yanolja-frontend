@@ -26,6 +26,6 @@ export class ReservationService {
   getDetailReservation(reservationId: string) {
     const headers = new HttpHeaders()
       .set('Authorization', `Token ${this.authService.getToken().token}`);
-    return this.http.get<ReservationDetail>(`${this.appUrl}mypage/reservation/detail/${reservationId}`, { headers });
+    return this.http.get<ReservationDetail>(`${this.appUrl}mypage/reservation/detail/${reservationId}/`, { headers });
   }
 }

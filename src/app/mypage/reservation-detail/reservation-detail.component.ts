@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SubTitleService } from '../../core/services/sub-title.service';
 import { ReservationService } from '../../core/services/reservation.service';
 
+import { ReservationDetail } from '../../core/types/reservation.interface';
+
 import { CancellationPolicyComponent } from '../../shared/cancellation-policy/cancellation-policy.component';
 
 
@@ -21,7 +23,7 @@ export class ReservationDetailComponent implements OnInit {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   modalRef: BsModalRef;
   isCheck: false;
-  bookData = {};
+  bookData: ReservationDetail;
   Date: string;
   reservationId: string;
 
@@ -59,7 +61,7 @@ export class ReservationDetailComponent implements OnInit {
   }
 
   splitDate(date: string) {
-    return `${date.split('T')[0]} ${date.split('T')[1].split(':')[0]}:${date.split('T')[1].split(':')[1]}`
+    return `${date.split('T')[0]} ${date.split('T')[1].split(':')[0]}:${date.split('T')[1].split(':')[1]}`;
   }
 
   getData() {
