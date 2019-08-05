@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { SubTitleService } from '../../core/services/sub-title.service';
+import { ReservationService } from '../../core/services/reservation.service';
+
+import { Reservation } from '../../core/types/reservation.interface';
 
 @Component({
   selector: 'app-reservation-list',
@@ -8,11 +13,15 @@ import { SubTitleService } from '../../core/services/sub-title.service';
   styleUrls: ['./reservation-list.component.scss']
 })
 export class ReservationListComponent implements OnInit {
-  lists = [];
+  lists: Reservation[];
   pager: any = {};
   pagedItems: any[];
 
-  constructor(private subTitleService: SubTitleService) { }
+  constructor(
+    private subTitleService: SubTitleService,
+    private reservationService: ReservationService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.subTitleService.pagaTitle = '예약내역';
@@ -26,66 +35,74 @@ export class ReservationListComponent implements OnInit {
   }
 
   getData() {
-    this.lists = [
-      {
-        stay: '역삼마레',
-        room: '특실',
-        checkIn: '2019-07-01T02:27:46',
-        checkOut: '2019-07-01T05:00:00',
-        reservationId: 5,
-        stayId: 1,
-        roomId: 3,
-        mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-        commentLeaved: true
+    this.reservationService.getReservation().subscribe(
+      data => {
+        this.lists = data;
+        this.setPage(1);
       },
-      {
-        stay: '삼성캘리포니아',
-        room: '특실',
-        checkIn: '2019-07-01T02:27:46',
-        checkOut: '2019-07-01T05:00:00',
-        reservationId: 5,
-        stayId: 1,
-        roomId: 3,
-        mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-        commentLeaved: true
-      },
-      {
-        stay: '선릉호텔스타',
-        room: '특실',
-        checkIn: '2019-07-01T02:27:46',
-        checkOut: '2019-07-01T05:00:00',
-        reservationId: 5,
-        stayId: 1,
-        roomId: 3,
-        mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-        commentLeaved: true
-      },
-      {
-        stay: '선릉호텔스타',
-        room: '특실',
-        checkIn: '2019-07-01T02:27:46',
-        checkOut: '2019-07-01T05:00:00',
-        reservationId: 5,
-        stayId: 1,
-        roomId: 3,
-        mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-        commentLeaved: true
-      },
-      {
-        stay: '선릉호텔스타',
-        room: '특실',
-        checkIn: '2019-07-01T02:27:46',
-        checkOut: '2019-07-01T05:00:00',
-        reservationId: 5,
-        stayId: 1,
-        roomId: 3,
-        mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-        commentLeaved: true
+      error => {
+        console.log(error);
+        this.toastr.error('치명적인 오류가 발생했습니다. 관리자에게 문의하세요.');
       }
-    ];
+    );
 
-    this.setPage(1);
-
+    // this.lists = [
+    //   {
+    //     stay: '역삼마레',
+    //     room: '특실',
+    //     checkIn: '2019-07-01T02:27:46',
+    //     checkOut: '2019-07-01T05:00:00',
+    //     reservationId: 5,
+    //     stayId: 1,
+    //     roomId: 3,
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     commentLeaved: true
+    //   },
+    //   {
+    //     stay: '삼성캘리포니아',
+    //     room: '특실',
+    //     checkIn: '2019-07-01T02:27:46',
+    //     checkOut: '2019-07-01T05:00:00',
+    //     reservationId: 5,
+    //     stayId: 1,
+    //     roomId: 3,
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     commentLeaved: true
+    //   },
+    //   {
+    //     stay: '선릉호텔스타',
+    //     room: '특실',
+    //     checkIn: '2019-07-01T02:27:46',
+    //     checkOut: '2019-07-01T05:00:00',
+    //     reservationId: 5,
+    //     stayId: 1,
+    //     roomId: 3,
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     commentLeaved: true
+    //   },
+    //   {
+    //     stay: '선릉호텔스타',
+    //     room: '특실',
+    //     checkIn: '2019-07-01T02:27:46',
+    //     checkOut: '2019-07-01T05:00:00',
+    //     reservationId: 5,
+    //     stayId: 1,
+    //     roomId: 3,
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     commentLeaved: true
+    //   },
+    //   {
+    //     stay: '선릉호텔스타',
+    //     room: '특실',
+    //     checkIn: '2019-07-01T02:27:46',
+    //     checkOut: '2019-07-01T05:00:00',
+    //     reservationId: 5,
+    //     stayId: 1,
+    //     roomId: 3,
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     commentLeaved: true
+    //   }
+    // ];
   }
 
   setPage(page: number) {
