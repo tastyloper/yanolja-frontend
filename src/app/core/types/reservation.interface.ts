@@ -59,3 +59,7 @@ export interface Hour {
   active: boolean;
   disabled: boolean;
 }
+
+export interface ReservationDelete {
+  reservationRemoved: boolean;
+}

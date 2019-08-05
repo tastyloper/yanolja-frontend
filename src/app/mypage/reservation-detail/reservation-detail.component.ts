@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SubTitleService } from '../../core/services/sub-title.service';
 import { ReservationService } from '../../core/services/reservation.service';
 
+import { ReservationDetail } from '../../core/types/reservation.interface';
+
 import { CancellationPolicyComponent } from '../../shared/cancellation-policy/cancellation-policy.component';
 
 
@@ -21,8 +23,7 @@ export class ReservationDetailComponent implements OnInit {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   modalRef: BsModalRef;
   isCheck: false;
-  bookData = {};
-  Date: string;
+  bookData: ReservationDetail;
   reservationId: string;
 
   constructor(
@@ -40,26 +41,6 @@ export class ReservationDetailComponent implements OnInit {
     this.reservationId = (this.router.url).split('/')[3];
 
     this.getData();
-  }
-
-  cancellationPolicyOpen() {
-    this.modalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
-  }
-
-  cancelConfirm(template: Template) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-  }
-
-  confirm(): void {
-    this.modalRef.hide();
-  }
-
-  decline(): void {
-    this.modalRef.hide();
-  }
-
-  splitDate(date: string) {
-    return `${date.split('T')[0]} ${date.split('T')[1].split(':')[0]}:${date.split('T')[1].split(':')[1]}`
   }
 
   getData() {
@@ -88,5 +69,34 @@ export class ReservationDetailComponent implements OnInit {
     //   stay: '역삼마레',
     //   room: '준특실 - 숙박'
     // };
+  }
+
+  splitDate(date: string) {
+    return `${date.split('T')[0]} ${date.split('T')[1].split(':')[0]}:${date.split('T')[1].split(':')[1]}`;
+  }
+
+  cancellationPolicyOpen() {
+    this.modalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+  }
+
+  cancelConfirm(template: Template) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.reservationService.canclelReservation(this.reservationId).subscribe(
+      data => {
+        if (data.reservationRemoved) {
+          this.toastr.success('예약을 취소하였습니다.');
+          this.modalRef.hide();
+          this.router.navigate(['mypage/reservation/']);
+        }
+      },
+      error => {
+        console.log(error);
+        this.toastr.error('삭제하는데 오류가 발생했습니다. 다시 요청해주세요.');
+        this.router.navigate(['mypage/reservation/']);
+      }
+    );
   }
 }
