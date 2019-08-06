@@ -342,12 +342,11 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       });
     this.route.queryParamMap
       .subscribe(queryParam => {
-        console.log(queryParam);
         console.log(Date.parse(this.bsValue.toDateString()));
         this.bsRangeValue =
         [
-          new Date(Date.parse('bsRangeValue[0]')),
-          new Date(Date.parse('bsRangeValue[1]'))
+          new Date(queryParam.get('bsRangeValue[0]')),
+          new Date(queryParam.get('bsRangeValue[1]'))
         ];
         console.log(this.bsRangeValue);
       });

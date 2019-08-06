@@ -41,7 +41,7 @@
     <li><a routerLink="/accommodation">숙소리스트</a></li>
     <li><a routerLink="/accommodation/565"
       [queryParams]="{ bsRangeValue: [1565017200000, 1565017200000]}">숙소상세</a></li>
-      <!--bsRangeValue: [minValue.toString(), maxValue.toString()]-->
+      <!--bsRangeValue: [Date.parse(minValue.toDateString()), Date.parse(maxValue.toDateString())]-->
     <li><a routerLink="/accommodation/1/review"
       [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7, stayId: 578 }">후기페이지</a></li>
     <li><a routerLink="/accommodation/1/1">룸상세</a></li>
