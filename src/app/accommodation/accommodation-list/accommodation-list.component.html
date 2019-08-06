@@ -1,237 +1,237 @@
-<div class="container-wrapper">
-  <div class="alist-body container">
-    <div class="alist-container">
-      <div class="alist-hrz sub-title"></div>
-      <section class="alist-container-sec">
-        <section class="alist-search-container">
-          <div class="alist-search-items-container">
-            <div class="alist-search-type search-box">
-              <div class="alist-search-frame" (click)="toggle('type')">
-                <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
-                <button class="alist-search-inputbox">{{searchBarShow}}</button>
-              </div>
-              <div class="alist-popup-container" [class.active]="type">
-                <div class="alist-type-popup-module">
-                  <ul class="alist-popup-type-container alist-type-container-type">
-                    <li class="alist-popup-type-item" (click)="selectType('motel')"><button>모텔</button></li>
-                    <li class="alist-popup-type-item" (click)="selectType('hotel')"><button>호텔</button></li>
-                    <li class="alist-popup-type-item" (click)="selectType('guestHouse')"><button>게스트하우스</button></li>
-                    <li class="alist-popup-type-item" (click)="selectType('pension')"><button>펜션</button></li>
-                  </ul>
-                </div>
-              </div>
+<div class="container-wrapper fix-height">
+  <div class="head-wrap">
+    <div class="container">
+      <section class="alist-search-container">
+        <div class="alist-search-items-container">
+          <div class="alist-search-type search-box">
+            <div class="alist-search-frame" (click)="toggle('type')">
+              <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
+              <button class="alist-search-inputbox">{{searchBarShow}}</button>
             </div>
-            <div class="alist-search-loc search-box">
-              <div class="alist-search-frame" (click)="toggle('location')">
-                <i class="alist-search-icon fa fa-map-marker"></i>
-                <button class="alist-search-inputbox">{{searchBarLocShow}}</button>
-              </div>
-              <div class="alist-search-location-container" [class.active]="location">
-                <div class="alist-search-location-header">
-                  <ul class="alist-location-header-top">
-                    <li>서울</li>
-                    <li>경기</li>
-                    <li>인천</li>
-                    <li>강원</li>
-                    <li>제주</li>
-                    <li>대전</li>
-                    <li>충북</li>
-                    <li>충남/세종</li>
-                    <li>부산</li>
-                    <li>울산</li>
-                    <li>경남</li>
-                    <li>대구</li>
-                    <li>경북</li>
-                    <li>광주</li>
-                    <li>전남</li>
-                    <li>전주/전북</li>
-                  </ul>
-                </div>
-                <div class="alist-search-location-bottom">
-                  <ul class="alist-search-bottom-list">
-                    <li><button (click)="selectLoc(item)" #item value="강남/역삼/삼성/논현">강남/역삼/삼성/논현</button></li>
-                    <li><button>서초/신사/방배</button></li>
-                    <li><button>잠실/신천(잠실새내)</button></li>
-                    <li><button>영등포/여의도</button></li>
-                    <li><button>신림/서울대/사당/동작</button></li>
-                    <li><button>천호/길동/둔촌</button></li>
-                    <li><button>화곡/까치산/양천/목동</button></li>
-                    <li><button>구로/금천/오류/신도림</button></li>
-                    <li><button>신촌/홍대/합정</button></li>
-                    <li><button>연신내/불광/응암</button></li>
-                    <li><button>종로/대학로</button></li>
-                    <li><button>성신여대/성북/월곡</button></li>
-                    <li><button>이태원/용산/서울역/명동/회현</button></li>
-                    <li><button>동대문/동묘/신당/충무로/약수</button></li>
-                    <li><button>회기/고려대/청량리/신설동</button></li>
-                    <li><button>장안동/답십리</button></li>
-                    <li><button>건대/군자/구의</button></li>
-                    <li><button>왕십리/성수/금호</button></li>
-                    <li><button>수유/미아</button></li>
-                    <li><button>상봉/중량/면목</button></li>
-                    <li><button>태릉/노원/도봉/창동</button></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="alist-search-date search-box" (click)="selectDate(inputDate)" (click)="toggle('calendar')">
-              <div class="alist-search-frame">
-                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                <button class="alist-search-inputbox">
-                  <div class="col-xs-12 col-12 form-group datePicker">
-                    <input type="text" placeholder="예약하실 날짜를 선택하세요" class="form-control datePicker-input"
-                      [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" 
-                      [bsValue]="bsValue "#inputDate>
-                  </div>
-                </button>
-              </div>
-            </div>
-            <div class="alist-search-date search-box">
-              <div class="alist-search-frame">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <button class="alist-search-inputbox" (click)="toggle('member')">
-                  <div class="btn-date-inner">
-                    <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
-                    <i class="fa fa-chevron-down arrow" [class.active]="!person" aria-hidden="true"></i>
-                    <i class="fa fa-chevron-up arrow" [class.active]="person" aria-hidden="true"></i>
-
-                  </div>
-                </button>
-              </div>
-              <div class="alist-popup-container alist-popup-container-member" [class.active]="person">
-                <div class="alist-popup-wrapper">
-                  <div class="alist-popup-module">
-                    <h4 class="alist-date-popup-h4">인원</h4>
-                    <div class="alist-date-popup-content">
-                      <div class="alist-date-popup-content-person popup-adult">
-                        <p class="popup-person-option">성인</p>
-                        <div class="popup-btn-stepper">
-                          <button class="stepper-modifier" (click)="minus('adult')">
-                            <i class="fa fa-minus" aria-hidden="true"></i>
-                          </button>
-                          <p class="stepper-value">{{numberAdult}}</p>
-                          <button class="stepper-modifier" (click)="plus('adult')">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                          </button>
-                        </div>
-
-                      </div>
-                      <div class="alist-date-popup-content-person popup-children">
-                        <p class="popup-person-option">아동</p>
-                        <div class="popup-btn-stepper">
-                          <button class="stepper-modifier" (click)="minus('children')">
-                            <i class="fa fa-minus" aria-hidden="true"></i>
-                          </button>
-                          <p class="stepper-value">{{numberChildren}}</p>
-                          <button class="stepper-modifier" (click)="plus('children')">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="btn-popup-close">
-                    <button class="btn-close" (click)="toggle('member')">
-                      <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="btn-submit-container search-box" (click)="submitNav()">
-              <div class="alist-search-frame">
-                <button class="alist-search-inputbox">검색</button>
+            <div class="alist-popup-container" [class.active]="type">
+              <div class="alist-type-popup-module">
+                <ul class="alist-popup-type-container alist-type-container-type">
+                  <li class="alist-popup-type-item" (click)="selectType('motel')"><button>모텔</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('hotel')"><button>호텔</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('guestHouse')"><button>게스트하우스</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('pension')"><button>펜션</button></li>
+                </ul>
               </div>
             </div>
           </div>
-        </section>
-        <article class="alist-whole-wrapper">
-          <header class="alist-header">
-            <h2 class="alist-header-h2">검색된 숙소 {{tempList.length}}개</h2>
-            <ul class="alist-header-nav">
-              <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">추천순</button></li>
-              <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 낮은순</button></li>
-              <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 높은순</button></li>
-              <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">평점순</button></li>
-              <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">거리순</button></li>
-              <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">등급순</button></li>
-            </ul>
-          </header>
-          <div class="loading-wrap" *ngIf="isLoading$ | async">
-            <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
-          </div>
-          <section class="alist-content-wrapper" *ngIf="!(isLoading$ | async)">
-            <div class="alist-content-container">
-              <div class="alist-content-outter" *ngFor="let list of tempList">
-                <a routerLink="/accommodation/1">
-                  <section class="alist-item-box">
-                    <div class="alist-item-box-image-container">
-                      <div class="alist-item-box-imgDetail"  [ngStyle]="{ 'background-image': 'url(' + list.mainImage + ')'}" title="호텔이름"></div>
-                    </div>
-                    <div class="alist-box-right-container">
-                      <div class="alist-box-right-inner">
-                        <div>
-                          <h2 class="alist-hotel-name">{{list.stay}}</h2>
-                          <p class="alist-hotel-name-desc">
-                            <i class="alist-search-icon fa fa-map-marker"></i>
-                            {{list.directions}}
-                          </p>
-                          <div class="alist-hotel-service">
-                            <span class="alist-hotel-service-label">무료 Wi-Fi</span>
-                          </div>
-                        </div>
-                        <div class="alist-hotel-review-container">
-                          <div class="alist-hotel-score">
-                            <span>8.2</span>
-                          </div>
-                          <div class="alist-hotel-review-label">
-                            <h3>좋음</h3>
-                            <p>
-                              {{list.totalComments}}개의 이용 후기
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="alist-box-right-outter">
-                        <div class="alist-rightbox-wrapper">
-                          <div class="alist-rightbox-price">
-                            <h2 class="alist-price-total">60,550 <span>원</span></h2>
-                            <p class="alist-price-avg">
-                              1박평균
-                              60,550원
-                            </p>
-                          </div>
-                          <div class="alist-rightbox-btnBox">
-                            <button type="button" class="alist-rightbox-btn">예약하러 가기</button>
-                          </div>
-                        </div>
-                        <div class="alist-rightbox-priceOption">
-                          <div class="alist-priceOption">
-                            <h4>대실</h4>
-                            <p *ngIf="list.hoursPrice">
-                              {{list.hoursPrice | number}}원
-                            </p>
-                            <p *ngIf="!list.hoursPrice">
-                              - 원
-                              </p>
-                          </div>
-                          <div class="alist-priceOption">
-                            <h4>숙박</h4>
-                            <p>
-                              {{list.daysPrice | number}}원
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </a>
-              </div>
-
+          <div class="alist-search-loc search-box">
+            <div class="alist-search-frame" (click)="toggle('location')">
+              <i class="alist-search-icon fa fa-map-marker"></i>
+              <button class="alist-search-inputbox">{{searchBarLocShow}}</button>
             </div>
-          </section>
-        </article>
+            <div class="alist-search-location-container" [class.active]="location">
+              <div class="alist-search-location-header">
+                <ul class="alist-location-header-top">
+                  <li>서울</li>
+                  <li>경기</li>
+                  <li>인천</li>
+                  <li>강원</li>
+                  <li>제주</li>
+                  <li>대전</li>
+                  <li>충북</li>
+                  <li>충남/세종</li>
+                  <li>부산</li>
+                  <li>울산</li>
+                  <li>경남</li>
+                  <li>대구</li>
+                  <li>경북</li>
+                  <li>광주</li>
+                  <li>전남</li>
+                  <li>전주/전북</li>
+                </ul>
+              </div>
+              <div class="alist-search-location-bottom">
+                <ul class="alist-search-bottom-list">
+                  <li><button (click)="selectLoc(item)" #item value="강남/역삼/삼성/논현">강남/역삼/삼성/논현</button></li>
+                  <li><button>서초/신사/방배</button></li>
+                  <li><button>잠실/신천(잠실새내)</button></li>
+                  <li><button>영등포/여의도</button></li>
+                  <li><button>신림/서울대/사당/동작</button></li>
+                  <li><button>천호/길동/둔촌</button></li>
+                  <li><button>화곡/까치산/양천/목동</button></li>
+                  <li><button>구로/금천/오류/신도림</button></li>
+                  <li><button>신촌/홍대/합정</button></li>
+                  <li><button>연신내/불광/응암</button></li>
+                  <li><button>종로/대학로</button></li>
+                  <li><button>성신여대/성북/월곡</button></li>
+                  <li><button>이태원/용산/서울역/명동/회현</button></li>
+                  <li><button>동대문/동묘/신당/충무로/약수</button></li>
+                  <li><button>회기/고려대/청량리/신설동</button></li>
+                  <li><button>장안동/답십리</button></li>
+                  <li><button>건대/군자/구의</button></li>
+                  <li><button>왕십리/성수/금호</button></li>
+                  <li><button>수유/미아</button></li>
+                  <li><button>상봉/중량/면목</button></li>
+                  <li><button>태릉/노원/도봉/창동</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="alist-search-date search-box" (click)="selectDate(inputDate)" (click)="toggle('calendar')">
+            <div class="alist-search-frame">
+              <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+              <button class="alist-search-inputbox">
+                <div class="col-xs-12 col-12 form-group datePicker">
+                  <input type="text" placeholder="예약하실 날짜를 선택하세요" class="form-control datePicker-input"
+                    [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" 
+                    [bsValue]="bsValue "#inputDate>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="alist-search-date search-box">
+            <div class="alist-search-frame">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <button class="alist-search-inputbox" (click)="toggle('member')">
+                <div class="btn-date-inner">
+                  <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
+                  <i class="fa fa-chevron-down arrow" [class.active]="!person" aria-hidden="true"></i>
+                  <i class="fa fa-chevron-up arrow" [class.active]="person" aria-hidden="true"></i>
+
+                </div>
+              </button>
+            </div>
+            <div class="alist-popup-container alist-popup-container-member" [class.active]="person">
+              <div class="alist-popup-wrapper">
+                <div class="alist-popup-module">
+                  <h4 class="alist-date-popup-h4">인원</h4>
+                  <div class="alist-date-popup-content">
+                    <div class="alist-date-popup-content-person popup-adult">
+                      <p class="popup-person-option">성인</p>
+                      <div class="popup-btn-stepper">
+                        <button class="stepper-modifier" (click)="minus('adult')">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <p class="stepper-value">{{numberAdult}}</p>
+                        <button class="stepper-modifier" (click)="plus('adult')">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                      </div>
+
+                    </div>
+                    <div class="alist-date-popup-content-person popup-children">
+                      <p class="popup-person-option">아동</p>
+                      <div class="popup-btn-stepper">
+                        <button class="stepper-modifier" (click)="minus('children')">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <p class="stepper-value">{{numberChildren}}</p>
+                        <button class="stepper-modifier" (click)="plus('children')">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-popup-close">
+                  <button class="btn-close" (click)="toggle('member')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-submit-container search-box" (click)="submitNav()">
+            <div class="alist-search-frame">
+              <button class="alist-search-inputbox">검색</button>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   </div>
+  <div class="container">
+    <article class="alist-whole-wrapper">
+      <header class="alist-header">
+        <h2 class="alist-header-h2">검색된 숙소 {{sstayList.length}}개</h2>
+        <ul class="alist-header-nav">
+          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">추천순</button></li>
+          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 낮은순</button></li>
+          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 높은순</button></li>
+          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">평점순</button></li>
+          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">거리순</button></li>
+          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">등급순</button></li>
+        </ul>
+      </header>
+      <div class="loading-wrap" *ngIf="isLoading$ | async">
+        <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+      </div>
+      <section class="alist-content-wrapper" *ngIf="!(isLoading$ | async)">
+        <div class="alist-content-container" infiniteScroll [infiniteScrollDistance]="0.5" (scrolled)="onScroll($event)">
+          <div class="alist-content-outter" *ngFor="let list of allPagedItems">
+              <a routerLink="/accommodation/{{list.stayId}}">
+              <section class="alist-item-box">
+                <div class="alist-item-box-image-container">
+                  <div class="alist-item-box-imgDetail"  [ngStyle]="{ 'background-image': 'url(' + list.mainImage + ')'}" title="호텔이름"></div>
+                </div>
+                <div class="alist-box-right-container">
+                  <div class="alist-box-right-inner">
+                    <div>
+                      <h2 class="alist-hotel-name">{{list.stay}}</h2>
+                      <p class="alist-hotel-name-desc">
+                        <i class="alist-search-icon fa fa-map-marker"></i>
+                        {{list.directions}}
+                      </p>
+                      <!-- <div class="alist-hotel-service">
+                        <span class="alist-hotel-service-label">무료 Wi-Fi</span>
+                      </div> -->
+                    </div>
+                    <div class="alist-hotel-review-container">
+                      <div class="alist-hotel-score">
+                        <span>{{list.averageGrade}}</span>
+                      </div>
+                      <div class="alist-hotel-review-label">
+                        <h3>좋음</h3>
+                        <p>
+                          {{list.totalComments}}개의 이용 후기
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="alist-box-right-outter">
+                    <div class="alist-rightbox-wrapper">
+                      <div class="alist-rightbox-price">
+                        <h2 class="alist-price-total">{{list.daysPrice | number}} <span>원</span></h2>
+                        <p class="alist-price-avg">
+                          1박평균
+                          {{list.daysPrice | number}} 원
+                        </p>
+                      </div>
+                      <div class="alist-rightbox-btnBox">
+                        <button type="button" class="alist-rightbox-btn">예약하러 가기</button>
+                      </div>
+                    </div>
+                    <div class="alist-rightbox-priceOption">
+                      <div class="alist-priceOption">
+                        <h4>대실</h4>
+                        <p *ngIf="list.hoursPrice">
+                          {{list.hoursPrice | number}}원
+                        </p>
+                        <p *ngIf="!list.hoursPrice">
+                          - 원
+                          </p>
+                      </div>
+                      <div class="alist-priceOption">
+                        <h4>숙박</h4>
+                        <p>
+                          {{list.daysPrice | number}}원
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </article>
+  </div>
 </div>
+<app-footer></app-footer>

@@ -12,6 +12,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { koLocale } from 'ngx-bootstrap/locale';
 import { SwiperModule, SWIPER_CONFIG, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { AgmCoreModule } from '@agm/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AccommodationRoutingModule } from './accommodation-routing.module';
 
@@ -51,11 +52,12 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     FormsModule,
+    InfiniteScrollModule,
     RouterModule,
     AgmCoreModule.forRoot({
       apiKey: environment.apiKey
     }),
-    AccommodationRoutingModule
+    AccommodationRoutingModule,
   ],
   providers: [
     {

@@ -18,7 +18,7 @@ export class StayListService {
     // .set('selectRegion','강남/역삼/선릉/삼성')
     // .set('category','모텔')
 
-    return this.http.get(this.appUrl, payload);
+    return this.http.get<Stay[]>(this.appUrl, payload);
   }
 
 }
