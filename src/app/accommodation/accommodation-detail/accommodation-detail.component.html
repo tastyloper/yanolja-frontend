@@ -219,12 +219,12 @@
       </section>
       <section class="review-section" *ngIf="!!data">
         <h2>후기 {{data.totalComments}}</h2>
-        <div class="grade">
+        <div class="grade" *ngIf="">
           <div class="grade-number">{{data.averageGrade}}</div>
           <div class="grade-text" *ngIf="data.averageGrade >= 4.5">우수함</div>
-        <div class="grade-text" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</div>
-        <div class="grade-text" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</div>
-        <div class="grade-text" *ngIf="data.averageGrade < 3.5">비추</div>
+          <div class="grade-text" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</div>
+          <div class="grade-text" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</div>
+          <div class="grade-text" *ngIf="data.averageGrade < 3.5">비추</div>
         </div>
         <div class="grade-score">
           <ul>
@@ -275,7 +275,8 @@
           totalGrade1: data.totalGrade[0], 
           totalGrade2: data.totalGrade[1], 
           totalGrade3: data.totalGrade[2], 
-          totalGrade4: data.totalGrade[3] }"
+          totalGrade4: data.totalGrade[3],
+          stayId: data.stayId }"
         >
         후기 더 보기
         </a>

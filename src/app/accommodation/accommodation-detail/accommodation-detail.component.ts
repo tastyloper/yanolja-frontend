@@ -26,6 +26,7 @@ import { Review } from 'src/app/core/types/review.interface';
 import { environment } from '../../../environments/environment';
 import { StayDetailService } from 'src/app/core/services/stay-detail.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -282,6 +283,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     private modalService: BsModalService,
     private dataService: StayDetailService,
     private mapsAPILoader: MapsAPILoader,
+    private toaster: ToastrService,
     private route: ActivatedRoute
   ) {}
 
@@ -386,13 +388,14 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
   copyText() {
     // document.execCommand('copy', true, this.address);
-    alert('주소가 클립보드에 저장되었어요!');
     const text = document.createElement('textarea');
     document.body.appendChild(text);
     text.value = this.address;
     text.select();
     document.execCommand('copy');
     document.body.removeChild(text);
+
+    this.toaster.success('주소가 클립보드에 복사되었어요!');
   }
 
   getGrade(grades: number[]) {
