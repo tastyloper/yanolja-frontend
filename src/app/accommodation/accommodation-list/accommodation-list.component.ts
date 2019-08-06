@@ -1587,8 +1587,7 @@ export class AccommodationListComponent implements OnInit {
         rangeInputFormat: 'YYYY-MM-DD',
         showWeekNumbers: false,
         minDate : this.minDate,
-
-        // maxDate : this.maxDate
+        maxDate : this.maxDate
       });
 
     this.getList();
