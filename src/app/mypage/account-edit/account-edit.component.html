@@ -1,4 +1,5 @@
-<div class="mypage-router-wrap">
+<div *ngIf="isLoading$ | async" class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+<div class="mypage-router-wrap" *ngIf="!(isLoading$ | async)">
   <section class="account-edit">
     <form [formGroup]="accountForm" class="mypage-body-wrapper clearfix" (ngSubmit)="onSubmit()">
       <div class="body-content">
@@ -7,50 +8,48 @@
           <div class="member-value value-spe">{{ account.email }}</div>
           <em class="help-block"></em>
         </div>
-        <div class="member-group input-group clearfix">
-          <div class="member-key">닉네임</div>
-          <div class="member-value" [class.has-error]="nickName.errors && nickName.touched">
-            <input type="text" class="form-control" placeholder="이가영" value="{{ account.nickname }}" formControlName="nickName">
-            <em class="help-block" *ngIf="nickName.errors?.required && nickName.touched">닉네임을 입력해주세요.</em>
-          </div>
-        </div>
-        <div class="member-group clearfix">
-          <div class="member-key">비밀번호</div>
+        <div class="member-group clearfix" [class.has-error]="currentpw.errors && currentpw.touched">
+          <div class="member-key">현재 비밀번호</div>
           <div class="member-value">
-            <input type="password" class="form-control" placeholder="현재 비밀번호 입력" formControlName="currentpw">
-            <em class="help-block" *ngIf="currentpw.errors?.required && currentpw.touched">현재 비밀번호를 입력해주세요.</em>
+            <input type="password" class="form-control" placeholder="비밀번호를 변경하시려면 현재 비밀번호를 입력해주세요." formControlName="currentpw">
             <em class="help-block" *ngIf="currentpw.errors?.pattern && currentpw.touched">8~20자 영대소문자, 숫자, 특수문자 조합으로 입력해주세요.</em>
           </div>
         </div>
         <div formGroupName="passwordGroup">
-          <div class="member-group clearfix">
-            <div class="member-key" [class.has-error]="userpw.errors && userpw.touched">&nbsp;</div>
+          <div class="member-group clearfix" [class.has-error]="userpw.errors && userpw.touched">
+            <div class="member-key">새 비밀번호</div>
             <div class="member-value">
               <input type="password" class="form-control" placeholder="새 비밀번호 - 영문+숫자+특문 8~20자" formControlName="userpw">
               <em class="help-block" *ngIf="userpw.errors?.required && userpw.touched">새 비밀번호를 입력해주세요.</em>
               <em class="help-block" *ngIf="userpw.errors?.pattern && userpw.touched">8~20자 영대소문자, 숫자, 특수문자 조합으로 입력해주세요.</em>
             </div>
           </div>
-          <div class="member-group">
+          <div class="member-group" [class.has-error]="passwordGroup.errors && confirmPw.touched">
             <div class="member-key">&nbsp;</div>
             <div class="member-value">
-              <input type="password" class="form-control" placeholder="새 비밀번호 확인" formControlName="confirmPw"
-                id="passwordCheck">
+              <input type="password" class="form-control" placeholder="새 비밀번호 확인" formControlName="confirmPw">
               <em class="help-block" *ngIf="passwordGroup.errors?.match && confirmPw.touched">위의 비밀번호와 동일하게 입력해 주세요.</em>
             </div>
           </div>
         </div>
-        <div class="member-group input-group clearfix">
+        <div class="member-group input-group clearfix" [class.has-error]="nickName.errors && nickName.touched">
+          <div class="member-key">닉네임</div>
+          <div class="member-value" [class.has-error]="nickName.errors && nickName.touched">
+            <input type="text" class="form-control" placeholder="닉네임을 입력해주세요." formControlName="nickName">
+            <em class="help-block" *ngIf="nickName.errors?.required && nickName.touched">닉네임을 입력해주세요.</em>
+          </div>
+        </div>
+        <div class="member-group input-group clearfix" [class.has-error]="phoneNumber.errors && phoneNumber.touched">
           <div class="member-key">휴대폰번호</div>
-          <div class="member-value" [class.has-error]="phoneNumber.errors && phoneNumber.touched">
-            <input type="text" class="form-control" placeholder="이가영" value="{{ account.phoneNumber }}" formControlName="phoneNumber">
+          <div class="member-value">
+            <input type="text" class="form-control" placeholder="휴대폰번호 입력해주세요." formControlName="phoneNumber">
             <em class="help-block" *ngIf="phoneNumber.errors?.required && phoneNumber.touched">휴대폰번호 입력해주세요.</em>
           </div>
         </div>
       </div>
-      <div class="memeber-edit-btn clearfix">
-        <button type="button" class="btn btn-secondary">취소하기</button>
-        <button class="btn btn-primary">저장하기</button>
+      <div class="memeber-edit-btn text-right pt-5">
+        <button class="btn btn-primary" [disabled]="accountForm.invalid">저장하기</button>
+        <a class="btn btn-secondary" routerLink="/mypage" >취소하기</a>
       </div>
     </form>
   </section>

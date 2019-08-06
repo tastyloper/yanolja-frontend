@@ -1,7 +1,8 @@
+
 <section class="accommodation-detail fix-height">
   <div class="container">
     <div class="my-container">
-    <section class="header-section">
+    <section class="header-section" *ngIf="!(stayDetailLoading$ | async)">
       <div class="header-div">
         <h1 class="accomodation-name">{{data.name}}</h1>
         <i class="stars">
@@ -15,10 +16,7 @@
             {{data.location}}</span>
       </div>
       <div class="review-container">
-        <span class="evaluation" *ngIf="data.averageGrade >= 4.5">우수함</span>
-        <span class="evaluation" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</span>
-        <span class="evaluation" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</span>
-        <span class="evaluation" *ngIf="data.averageGrade < 3.5">비추</span>
+        <span class="evaluation">{{evaluationText()}}</span>
 
         <span class="review-count">{{data.totalComments}}개의 이용 후기</span>
         <i>{{data.averageGrade}}</i>
@@ -32,25 +30,29 @@
       <div class="all-wrpper">
         <div class="swiper-container gallery-top" #galleryTop [swiper]="galleryTopConfig">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" *ngFor="let img of data.urlImage">
-              <img [src]="img">
-            </div>
+            <ng-container *ngIf="!!data">
+              <div class="swiper-slide" *ngFor="let img of data.urlImage">
+                <img [src]="img">
+              </div>
+            </ng-container>
           </div>
           <div class="swiper-button-next swiper-button-black"></div>
           <div class="swiper-button-prev swiper-button-black"></div>
         </div>
-        <div class="swiper-container gallery-thumbs" #galleryThumbs [swiper]="galleryThumbsConfig">
+        <div class="swiper-container gallery-thumbs" #galleryThumbs setgalleryThumbs [swiper]="galleryThumbsConfig">
           <div class="swiper-wrapper">
+            <ng-container *ngIf="!!data">
             <div class="swiper-slide" *ngFor="let img of data.urlImage">
               <img [src]="img">
             </div>
+            </ng-container>
           </div>
         </div>
       </div>
       </section>
       <section class="compare-price-section">
         <h2>객실 가격비교</h2>
-        <section class="compare-condition">
+        <section class="compare-condition" *ngIf="!(stayDetailLoading$ | async)">
           <h3>비교 조건 선택</h3>
           <div class="check-date">
             <p>날짜 선택</p>
@@ -65,7 +67,6 @@
                       bsDaterangepicker
                       formControlName="dateYMD"
                       [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
-                      [(ngModel)]="bsRangeValue"
                       [minDate]="minDate"
                       [container]="'.accommodation-detail'"
                       >
@@ -118,7 +119,7 @@
           </div>
           <button class="search btn btn-outline-primary">검색</button>
         </section>
-        <section class="room-list-section">
+        <section class="room-list-section" *ngIf="!(roomsLoading$ | async)">
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
           <li class="room" [routerLink]="room.roomId" *ngFor="let room of rooms">
@@ -127,27 +128,41 @@
               <div class="column-div">
                 <span class="room-name">{{room.name}}</span>
                 <span class="room-standard">기준 {{room.standardPersonnel}}명/ 최대 {{room.maximumPersonnel}}명</span>
-                <div class="reservation-status" *ngIf="!true">예약가능</div>
-                <div class="reservation-status not-available" *ngIf="true">예약불가</div>
+                <div class="reservation-status" *ngIf="!(room.hoursAvailable && room.stayAvailable)">예약가능</div>
+                <div class="reservation-status not-available" *ngIf="room.hoursAvailable && room.stayAvailable">예약불가</div>
               </div>
             </div>
             <div class="room-div">
-              <div>
-                <span class="room-type">대실</span>
-                <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
-              </div>
-              <span class="room-price">{{room.saleHoursPrice | number}}원</span>
-              <div>
-                <span class="room-type">숙박</span>
-                <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
-              </div>
-              <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+              <ng-container *ngIf="!room.rentalAvailable">
+                <div>
+                  <ng-container *ngIf="room.hoursAvailable">
+                  <div>
+                    <span class="room-type">대실</span>
+                    <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
+                  </div>
+                  <span class="room-price">{{room.saleHoursPrice | number}}원</span>
+                </ng-container>
+                <span class="reservation-done" *ngIf="!room.hoursAvailable">예약마감</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!room.stayAvailable">
+                <div>
+                  <ng-container *ngIf="!!room.daysCheckIn">
+                  <div>
+                    <span class="room-type">숙박</span>
+                    <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
+                  </div>
+                  <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                  </ng-container>
+                  <span class="reservation-done" *ngIf="!room.daysCheckIn">예약마감</span>
+                </div>
+              </ng-container>
             </div>
           </li>
         </ul>
         </section>
       </section>
-      <section class="accomodation-information-section">
+      <section class="accomodation-information-section" *ngIf="!(stayDetailLoading$ | async)">
         <h2>숙소 정보</h2>
         <section class="accomodation-location">
           <div class="map-overlay"></div>
@@ -202,7 +217,7 @@
           </ul>
         </section>
       </section>
-      <section class="review-section">
+      <section class="review-section" *ngIf="!!data">
         <h2>후기 {{data.totalComments}}</h2>
         <div class="grade">
           <div class="grade-number">{{data.averageGrade}}</div>
@@ -255,12 +270,12 @@
         </ul>
         <a routerLink="/accommodation/1/review"
         [queryParams]=
-        "{ totalComments: this.totalComments, 
-          averageGrade: this.averageGrade, 
-          totalGrade1: this.totalGrade1, 
-          totalGrade2: this.totalGrade2, 
-          totalGrade3: this.totalGrade3, 
-          totalGrade4: this.totalGrade4 }"
+        "{ totalComments: data.totalComments, 
+          averageGrade: data.averageGrade, 
+          totalGrade1: data.totalGrade[0], 
+          totalGrade2: data.totalGrade[1], 
+          totalGrade3: data.totalGrade[2], 
+          totalGrade4: data.totalGrade[3] }"
         >
         후기 더 보기
         </a>

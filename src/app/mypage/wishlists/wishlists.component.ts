@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+import { ToastrService } from 'ngx-toastr';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
+import { WishlistsService } from '../../core/services/wishlists.service';
 
 import { Stay } from '../../core/types/stay.interface';
 
@@ -10,12 +14,15 @@ import { Stay } from '../../core/types/stay.interface';
   styleUrls: ['./wishlists.component.scss']
 })
 export class WishlistsComponent implements OnInit {
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private likes: Stay[];
   pager: any = {};
   pagedItems: any[];
 
   constructor(
-    private subTitleService: SubTitleService
+    private subTitleService: SubTitleService,
+    private wishlistsService: WishlistsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -26,80 +33,103 @@ export class WishlistsComponent implements OnInit {
   }
 
   getLike() {
-    this.likes = [
-      {
-        id: 1,
-        category: 1,
-        name: '역삼 리치웰1',
-        averageGrade: 4.7,
-        totalComments: 21,
-        ownerComments: 14,
-        hoursAvailable: 6,
-        daysCheckIn: 16,
-        hoursPrice: '25000',
-        daysPrice: '25000',
-        directions: '선릉역 4번출구 도보10분',
-        mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
-      },
-      {
-        id: 2,
-        category: 1,
-        name: '역삼 리치웰2',
-        averageGrade: 4.7,
-        totalComments: 21,
-        ownerComments: 14,
-        hoursAvailable: 6,
-        daysCheckIn: 16,
-        hoursPrice: '25000',
-        daysPrice: '25000',
-        directions: '선릉역 4번출구 도보10분',
-        mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
-      },
-      {
-        id: 3,
-        category: 1,
-        name: '역삼 리치웰3',
-        averageGrade: 4.7,
-        totalComments: 21,
-        ownerComments: 14,
-        hoursAvailable: 6,
-        daysCheckIn: 16,
-        hoursPrice: '25000',
-        daysPrice: '25000',
-        directions: '선릉역 4번출구 도보10분',
-        mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
-      },
-      {
-        id: 4,
-        category: 1,
-        name: '역삼 리치웰4',
-        averageGrade: 4.7,
-        totalComments: 21,
-        ownerComments: 14,
-        hoursAvailable: 6,
-        daysCheckIn: 16,
-        hoursPrice: '25000',
-        daysPrice: '25000',
-        directions: '선릉역 4번출구 도보10분',
-        mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
-      },
-      {
-        id: 5,
-        category: 1,
-        name: '역삼 리치웰5',
-        averageGrade: 4.7,
-        totalComments: 21,
-        ownerComments: 14,
-        hoursAvailable: 6,
-        daysCheckIn: 16,
-        hoursPrice: '25000',
-        daysPrice: '25000',
-        directions: '선릉역 4번출구 도보10분',
-        mainImage: 'https://yaimg.yanolja.com/resize/place/v4/2017/08/24/06/640/599df9c8524630.94491845.jpg'
-      }
-    ];
+    // this.likes = [
+    //   {
+    //     directions: '강남역 초인접 위치(도로 5분 거리)',
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     category: '모텔',
+    //     stay: '역삼마레',
+    //     stayId: 1,
+    //     totalComments: 9,
+    //     averageGrade: 4.5,
+    //     ownerComments: 7,
+    //     hoursPrice: '25000',
+    //     hoursAvailable: 4,
+    //     saleHoursPrice: '10000',
+    //     daysCheckIn: 22,
+    //     daysPrice: '50000',
+    //     saleDaysPrice: '41200'
+    //   },
+    //   {
+    //     directions: '역삼역 도보 10분 거리',
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     category: '모텔',
+    //     stay: '역삼 호텔 The Artist',
+    //     stayId: 3,
+    //     totalComments: 0,
+    //     averageGrade: 0,
+    //     ownerComments: 0,
+    //     hoursPrice: '30000',
+    //     hoursAvailable: 3,
+    //     saleHoursPrice: '18500',
+    //     daysCheckIn: 22,
+    //     daysPrice: '',
+    //     saleDaysPrice: ''
+    //   },
+    //   {
+    //     directions: '강남역 초인접 위치(도로 5분 거리)',
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     category: '모텔',
+    //     stay: '역삼마레1',
+    //     stayId: 4,
+    //     totalComments: 9,
+    //     averageGrade: 4.5,
+    //     ownerComments: 7,
+    //     hoursPrice: '',
+    //     hoursAvailable: 4,
+    //     saleHoursPrice: '',
+    //     daysCheckIn: 22,
+    //     daysPrice: '50000',
+    //     saleDaysPrice: '41200'
+    //   },
+    //   {
+    //     directions: '역삼역 도보 10분 거리',
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     category: '모텔',
+    //     stay: '역삼 호텔 The Artist2',
+    //     stayId: 5,
+    //     totalComments: 0,
+    //     averageGrade: 0,
+    //     ownerComments: 0,
+    //     hoursPrice: '30000',
+    //     hoursAvailable: 3,
+    //     saleHoursPrice: '',
+    //     daysCheckIn: 22,
+    //     daysPrice: '50000',
+    //     saleDaysPrice: '41200'
+    //   },
+    //   {
+    //     directions: '역삼역 도보 10분 거리',
+    //     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+    //     category: '모텔',
+    //     stay: '역삼 호텔 The Artist3',
+    //     stayId: 6,
+    //     totalComments: 0,
+    //     averageGrade: 0,
+    //     ownerComments: 0,
+    //     hoursPrice: '30000',
+    //     hoursAvailable: 3,
+    //     saleHoursPrice: '18500',
+    //     daysCheckIn: 22,
+    //     daysPrice: '50000',
+    //     saleDaysPrice: ''
+    //   }
+    // ];
 
-    this.setPage(1);
+    this.isLoading$.next(true);
+    this.wishlistsService.getWishlist().subscribe(
+      data => {
+        this.likes = data;
+        this.setPage(1);
+      },
+      error => {
+        console.log(error);
+        this.toastr.error('치명적인 오류가 발생했습니다. 관리자에게 문의하세요.');
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
   }
 
   setPage(page: number) {

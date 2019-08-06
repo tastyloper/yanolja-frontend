@@ -38,11 +38,8 @@
 .help-block {
   margin-bottom: 10px;
 }
-
 .btn {
-  
   width: calc(20% - 5px);
-  float: right;
   line-height: 15px;
   padding: 12px;
   & + .btn {

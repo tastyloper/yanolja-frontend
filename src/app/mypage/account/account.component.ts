@@ -41,11 +41,18 @@ export class AccountComponent implements OnInit {
   }
 
   getData() {
+    // 가데이터
+    // this.account = {
+    //   nickname: '연희내꺼야',
+    //   email: 'tak@gmail.com',
+    //   phoneNumber: '01042221234'
+    // };
     this.authService.getUser().subscribe(
       success => {
         this.accountdata = success;
       },
       error => {
+        console.log(error);
         this.authService.removeToken();
         this.toastr.error('유저 정보를 찾을 수 없습니다.');
         this.router.navigate(['login']);

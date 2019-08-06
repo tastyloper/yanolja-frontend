@@ -1,34 +1,39 @@
-<div class="mypage-router-wrap">
+<div *ngIf="isLoading$ | async" class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+<div class="mypage-router-wrap" *ngIf="!(isLoading$ | async)">
   <section class="reservation-detail">
     <div class="reservation-detail-body">
       <div class="detail-wrapper">
         <div class="reservation-detail-header">
           <div class="title-wrapper">
-            <a class="detail-title">무주귀빈</a>
-            <a class="detail-title-icon"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            <a class="detail-title">{{ bookData.stay }}</a>
+            <!-- <i class="detail-title-icon"><i class="fa fa-angle-right" aria-hidden="true"></i></a> -->
           </div>
-          <p class="detail-subtitle subtitle">온돌</p>
-          <p class="detail-subtitle">2019.08.26(월) 14:00 ~ 2019.08.27(화) 11:00</p>
+          <p class="detail-subtitle subtitle">{{ bookData.room }}</p>
+          <p class="detail-subtitle">
+            <span [innerText]="splitDate(bookData.checkIn)"></span> ~
+            <span [innerText]="splitDate(bookData.checkOut)"></span>
+          </p>
+          <!-- <p class="detail-subtitle">{{ bookData.checkIn }} ~ {{ bookData.checkOut }}</!--> 
         </div>
       </div>
       <div class="reservation-detail-table">
         <p class="box-title">예약 상세</p>
         <table class="table mb-0">
-          <tr>
+          <!-- <tr>
             <th class="table-key">예약번호</th>
             <td>190709174591733</td>
-          </tr>
+          </tr> -->
           <tr>
             <th class="table-key">예약자명</th>
-            <td>이가영</td>
+            <td>{{ bookData.booker }}</td>
           </tr>
           <tr>
             <th class="table-key">예약자 연락처</th>
-            <td>050350713667</td>
+            <td>{{ bookData.phoneNumber }}</td>
           </tr>
           <tr>
             <th class="table-key">예약일시</th>
-            <td>2019.07.09 (화) 17:43</td>
+            <td [innerText]="splitDate(bookData.created)"></td>
           </tr>
         </table>
       </div>
@@ -42,16 +47,16 @@
           <div class="payment-box">
             <div class="payment-box-group clearfix">
               <p class="d-inline-block payment-box-right">판매금액</p>
-              <p class="float-right">₩ 3,900</p>
+              <p class="float-right">{{ bookData.finalPrice | number }}원</p>
             </div>
             <div class="payment-box-group clearfix">
               <p class="d-inline-block">총 할인금액</p>
-              <p class="float-right">- ₩ 0</p>
+              <p class="float-right">- 0원</p>
             </div>
             <div class="payment-box-group box-strong clearfix">
               <div class="payment-box-group payment-total-line"></div>
               <p class="d-inline-block">결제금액</p>
-              <p class="float-right">₩ 3,900</p>
+              <p class="float-right">{{ bookData.finalPrice | number }}원</p>
             </div>
           </div>
         </div>
@@ -68,7 +73,7 @@
         <div class="modal-body text-center">
           <p class="modal-text">정말 취소하시겠습니까?</p>
           <button class="btn btn-primary" (click)="confirm()">확인</button>
-          <button type="button" class="btn btn-secondary" (click)="decline()">취소</button>
+          <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
         </div>
       </ng-template>
     </div>

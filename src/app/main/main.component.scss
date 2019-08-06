@@ -117,17 +117,32 @@
   }
 }
 .main-contents {
-  .content-panel h2 {
-    margin-bottom: 15px;
-    font-size: 24px;
-    font-weight: 700;
+  padding-bottom: 100px;
+  .content-panel {
+    & + .content-panel {
+      margin-top: 60px;
+    }
+    h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: 700;
+    }
   }
   .swiper-container {
     padding: 10px 0;
   }
+  .swiper-panel {
+    position: relative;
+  }
   .swiper-button-next,
   .swiper-button-prev {
-    margin-top: 0;
+    margin-top: -20px;
+  }
+  .swiper-button-next {
+    right: -20px;
+  }
+  .swiper-button-prev {
+    left: -20px;
   }
   .content-item {
     position: relative;
@@ -184,7 +199,7 @@
   .content-text-wrap {
     position: relative;
     height: 157px;
-    padding: 10px 16px 16px;
+    padding: 5px 16px 16px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     .location {
@@ -192,41 +207,50 @@
       font-size: 11px;
     }
     h3 {
+      overflow: hidden;
       color: #343a40;
       font-weight: 600;
       font-size: 18px;
+      white-space: nowrap;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
     }
     .customer {
       font-size: 12px;
-      .fa-star {
+      .comma {
+        height: 12px;
+        margin-top: 3px;
         margin-right: 5px;
-        color: #FFCD34;
+        vertical-align: top;
       }
       .fa-comments {
         margin: 0 5px 0 10px;
       }
     }
+    .type-wrap {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 0 16px 12px;
+    }
     .type {
-      display: inline-block;
-      width: calc(50% - 8px);
-      margin-top: 20px;
+      margin-top: 5px;
       h4 {
         font-weight: 700;
         font-size: 14px;
-        span {
-          color: #919191;
-          font-weight: 400;
-          font-size: 11px;
-        }
+      }
+      span {
+        display: block;
+        color: #919191;
+        font-weight: 400;
+        font-size: 11px;
       }
       p {
         color: #999;
         font-size: 11px;
         text-decoration: line-through;
       }
-    }
-    .borrow {
-      margin-right: 16px;
     }
     .price {
       line-height: 1;
@@ -263,4 +287,8 @@
   agm-map {
     height: 600px;
   }
+}
+.loading-wrap {
+  position: relative;
+  height: 343px;
 }

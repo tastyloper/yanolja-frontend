@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { User, Login } from '../types/user.interface';
+
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -17,22 +19,27 @@ export class AuthService {
   }
 
   login(payload: object) {
-    return this.http.post(`${this.appUrl}email/get_token/`, payload);
+    return this.http.post<Login>(`${this.appUrl}email/get_token/`, payload);
   }
 
   getUser() {
     const headers = new HttpHeaders()
-      .set('Authorization', `Token ${this.getToken()}`);
-
-    return this.http.get(`${this.appUrl}mypage/`, { headers });
+      .set('Authorization', `Token ${this.getToken().token}`);
+    return this.http.get<User>(`${this.appUrl}mypage/`, { headers });
   }
 
-  getToken(): string {
-    return localStorage.getItem(this.TOKEN_NAME);
+  upadteUser(payload: object) {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Token ${this.getToken().token}`);
+    return this.http.patch(`${this.appUrl}mypage/update/`, payload, { headers });
   }
 
-  setToken(token: string): void {
-    localStorage.setItem(this.TOKEN_NAME, token);
+  getToken(): Login {
+    return JSON.parse(localStorage.getItem(this.TOKEN_NAME));
+  }
+
+  setToken(loginInfo: object): void {
+    localStorage.setItem(this.TOKEN_NAME, JSON.stringify(loginInfo));
   }
 
   removeToken(): void {
