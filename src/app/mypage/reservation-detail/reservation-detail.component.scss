@@ -10,19 +10,13 @@
   padding-bottom: 15px;
 }
 .detail-title {
-  font-size: 16px;
-  line-height: 50px;
+  font-size: 20px;
+  font-weight: 600;
 }
-.detail-title-icon{
-  display: inline-block;
-  position: absolute;
-  top: 14px;
-  right: 20px;
+.detail-sub {
+  padding-top: 15px;
 }
-.detail-subtitle {
-  font-size: 12px;
-  font-weight: 400;
-}
+
 .subtitle {
   margin-bottom: 3px;
 }
@@ -34,22 +28,19 @@
 }
 .box-title {
   padding-bottom: 20px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .table {
   border-bottom: 1px solid #ccc;
-  font-size: 12px;
 }
 .table th {
   width: 20%;
   padding: 20px 20px;
   background: #f5f6f7;
-  font-weight: 400;
 }
 .table td {
   width: 80%;
   padding: 20px 20px;
-  font-weight: 200;
 }
 .table tr:first-child td,
 .table tr:first-child th {
@@ -58,7 +49,6 @@
 .box-outline {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  font-size: 12px;
   display: flex;
   justify-content: space-between;
 }
@@ -79,7 +69,6 @@
   border-top: 1px solid #dee2e6;
 }
 .box-strong {
-  font-size: 14px;
   padding-bottom: 0px;
 }
 
@@ -93,7 +82,6 @@
 .checkbox {
   // margin-bottom: 15px;
   label {
-    font-size: 14px;
     line-height: 20px;
   }
   .help-block {
@@ -112,7 +100,6 @@
   margin-bottom: 15px;
   padding: 15px;
   color: #ADB5BD;
-  font-size: 12px;
   background-color: #F5F6F7;
   border: 1px solid #E9ECEF;
   border-radius: 2px;
@@ -124,3 +111,4 @@
   margin-bottom: 15px;
   font-size: 16px;
 }
+

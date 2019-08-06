@@ -3,16 +3,18 @@
   <section class="reservation-detail">
     <div class="reservation-detail-body">
       <div class="detail-wrapper">
-        <div class="reservation-detail-header">
+        <div class="reservation-detail-table">
+        <!-- <div class="reservation-detail-header"> -->
           <div class="title-wrapper">
             <a class="detail-title">{{ bookData.stay }}</a>
-            <!-- <i class="detail-title-icon"><i class="fa fa-angle-right" aria-hidden="true"></i></a> -->
           </div>
-          <p class="detail-subtitle subtitle">{{ bookData.room }}</p>
-          <p class="detail-subtitle">
-            <span [innerText]="splitDate(bookData.checkIn)"></span> ~
-            <span [innerText]="splitDate(bookData.checkOut)"></span>
-          </p>
+          <div class="detail-sub">
+            <p class="detail-subtitle subtitle">{{ bookData.room }}</p>
+            <p class="detail-subtitle">
+              <span [innerText]="splitDate(bookData.checkIn)"></span> ~
+              <span [innerText]="splitDate(bookData.checkOut)"></span>
+            </p>
+          </div>
           <!-- <p class="detail-subtitle">{{ bookData.checkIn }} ~ {{ bookData.checkOut }}</!--> 
         </div>
       </div>
@@ -75,6 +77,21 @@
           <button class="btn btn-primary" (click)="confirm()">확인</button>
           <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
         </div>
+        <!-- <div class="modal-header">
+            <h4 class="modal-title pull-left">계정 삭제하기</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body text-center">
+            <div class="modal-q">
+              <p class="modal-q-color">정말로 <span class="modal-q-agree">취소</span>를 진행하시겠습니까?</p>
+            </div> 
+            <div class="modal-btn clearfix">
+              <button class="btn btn-primary" (click)="confirm()">확인</button>
+              <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
+            </div>
+          </div> -->
       </ng-template>
     </div>
   </section>
