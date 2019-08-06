@@ -45,4 +45,10 @@ export class AuthService {
   removeToken(): void {
     localStorage.removeItem(this.TOKEN_NAME);
   }
+
+  secession() {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Token ${this.getToken().token}`);
+    return this.http.delete<User>(`${this.appUrl}/api/accounts/delete/`, { headers });
+  }
 }

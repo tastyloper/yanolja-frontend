@@ -1,12 +1,16 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
 import { AuthService } from '../../core/services/auth.service';
+
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-account',
@@ -17,6 +21,7 @@ export class AccountComponent implements OnInit {
   secessionForm: FormGroup;
   modalRef: BsModalRef;
   accountdata = {};
+  private appUrl = environment.appUrl;
 
   constructor(
     private subTitleService: SubTitleService,
@@ -25,6 +30,7 @@ export class AccountComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -64,10 +70,10 @@ export class AccountComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  onSubmit() {
-    console.log(this.secessionForm);
-    this.secessionForm.reset();
-  }
+  // onSubmit() {
+  //   console.log(this.secessionForm);
+  //   this.secessionForm.reset();
+  // }
 
   get userpw() {
     return this.secessionForm.get('userpw');
