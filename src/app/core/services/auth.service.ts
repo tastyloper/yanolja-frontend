@@ -12,7 +12,9 @@ export class AuthService {
   private appUrl = environment.appUrl;
   private TOKEN_NAME = environment.tokenName;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+    ) {}
 
   createAccount(payload: object) {
     return this.http.post(`${this.appUrl}accounts/signup/`, payload);
@@ -44,5 +46,11 @@ export class AuthService {
 
   removeToken(): void {
     localStorage.removeItem(this.TOKEN_NAME);
+  }
+
+  secession() {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Token ${this.getToken().token}`);
+    return this.http.delete(`${this.appUrl}accounts/delete/`, { headers });
   }
 }

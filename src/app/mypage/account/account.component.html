@@ -7,7 +7,7 @@
         <div class="body-text">{{ accountdata.nickname }}</div>
       </div>
       <div class="member-group clearfix">
-        <div class="member-key">이름</div>
+        <div class="member-key">닉네임</div>
         <div class="member-value">{{ accountdata.nickname }}</div>
       </div>
       <div class="member-group clearfix">
@@ -39,15 +39,11 @@
   <div class="modal-body">
     <div class="modal-q">
       회원탈퇴를 하시려면 <span class="modal-q-agree">안내 및 동의</span>가 필요합니다.
-      <p class="modal-q-color">정말로 회원탈퇴를 진행하시겠습니까?</p>
+      <p class="modal-q-color">정말로 <span class="modal-q-agree">회원탈퇴</span>를 진행하시겠습니까?</p>
+    </div> 
+    <div class="modal-btn clearfix">
+      <button class="btn btn-primary" (click)="btnSecession()">확인</button>
+      <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
     </div>
-    <form [formGroup]="secessionForm" (ngSubmit)="onSubmit()"> 
-      <div class="form-group" [class.has-error]="userpw.errors && userpw.touched">
-        <input type="password" id="userpw" name="userpw" class="form-input" placeholder="비밀번호를 입력해주세요." minlength="6" formControlName="userpw">
-        <em class="form-error-msg" *ngIf="userpw.errors?.required && userpw.touched">비밀번호를 입력해주세요.</em>
-        <em class="form-error-msg" *ngIf="userpw.errors?.minlength && userpw.touched">너무 짧은 비밀번호입니다.</em>
-      </div>
-      <button class="submit-btn" [disabled]="secessionForm.invalid">확인</button>
-    </form>
   </div>
 </ng-template>
