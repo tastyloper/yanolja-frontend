@@ -446,7 +446,8 @@ button {
   position: relative;
 }
 .accomodation-location p span {
-  @include vertical-center
+  @include vertical-center;
+  width: 100%;
 }
 .accomodation-map-marker {
   color: $primary-dark-color;
