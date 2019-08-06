@@ -1558,7 +1558,7 @@ export class AccommodationListComponent implements OnInit {
   searchBarDateShow: string;
   searchBarMemberShow: string;
 
-  sstayList:object;
+  sstayList;
 
   searchParams;
 
@@ -1606,11 +1606,21 @@ export class AccommodationListComponent implements OnInit {
       // category: '모텔',
       // personnel: 2,
       // requestCheckIn: '2019-07-01+22:00:00'
+      category: this.category,
+      selectRegion : this.selectRegion,
+      personnel: 2,
+      requestCheckIn: '2019-07-01+22:00:00',
+      requestCheckOut: '2019-07-02+22:00:00',
+      popularKeyword: ''
     }
 
     let slist = this.sstayList;
-    this.stayList.getAList(payLoad).subscribe(list => this.sstayList = Object.assign(slist, list));
-    console.log('list',this.sstayList);
+    this.stayList.getAList(payLoad).subscribe(list => {
+     const copyList = list;
+     this.sstayList = copyList;
+     console.log(this.sstayList + 'dd');
+    });
+    console.log('list', this.sstayList);
   }
 
   toggle(option:string) {
