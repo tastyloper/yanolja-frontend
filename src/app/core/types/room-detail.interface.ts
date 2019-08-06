@@ -15,4 +15,6 @@ export interface RoomDetail {
     urlImage: string[];
     stayId: number;
     roomId: number;
+    rentalAvailable: boolean;
+    stayAvailable: boolean;
 }

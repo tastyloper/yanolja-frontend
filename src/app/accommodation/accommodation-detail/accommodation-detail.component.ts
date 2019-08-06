@@ -1,5 +1,7 @@
-import { Component, AfterViewInit, ViewChild, OnInit, HostListener, Host, TemplateRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { BehaviorSubject } from 'rxjs';
 // swiper
@@ -8,6 +10,9 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 // DateRangePicker
 import { BsDaterangepickerDirective } from 'ngx-bootstrap/datepicker';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
+
+// toastr
+import { ToastrService } from 'ngx-toastr';
 
 // Locales
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -23,10 +28,10 @@ import { StayDetail } from '../../core/types/stay-detail.interface';
 import { Room } from '../../core/types/room.interface';
 import { Review } from 'src/app/core/types/review.interface';
 
-import { environment } from '../../../environments/environment';
+// services
 import { StayDetailService } from 'src/app/core/services/stay-detail.service';
-import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -75,7 +80,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   data: StayDetail;
   rooms: Room[];
   reviews: Review[];
-  dummyStayId: number;
+  stayId: number;
   // mapConfig
   zoom = 15;
   address: string;
@@ -333,26 +338,25 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.facilitiesStatus = false;
     this.url = environment.appUrl;
     this.token = environment.tokenName;
-    this.adultCount = 0;
+    this.adultCount = 2;
     this.childrenCount = 0;
 
     this.route.paramMap
       .subscribe(param => {
-        this.dummyStayId = +param.get('id');
+        this.stayId = +param.get('id');
       });
     this.route.queryParamMap
       .subscribe(queryParam => {
-        console.log(Date.parse(this.bsValue.toDateString()));
-        this.bsRangeValue =
+        const bsRangeValue =
         [
-          new Date(queryParam.get('bsRangeValue[0]')),
-          new Date(queryParam.get('bsRangeValue[1]'))
+          new Date(Date.parse(queryParam.get('minDate'))),
+          new Date(Date.parse(queryParam.get('maxDate')))
         ];
-        console.log(this.bsRangeValue);
+        this.form.get('dateYMD').setValue(bsRangeValue);
       });
 
     this.stayDetailLoading$.next(true);
-    this.dataService.getStayDetail(595).subscribe(
+    this.dataService.getStayDetail(this.stayId).subscribe(
       data => {
         this.data = data;
         this.address = data.location;
@@ -367,7 +371,11 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
         this.stayDetailLoading$.next(false);
     });
     this.roomsLoading$.next(true);
-    this.dataService.getRoomList(595).subscribe(
+    this.dataService.getRoomList(
+      this.stayId,
+      `${this.formatDate(this.bsRangeValue[0])}+17:00:00`,
+      `${this.formatDate(this.bsRangeValue[1])}+00:00:00`
+    ).subscribe(
       data => {
         this.rooms = data;
       },
@@ -378,7 +386,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
         this.roomsLoading$.next(false);
     });
     this.reviewsLoading$.next(true);
-    this.dataService.getReviewList(595).subscribe(
+    this.dataService.getReviewList(this.stayId).subscribe(
       data => {
         this.reviews = data;
       },
@@ -387,6 +395,23 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       },
       () => {
         this.reviewsLoading$.next(false);
+    });
+  }
+  requestRoom() {
+    this.roomsLoading$.next(true);
+    this.dataService.getRoomList(
+      this.stayId,
+      `${this.formatDate(this.bsRangeValue[0])}+17:00:00`,
+      `${this.formatDate(this.bsRangeValue[1])}+00:00:00`
+    ).subscribe(
+      data => {
+        this.rooms = data;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.roomsLoading$.next(false);
     });
   }
 
@@ -456,6 +481,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   splitDate(date: string) {
     return date.split('T')[0];
   }
+  onValueChange(value: Date[]) {
+    this.bsRangeValue = value;
+  }
 
 
   adultCountUp() {
@@ -501,9 +529,19 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
           } else {
             alert('No address available!');
           }
-          console.log(this.lat, this.lng);
         }
       });
     }
+  }
+  formatDate(date: Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
   }
 }
