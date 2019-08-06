@@ -75,19 +75,19 @@ export class MainComponent implements OnInit {
   popularKeywords = [
     {
       name: '프랜차이즈',
-      img: 'url(/assets/img/main/franchise.png)'
+      img: 'url(/assets/img/main/franchise.jpg)'
     },
     {
       name: '신축/리모델링',
-      img: 'url(/assets/img/main/remodeling.png)'
+      img: 'url(/assets/img/main/remodeling.jpg)'
     },
     {
       name: '초특가 할인',
-      img: 'url(/assets/img/main/super-special.png)'
+      img: 'url(/assets/img/main/super-special.jpg)'
     },
     {
       name: '파티룸',
-      img: 'url(/assets/img/main/party.png)'
+      img: 'url(/assets/img/main/party.jpg)'
     },
     {
       name: '무료영화',

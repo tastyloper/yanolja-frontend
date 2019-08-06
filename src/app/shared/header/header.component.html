@@ -19,12 +19,12 @@
         <li *ngIf="isLogin"><a routerLink="/mypage/reservation">예약내역</a></li>
         <li *ngIf="isLogin" dropdown>
           <a class="mypage-btn dropdown-toggle" id="mypage-btn" dropdownToggle aria-controls="dropdown-mypage">
-            <img src="assets/img/mypage/profile.png" alt="mypage">
+            <img src="assets/img/mypage/profile.jpg" alt="mypage">
           </a>
           <ul id="dropdown-mypage" *dropdownMenu class="mypage-dropdown dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="mypage-btn">
             <li role="menuitem">
               <a class="dropdown-item" routerLink="/mypage">
-                <img class="rounded-circle" src="assets/img/mypage/profile.png" alt="mypage">
+                <img class="rounded-circle" src="assets/img/mypage/profile.jpg" alt="mypage">
                 <p>{{ nickname }}</p>
                 <p>프로필관리</p>
               </a>
