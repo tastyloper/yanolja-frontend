@@ -11,52 +11,10 @@
       <div class="swiper-panel">
         <div class="swiper-container" [swiper]="headerConfig">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item franchise">
+            <div class="swiper-slide" *ngFor="let popularKeyword of popularKeywords">
+              <a routerLink="/accommodation" [queryParams]="{ totalComments: 1000 }" class="hash-item" [style.background-image]="popularKeyword.img">
                 <div class="hash-bg"></div>
-                <h3>프랜차이즈</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item remodeling">
-                <div class="hash-bg"></div>
-                <h3>신축/리모델링</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item super-special">
-                <div class="hash-bg"></div>
-                <h3>초특가 할인</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item party">
-                <div class="hash-bg"></div>
-                <h3>파티룸</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item franchise">
-                <div class="hash-bg"></div>
-                <h3>프랜차이즈</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item remodeling">
-                <div class="hash-bg"></div>
-                <h3>신축/리모델링</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item super-special">
-                <div class="hash-bg"></div>
-                <h3>초특가 할인</h3>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a routerLink="/accommodation/1" class="hash-item party">
-                <div class="hash-bg"></div>
-                <h3>파티룸</h3>
+                <h3>{{ popularKeyword.name }}</h3>
               </a>
             </div>
           </div>

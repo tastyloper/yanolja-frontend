@@ -72,6 +72,44 @@ export class MainComponent implements OnInit {
   partyRooms: Stay[];
   swimmingPools: Stay[];
   spas: Stay[];
+  popularKeywords = [
+    {
+      name: '프랜차이즈',
+      img: 'url(/assets/img/main/franchise.png)'
+    },
+    {
+      name: '신축/리모델링',
+      img: 'url(/assets/img/main/remodeling.png)'
+    },
+    {
+      name: '초특가 할인',
+      img: 'url(/assets/img/main/super-special.png)'
+    },
+    {
+      name: '파티룸',
+      img: 'url(/assets/img/main/party.png)'
+    },
+    {
+      name: '무료영화',
+      img: 'url(/assets/img/main/movie.jpg)'
+    },
+    {
+      name: '스파펜션',
+      img: 'url(/assets/img/main/spa.jpg)'
+    },
+    {
+      name: '수영장호텔',
+      img: 'url(/assets/img/main/pool.jpg)'
+    },
+    {
+      name: '오션뷰호텔',
+      img: 'url(/assets/img/main/ocean.jpg)'
+    },
+    {
+      name: '개별바베큐',
+      img: 'url(/assets/img/main/bbq.jpg)'
+    }
+  ];
 
   constructor(
     private modalService: BsModalService,
