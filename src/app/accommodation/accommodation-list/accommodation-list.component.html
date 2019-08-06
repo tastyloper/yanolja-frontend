@@ -157,7 +157,10 @@
               <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">등급순</button></li>
             </ul>
           </header>
-          <section class="alist-content-wrapper">
+          <div class="loading-wrap" *ngIf="isLoading$ | async">
+            <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+          </div>
+          <section class="alist-content-wrapper" *ngIf="!(isLoading$ | async)">
             <div class="alist-content-container">
               <div class="alist-content-outter" *ngFor="let list of tempList">
                 <a routerLink="/accommodation/1">
