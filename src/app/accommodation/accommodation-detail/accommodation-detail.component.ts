@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild, OnInit, HostListener, Host, TemplateRef } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { BehaviorSubject } from 'rxjs';
 // swiper
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
@@ -21,10 +21,11 @@ declare const google: any;
 // types
 import { StayDetail } from '../../core/types/stay-detail.interface';
 import { Room } from '../../core/types/room.interface';
+import { Review } from 'src/app/core/types/review.interface';
 
 import { environment } from '../../../environments/environment';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Review } from 'src/app/core/types/review.interface';
+import { StayDetailService } from 'src/app/core/services/stay-detail.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -37,6 +38,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   @ViewChild('galleryThumbs', { static: true }) galleryThumbs;
   @ViewChild(BsDaterangepickerDirective, { static: false }) daterangepicker: BsDaterangepickerDirective;
 
+  stayDetailLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  roomsLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  reviewsLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   // datepicker
   dateCustomClasses: DatepickerDateCustomClasses[];
@@ -70,6 +74,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   data: StayDetail;
   rooms: Room[];
   reviews: Review[];
+  dummyStayId: number;
   // mapConfig
   zoom = 15;
   address: string;
@@ -77,75 +82,75 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   lng: number;
 
   // dummy data
-  averageGrade = 0;
-  // data: any = {
-  //   name: '역삼마레',
-  //   category: '모텔',
-  //   location: '서울특별시 강남구 테헤란로2길 33 (역삼동)',
-  //   directions: '강남역 초인접 위치(도로 5분 거리)',
-  //   route: [
-  //       '찾아오시는 길',
-  //       '찾아오시는 길'
-  //   ],
-  //   mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-  //   urlImage: [
-  //       'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
-  //       'https://yaimg.yanolja.com/'
-  //   ],
-  //   introduce: [
-  //       '역삼 마레',
-  //       '좋아요'
-  //   ],
-  //   serviceKinds: [
-  //     'park',
-  //     'restaurant',
-  //     'coffeeShop',
-  //     'paidLaundry',
-  //     'noSmoking',
-  //     'banquetHall',
-  //     'business',
-  //     'wifi',
-  //     'breakfast',
-  //     'spa',
-  //     'swimmingPool',
-  //     'partyRoom',
-  //     'unmanned',
-  //     'couplePC',
-  //     'barbecue',
-  //     'jokgu'
+//   averageGrade = 0;
+//   data: StayDetail = {
+//     name: '역삼마레',
+//     category: '모텔',
+//     location: '서울특별시 강남구 테헤란로2길 33 (역삼동)',
+//     directions: '강남역 초인접 위치(도로 5분 거리)',
+//     route: [
+//         '찾아오시는 길',
+//         '찾아오시는 길'
+//     ],
+//     mainImage: 'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+//     urlImage: [
+//         'https://yaimg.yanolja.com/v5/2018/10/04/11/1280/5bb577c8ad2cb3.53607180.JPG',
+//         'https://yaimg.yanolja.com/'
+//     ],
+//     introduce: [
+//         '역삼 마레',
+//         '좋아요'
+//     ],
+//     serviceKinds: [
+//       'park',
+//       'restaurant',
+//       'coffeeShop',
+//       'paidLaundry',
+//       'noSmoking',
+//       'banquetHall',
+//       'business',
+//       'wifi',
+//       'breakfast',
+//       'spa',
+//       'swimmingPool',
+//       'partyRoom',
+//       'unmanned',
+//       'couplePC',
+//       'barbecue',
+//       'jokgu'
 
-  //   ],
-  //   serviceIntroduce: [
-  //       '편의시설',
-  //       '편의시설'
-  //   ],
-  //   serviceNotice: [
-  //       '이용안내',
-  //       '이용안내',
-  //       '이용안내',
-  //       '이용안내',
-  //       '이용안내',
-  //       '이용안내',
-  //       '이용안내',
-  //       '이용안내',
-  //   ],
-  //   pickupNotice: [
-  //       '픽업안내',
-  //       '픽업안내'
-  //   ],
-  //   like: false,
-  //   stayId: 1,
-  //   totalComments: 9,
-  //   averageGrade: 4.5,
-  //   totalGrade: [
-  //       4.6,
-  //       4.2,
-  //       4.4,
-  //       4.7
-  //   ],
-  //   ownerComments: 7
-  // };
-//   rooms: any = [
+//     ],
+//     serviceIntroduce: [
+//         '편의시설',
+//         '편의시설'
+//     ],
+//     serviceNotice: [
+//         '이용안내',
+//         '이용안내',
+//         '이용안내',
+//         '이용안내',
+//         '이용안내',
+//         '이용안내',
+//         '이용안내',
+//         '이용안내',
+//     ],
+//     pickupNotice: [
+//         '픽업안내',
+//         '픽업안내'
+//     ],
+//     like: false,
+//     stayId: 1,
+//     totalComments: 9,
+//     averageGrade: 4.5,
+//     totalGrade: [
+//         4.6,
+//         4.2,
+//         4.4,
+//         4.7
+//     ],
+//     ownerComments: 7
+//   };
+//   rooms: Room[] = [
 //     {
 //         name: '일반실',
 //         standardPersonnel: 2,
@@ -166,7 +171,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 //         ],
 //         roomId: 1,
 //         stayId: 1,
-//         stay: '역삼마레'
+//         stay: '역삼마레',
+//         rentalAvailable: false,
+//         stayAvailable: false
 //     },
 //     {
 //         name: '준특실',
@@ -188,7 +195,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 //         ],
 //         roomId: 2,
 //         stayId: 1,
-//         stay: '역삼마레'
+//         stay: '역삼마레',
+//         rentalAvailable: false,
+//         stayAvailable: false
 //     },
 //     {
 //         name: '특실',
@@ -210,10 +219,12 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 //         ],
 //         roomId: 3,
 //         stayId: 1,
-//         stay: '역삼마레'
+//         stay: '역삼마레',
+//         rentalAvailable: false,
+//         stayAvailable: false
 //     }
 // ];
-// reviews: any = [
+// reviews: Review[] = [
 //   null,
 //   {
 //       text: '이렇게 좋나요?',
@@ -267,10 +278,11 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
 
   constructor(
-    private http: HttpClient,
     private localeService: BsLocaleService,
     private modalService: BsModalService,
+    private dataService: StayDetailService,
     private mapsAPILoader: MapsAPILoader,
+    private route: ActivatedRoute
   ) {}
 
 
@@ -284,13 +296,15 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.maxDate = new Date();
     this.minDate = new Date();
     this.form = new FormGroup({
-      dateYMD: new FormControl(new Date()),
-      dateFull: new FormControl(new Date()),
-      dateMDY: new FormControl(new Date()),
-      dateRange: new FormControl([new Date(), new Date()])
+      dateYMD: new FormControl(new Date())
     });
     this.locale = 'ko';
     this.locales = listLocales();
+    this.localeService.use(this.locale);
+    this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.minDate.setDate(this.minDate.getDate());
+    this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.form.get('dateYMD').setValue(this.bsRangeValue);
 
     this.galleryTopConfig = {
       spaceBetween: 10,
@@ -298,7 +312,8 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-      }
+      },
+      observer: true,
     };
     this.galleryThumbsConfig = {
       spaceBetween: 10,
@@ -307,6 +322,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       watchSlidesVisibility: true,
       watchSlidesProgress: true,
       slideToClickedSlide: true,
+      observer: true,
     };
 
     this.checkPersonModalStatus = false;
@@ -316,22 +332,47 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.adultCount = 0;
     this.childrenCount = 0;
 
-    // const headers = new HttpHeaders()
-    // .set('Authorization', this.token);
-    this.http.get<StayDetail>(this.url + 'stay/detail/333/').subscribe(data => {
-      this.data = data;
-      this.address = data.location;
+    this.route.paramMap
+      .subscribe(param => this.dummyStayId = +param.get('id'));
+
+    this.stayDetailLoading$.next(true);
+    this.dataService.getStayDetail(595).subscribe(
+      data => {
+        this.data = data;
+        this.address = data.location;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.stayDetailLoading$.next(false);
     });
-    this.http.get<Room[]>(this.url + 'stay/333/room/').subscribe(data => this.rooms = data);
-    this.http.get<Review[]>(this.url + 'stay/333/comments/').subscribe(data => this.reviews = data);
-    this.localeService.use(this.locale);
-    this.maxDate.setDate(this.maxDate.getDate() + 1);
-    this.minDate.setDate(this.minDate.getDate());
-    this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.roomsLoading$.next(true);
+    this.dataService.getRoomList(595).subscribe(
+      data => {
+        this.rooms = data;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.roomsLoading$.next(false);
+    });
+    this.reviewsLoading$.next(true);
+    this.dataService.getReviewList(595).subscribe(
+      data => {
+        this.reviews = data;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.reviewsLoading$.next(false);
+    });
+
     this.mapsAPILoader.load().then(() => {
       this.getLocationAddress();
     });
-
   }
 
   openMore() {
@@ -411,7 +452,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       });
     }
   }
-  test() {
-    console.log('a');
-  }
+  // test() {
+  //   console.log('a');
+  // }
 }
