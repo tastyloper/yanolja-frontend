@@ -7,6 +7,7 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 import { StayListService } from 'src/app/core/services/stay-list.service';
 // Interface of Stay import
 import { Stay } from '../../core/types/stay.interface'
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-accommodation-list',
@@ -14,6 +15,8 @@ import { Stay } from '../../core/types/stay.interface'
   styleUrls: ['./accommodation-list.component.scss']
 })
 export class AccommodationListComponent implements OnInit {
+
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   tempList = [
     {
@@ -1613,13 +1616,22 @@ export class AccommodationListComponent implements OnInit {
       requestCheckOut: '2019-07-02+22:00:00',
       popularKeyword: ''
     }
+    this.isLoading$.next(true);
 
     let slist = this.sstayList;
-    this.stayList.getAList(payLoad).subscribe(list => {
-     const copyList = list;
-     this.sstayList = copyList;
-     console.log(this.sstayList + 'dd');
-    });
+    this.stayList.getAList(payLoad).subscribe(
+      list => {
+        const copyList = list;
+        this.sstayList = copyList;
+        console.log(this.sstayList + 'dd');
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
     console.log('list', this.sstayList);
   }
 
@@ -1683,11 +1695,5 @@ export class AccommodationListComponent implements OnInit {
 
   selectDate(dateRange) {
     // console.log(this.bsRangeValue[0]);
-  }
-
-  likeAction(e:Event) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('123');
   }
 }
