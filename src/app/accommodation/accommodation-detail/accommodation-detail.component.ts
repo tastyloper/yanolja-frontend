@@ -396,7 +396,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     document.body.removeChild(text);
 
     this.toaster.success('주소가 클립보드에 복사되었어요!');
-  }
+}
 
   getGrade(grades: number[]) {
     return grades.reduce((pre, val, idx, arr) => idx === arr.length - 1 ? (pre + val) / arr.length : pre + val).toFixed(1);
