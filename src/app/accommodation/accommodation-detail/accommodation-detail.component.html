@@ -169,7 +169,9 @@
           <h3>숙소 위치 보기</h3>
           <p>
             <i class="fa fa-map-marker accomodation-map-marker fa-3x" aria-hidden="true"></i>
-            {{data.location}}
+            <span>
+              {{data.location}}
+            </span>
           </p>
           <div>
           <button class="copy-location" (click)="copyText()">
@@ -186,22 +188,7 @@
             <li class="facilities-item" *ngFor="let serviceKind of data.serviceKinds">
               <figure>
               <img [src]="'../../../assets/img/accommodation/icon/' + serviceKind + '.png'">
-              <figcaption *ngIf="serviceKind === 'park'">주차</figcaption>
-              <figcaption *ngIf="serviceKind === 'restaurant'">레스토랑</figcaption>
-              <figcaption *ngIf="serviceKind === 'coffeeShop'">카페</figcaption>
-              <figcaption *ngIf="serviceKind === 'paidLaundry'">유료 세탁</figcaption>
-              <figcaption *ngIf="serviceKind === 'noSmoking'">금연</figcaption>
-              <figcaption *ngIf="serviceKind === 'banquetHall'">연회장</figcaption>
-              <figcaption *ngIf="serviceKind === 'business'">비즈니스</figcaption>
-              <figcaption *ngIf="serviceKind === 'wifi'">와이파이</figcaption>
-              <figcaption *ngIf="serviceKind === 'breakfast'">조식 제공</figcaption>
-              <figcaption *ngIf="serviceKind === 'spa'">스파</figcaption>
-              <figcaption *ngIf="serviceKind === 'swimmingPool'">수영장</figcaption>
-              <figcaption *ngIf="serviceKind === 'partyRoom'">파티룸</figcaption>
-              <figcaption *ngIf="serviceKind === 'unmanned'">무인텔</figcaption>
-              <figcaption *ngIf="serviceKind === 'couplePC'">커플PC</figcaption>
-              <figcaption *ngIf="serviceKind === 'barbecue'">바베큐</figcaption>
-              <figcaption *ngIf="serviceKind === 'jokgu'">족구장</figcaption>
+              <figcaption>{{serviceText(serviceKind)}}</figcaption>
               </figure>
             </li>
           </ul>
@@ -219,42 +206,19 @@
       </section>
       <section class="review-section" *ngIf="!!data">
         <h2>후기 {{data.totalComments}}</h2>
+        <ng-container *ngIf="data.totalComments">
         <div class="grade">
           <div class="grade-number">{{data.averageGrade}}</div>
-          <div class="grade-text" *ngIf="data.averageGrade >= 4.5">우수함</div>
-        <div class="grade-text" *ngIf="data.averageGrade >= 4 && data.averageGrade < 4.5">좋음</div>
-        <div class="grade-text" *ngIf="data.averageGrade >= 3.5 && data.averageGrade < 4">보통</div>
-        <div class="grade-text" *ngIf="data.averageGrade < 3.5">비추</div>
+          <div class="grade-text" *ngIf="data.averageGrade >= 4.5">{{evaluationText()}}</div>
         </div>
         <div class="grade-score">
           <ul>
-            <li class="grade-item">
-              <p>청결도</p>
+            <li class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
+              <p>{{gradeText(i)}}</p>
               <div class="item-background">
-                <div class="item-foreground" [style.width]="data.totalGrade[0] * 20 + '%'"></div>
+                <div class="item-foreground" [style.width]="totalgrade * 20 + '%'"></div>
               </div>
-              <p>{{data.totalGrade[0]}}</p>
-            </li>
-            <li class="grade-item">
-              <p>편의성</p>
-              <div class="item-background">
-                <div class="item-foreground" [style.width]="data.totalGrade[1] * 20 + '%'"></div>
-              </div>
-              <p>{{data.totalGrade[1]}}</p>
-            </li>
-            <li class="grade-item">
-              <p>위치만족도</p>
-              <div class="item-background">
-                <div class="item-foreground" [style.width]="data.totalGrade[2] * 20 + '%'"></div>
-              </div>
-              <p>{{data.totalGrade[2]}}</p>
-            </li>
-            <li class="grade-item">
-              <p>친절도</p>
-              <div class="item-background">
-                <div class="item-foreground" [style.width]="data.totalGrade[3] * 20 + '%'"></div>
-              </div>
-              <p>{{data.totalGrade[3]}}</p>
+              <p>{{totalgrade}}</p>
             </li>
           </ul>
         </div>
@@ -275,14 +239,23 @@
           totalGrade1: data.totalGrade[0], 
           totalGrade2: data.totalGrade[1], 
           totalGrade3: data.totalGrade[2], 
-          totalGrade4: data.totalGrade[3] }"
+          totalGrade4: data.totalGrade[3],
+          stayId: data.stayId }"
         >
         후기 더 보기
         </a>
-      </section>
+      </ng-container>
+      <ng-container *ngIf="!!data && !data.totalComments">
+        <div class="no-review-container">
+          <span class="no-review">            
+            후기가 없습니다.
+          </span>
+        </div>
+      </ng-container>
+    </section>
     </section>
     </div>
-    </div>
+  </div>
 </section>
 <app-footer></app-footer>
 <ng-template #template>
