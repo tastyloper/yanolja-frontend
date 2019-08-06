@@ -23,23 +23,26 @@ export class MypageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.nickname = this.authService.getToken().nickname;
-    this.reservedCount = this.authService.getToken().reservedCount;
+    this.getUserInfo();
 
     this.router.events.subscribe(_ => {
-      this.authService.getUser().subscribe(
-        data => {
-          this.nickname = data.nickname;
-          this.reservedCount = data.reservedCount;
-        },
-        error => {
-          this.toastr.error('회원정보를 가져오는데 에러가 났습니다.');
-        }
-      );
+      this.getUserInfo();
     });
   }
 
   getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+
+  getUserInfo() {
+    this.authService.getUser().subscribe(
+      data => {
+        this.nickname = data.nickname;
+        this.reservedCount = data.reservedCount;
+      },
+      error => {
+        this.toastr.error('회원정보를 가져오는데 에러가 났습니다.');
+      }
+    );
   }
 }

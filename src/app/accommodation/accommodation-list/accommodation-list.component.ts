@@ -7,6 +7,7 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 import { StayListService } from 'src/app/core/services/stay-list.service';
 // Interface of Stay import
 import { Stay } from '../../core/types/stay.interface'
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-accommodation-list',
@@ -14,6 +15,8 @@ import { Stay } from '../../core/types/stay.interface'
   styleUrls: ['./accommodation-list.component.scss']
 })
 export class AccommodationListComponent implements OnInit {
+
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   tempList = [
     {
@@ -1558,7 +1561,7 @@ export class AccommodationListComponent implements OnInit {
   searchBarDateShow: string;
   searchBarMemberShow: string;
 
-  sstayList:object;
+  sstayList;
 
   searchParams;
 
@@ -1606,11 +1609,30 @@ export class AccommodationListComponent implements OnInit {
       // category: '모텔',
       // personnel: 2,
       // requestCheckIn: '2019-07-01+22:00:00'
+      category: this.category,
+      selectRegion : this.selectRegion,
+      personnel: 2,
+      requestCheckIn: '2019-07-01+22:00:00',
+      requestCheckOut: '2019-07-02+22:00:00',
+      popularKeyword: ''
     }
+    this.isLoading$.next(true);
 
     let slist = this.sstayList;
-    this.stayList.getAList(payLoad).subscribe(list => this.sstayList = Object.assign(slist, list));
-    console.log('list',this.sstayList);
+    this.stayList.getAList(payLoad).subscribe(
+      list => {
+        const copyList = list;
+        this.sstayList = copyList;
+        console.log(this.sstayList + 'dd');
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
+    console.log('list', this.sstayList);
   }
 
   toggle(option:string) {
@@ -1673,11 +1695,5 @@ export class AccommodationListComponent implements OnInit {
 
   selectDate(dateRange) {
     // console.log(this.bsRangeValue[0]);
-  }
-
-  likeAction(e:Event) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('123');
   }
 }

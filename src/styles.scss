@@ -362,6 +362,13 @@ a, button {
   }
 }
 /* datepicker */
+bs-daterangepicker-container {
+  left: 126px !important;
+  top: 20px !important;
+}
+.room-detail bs-daterangepicker-container {
+  left: -137px !important;
+}
 .theme-yanolja .bs-datepicker-head {
   background-color: $primary-color;
 }
@@ -370,10 +377,6 @@ a, button {
 .theme-yanolja .bs-datepicker-body table td span[class*="select-"]:after,
 .theme-yanolja .bs-datepicker-body table td[class*="select-"] span:after {
   background-color: $primary-color;
-}
-bs-daterangepicker-container {
-  left: 126px !important;
-  top: 20px !important;
 }
 /* loading */
 .loading {
