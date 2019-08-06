@@ -71,8 +71,12 @@
 }
 
 // modal
+.modal-q {
+  text-align: center;
+}
 .modal-q-agree {
   text-decoration: underline;
+  font-weight: 550;
 }
 .modal-q-color {
   margin-top: 3px;
@@ -83,11 +87,9 @@
   text-align: center;
 }
 .btn-primary {
-  width: 45%;
+  width: 40%;
   margin-right: 5px;
-  // float: right;
 }
 .btn-secondary {
-  width: 45%;
-  // float: right;
+  width: 40%;
 }
