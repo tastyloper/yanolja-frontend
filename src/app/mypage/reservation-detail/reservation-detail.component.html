@@ -69,29 +69,25 @@
           <label for="cancelPolicy">(필수)취소 규정 동의</label>
           <a (click)="cancellationPolicyOpen()" class="modal-open-btn">보기</a>
         </div>
-        <button class="btn btn-primary float-right" [disabled]="!isCheck" (click)="cancelConfirm(template)">취소하기</button>
+        <button class="btn btn-primary float-right btn-cancel" [disabled]="!isCheck" (click)="cancelConfirm(template)">취소하기</button>
       </div> 
       <ng-template #template>
-        <div class="modal-body text-center">
-          <p class="modal-text">정말 취소하시겠습니까?</p>
-          <button class="btn btn-primary" (click)="confirm()">확인</button>
-          <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">취소 동의서</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- <div class="modal-header">
-            <h4 class="modal-title pull-left">계정 삭제하기</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-              <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal-body">
+          <div class="modal-q">
+            <p>취소하시면 되돌리실 수 없습니다.</p>
+            <p class="modal-q-color">정말로 <span class="modal-q-agree">취소</span>를 진행하시겠습니까?</p>
+          </div> 
+          <div class="modal-btn clearfix">
+            <button class="btn btn-primary btn-rv" (click)="confirm()">확인</button>
+            <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
+          </div>
         </div>
-        <div class="modal-body text-center">
-            <div class="modal-q">
-              <p class="modal-q-color">정말로 <span class="modal-q-agree">취소</span>를 진행하시겠습니까?</p>
-            </div> 
-            <div class="modal-btn clearfix">
-              <button class="btn btn-primary" (click)="confirm()">확인</button>
-              <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">취소</button>
-            </div>
-          </div> -->
       </ng-template>
     </div>
   </section>
