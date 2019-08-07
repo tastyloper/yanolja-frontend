@@ -327,17 +327,15 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
 }
 
 .alist-header-nav-item::before {
-  background-color: #343a40;
-  width: 4px;
-  height: 4px;
-  display: inline-block;
   content: "";
+  display: inline-block;
   position: absolute;
   top: 6px;
+  width: 4px;
+  height: 4px;
+  background-color: #343A40;
   border-radius: 2px;
-  // background-color: #ced4da;
 }
-
 .alist-sort-option {
   color: #343a40;
   font-weight: 700;
@@ -345,16 +343,10 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   font-size: 13px;
   background-color: rgba(0,0,0,0);
 }
-
-.alist-content-outter {
-
-}
-
 .alist-content-ul-item a {
   display: flex;
   justify-content: space-between;
 }
-
 .alist-item-box {
   display: flex;
   justify-content: space-between;
@@ -493,11 +485,6 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   align-items: flex-end;
   padding: 22px 24px 22px;
 }
-
-.alist-rightbox-price {
-
-}
-
 .alist-price-total {
   line-height: 22px;
   font-size: 20px;
