@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SubTitleService } from '../../core/services/sub-title.service';
 import { AuthService } from '../../core/services/auth.service';
 
+import { User } from '../../core/types/user.interface';
+
 
 @Component({
   selector: 'app-account',
@@ -17,7 +19,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class AccountComponent implements OnInit {
   secessionForm: FormGroup;
   modalRef: BsModalRef;
-  accountdata = {};
+  accountdata: User;
 
   constructor(
     private subTitleService: SubTitleService,
@@ -49,7 +51,7 @@ export class AccountComponent implements OnInit {
     );
   }
 
-   getData() {
+  getData() {
     // 가데이터
     // this.account = {
     //   nickname: '연희내꺼야',
