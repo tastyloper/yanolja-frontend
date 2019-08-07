@@ -36,10 +36,12 @@
   .grade {
     position: absolute;
     color: $primary-color;
-    right: 32px;
     top: 1px;
     font-weight: 700;
-    font-size: 19px
+    font-size: 19px;
+    text-align: center;
+    width: 50px;
+    right: 20px;
   }
   .content {
     position: absolute;

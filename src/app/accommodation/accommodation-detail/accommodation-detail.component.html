@@ -1,28 +1,6 @@
 <app-sub-title></app-sub-title>
 <section class="accommodation-detail fix-height">
   <div class="container">
-    <section class="header-section" *ngIf="!(stayDetailLoading$ | async)">
-      <div class="header-div">
-        
-        <h1 class="accomodation-name">{{data.name}}</h1>
-        <i class="stars">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-        </i>
-        <span class="header-location">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-        {{data.location}}</span>
-      </div>
-      <div class="review-container">
-        <span class="evaluation">{{evaluationText()}}</span>
-
-        <span class="review-count">{{data.totalComments}}개의 이용 후기</span>
-        <i>{{data.averageGrade}}</i>
-      </div>
-    </section>
-  
     <section class="accomodation-detail">
       <h1>숙소 상세 페이지</h1>
       <!-- <button (click)="dibStay()">찜하기</button> -->

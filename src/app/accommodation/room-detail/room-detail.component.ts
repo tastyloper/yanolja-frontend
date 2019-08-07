@@ -22,6 +22,7 @@ import { RoomDetail } from 'src/app/core/types/room-detail.interface';
 
 // service
 import { RoomDetailService } from 'src/app/core/services/room-detail.service';
+import { SubTitleService } from 'src/app/core/services/sub-title.service';
 
 @Component({
   selector: 'app-room-detail',
@@ -64,6 +65,7 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     private localeService: BsLocaleService,
     private dataService: RoomDetailService,
     private route: ActivatedRoute,
+    private subTitleService: SubTitleService
     ) { }
   //   data = {
   //     stay: '역삼마레',
@@ -172,6 +174,9 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     .subscribe(
       data => {
         this.data = data;
+
+        this.subTitleService.pagaTitle = this.data.name;
+        this.subTitleService.pagaDescription = this.data.stay;
       }
     );
   }

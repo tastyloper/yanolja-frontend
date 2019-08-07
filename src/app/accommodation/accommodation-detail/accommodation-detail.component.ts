@@ -304,12 +304,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       dateYMD: new FormControl(new Date())
     });
 
-    this.subTitleService.pagaTitle = `역삼 VERY SIX`;
-    this.subTitleService.pagaDescription = '4성급 · 서울특별시 강남구 테헤란로38길 7 (역삼동)';
-    this.subTitleService.grade = 2.5;
-    this.subTitleService.recommendation = '비추천';
-    this.subTitleService.review = '2개의 이용 후기';
-
 
     this.locale = 'ko';
     this.locales = listLocales();
@@ -369,11 +363,18 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.stayDetailLoading$.next(true);
     this.dataService.getStayDetail(this.stayId).subscribe(
       data => {
+        console.log(data);
         this.data = data;
         this.address = data.location;
         this.mapsAPILoader.load().then(() => {
           this.getLocationAddress();
         });
+
+        this.subTitleService.pagaTitle = this.data.name;
+        this.subTitleService.pagaDescription = `4성급 · ${this.data.location}`;
+        this.subTitleService.grade = this.data.averageGrade;
+        this.subTitleService.recommendation = this.evaluationText();
+        this.subTitleService.review = `${this.data.totalComments}개의 이용 후기`;
       },
       error => {
         console.log(error);
