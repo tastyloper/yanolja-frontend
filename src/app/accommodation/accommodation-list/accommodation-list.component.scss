@@ -1,37 +1,43 @@
-button {
+@import '../../../output-scss/common.scss';
+
+button:not(.btn-primary):not(.btn-secondary) {
   outline: none;
-  background: #ffff;
+  background: #FFF;
   border: none;
 }
-.head-wrap{
-  width: 100%;
-  height: 72px;
-  background: #ff3478;
-  z-index: 80;
-}
-.alist-search-container{
-  margin-bottom: 10px;
-  height: 72px;
-  background:#FF3478;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-
 .container-wrapper {
   margin-bottom: 100px;
 }
-
-.alist-search-items-container{
+.head-wrap {
   width: 100%;
+  height: 91px;
+  background-color: $primary-color;
+  z-index: 80;
+}
+.alist-search-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 91px;
+  padding: 7px 0;
+}
+.alist-search-items-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  & + .alist-search-items-container {
+    margin-top: 7px;
+  }
 }
-
-.alist-search-frame{
+.open-map-btn {
+  display: inline-block;
+  margin: 0 0 10px 10px;
+  .fa-location-arrow {
+    color: $primary-color;
+  }
+}
+.alist-search-frame {
   height: 100%;
   width: 100%;
   display: flex;
@@ -39,34 +45,47 @@ button {
   justify-content: space-around;
   padding: 0 2px;
 }
-
 .alist-search-frame i {
   margin-left: 12px;
   color: #FF3478;
 }
-
 .search-box {
   border-radius: 2px;
-  background: #ffff;
-  height: 48px;
-  margin-right: 6px;
+  background: #FFF;
+  height: 35px;
   z-index: 100;
-  // padding-right: 10px; 
 }
-
+.keyword-wrap {
+  position: relative;
+  .fa {
+    @include vertical-center;
+    left: 15px;
+    z-index: 96;
+    color: $primary-color;
+  }
+  .keyword-input {
+    width: 100%;
+    padding: 0 10px 0 40px;
+    border: 0;
+    z-index: 95;
+    &::placeholder {
+      color: #343a40;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
 .alist-date-popup-content-person {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 0 ;
 }
-
 .popup-btn-stepper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .stepper-value {
   width: 36px;
   height: 22px;
@@ -76,60 +95,44 @@ button {
   text-align: center;
   line-height: 20px;
 }
-
 .stepper-modifier {
   border-radius: 24px;
   width: 32px;
   height: 32px;
   border: 1px solid #ced4da;
 }
-
-.search-box:first-child {
-  margin-left: 4px;
-}
-
-.search-box:last-child {
-  margin-right: 0px;
-  padding-right: 0px; 
-}
-
-.alist-search-type{
+.alist-search-type {
   border:none;
   width: 130px;
 }
-
-.alist-search-loc{
-  width: 260px;
+.alist-search-loc {
+  width: 360px;
 }
-
-.alist-search-date{
-  width: 300px;
+.alist-search-date {
+  width: 255px;
 }
-
 .btn-date-inner {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-
-.alist-search-inputbox{
-  font-weight: 600;
-  border:none;
-  width: 256px;
-  height: 100%;
-  color: #343a40;
-  outline-style: none;
+.alist-search-inputbox {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.alist-search-inputbox:last-child {
-  display: flex;
+  overflow: hidden;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 10px;
+  color: #343A40;
+  font-weight: 600;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  border: none;
+  outline-style: none;
 }
-
-.btn-submit-container{
+.btn-submit-container {
   width: 80px;
 }
 
@@ -144,11 +147,9 @@ button {
   border: none;
   background: none;
 }
-
 .btn-close:focus {
   outline: none;
 }
-
 .btn-popup-close {
   position: absolute;
   top: 20px;
@@ -162,13 +163,9 @@ button {
   background-color: #fff;
   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
   z-index: 100;
-  display: none;
-  // transition: transform .12s ease,opacity .12s ease;
 }
-
-.alist-popup-module{
+.alist-popup-module {
   padding: 20px;
- 
 }
 
 //  상단 검색네비 옵션 클릭 팝업 - 유형
@@ -181,24 +178,24 @@ button {
   font-weight: 700;
   
 }
-
-.alist-type-popup-module{
-  margin-top: 4px;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
-  padding: 20px;
+.alist-type-popup-module {
   width: 395px;
+  padding: 15px;
+  margin-top: 4px;
+  background-color: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 0 10px 0 #AAA;
   z-index: 100;
-  background-color: #fff;
 }
-
 .alist-popup-type-item {
   display: inline-block;
-  margin-right: 1px;
-
-  :hover {
-    font-weight: 700;
-    color: #FF3478;
+  padding: 15px;
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
   }
 }
 // 상단 검색네비 datePicker
@@ -207,85 +204,82 @@ button {
   margin-bottom: 0;
   border: none;
 }
-
 .datePicker-input {
+  height: 33px;
+  padding: 0;
+  color: #343A40;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
   outline: none;
   border: none;
   box-shadow: none;
   cursor: pointer;
-  
+  &[readonly] {
+    background-color: #FFF;
+  }
 }
-
 .datePicker-input::placeholder {
-  color: #343a40;
+  color: #343A40;
   font-size: 14px;
   font-family: inherit;
   font-weight: 600;
 }
 
 // 상단 검색네비 옵션 클릭 팝업 - 지역
-
 .alist-search-location-container {
-  display: none;
-  padding: 20px 10px 15px 47px;
-  margin-top: 5px;
-  width: 785px;
-  background: #ffff;
+  padding: 15px;
+  margin-top: 4px;
+  width: 782px;
+  background-color: #FFF;
   border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
-  
+  box-shadow: 0 0 10px 0 #AAA;
 }
-
-.alist-search-location-header {
-  background: #eeee;
-}
-
 .alist-location-header-top {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background: #eeee;
+  background-color: #F5F6F7;
 }
-
-.alist-location-header-top li{
-  display: block;
-  line-height: 40px;
-  background: #eeee;
-  width: 88px;
+.alist-location-header-top li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 94px;
   height: 40px;
-  :hover {
-    font-weight: 700;
-    color: #FF3478;
+  background-color: #F5F6F7;
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  cursor: pointer;
+  &:hover, &.active {
+    color: $primary-color;
+    background-color: #FFF;
   }
 }
-
-.alist-search-location-bottom {
-  background: #f9f9f9;
-}
-
 .alist-search-bottom-list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   margin-top: 10px;
-}
-
-.alist-search-bottom-list li{
-  display:flex;
-  align-items: center;
-  margin-bottom: 5px;
-  width: 177px;
-  background: #ffff;
-  height: 44px;
-  margin-right: 5px;
-  :hover {
-    font-weight: 700;
-    color: #FF3478;
+  li {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 20px;
+    background-color: #FFF;
+    -webkit-transition: all 0.35s;
+    -moz-transition: all 0.35s;
+    transition: all 0.35s;
+    cursor: pointer;
+    &:hover {
+      color: #FF3478;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
-}
-
-.alist-search-bottom-list li:last-child {
-  margin-right: 0;
 }
 
 // 상단 검색네비 옵션 클릭 팝업 - 인원수
@@ -304,9 +298,6 @@ button {
   display: none;
 }
 
-.active {
-  display: block;
-}
 
 // 숙소리스트 컨텐츠 전체 wrapper
 .alist-whole-wrapper {
@@ -621,4 +612,26 @@ button {
 
 .loading-wrap {
   height: 500px;
+}
+.modal-title {
+  font-size: 16px;
+}
+.modal-body {
+  .form-row {
+    margin-bottom: 15px;
+  }
+  .form-control {
+    height: 35px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .btn-secondary {
+    width: 100%;
+  }
+  .map-wrap {
+    margin-bottom: 15px;
+  }
+  .loading-wrap, agm-map {
+    height: 500px;
+  }
 }
