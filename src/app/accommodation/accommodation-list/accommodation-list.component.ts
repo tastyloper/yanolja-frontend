@@ -1562,7 +1562,7 @@ export class AccommodationListComponent implements OnInit {
     member: ''
   };
   queryParams: StayList;
-  searchBarShow: string ;
+  searchBarShow: string;
   searchBarLocShow: string;
   searchBarDateShow: string;
   searchBarMemberShow: string;

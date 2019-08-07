@@ -7,6 +7,7 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { AgmCoreModule } from '@agm/core';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -29,6 +30,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AgmCoreModule.forRoot({
       apiKey: environment.apiKey
     }),
+    BsDatepickerModule.forRoot(),
     FormsModule
   ],
   providers: [
