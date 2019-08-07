@@ -363,10 +363,18 @@ a, button {
 }
 /* datepicker */
 bs-daterangepicker-container {
-  left: 126px !important;
-  top: 20px !important;
+  border-radius: 2px;
+}
+.accommodation-list bs-daterangepicker-container {
+  top: 5px !important;
+  left: 157px !important;
+}
+.accommodation-detail bs-daterangepicker-container {
+  top: 5px !important;
+  left: 131px !important;
 }
 .room-detail bs-daterangepicker-container {
+  top: 5px !important;
   left: -137px !important;
 }
 .theme-yanolja .bs-datepicker-head {
