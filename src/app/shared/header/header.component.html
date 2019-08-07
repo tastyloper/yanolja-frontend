@@ -8,10 +8,10 @@
     </h1>
     <nav class="gnb-nav">
       <ul>
-        <li><a routerLink="/accommodation" [queryParams]="{category:'motel'}">모텔</a></li>
-        <li><a routerLink="/accommodation" [queryParams]="{category:'hotel'}">호텔/리조트</a></li>
-        <li><a routerLink="/accommodation" [queryParams]="{category:'pension'}">펜션/풀빌라</a></li>
-        <li><a routerLink="/accommodation" [queryParams]="{category:'guest-house'}">게스트하우스</a></li>
+        <li><a routerLink="/accommodation" [queryParams]="{category:'모텔'}">모텔</a></li>
+        <li><a routerLink="/accommodation" [queryParams]="{category:'호텔/리조트'}">호텔/리조트</a></li>
+        <li><a routerLink="/accommodation" [queryParams]="{category:'펜션/풀빌라'}">펜션/풀빌라</a></li>
+        <li><a routerLink="/accommodation" [queryParams]="{category:'게스트하우스'}">게스트하우스</a></li>
       </ul>
       <ul class="right-menu">
         <li *ngIf="!isLogin"><a routerLink="/login">로그인</a></li>

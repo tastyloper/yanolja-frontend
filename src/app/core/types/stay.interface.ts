@@ -14,3 +14,18 @@ export interface Stay {
   daysPrice: string;
   saleDaysPrice: string;
 }
+
+export interface StayList {
+  selectRegion: string;
+  category: string;
+  personnel: string;
+  requestCheckIn: string;
+  requestCheckOut: string;
+  poplularKeyword?: string;
+  review?: string;
+  wish?: string;
+  priceLow?: string;
+  priceHigh?: string;
+  searchKeyword?: string;
+  currentAddress?: string;
+}

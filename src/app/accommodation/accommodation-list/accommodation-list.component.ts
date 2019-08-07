@@ -6,7 +6,7 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 // StayListService import
 import { StayListService } from 'src/app/core/services/stay-list.service';
 // Interface of Stay import
-import { Stay } from '../../core/types/stay.interface'
+import { Stay, StayList } from '../../core/types/stay.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -1555,7 +1555,10 @@ export class AccommodationListComponent implements OnInit {
     location: '',
     date: '',
     member: ''
-  }
+  };
+
+  queryParams: StayList;
+
   searchBarShow: string ;
   searchBarLocShow: string;
   searchBarDateShow: string;
@@ -1571,10 +1574,10 @@ export class AccommodationListComponent implements OnInit {
   searchParams;
 
   constructor(
-    private route: ActivatedRoute, private localeService: BsLocaleService, private stayList: StayListService) {
+    private route: ActivatedRoute, private localeService: BsLocaleService,
+    private stayList: StayListService) {
 
     this.localeService.use(this.locale);
-
     this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate() - 1);
@@ -1589,40 +1592,34 @@ export class AccommodationListComponent implements OnInit {
         minDate : this.minDate,
         maxDate : this.maxDate
       });
-
-    this.getList();
   }
 
   ngOnInit() {
     this.route.queryParams
     .subscribe(params => {
-      // this.category = params.category;
-      // this.searchBar.type = this.category;
       this.selectType(params.category);
+      this.allPagedItems = [];
+      this.sstayList = [];
       this.type = false;
-      return;
+      this.getList();
     });
 
     this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
-    // this.bsRangeValue = [this.bsValue, this.maxDate]
   }
 
   getList() {
-    const payLoad = {
-      // selectRegion: '강남',
-      // category: '모텔',
-      // personnel: 2,
-      // requestCheckIn: '2019-07-01+22:00:00'
+    console.log(this.selectRegion);
+    this.sstayList = [];
+    const payload = {
       category: this.category,
       selectRegion : this.selectRegion,
-      personnel: 2,
-      requestCheckIn: '2019-07-01+22:00:00',
-      requestCheckOut: '2019-07-02+22:00:00',
-      popularKeyword: ''
+      personnel: '2',
+      requestCheckIn: '2019-09-01+22:00:00',
+      requestCheckOut: '2019-09-02+22:00:00',
+      // popularKeyword: ''
     };
     this.isLoading$.next(true);
-
-    this.stayList.getAList(payLoad).subscribe(
+    this.stayList.getAList(payload).subscribe(
       list => {
         const copyList = list;
         this.sstayList = copyList;
@@ -1635,7 +1632,6 @@ export class AccommodationListComponent implements OnInit {
         this.isLoading$.next(false);
       }
     );
-    console.log('list', this.sstayList);
   }
 
   toggle(option: string) {
@@ -1687,14 +1683,13 @@ export class AccommodationListComponent implements OnInit {
       personnel: this.numberAdult,
       selectRegion: this.selectRegion
     };
-    console.log(this.searchParams);
-    console.log([this.bsValue.toDateString(), this.maxDate]);
   }
 
   selectType(type: string) {
     this.toggle('type');
+    this.category = type;
     this.searchBar.type = type;
-    this.searchBarShow = type === 'motel' ? '모텔' : (type === 'hotel' ?  '호텔' : (type === 'guestHouse' ?  '게스트하우스' : (type === 'pension' ? '펜션' : '숙박종류')));
+    this.searchBarShow = type === '모텔' ? '모텔' : (type === '호텔/리조트' ?  '호텔/리조트' : (type === '게스트하우스' ?  '게스트하우스' : (type === '펜션/풀빌라' ? '펜션/풀빌라' : '숙박종류')));
     return(this.searchBar);
   }
 
@@ -1709,13 +1704,11 @@ export class AccommodationListComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('loged');
     this.scrollState += 1;
     this.setPage(this.scrollState);
   }
 
   setPage(page: number) {
-    console.log(page);
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
@@ -1725,7 +1718,7 @@ export class AccommodationListComponent implements OnInit {
 
   }
 
-  getPager(totalItems: number, currentPage: number = 1, pageSize: number = 20) {
+  getPager(totalItems: number, currentPage: number = 1, pageSize: number = 10) {
     const totalPages = Math.ceil(totalItems / pageSize);
     let startPage: number;
     let endPage: number;
@@ -1761,5 +1754,73 @@ export class AccommodationListComponent implements OnInit {
       endIndex,
       pages
     };
+  }
+
+  sorting(select: string) {
+    if (select === 'reviewPoint') {
+      return;
+    } else if (select === 'priceHigh') {
+      const payload = {
+        category: this.category,
+        selectRegion : this.selectRegion,
+        personnel: '2',
+        requestCheckIn: '2019-09-01+22:00:00',
+        requestCheckOut: '2019-09-02+22:00:00',
+        popularKeyword: '',
+        priceHigh: 'True'
+      };
+      this.isLoading$.next(true);
+      this.stayList.getAList(payload).subscribe(
+        list => {
+          const copyList = list;
+          this.sstayList = copyList;
+          this.setPage(1);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          this.isLoading$.next(false);
+        }
+      );
+    } else if (select === 'priceLow') {
+
+      const payload = {
+        category: this.category,
+        selectRegion : this.selectRegion,
+        personnel: '2',
+        requestCheckIn: '2019-09-01+22:00:00',
+        requestCheckOut: '2019-09-02+22:00:00',
+        popularKeyword: '',
+        priceLow: 'True'
+      };
+      this.isLoading$.next(true);
+      this.stayList.getAList(payload).subscribe(
+        list => {
+          const copyList = list;
+          this.sstayList = copyList;
+          this.setPage(1);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          this.isLoading$.next(false);
+        }
+      );
+    }
+
+  }
+
+  setSortingParams(sort: string) {
+    this.queryParams.category = '모텔';
+    this.queryParams.selectRegion = '강남';
+    this.queryParams.personnel = `2`;
+    this.queryParams.requestCheckIn = '2019-09-01+22:00:00';
+    this.queryParams.requestCheckOut = `2019-09-02+22:00:00`;
+    // this.queryParams.review = sort === 'review' ? 'True' : 'False';
+    this.queryParams.review = 'True';
+    this.queryParams.priceLow = sort === 'priceLow' ? 'True' : 'False';
+    this.queryParams.priceHigh = sort === 'priceHigh' ? 'True' : 'False';
   }
 }
