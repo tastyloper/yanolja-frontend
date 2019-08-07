@@ -1,9 +1,9 @@
 
 <section class="accommodation-detail fix-height">
   <div class="container">
-    <div class="my-container">
     <section class="header-section" *ngIf="!(stayDetailLoading$ | async)">
       <div class="header-div">
+        
         <h1 class="accomodation-name">{{data.name}}</h1>
         <i class="stars">
             <i class="fa fa-star" aria-hidden="true"></i>
@@ -14,6 +14,10 @@
         <span class="header-location">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
             {{data.location}}</span>
+            
+    <!-- <button (click)="dibStay()">찜하기</button>
+    <i class="fa fa-heart-o fa-3x" aria-hidden="true" *ngIf=""></i>
+    <i class="fa fa-heart fa-3x" aria-hidden="true" *ngIf=""></i> -->
       </div>
       <div class="review-container">
         <span class="evaluation">{{evaluationText()}}</span>
@@ -55,36 +59,33 @@
         <section class="compare-condition" *ngIf="!(stayDetailLoading$ | async)">
           <h3>비교 조건 선택</h3>
           <div class="check-date">
-            <p>날짜 선택</p>
-            <div>
-              <form [formGroup]="form">
-                <div class="row">
-                  <div class="col-xs-12 col-md-5 col-lg-4 form-group">
-                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                    <input
-                      class="form-control"
-                      #datepicker="bsDaterangepicker"
-                      bsDaterangepicker
-                      formControlName="dateYMD"
-                      [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
-                      [minDate]="minDate"
-                      [container]="'.accommodation-detail'"
-                      >
-                      <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!datepicker.isOpen"></i>
-                      <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="datepicker.isOpen"></i>
-                    </div>
+            <form [formGroup]="form" class="bs-form">
+                <div class="form-group">
+                  <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                  <input
+                    class="form-control"
+                    #datepicker="bsDaterangepicker"
+                    bsDaterangepicker
+                    formControlName="dateYMD"
+                    [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
+                    [minDate]="minDate"
+                    [maxDate]="maxDate"
+                    [container]="'.accommodation-detail'"
+                    (bsValueChange)="onValueChange($event)"
+                    readonly
+                    >
+                    <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!datepicker.isOpen"></i>
+                    <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="datepicker.isOpen"></i>
                   </div>
-              </form>
-            </div>
+            </form>
           </div>
           <div class="check-person" appClickOutside (clickOutSide)="modalHide()">
-            <div class="check-cursor" (click)="modalToggle()">
+            <div class="check-cursor" [class.check-cursor-active]="checkPersonModalStatus" (click)="modalToggle()">
               <i class="fa fa-user" aria-hidden="true"></i>
-              <div class="check-person-container">
-                <p>총 {{adultCount + childrenCount}}명 (어른: {{adultCount}}명, 아동: {{childrenCount}}명) </p>
-              </div>
-              <i class="fa fa-chevron-down" aria-hidden="true" *ngIf="!checkPersonModalStatus"></i>
-              <i class="fa fa-chevron-up" aria-hidden="true" *ngIf="checkPersonModalStatus"></i>
+              <i class="fa" [class.fa-chevron-up]="checkPersonModalStatus" [class.fa-chevron-down]="!checkPersonModalStatus" aria-hidden="true"></i>
+                <div class="check-person-container">
+                  <p>총 {{adultCount + childrenCount}}명 (어른: {{adultCount}}명, 아동: {{childrenCount}}명) </p>
+                </div>
             </div>
             <div class="modal-person" *ngIf="checkPersonModalStatus">
               <div class="person-header">
@@ -117,44 +118,46 @@
               </div>
             </div>
           </div>
-          <button class="search btn btn-outline-primary">검색</button>
+          <button class="search btn btn-outline-primary" (click)="requestRoom()">검색</button>
         </section>
         <section class="room-list-section" *ngIf="!(roomsLoading$ | async)">
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
-          <li class="room" [routerLink]="room.roomId" *ngFor="let room of rooms">
+          <li class="room" [routerLink]="room.roomId"
+          [queryParams]="{ checkIn: bsRangeValue[0].toDateString(), checkOut: bsRangeValue[1].toDateString()}"
+          *ngFor="let room of rooms">
             <div>
               <img [src]="room.urlImage[0]">
               <div class="column-div">
                 <span class="room-name">{{room.name}}</span>
                 <span class="room-standard">기준 {{room.standardPersonnel}}명/ 최대 {{room.maximumPersonnel}}명</span>
-                <div class="reservation-status" *ngIf="!(room.hoursAvailable && room.stayAvailable)">예약가능</div>
-                <div class="reservation-status not-available" *ngIf="room.hoursAvailable && room.stayAvailable">예약불가</div>
+                <div class="reservation-status" *ngIf="(room.rentalAvailable || room.stayAvailable)">예약가능</div>
+                <div class="reservation-status not-available" *ngIf="!(room.rentalAvailable || room.stayAvailable)">예약불가</div>
               </div>
             </div>
             <div class="room-div">
-              <ng-container *ngIf="!room.rentalAvailable">
+              <ng-container *ngIf="room.hoursAvailable">
                 <div>
-                  <ng-container *ngIf="room.hoursAvailable">
+                  <ng-container *ngIf="room.rentalAvailable">
                   <div>
                     <span class="room-type">대실</span>
                     <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
                   </div>
                   <span class="room-price">{{room.saleHoursPrice | number}}원</span>
                 </ng-container>
-                <span class="reservation-done" *ngIf="!room.hoursAvailable">예약마감</span>
+                <span class="reservation-done" *ngIf="!room.rentalAvailable">예약마감</span>
                 </div>
               </ng-container>
-              <ng-container *ngIf="!room.stayAvailable">
+              <ng-container>
                 <div>
-                  <ng-container *ngIf="!!room.daysCheckIn">
+                  <ng-container *ngIf="room.stayAvailable">
                   <div>
                     <span class="room-type">숙박</span>
                     <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
                   </div>
                   <span class="room-price">{{room.saleDaysPrice | number}}원</span>
                   </ng-container>
-                  <span class="reservation-done" *ngIf="!room.daysCheckIn">예약마감</span>
+                  <span class="reservation-done" *ngIf="!room.stayAvailable">예약마감</span>
                 </div>
               </ng-container>
             </div>
@@ -206,56 +209,118 @@
       </section>
       <section class="review-section" *ngIf="!!data">
         <h2>후기 {{data.totalComments}}</h2>
-        <ng-container *ngIf="data.totalComments">
-        <div class="grade">
-          <div class="grade-number">{{data.averageGrade}}</div>
-          <div class="grade-text" *ngIf="data.averageGrade >= 4.5">{{evaluationText()}}</div>
-        </div>
-        <div class="grade-score">
-          <ul>
-            <li class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
-              <p>{{gradeText(i)}}</p>
-              <div class="item-background">
-                <div class="item-foreground" [style.width]="totalgrade * 20 + '%'"></div>
-              </div>
-              <p>{{totalgrade}}</p>
-            </li>
+        <!-- <ng-container *ngIf="data.totalComments">
+          <div class="grade">
+            <div class="grade-number">{{data.averageGrade}}</div>
+            <div class="grade-text">{{evaluationText()}}</div>
+          </div>
+          <div class="grade-score">
+            <ul>
+              <li class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
+                <p>{{gradeText(i)}}</p>
+                <div class="item-background">
+                  <div class="item-foreground" [style.width]="totalgrade * 20 + '%'"></div>
+                </div>
+                <p>{{totalgrade}}</p>
+              </li>
+            </ul>
+          </div>
+          <ul class="review-list">
+            <ng-container *ngFor="let review of reviews">
+              <li class="review-item" *ngIf="review">
+                <div class="review-score" [innerText]="getGrade(review.grade)"></div>
+                <span class="review-title">{{review.stay}}</span>
+                <p class="review-detail">{{review.text}}</p>
+                <span>{{review.nickname}} · {{splitDate(review.created)}} · {{review.reservedRoom}}</span>
+              </li>
+            </ng-container>
           </ul>
-        </div>
-        <ul class="review-list">
-          <ng-container *ngFor="let review of reviews">
-          <li class="review-item" *ngIf="review">
-            <div class="review-score" [innerText]="getGrade(review.grade)"></div>
-            <span class="review-title">{{review.stay}}</span>
-            <p class="review-detail">{{review.text}}</p>
-            <span>{{review.nickname}} · {{splitDate(review.created)}} · {{review.reservedRoom}}</span>
-          </li>
+          <a routerLink="/accommodation/1/review"
+          [queryParams]=
+          "{ totalComments: data.totalComments, 
+            averageGrade: data.averageGrade, 
+            totalGrade1: data.totalGrade[0], 
+            totalGrade2: data.totalGrade[1], 
+            totalGrade3: data.totalGrade[2], 
+            totalGrade4: data.totalGrade[3],
+            stayId: data.stayId }"
+          >
+          후기 더 보기
+          </a> -->
+          
+        <ng-container *ngIf="data.totalComments">
+          <section class="review-header">
+            <div class="all-grade-wrap d-inline-block">
+              <div class="all-grade">
+                <img src="/assets/img/common/comma-y.png">
+                {{ data.averageGrade }}
+              </div>
+              <p>전체 누적평점</p>
+            </div>
+            <div class="grades-wrap d-inline-block">
+              <div class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
+                <div class="grade-item-num">{{ totalgrade }}
+                  <img src="/assets/img/common/comma-y.png">
+                </div>
+                <span class="grade-item-title">{{gradeText(i)}}</span>
+              </div>
+            </div>
+          </section>
+          <section class="review-list" *ngIf="!!reviews">
+            <ng-container *ngFor="let comment of reviews">
+              <div class="review-item" *ngIf="!!comment">
+                <div class="review-item-header">
+                  <div class="grade">
+                    <span [innerText]="getGrade(comment.grade)"></span>
+                    <img src="/assets/img/common/comma-y.png">
+                  </div>
+                  <p class="review-info">{{ comment.nickname }} | {{ comment.stay }} - {{ comment.reservedRoom }}</p>
+                  <p class="review-date" [innerText]="splitDate(comment.created)"></p>
+                </div>
+                <p class="review-content">{{ comment.text }}</p>
+                <div class="owner" *ngIf="comment['ownerComment-1']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-1'])"></span></h5>
+                  <p>{{ comment['ownerComment-1'] }}</p>
+                </div>
+                <div class="owner" *ngIf="comment['ownerComment-2']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-2'])"></span></h5>
+                  <p>{{ comment['ownerComment-2'] }}</p>
+                </div>
+                <div class="owner" *ngIf="comment['ownerComment-3']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-3'])"></span></h5>
+                  <p>{{ comment['ownerComment-3'] }}</p>
+                </div>
+                <div class="owner" *ngIf="comment['ownerComment-4']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-4'])"></span></h5>
+                  <p>{{ comment['ownerComment-4'] }}</p>
+                </div>
+              </div>
+            </ng-container>
+          </section>
+          
+          <a routerLink="/accommodation/1/review"
+          [queryParams]=
+          "{ totalComments: data.totalComments, 
+            averageGrade: data.averageGrade, 
+            totalGrade1: data.totalGrade[0], 
+            totalGrade2: data.totalGrade[1], 
+            totalGrade3: data.totalGrade[2], 
+            totalGrade4: data.totalGrade[3],
+            stayId: data.stayId }"
+          >
+          후기 더 보기
+          </a>
         </ng-container>
-        </ul>
-        <a routerLink="/accommodation/1/review"
-        [queryParams]=
-        "{ totalComments: data.totalComments, 
-          averageGrade: data.averageGrade, 
-          totalGrade1: data.totalGrade[0], 
-          totalGrade2: data.totalGrade[1], 
-          totalGrade3: data.totalGrade[2], 
-          totalGrade4: data.totalGrade[3],
-          stayId: data.stayId }"
-        >
-        후기 더 보기
-        </a>
-      </ng-container>
-      <ng-container *ngIf="!!data && !data.totalComments">
-        <div class="no-review-container">
-          <span class="no-review">            
-            후기가 없습니다.
-          </span>
-        </div>
-      </ng-container>
-    </section>
+        <ng-container *ngIf="!!data && !data.totalComments">
+          <div class="no-review-container">
+            <span class="no-review">            
+              후기가 없습니다.
+            </span>
+          </div>
+        </ng-container>
+      </section>
     </section>
     </div>
-  </div>
 </section>
 <app-footer></app-footer>
 <ng-template #template>
