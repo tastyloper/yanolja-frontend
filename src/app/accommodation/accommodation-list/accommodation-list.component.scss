@@ -1,6 +1,6 @@
 @import '../../../output-scss/common.scss';
 
-button:not(.btn-primary):not(.btn-secondary) {
+button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   outline: none;
   background: #FFF;
   border: none;
@@ -11,7 +11,6 @@ button:not(.btn-primary):not(.btn-secondary) {
 .head-wrap {
   padding: 50px 0;
   background-color: $primary-color;
-  z-index: 80;
 }
 .alist-search-container {
   display: flex;
@@ -48,21 +47,20 @@ button:not(.btn-primary):not(.btn-secondary) {
   border-radius: 2px;
   background: #FFF;
   height: 45px;
-  z-index: 100;
 }
 .keyword-wrap {
   position: relative;
+  margin-right: 8px;
   .fa {
     @include vertical-center;
     left: 15px;
-    z-index: 96;
+    z-index: 1;
     color: $primary-color;
   }
   .keyword-input {
     width: 100%;
     padding: 0 10px 0 40px;
     border: 0;
-    z-index: 95;
     &::placeholder {
       color: #343a40;
       font-size: 14px;
@@ -104,6 +102,7 @@ button:not(.btn-primary):not(.btn-secondary) {
   width: 360px;
 }
 .alist-search-date {
+  position: relative;
   width: 255px;
 }
 .btn-date-inner {
@@ -129,6 +128,7 @@ button:not(.btn-primary):not(.btn-secondary) {
 }
 .btn-submit-container {
   width: 80px;
+  height: 100%;
 }
 
 // 상단 검색네비 옵션 클릭 팝업 wrapper
@@ -153,11 +153,12 @@ button:not(.btn-primary):not(.btn-secondary) {
 
 // 상단 검색네비 옵션 클릭시 팝업
 .alist-popup-container {
+  position: absolute;
+  z-index: 2;
   margin-top: 4px;
   border-radius: 2px;
   background-color: #fff;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 5px 10px 0 rgba(0,0,0,.12);
-  z-index: 100;
+  box-shadow: 0 0 10px 0 #AAA;
 }
 .alist-popup-module {
   padding: 20px;
@@ -176,11 +177,8 @@ button:not(.btn-primary):not(.btn-secondary) {
 .alist-type-popup-module {
   width: 395px;
   padding: 15px;
-  margin-top: 4px;
   background-color: #FFF;
   border-radius: 2px;
-  box-shadow: 0 0 10px 0 #AAA;
-  z-index: 100;
 }
 .alist-popup-type-item {
   display: inline-block;
@@ -223,9 +221,11 @@ button:not(.btn-primary):not(.btn-secondary) {
 
 // 상단 검색네비 옵션 클릭 팝업 - 지역
 .alist-search-location-container {
-  padding: 15px;
-  margin-top: 4px;
+  position: absolute;
+  z-index: 2;
   width: 782px;
+  margin-top: 4px;
+  padding: 15px;
   background-color: #FFF;
   border-radius: 2px;
   box-shadow: 0 0 10px 0 #AAA;
@@ -278,7 +278,9 @@ button:not(.btn-primary):not(.btn-secondary) {
 }
 
 // 상단 검색네비 옵션 클릭 팝업 - 인원수
-.alist-popup-container-member{
+.alist-popup-container-member {
+  left: 0;
+  right: 0;
   width: 100%;
 }
 
@@ -288,11 +290,6 @@ button:not(.btn-primary):not(.btn-secondary) {
   font-size: 14px;
   font-weight: 700;
 }
-
-.arrow {
-  display: none;
-}
-
 
 // 숙소리스트 컨텐츠 전체 wrapper
 .alist-whole-wrapper {
@@ -377,18 +374,6 @@ button:not(.btn-primary):not(.btn-secondary) {
   vertical-align: top;
   background: lime;
   position: relative;
-}
-.like-wrap {
-  position: absolute;
-  top: 8px;
-  font-size: 22px;
-  right: 8px;
-  z-index: 1;
-  width: 24px;
-  height: 24px;
-  a {
-    color: #FFF;
-  }
 }
 .alist-item-box-imgDetail{
   width: 100%;
