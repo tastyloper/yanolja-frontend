@@ -12,12 +12,8 @@
             <i class="fa fa-star-half-o" aria-hidden="true"></i>
         </i>
         <span class="header-location">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            {{data.location}}</span>
-            
-    <!-- <button (click)="dibStay()">찜하기</button>
-    <i class="fa fa-heart-o fa-3x" aria-hidden="true" *ngIf=""></i>
-    <i class="fa fa-heart fa-3x" aria-hidden="true" *ngIf=""></i> -->
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+        {{data.location}}</span>
       </div>
       <div class="review-container">
         <span class="evaluation">{{evaluationText()}}</span>
@@ -29,6 +25,9 @@
   
     <section class="accomodation-detail">
       <h1>숙소 상세 페이지</h1>
+      <!-- <button (click)="dibStay()">찜하기</button> -->
+      <i class="fa fa-heart-o dib-heart" aria-hidden="true" *ngIf="!dibStatus" (click)="dibStay()"></i>
+      <i class="fa fa-heart dib-heart" aria-hidden="true" *ngIf="dibStatus" (click)="dibStay()"></i>
       <section class="accomodation-imgs-section">
         <h2>숙소 사진</h2>
       <div class="all-wrpper">
@@ -124,7 +123,7 @@
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
           <li class="room" [routerLink]="room.roomId"
-          [queryParams]="{ checkIn: bsRangeValue[0].toDateString(), checkOut: bsRangeValue[1].toDateString()}"
+          [queryParams]="{ checkIn: bsRangeValue[0]?.toDateString(), checkOut: bsRangeValue[1]?.toDateString()}"
           *ngFor="let room of rooms">
             <div>
               <img [src]="room.urlImage[0]">

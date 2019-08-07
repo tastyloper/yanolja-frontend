@@ -87,6 +87,9 @@ button {
   margin-bottom: 120px;
   position: relative;
 }
+.accomodation-detail {
+  position: relative;
+}
 .accomodation-detail h1 {
   height: 1px;
   width: 1px;
@@ -98,6 +101,14 @@ button {
   width: 1px;
   padding: 1px;
   overflow: hidden;
+}
+.dib-heart {
+  position: absolute;
+  top: 20px;
+  right: 90px;
+  z-index: 2;
+  font-size: 25px;
+  color: $primary-color;
 }
 /*캐러셀*/
 .gallery-top .swiper-slide {

@@ -4,6 +4,8 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { StayDetail } from '../types/stay-detail.interface';
 import { Room } from '../types/room.interface';
 import { Review } from '../types/review.interface';
+import { DipStay } from '../types/dipStay.interface';
+import { Stay } from '../types/stay.interface';
 
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
@@ -24,18 +26,26 @@ export class StayDetailService {
   getStayDetail(stayId: number) {
     return this.http.get<StayDetail>(this.url + `stay/detail/${stayId}/`);
   }
+
   getRoomList(stayId: number, requestCheckIn: string, requestCheckOut: string) {
     const params = new HttpParams()
     .set('requestCheckIn', requestCheckIn)
     .set('requestCheckOut', requestCheckOut);
     return this.http.get<Room[]>(this.url + `stay/${stayId}/room/`, { params });
   }
+
   getReviewList(stayId: number) {
     return this.http.get<Review[]>(this.url + `stay/${stayId}/comments/`);
   }
+
   postDibStay(stayId: number) {
     const headers = new HttpHeaders()
     .set('Authorization', `Token ${this.authService.getToken().token}`);
-    return this.http.post(this.url + `stay/${stayId}/like/`, null, { headers });
+    return this.http.post<DipStay>(this.url + `stay/${stayId}/like/`, null, { headers });
+  }
+  getDibStay() {
+    const headers = new HttpHeaders()
+    .set('Authorization', `Token ${this.authService.getToken().token}`);
+    return this.http.get<Stay[]>(this.url + 'mypage/like/', { headers });
   }
 }

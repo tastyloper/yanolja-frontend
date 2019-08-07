@@ -183,10 +183,9 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
   onValueChange(value: Date[]) {
     this.bsRangeValue = value;
     this.requestRoom();
-    console.log(value);
   }
 
-  formatDate(date: Date) {
+  formatDate(date: Date): string {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
@@ -197,7 +196,7 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
 
     return [year, month, day].join('-');
   }
-  formatReservedList() {
+  formatReservedList(): string[] {
     let reservedList = [];
     this.data.reservedList.map(reserved => {
       reservedList = [...reservedList, new Date(reserved)];
