@@ -44,6 +44,7 @@ export class StayDetailService {
     return this.http.post<DipStay>(this.url + `stay/${stayId}/like/`, null, { headers });
   }
   getDibStay() {
+    if (!this.authService.getToken()) { return; }
     const headers = new HttpHeaders()
     .set('Authorization', `Token ${this.authService.getToken().token}`);
     return this.http.get<Stay[]>(this.url + 'mypage/like/', { headers });

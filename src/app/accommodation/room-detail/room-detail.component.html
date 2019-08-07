@@ -37,7 +37,7 @@
       </section>
       <section class="reservation-notice" *ngIf="!!data">
         <h3>예약공지</h3>
-        <pre *ngFor="let text of data.reservationNotice">{{text}}</pre>
+        <li *ngFor="let text of data.reservationNotice">{{text}}</li>
       </section>
       <section class="cancel-rule" *ngIf="!!data">
         <h3>취소규정</h3>

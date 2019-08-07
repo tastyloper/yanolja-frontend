@@ -403,14 +403,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       () => {
         this.reviewsLoading$.next(false);
     });
-    this.dataService.getDibStay().subscribe(
-      stays => {
-        stays.forEach(stay => {
-          if (stay.stayId !== this.data.stayId) { return; }
-          this.dibStatus = true;
-        });
-      }
-    );
+    this.filterGetDibStay();
   }
 
 
@@ -529,6 +522,17 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.dataService.postDibStay(this.stayId).subscribe(
       data => {
         this.dibStatus = data.like;
+      }
+    );
+  }
+  filterGetDibStay() {
+    if (!this.authService.getToken()) { return; }
+    this.dataService.getDibStay().subscribe(
+      stays => {
+        stays.forEach(stay => {
+          if (stay.stayId !== this.data.stayId) { return; }
+          this.dibStatus = true;
+        });
       }
     );
   }
