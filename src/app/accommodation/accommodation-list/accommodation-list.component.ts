@@ -1999,7 +1999,9 @@ export class AccommodationListComponent implements OnInit {
 
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-    const pages = [...Array(endPage).keys()].map(i => i + startPage);
+    const pages = Array.from({ length: endPage }, (v, i) => i + startPage);
+    // const pages = [...Array(endPage).keys()].map(i => i + startPage);
+    // https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
 
     return {
       totalItems,
