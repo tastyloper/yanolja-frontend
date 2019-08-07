@@ -80,7 +80,7 @@ export class ReservationDetailComponent implements OnInit {
   }
 
   cancelConfirm(template: Template) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template);
   }
 
   confirm(): void {
