@@ -79,6 +79,7 @@ button {
   color: #fff;
 }
 
+
 /*사진 섹션*/
 .accomodation-imgs-section {
   width: 100%;
@@ -134,26 +135,27 @@ button {
 /* 객실 비교조건 선택*/
 .compare-condition {
   width: 100%;
-  height: 120px;
-  padding: 45px;
+  padding: 24px 45px;
   /* 패딩 24px에서 45px로 변경*/
-  flex-direction: column;
   border: 1px solid #e9ecef;
   margin-bottom: 30px;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 .compare-condition h3 {
   height: 1px;
   width: 1px;
   padding: 1px;
   overflow: hidden;
+  position: absolute;
 }
 .check-date {
-  width: 100%;
+  width: 336px;
   height: 45px;
+  justify-self: flex-start;
 }
 .form-control {
-  width: 100%;
+  width: 336px;
   display: block;
   cursor: pointer;
   font-weight: 600;
@@ -161,45 +163,50 @@ button {
   text-shadow: 0 0 0 #000;
   background: transparent;
   padding-left: 40px;
+  border: 1px solid #e9ecef;
 
 &:focus {
     outline: none;
+}
+.bs-form {
+  width: 336px;
+}
+.row {
+  width: 336px;
 }
 }
 /*아이콘 css설정*/
 .fa-chevron-down, .fa-chevron-up {
   @include vertical-center;
-  right: 25px;
+  right: 15px;
   z-index: -1;
   color: $primary-color;
 }
 .fa-calendar-check-o {
   @include vertical-center;
-  left: 30px;
+  left: 16px;
   z-index: -1;
   color: $primary-color;
 }
 
 .check-date p {
-  position: absolute;
-  top: 10px;
-  left: 48px;
   font-size: 20px;
   font-weight: 600;
   
 }
 .form-group {
   width: 100%;
+  position: relative;
 }
 /* 인원 선택*/
 .check-person {
-  width: 33%;
+  width: 336px;
   height: 40px;
-  position: absolute;
-  top: 45px;
-  left: 40%;
   border: 1px solid #e9ecef;
+  border-radius: 2px;
   background: #fff;
+  position: relative;
+  user-select: none;
 }
 .check-person-container {
   padding: 7px 10px 8px 50px;
@@ -207,15 +214,20 @@ button {
 .check-person-container>p {
   font-weight: 600;
   font-size : 16px;
-  @include vertical-center;
 }
 .check-cursor>.fa-chevron-down, .check-cursor>.fa-chevron-up {
   right: 10px;
+  position: absolute;
   z-index: 1;
 }
 .check-cursor {
   cursor: pointer;
   height: 100%;
+}
+.check-cursor-active {
+  box-shadow: 0 0 0 0.2rem rgba(255, 52, 120, 0.25);
+  transition: all 0.08s ease;
+  border-radius: 2px;
 }
 .fa-times {
   cursor: pointer;
@@ -228,14 +240,15 @@ button {
 .modal-person {
   width: 100%;
   position: absolute;
-  top: 45px;
+  top: 60px;
   z-index: 2;
   padding: 20px;
   display: flex;
   flex-direction: column;
   border-radius: 2px;
   background-color: #fff;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 5px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 10px 0 #aaa;
+  transition: all 0.5s ease-in-out;
 }
 .modal-person>div {
   margin-top: 20px;
@@ -276,9 +289,8 @@ button {
   outline-style: none;
   align-items: center;
   background-color: #fff;
-  @include vertical-center;
-  right: 50px;
   height: 40px;
+  justify-self: flex-end;
 }
 .search:hover {
   background: #FFF2F5;
@@ -557,7 +569,7 @@ button {
   font-size: 28px;
   font-weight: 700;
 }
-.review-section>a {
+.review-section a {
   @include horizontal-center;
   bottom: 20px;
   cursor: pointer;
@@ -565,130 +577,251 @@ button {
   font-size: 17px;
   left: 45%;
 }
-.grade {
-  width: 30%;
-  height: 154px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(233, 236, 239);
-  border-radius: 2px;
-  float: left;
+// .grade {
+//   width: 30%;
+//   height: 154px;
+//   border-width: 1px;
+//   border-style: solid;
+//   border-color: rgb(233, 236, 239);
+//   border-radius: 2px;
+//   float: left;
+// }
+// .grade-number {
+//   width: 48px;
+//   height: 48px;
+//   margin-bottom: 10px;
+//   background: #E2054F;
+//   font-size: 24px;
+//   font-weight: 600;
+//   color: rgb(255, 255, 255);
+//   text-align: center;
+//   line-height: 48px;
+//   border-radius: 9px 9px 9px 0px;
+//   margin: 40px auto 10px auto;
+// }
+// .grade-text {
+//   font-size: 16px;
+//   font-weight: 700;
+//   color: rgb(73, 80, 86);
+//   text-align: center;
+// }
+// .grade-score {
+//   width: 65%;
+//   height: 154px;
+//   border-width: 1px;
+//   border-style: solid;
+//   border-color: rgb(233, 236, 239);
+//   border-radius: 2px;
+//   margin-left: calc(30% + 10px);
+// }
+// .grade-score ul {
+//   display: flex;
+//   flex-wrap: wrap;
+//   padding: 20px 32px;
+// }
+// .grade-item {
+//   width: calc(45% - 16px);
+//   margin-bottom: 20px;
+//   margin-right: 38px;
+//   display: flex;
+//   flex-wrap: wrap;
+//   position: relative;
+// }
+// .item-background {
+//   width: 100%;
+//   height: 4px;
+//   position: relative;
+//   background-color: rgb(233, 236, 239);
+//   border-radius: 2px;
+// }
+// .grade-item p:nth-child(1) {
+//   font-size: 13px;
+//   color: rgb(73, 80, 86);
+//   line-height: 18px;
+//   margin-bottom: 2px;
+// }
+// .grade-item p:nth-last-child(1) {
+//   margin-left: 8px;
+//   font-size: 12px;
+//   font-weight: 600;
+//   color: rgb(102, 109, 117);
+//   position: absolute;
+//   right: -24px;
+//   top: 50%;
+// }
+// .item-foreground {
+//   height: 4px;
+//   position: absolute;
+//   top: 0px;
+//   left: 0px;
+//   background-color: $primary-color;
+//   border-radius: 2px;
+//   z-index: 2;
+//   /*임시 width*/
+//   width: 90%;
+// }
+// /*container 임시 width*/
+// .my-container {
+//   width: 1160px;
+//   margin: 0 auto;
+// }
+// .review-item {
+//   width: calc(90% + 10px);
+//   padding-top: 20px;
+//   padding-bottom: 20px;
+//   border-bottom: 1px solid rgb(233, 236, 239);
+// }
+// .review-score {
+//   width: 32px;
+//   height: 32px;
+//   margin-right: 10px;
+//   background: #E2054F;
+//   font-size: 16px;
+//   font-weight: 600;
+//   color: rgb(255, 255, 255);
+//   text-align: center;
+//   line-height: 32px;
+//   border-radius: 6px 6px 6px 0px;
+//   display: inline-block;
+// }
+// .review-item span:nth-child(2) {
+//   font-size: 18px;
+//   font-weight: 600;
+//   color: rgb(52, 58, 64);
+//   line-height: 32px;
+//   margin-bottom: 0px;
+//   margin-left: 6px;
+// }
+// .review-item p {
+//   margin: 20px 0 20px 50px;
+//   font-size: 14px;
+//   color: rgb(73, 80, 86);
+// }
+// .review-item span:nth-last-child(1) {
+//   padding-left: 50px;
+//   font-size: 12px;
+//   color: rgb(132, 140, 148);
+// }
+.review-header {
+  padding-bottom: 20px;
 }
-.grade-number {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 10px;
-  background: #E2054F;
-  font-size: 24px;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  line-height: 48px;
-  border-radius: 9px 9px 9px 0px;
-  margin: 40px auto 10px auto;
-}
-.grade-text {
-  font-size: 16px;
-  font-weight: 700;
-  color: rgb(73, 80, 86);
-  text-align: center;
-}
-.grade-score {
-  width: 65%;
-  height: 154px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(233, 236, 239);
-  border-radius: 2px;
-  margin-left: calc(30% + 10px);
-}
-.grade-score ul {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px 32px;
+.all-grade-wrap {
+  position: relative;
+  margin-right: 60px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(100% + 40px);
+    width: 2px;
+    height: 100%;
+    background-color: #CCC;
+    transform: rotate(16deg);
+  }
+  .all-grade {
+    display: inline-block;
+    position: relative;
+    width: 72px;
+    height: 90px;
+    margin: 0 0 5px 5px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #FFF;
+    text-align: center;
+    line-height: 76px;
+    border-radius: 9px 9px 9px 0px;
+    img {
+      @include both-center;
+      height: 100%;
+      z-index: -1;
+    }
+  }
 }
 .grade-item {
-  width: calc(45% - 16px);
-  margin-bottom: 20px;
-  margin-right: 38px;
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-}
-.item-background {
-  width: 100%;
-  height: 4px;
-  position: relative;
-  background-color: rgb(233, 236, 239);
-  border-radius: 2px;
-}
-.grade-item p:nth-child(1) {
-  font-size: 13px;
-  color: rgb(73, 80, 86);
-  line-height: 18px;
-  margin-bottom: 2px;
-}
-.grade-item p:nth-last-child(1) {
-  margin-left: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgb(102, 109, 117);
-  position: absolute;
-  right: -24px;
-  top: 50%;
-}
-.item-foreground {
-  height: 4px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background-color: $primary-color;
-  border-radius: 2px;
-  z-index: 2;
-  /*임시 width*/
-  width: 90%;
-}
-/*container 임시 width*/
-.my-container {
-  width: 1160px;
-  margin: 0 auto;
-}
-.review-item {
-  width: calc(90% + 10px);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgb(233, 236, 239);
-}
-.review-score {
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-  background: #E2054F;
-  font-size: 16px;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  line-height: 32px;
-  border-radius: 6px 6px 6px 0px;
   display: inline-block;
+  width: 95px;
+  margin: 0 0 6px 10px;
+  color: #848C94;
+  text-align: center;
+  .grade-item-num {
+    position: relative;
+    height: 90px;
+    margin-bottom: 5px;
+    color: #FFF;
+    font-size: 35px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 76px;
+    img {
+      @include both-center;
+      height: 100%;
+      z-index: -1;
+    }
+  }
 }
-.review-item span:nth-child(2) {
-  font-size: 18px;
-  font-weight: 600;
-  color: rgb(52, 58, 64);
-  line-height: 32px;
-  margin-bottom: 0px;
-  margin-left: 6px;
-}
-.review-item p {
-  margin: 20px 0 20px 50px;
-  font-size: 14px;
-  color: rgb(73, 80, 86);
-}
-.review-item span:nth-last-child(1) {
-  padding-left: 50px;
-  font-size: 12px;
-  color: rgb(132, 140, 148);
+.review-list {
+  .review-item {
+    padding: 20px 0;
+    border-top: 1px solid #E9ECEF;
+    .review-item-header {
+      margin-bottom: 10px;
+    }
+    .grade {
+      display: inline-block;
+      position: relative;
+      width: 32px;
+      height: 38px;
+      margin-right: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFF;
+      text-align: center;
+      line-height: 32px;
+      border-radius: 6px 6px 6px 0px;
+      span {
+        @include horizontal-center;
+      }
+      img {
+        @include horizontal-center;
+        height: 100%;
+        z-index: -1;
+      }
+    }
+    .review-info {
+      display: inline-block;
+      font-size: 12px;
+      color: #848C94;
+      line-height: 32px;
+      vertical-align: top;
+    }
+    .review-date {
+      float: right;
+      font-size: 12px;
+      color: #848C94;
+      line-height: 32px;
+      vertical-align: top;
+    }
+  }
+  .owner {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #FAFAFA;
+    border-radius: 10px;
+    h5 {
+      margin-bottom: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      span {
+        float: right;
+        color: #848C94;
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+    p {
+      color: #888;
+    }
+  }
 }
 .no-review-container {
   display: flex;

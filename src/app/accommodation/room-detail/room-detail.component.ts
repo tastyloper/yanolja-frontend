@@ -42,7 +42,8 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
 
   // datepicker
   dateCustomClasses: DatepickerDateCustomClasses[];
-  bsValue: Date;
+  checkIn: Date;
+  checkOut: Date;
   bsRangeValue: Date[];
   maxDate: Date;
   minDate: Date;
@@ -102,7 +103,8 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.bsValue = new Date();
+    this.checkIn = new Date();
+    this.checkOut = new Date();
     this.maxDate = new Date();
     this.minDate = new Date();
     this.form = new FormGroup({
@@ -112,11 +114,14 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     this.locales = listLocales();
 
     this.localeService.use(this.locale);
-    this.maxDate.setDate(this.maxDate.getDate() + 1);
-    this.minDate.setDate(this.minDate.getDate());
-    this.bsRangeValue = [this.bsValue, this.maxDate];
-    this.form.get('dateYMD').setValue(this.bsRangeValue);
 
+    this.minDate.setDate(this.minDate.getDate());
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
+
+    this.checkOut.setDate(this.checkIn.getDate() + 1);
+
+    this.bsRangeValue = [this.checkIn, this.checkOut];
+    this.form.get('dateYMD').setValue(this.bsRangeValue);
     this.galleryTopConfig = {
       spaceBetween: 10,
       effect: 'fade',
@@ -138,15 +143,47 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     this.route.paramMap
       .subscribe(param => this.roomId = +param.get('id'));
 
-    this.dataService.getRoomDetail(this.roomId, '2019-07-01+22:00:00', '2019-07-02+11:00:00').subscribe(
+    this.route.queryParamMap
+    .subscribe(queryParam => {
+      const bsRangeValue =
+      [
+        new Date(Date.parse(queryParam.get('checkIn'))),
+        new Date(Date.parse(queryParam.get('checkOut')))
+      ];
+      this.form.get('dateYMD').setValue(bsRangeValue);
+    });
+
+    this.dataService.getRoomDetail(
+      this.roomId,
+      `${this.formatDate(this.bsRangeValue[0])}+17:00:00`,
+      `${this.formatDate(this.bsRangeValue[1])}+00:00:00`)
+      .subscribe(
       data => {
         this.data = data;
       }
     );
   }
 
+  requestRoom() {
+    this.dataService.getRoomDetail(
+    this.roomId,
+    `${this.formatDate(this.bsRangeValue[0])}+17:00:00`,
+    `${this.formatDate(this.bsRangeValue[1])}+00:00:00`)
+    .subscribe(
+      data => {
+        this.data = data;
+      }
+    );
+  }
+
+
   openPolicy() {
     this.bsModalRef = this.modalService.show(CancellationPolicyComponent, { class: 'modal-lg' });
+  }
+  onValueChange(value: Date[]) {
+    this.bsRangeValue = value;
+    this.requestRoom();
+    console.log(value);
   }
 
   formatDate(date: Date) {
@@ -159,5 +196,12 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     if (day.length < 2) { day = '0' + day; }
 
     return [year, month, day].join('-');
+  }
+  formatReservedList() {
+    let reservedList = [];
+    this.data.reservedList.map(reserved => {
+      reservedList = [...reservedList, new Date(reserved)];
+    });
+    return reservedList;
   }
 }

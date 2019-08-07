@@ -1,73 +1,43 @@
-<div class="container-wrapper fix-height">
+<div class="accommodation-list container-wrapper fix-height">
   <div class="head-wrap">
     <div class="container">
       <section class="alist-search-container">
         <div class="alist-search-items-container">
-          <div class="alist-search-type search-box">
+          <div class="alist-search-type search-box" appClickOutside (clickOutSide)="type = false">
             <div class="alist-search-frame" (click)="toggle('type')">
               <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
               <button class="alist-search-inputbox">{{searchBarShow}}</button>
             </div>
-            <div class="alist-popup-container" [class.active]="type">
+            <div class="alist-popup-container" *ngIf="type">
               <div class="alist-type-popup-module">
                 <ul class="alist-popup-type-container alist-type-container-type">
-                  <li class="alist-popup-type-item" (click)="selectType('motel')"><button>모텔</button></li>
-                  <li class="alist-popup-type-item" (click)="selectType('hotel')"><button>호텔</button></li>
-                  <li class="alist-popup-type-item" (click)="selectType('guestHouse')"><button>게스트하우스</button></li>
-                  <li class="alist-popup-type-item" (click)="selectType('pension')"><button>펜션</button></li>
+                  <li class="alist-popup-type-item" (click)="selectType('motel')">모텔</li>
+                  <li class="alist-popup-type-item" (click)="selectType('hotel')">호텔</li>
+                  <li class="alist-popup-type-item" (click)="selectType('guestHouse')">게스트하우스</li>
+                  <li class="alist-popup-type-item" (click)="selectType('pension')">펜션</li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="alist-search-loc search-box">
+          <div class="alist-search-loc search-box" appClickOutside (clickOutSide)="location = false">
             <div class="alist-search-frame" (click)="toggle('location')">
               <i class="alist-search-icon fa fa-map-marker"></i>
               <button class="alist-search-inputbox">{{searchBarLocShow}}</button>
             </div>
-            <div class="alist-search-location-container" [class.active]="location">
+            <div class="alist-search-location-container" *ngIf="location">
+              <a (click)="openModal(template)" class="open-map-btn">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                {{ address }}
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
               <div class="alist-search-location-header">
                 <ul class="alist-location-header-top">
-                  <li>서울</li>
-                  <li>경기</li>
-                  <li>인천</li>
-                  <li>강원</li>
-                  <li>제주</li>
-                  <li>대전</li>
-                  <li>충북</li>
-                  <li>충남/세종</li>
-                  <li>부산</li>
-                  <li>울산</li>
-                  <li>경남</li>
-                  <li>대구</li>
-                  <li>경북</li>
-                  <li>광주</li>
-                  <li>전남</li>
-                  <li>전주/전북</li>
+                  <li [class.active]="locationA.active" (click)="locationChange($event, locationA.val)" *ngFor="let locationA of locationArr">{{ locationA.val }}</li>
                 </ul>
               </div>
               <div class="alist-search-location-bottom">
                 <ul class="alist-search-bottom-list">
-                  <li><button (click)="selectLoc(item)" #item value="강남/역삼/삼성/논현">강남/역삼/삼성/논현</button></li>
-                  <li><button>서초/신사/방배</button></li>
-                  <li><button>잠실/신천(잠실새내)</button></li>
-                  <li><button>영등포/여의도</button></li>
-                  <li><button>신림/서울대/사당/동작</button></li>
-                  <li><button>천호/길동/둔촌</button></li>
-                  <li><button>화곡/까치산/양천/목동</button></li>
-                  <li><button>구로/금천/오류/신도림</button></li>
-                  <li><button>신촌/홍대/합정</button></li>
-                  <li><button>연신내/불광/응암</button></li>
-                  <li><button>종로/대학로</button></li>
-                  <li><button>성신여대/성북/월곡</button></li>
-                  <li><button>이태원/용산/서울역/명동/회현</button></li>
-                  <li><button>동대문/동묘/신당/충무로/약수</button></li>
-                  <li><button>회기/고려대/청량리/신설동</button></li>
-                  <li><button>장안동/답십리</button></li>
-                  <li><button>건대/군자/구의</button></li>
-                  <li><button>왕십리/성수/금호</button></li>
-                  <li><button>수유/미아</button></li>
-                  <li><button>상봉/중량/면목</button></li>
-                  <li><button>태릉/노원/도봉/창동</button></li>
+                  <li (click)="selectLoc(locationVal)" *ngFor="let locationVal of detailLocationArr">{{ locationVal }}</li>
                 </ul>
               </div>
             </div>
@@ -76,28 +46,26 @@
             <div class="alist-search-frame">
               <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
               <button class="alist-search-inputbox">
-                <div class="col-xs-12 col-12 form-group datePicker">
+                <div class="form-group datePicker">
                   <input type="text" placeholder="예약하실 날짜를 선택하세요" class="form-control datePicker-input"
-                    [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" 
-                    [bsValue]="bsValue" readonly
-                    #inputDate>
+                    [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" [container]="'.container-wrapper'"
+                    [bsValue]="bsValue" readonly #inputDate>
                 </div>
               </button>
             </div>
           </div>
-          <div class="alist-search-date search-box">
+          <div class="alist-search-date search-box" appClickOutside (clickOutSide)="person = false">
             <div class="alist-search-frame">
               <i class="fa fa-user" aria-hidden="true"></i>
               <button class="alist-search-inputbox" (click)="toggle('member')">
                 <div class="btn-date-inner">
                   <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
-                  <i class="fa fa-chevron-down arrow" [class.active]="!person" aria-hidden="true"></i>
-                  <i class="fa fa-chevron-up arrow" [class.active]="person" aria-hidden="true"></i>
-
+                  <i class="fa fa-chevron-down arrow" *ngIf="!person" aria-hidden="true"></i>
+                  <i class="fa fa-chevron-up arrow" *ngIf="person" aria-hidden="true"></i>
                 </div>
               </button>
             </div>
-            <div class="alist-popup-container alist-popup-container-member" [class.active]="person">
+            <div class="alist-popup-container alist-popup-container-member" *ngIf="person">
               <div class="alist-popup-wrapper">
                 <div class="alist-popup-module">
                   <h4 class="alist-date-popup-h4">인원</h4>
@@ -113,7 +81,6 @@
                           <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                       </div>
-
                     </div>
                     <div class="alist-date-popup-content-person popup-children">
                       <p class="popup-person-option">아동</p>
@@ -143,150 +110,11 @@
             </div>
           </div>
         </div>
+        <div class="alist-search-items-container keyword-wrap">
+          <i class="fa fa-search"></i>
+          <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요.">
+        </div>
       </section>
-      <section class="alist-search-container">
-          <div class="alist-search-items-container">
-            <div class="alist-search-type search-box">
-              <div class="alist-search-frame" (click)="toggle('type')">
-                <i class="alist-search-icon fa fa-bed" aria-hidden="true"></i>
-                <button class="alist-search-inputbox">{{searchBarShow}}</button>
-              </div>
-              <div class="alist-popup-container" [class.active]="type">
-                <div class="alist-type-popup-module">
-                  <ul class="alist-popup-type-container alist-type-container-type">
-                    <li class="alist-popup-type-item" (click)="selectType('motel')"><button>모텔</button></li>
-                    <li class="alist-popup-type-item" (click)="selectType('hotel')"><button>호텔</button></li>
-                    <li class="alist-popup-type-item" (click)="selectType('guestHouse')"><button>게스트하우스</button></li>
-                    <li class="alist-popup-type-item" (click)="selectType('pension')"><button>펜션</button></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="alist-search-loc search-box">
-              <div class="alist-search-frame" (click)="toggle('location')">
-                <i class="alist-search-icon fa fa-map-marker"></i>
-                <button class="alist-search-inputbox">{{searchBarLocShow}}</button>
-              </div>
-              <div class="alist-search-location-container" [class.active]="location">
-                <div class="alist-search-location-header">
-                  <ul class="alist-location-header-top">
-                    <li>서울</li>
-                    <li>경기</li>
-                    <li>인천</li>
-                    <li>강원</li>
-                    <li>제주</li>
-                    <li>대전</li>
-                    <li>충북</li>
-                    <li>충남/세종</li>
-                    <li>부산</li>
-                    <li>울산</li>
-                    <li>경남</li>
-                    <li>대구</li>
-                    <li>경북</li>
-                    <li>광주</li>
-                    <li>전남</li>
-                    <li>전주/전북</li>
-                  </ul>
-                </div>
-                <div class="alist-search-location-bottom">
-                  <ul class="alist-search-bottom-list">
-                    <li><button (click)="selectLoc(item)" #item value="강남/역삼/삼성/논현">강남/역삼/삼성/논현</button></li>
-                    <li><button>서초/신사/방배</button></li>
-                    <li><button>잠실/신천(잠실새내)</button></li>
-                    <li><button>영등포/여의도</button></li>
-                    <li><button>신림/서울대/사당/동작</button></li>
-                    <li><button>천호/길동/둔촌</button></li>
-                    <li><button>화곡/까치산/양천/목동</button></li>
-                    <li><button>구로/금천/오류/신도림</button></li>
-                    <li><button>신촌/홍대/합정</button></li>
-                    <li><button>연신내/불광/응암</button></li>
-                    <li><button>종로/대학로</button></li>
-                    <li><button>성신여대/성북/월곡</button></li>
-                    <li><button>이태원/용산/서울역/명동/회현</button></li>
-                    <li><button>동대문/동묘/신당/충무로/약수</button></li>
-                    <li><button>회기/고려대/청량리/신설동</button></li>
-                    <li><button>장안동/답십리</button></li>
-                    <li><button>건대/군자/구의</button></li>
-                    <li><button>왕십리/성수/금호</button></li>
-                    <li><button>수유/미아</button></li>
-                    <li><button>상봉/중량/면목</button></li>
-                    <li><button>태릉/노원/도봉/창동</button></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="alist-search-date search-box" (click)="selectDate(inputDate)" (click)="toggle('calendar')">
-              <div class="alist-search-frame">
-                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                <button class="alist-search-inputbox">
-                  <div class="col-xs-12 col-12 form-group datePicker">
-                    <input type="text" placeholder="예약하실 날짜를 선택하세요" class="form-control datePicker-input"
-                      [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" 
-                      [bsValue]="bsValue" readonly
-                      #inputDate>
-                  </div>
-                </button>
-              </div>
-            </div>
-            <div class="alist-search-date search-box">
-              <div class="alist-search-frame">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <button class="alist-search-inputbox" (click)="toggle('member')">
-                  <div class="btn-date-inner">
-                    <span>총 {{numberAdult + numberChildren}}명 (어른 : {{numberAdult}}명, 아동: {{numberChildren}}명)</span>
-                    <i class="fa fa-chevron-down arrow" [class.active]="!person" aria-hidden="true"></i>
-                    <i class="fa fa-chevron-up arrow" [class.active]="person" aria-hidden="true"></i>
-  
-                  </div>
-                </button>
-              </div>
-              <div class="alist-popup-container alist-popup-container-member" [class.active]="person">
-                <div class="alist-popup-wrapper">
-                  <div class="alist-popup-module">
-                    <h4 class="alist-date-popup-h4">인원</h4>
-                    <div class="alist-date-popup-content">
-                      <div class="alist-date-popup-content-person popup-adult">
-                        <p class="popup-person-option">성인</p>
-                        <div class="popup-btn-stepper">
-                          <button class="stepper-modifier" (click)="minus('adult')">
-                            <i class="fa fa-minus" aria-hidden="true"></i>
-                          </button>
-                          <p class="stepper-value">{{numberAdult}}</p>
-                          <button class="stepper-modifier" (click)="plus('adult')">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                          </button>
-                        </div>
-  
-                      </div>
-                      <div class="alist-date-popup-content-person popup-children">
-                        <p class="popup-person-option">아동</p>
-                        <div class="popup-btn-stepper">
-                          <button class="stepper-modifier" (click)="minus('children')">
-                            <i class="fa fa-minus" aria-hidden="true"></i>
-                          </button>
-                          <p class="stepper-value">{{numberChildren}}</p>
-                          <button class="stepper-modifier" (click)="plus('children')">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="btn-popup-close">
-                    <button class="btn-close" (click)="toggle('member')">
-                      <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="btn-submit-container search-box" (click)="submitNav()">
-              <div class="alist-search-frame">
-                <button class="alist-search-inputbox">검색</button>
-              </div>
-            </div>
-          </div>
-        </section>
     </div>
   </div>
   <div class="container">
@@ -294,12 +122,15 @@
       <header class="alist-header">
         <h2 class="alist-header-h2">검색된 숙소 {{sstayList.length}}개</h2>
         <ul class="alist-header-nav">
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">추천순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 낮은순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 높은순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">평점순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">거리순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">등급순</button></li>
+          <li class="alist-header-nav-item">
+            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">평점순</a>
+          </li>
+          <li class="alist-header-nav-item">
+            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">가격 낮은순</a>
+          </li>
+          <li class="alist-header-nav-item">
+            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">가격 높은순</a>
+          </li>
         </ul>
       </header>
       <div class="loading-wrap" *ngIf="isLoading$ | async">
@@ -379,3 +210,30 @@
   </div>
 </div>
 <app-footer></app-footer>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">주소검색 및 지도로 위치지정</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="col-10">
+        <input type="text" class="form-control" value="{{ address }}" [(ngModel)]="address" (keyup.enter)="getLocationAddress()">
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-secondary" (click)="getLocationAddress()">주소검색</button>
+      </div>
+    </div>
+    <div class="loading-wrap" *ngIf="isMapLoading$ | async">
+      <div class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+    </div>
+    <div class="map-wrap" *ngIf="!(isMapLoading$ | async)">
+      <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng" (mapClick)="positionChange($event)">
+        <agm-marker [(latitude)]="lat" [(longitude)]="lng"></agm-marker>
+      </agm-map>
+    </div>
+    <button class="btn btn-primary d-block w-100" (click)="locationComplete()">위치지정 완료</button>
+  </div>
+</ng-template>
