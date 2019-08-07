@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class SubTitleService {
   pagaTitle: string;
   pagaDescription: string;
+  grade: number;
+  recommendation: string;
+  review: string;
+  isDetail: boolean;
 }
