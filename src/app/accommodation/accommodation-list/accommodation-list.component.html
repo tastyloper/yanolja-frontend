@@ -11,10 +11,10 @@
             <div class="alist-popup-container" *ngIf="type">
               <div class="alist-type-popup-module">
                 <ul class="alist-popup-type-container alist-type-container-type">
-                  <li class="alist-popup-type-item" (click)="selectType('motel')">모텔</li>
-                  <li class="alist-popup-type-item" (click)="selectType('hotel')">호텔</li>
-                  <li class="alist-popup-type-item" (click)="selectType('guestHouse')">게스트하우스</li>
-                  <li class="alist-popup-type-item" (click)="selectType('pension')">펜션</li>
+                  <li class="alist-popup-type-item" (click)="selectType('모텔')">모텔</li>
+                  <li class="alist-popup-type-item" (click)="selectType('호텔/리조트')">호텔</li>
+                  <li class="alist-popup-type-item" (click)="selectType('게스트하우스')">게스트하우스</li>
+                  <li class="alist-popup-type-item" (click)="selectType('펜션/풀빌라')">펜션</li>
                 </ul>
               </div>
             </div>
@@ -49,7 +49,9 @@
                 <div class="form-group datePicker">
                   <input type="text" placeholder="예약하실 날짜를 선택하세요" class="form-control datePicker-input"
                     [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" [container]="'.container-wrapper'"
-                    [bsValue]="bsValue" readonly #inputDate>
+                    [bsValue]="bsValue" readonly
+                   
+                    #inputDate>
                 </div>
               </button>
             </div>

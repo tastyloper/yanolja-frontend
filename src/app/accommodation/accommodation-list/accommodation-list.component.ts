@@ -1543,7 +1543,7 @@ export class AccommodationListComponent implements OnInit {
   locale = 'ko';
   locales = listLocales();
   bsValue = new Date();
-  bsRangeValue: Date[];
+  bsRangeValue: Date[] ;
   navClicked = false;
   datePickerConfig: Partial<BsDatepickerConfig>;
   category: string;
@@ -1553,8 +1553,10 @@ export class AccommodationListComponent implements OnInit {
   location = false;
   numberAdult = 2;
   numberChildren = 0;
+  personnel: string;
   minDate: Date;
   maxDate: Date;
+
   searchBar = {
     type: '',
     location: '',
@@ -1837,8 +1839,8 @@ export class AccommodationListComponent implements OnInit {
     this.localeService.use(this.locale);
     this.minDate = new Date();
     this.maxDate = new Date();
-    this.minDate.setDate(this.minDate.getDate() - 1);
-    this.maxDate.setDate(this.maxDate.getDate() + 14);
+    this.minDate.setDate(this.minDate.getDate());
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
 
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-yanolja',
@@ -1921,6 +1923,7 @@ export class AccommodationListComponent implements OnInit {
     } else if (person === 'children') {
       this.numberChildren = this.numberChildren - 1;
     }
+    this.totalMember();
   }
 
   plus(person: string) {
@@ -1929,23 +1932,56 @@ export class AccommodationListComponent implements OnInit {
     } else if (person === 'children') {
       this.numberChildren = this.numberChildren + 1;
     }
+    this.totalMember();
+  }
+
+  totalMember() {
+    this.personnel = `${this.numberAdult + this.numberChildren}`;
   }
 
   submitNav() {
+    this.allPagedItems = [];
     this.person = false;
     this.location = false;
     this.type = false;
-
-    this.searchParams = {
+    if (!this.bsRangeValue) {
+      this.bsRangeValue = [new Date(), new Date(new Date().setDate(new Date().getDate() + 1))]
+    }
+    if (!this.personnel) {
+      this.personnel = '2';
+    }
+    const payload = {
       category: this.category,
-      personnel: this.numberAdult,
-      selectRegion: this.selectRegion
+      selectRegion : this.selectRegion,
+      personnel: this.personnel,
+      requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
+      requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
+      popularKeyword: '',
+      priceHigh: 'False',
+      priceLow: 'True',
+      review: 'False',
+      wish: 'False'
     };
+    this.isLoading$.next(true);
+    this.stayList.getAList(payload).subscribe(
+      list => {
+        console.log("!@#!@#", list);
+        const copyList = list;
+        this.sstayList = copyList;
+        this.setPage(1);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
   }
 
   selectType(type: string) {
     this.toggle('type');
-    this.category = type;
+    this.category = type === '모텔' ? '모텔' : (type === '호텔/리조트' ?  '호텔/리조트' : (type === '게스트하우스' ?  '게스트하우스' : (type === '펜션/풀빌라' ? '펜션/풀빌라' : '숙박종류')));
     this.searchBar.type = type;
     this.searchBarShow = type === '모텔' ? '모텔' : (type === '호텔/리조트' ?  '호텔/리조트' : (type === '게스트하우스' ?  '게스트하우스' : (type === '펜션/풀빌라' ? '펜션/풀빌라' : '숙박종류')));
     return(this.searchBar);
@@ -1961,9 +1997,22 @@ export class AccommodationListComponent implements OnInit {
     // console.log(this.bsRangeValue[0]);
   }
 
+  formatDate(date: Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
+  }
+
   onScroll() {
     this.scrollState += 1;
     this.setPage(this.scrollState);
+    console.log(this.scrollState);
   }
 
   setPage(page: number) {
@@ -2101,6 +2150,11 @@ export class AccommodationListComponent implements OnInit {
         }
       });
     }
+  }
+
+  onValueChange(value: Date[]) {
+    this.bsRangeValue = value;
+
   }
 
   sorting(select: string) {

@@ -14,7 +14,6 @@ export class StayListService {
   constructor(private http: HttpClient) { }
 
   getAList(payload: StayList) {
-
     const params = new HttpParams()
       .set('selectRegion', payload.selectRegion)
       .set('category', payload.category)
@@ -27,11 +26,8 @@ export class StayListService {
       .set('priceLow', payload.priceLow)
       .set('priceHigh', payload.priceHigh);
     console.log(params, '::', payload);
-    return this.http.get<Stay[]>(this.appUrl, { params });
-  }
-
-  getAlistPriceHigh() {
     
+    return this.http.get<Stay[]>(this.appUrl, { params });
   }
 
 }
