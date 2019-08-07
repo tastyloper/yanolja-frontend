@@ -115,8 +115,8 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
 
     this.localeService.use(this.locale);
 
-    this.maxDate.setDate(this.maxDate.getDate() + 14);
     this.minDate.setDate(this.minDate.getDate());
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
 
     this.checkOut.setDate(this.checkIn.getDate() + 1);
 
@@ -157,7 +157,7 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
       this.roomId,
       `${this.formatDate(this.bsRangeValue[0])}+17:00:00`,
       `${this.formatDate(this.bsRangeValue[1])}+00:00:00`)
-    .subscribe(
+      .subscribe(
       data => {
         this.data = data;
       }
@@ -169,11 +169,11 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     this.roomId,
     `${this.formatDate(this.bsRangeValue[0])}+17:00:00`,
     `${this.formatDate(this.bsRangeValue[1])}+00:00:00`)
-  .subscribe(
-    data => {
-      this.data = data;
-    }
-  );
+    .subscribe(
+      data => {
+        this.data = data;
+      }
+    );
   }
 
 
@@ -182,8 +182,8 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
   }
   onValueChange(value: Date[]) {
     this.bsRangeValue = value;
-    this.maxDate.setDate(this.bsRangeValue[0].getDate() + 14);
     this.requestRoom();
+    console.log(value);
   }
 
   formatDate(date: Date) {
@@ -196,5 +196,12 @@ export class RoomDetailComponent implements OnInit, AfterViewInit {
     if (day.length < 2) { day = '0' + day; }
 
     return [year, month, day].join('-');
+  }
+  formatReservedList() {
+    let reservedList = [];
+    this.data.reservedList.map(reserved => {
+      reservedList = [...reservedList, new Date(reserved)];
+    });
+    return reservedList;
   }
 }

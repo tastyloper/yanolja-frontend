@@ -1,9 +1,9 @@
 
 <section class="accommodation-detail fix-height">
   <div class="container">
-    <div class="my-container">
     <section class="header-section" *ngIf="!(stayDetailLoading$ | async)">
       <div class="header-div">
+        
         <h1 class="accomodation-name">{{data.name}}</h1>
         <i class="stars">
             <i class="fa fa-star" aria-hidden="true"></i>
@@ -14,6 +14,10 @@
         <span class="header-location">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
             {{data.location}}</span>
+            
+    <!-- <button (click)="dibStay()">찜하기</button>
+    <i class="fa fa-heart-o fa-3x" aria-hidden="true" *ngIf=""></i>
+    <i class="fa fa-heart fa-3x" aria-hidden="true" *ngIf=""></i> -->
       </div>
       <div class="review-container">
         <span class="evaluation">{{evaluationText()}}</span>
@@ -65,6 +69,7 @@
                     formControlName="dateYMD"
                     [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
                     [minDate]="minDate"
+                    [maxDate]="maxDate"
                     [container]="'.accommodation-detail'"
                     (bsValueChange)="onValueChange($event)"
                     readonly
@@ -204,56 +209,118 @@
       </section>
       <section class="review-section" *ngIf="!!data">
         <h2>후기 {{data.totalComments}}</h2>
-        <ng-container *ngIf="data.totalComments">
-        <div class="grade">
-          <div class="grade-number">{{data.averageGrade}}</div>
-          <div class="grade-text">{{evaluationText()}}</div>
-        </div>
-        <div class="grade-score">
-          <ul>
-            <li class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
-              <p>{{gradeText(i)}}</p>
-              <div class="item-background">
-                <div class="item-foreground" [style.width]="totalgrade * 20 + '%'"></div>
-              </div>
-              <p>{{totalgrade}}</p>
-            </li>
+        <!-- <ng-container *ngIf="data.totalComments">
+          <div class="grade">
+            <div class="grade-number">{{data.averageGrade}}</div>
+            <div class="grade-text">{{evaluationText()}}</div>
+          </div>
+          <div class="grade-score">
+            <ul>
+              <li class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
+                <p>{{gradeText(i)}}</p>
+                <div class="item-background">
+                  <div class="item-foreground" [style.width]="totalgrade * 20 + '%'"></div>
+                </div>
+                <p>{{totalgrade}}</p>
+              </li>
+            </ul>
+          </div>
+          <ul class="review-list">
+            <ng-container *ngFor="let review of reviews">
+              <li class="review-item" *ngIf="review">
+                <div class="review-score" [innerText]="getGrade(review.grade)"></div>
+                <span class="review-title">{{review.stay}}</span>
+                <p class="review-detail">{{review.text}}</p>
+                <span>{{review.nickname}} · {{splitDate(review.created)}} · {{review.reservedRoom}}</span>
+              </li>
+            </ng-container>
           </ul>
-        </div>
-        <ul class="review-list">
-          <ng-container *ngFor="let review of reviews">
-          <li class="review-item" *ngIf="review">
-            <div class="review-score" [innerText]="getGrade(review.grade)"></div>
-            <span class="review-title">{{review.stay}}</span>
-            <p class="review-detail">{{review.text}}</p>
-            <span>{{review.nickname}} · {{splitDate(review.created)}} · {{review.reservedRoom}}</span>
-          </li>
+          <a routerLink="/accommodation/1/review"
+          [queryParams]=
+          "{ totalComments: data.totalComments, 
+            averageGrade: data.averageGrade, 
+            totalGrade1: data.totalGrade[0], 
+            totalGrade2: data.totalGrade[1], 
+            totalGrade3: data.totalGrade[2], 
+            totalGrade4: data.totalGrade[3],
+            stayId: data.stayId }"
+          >
+          후기 더 보기
+          </a> -->
+          
+        <ng-container *ngIf="data.totalComments">
+          <section class="review-header">
+            <div class="all-grade-wrap d-inline-block">
+              <div class="all-grade">
+                <img src="/assets/img/common/comma-y.png">
+                {{ data.averageGrade }}
+              </div>
+              <p>전체 누적평점</p>
+            </div>
+            <div class="grades-wrap d-inline-block">
+              <div class="grade-item" *ngFor="let totalgrade of data.totalGrade; let i = index">
+                <div class="grade-item-num">{{ totalgrade }}
+                  <img src="/assets/img/common/comma-y.png">
+                </div>
+                <span class="grade-item-title">{{gradeText(i)}}</span>
+              </div>
+            </div>
+          </section>
+          <section class="review-list" *ngIf="!!reviews">
+            <ng-container *ngFor="let comment of reviews">
+              <div class="review-item" *ngIf="!!comment">
+                <div class="review-item-header">
+                  <div class="grade">
+                    <span [innerText]="getGrade(comment.grade)"></span>
+                    <img src="/assets/img/common/comma-y.png">
+                  </div>
+                  <p class="review-info">{{ comment.nickname }} | {{ comment.stay }} - {{ comment.reservedRoom }}</p>
+                  <p class="review-date" [innerText]="splitDate(comment.created)"></p>
+                </div>
+                <p class="review-content">{{ comment.text }}</p>
+                <div class="owner" *ngIf="comment['ownerComment-1']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-1'])"></span></h5>
+                  <p>{{ comment['ownerComment-1'] }}</p>
+                </div>
+                <div class="owner" *ngIf="comment['ownerComment-2']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-2'])"></span></h5>
+                  <p>{{ comment['ownerComment-2'] }}</p>
+                </div>
+                <div class="owner" *ngIf="comment['ownerComment-3']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-3'])"></span></h5>
+                  <p>{{ comment['ownerComment-3'] }}</p>
+                </div>
+                <div class="owner" *ngIf="comment['ownerComment-4']">
+                  <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-4'])"></span></h5>
+                  <p>{{ comment['ownerComment-4'] }}</p>
+                </div>
+              </div>
+            </ng-container>
+          </section>
+          
+          <a routerLink="/accommodation/1/review"
+          [queryParams]=
+          "{ totalComments: data.totalComments, 
+            averageGrade: data.averageGrade, 
+            totalGrade1: data.totalGrade[0], 
+            totalGrade2: data.totalGrade[1], 
+            totalGrade3: data.totalGrade[2], 
+            totalGrade4: data.totalGrade[3],
+            stayId: data.stayId }"
+          >
+          후기 더 보기
+          </a>
         </ng-container>
-        </ul>
-        <a routerLink="/accommodation/1/review"
-        [queryParams]=
-        "{ totalComments: data.totalComments, 
-          averageGrade: data.averageGrade, 
-          totalGrade1: data.totalGrade[0], 
-          totalGrade2: data.totalGrade[1], 
-          totalGrade3: data.totalGrade[2], 
-          totalGrade4: data.totalGrade[3],
-          stayId: data.stayId }"
-        >
-        후기 더 보기
-        </a>
-      </ng-container>
-      <ng-container *ngIf="!!data && !data.totalComments">
-        <div class="no-review-container">
-          <span class="no-review">            
-            후기가 없습니다.
-          </span>
-        </div>
-      </ng-container>
-    </section>
+        <ng-container *ngIf="!!data && !data.totalComments">
+          <div class="no-review-container">
+            <span class="no-review">            
+              후기가 없습니다.
+            </span>
+          </div>
+        </ng-container>
+      </section>
     </section>
     </div>
-  </div>
 </section>
 <app-footer></app-footer>
 <ng-template #template>

@@ -17,4 +17,5 @@ export interface RoomDetail {
     roomId: number;
     rentalAvailable: boolean;
     stayAvailable: boolean;
+    reservedList: string[];
 }

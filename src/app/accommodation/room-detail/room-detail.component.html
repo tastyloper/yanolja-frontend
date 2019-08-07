@@ -61,6 +61,7 @@
                   [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD', isAnimated: true, containerClass: 'theme-yanolja', showWeekNumbers: false }"
                   [minDate]="minDate"
                   [maxDate]="maxDate"
+                  [datesDisabled]="formatReservedList()"
                   [container]="'.room-detail'"
                   (bsValueChange)="onValueChange($event)"
                   readonly

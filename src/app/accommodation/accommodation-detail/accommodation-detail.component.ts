@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, ViewChild, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 // swiper
@@ -30,6 +29,7 @@ import { Review } from 'src/app/core/types/review.interface';
 
 // services
 import { StayDetailService } from 'src/app/core/services/stay-detail.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 import { environment } from '../../../environments/environment';
 
@@ -289,6 +289,8 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     private dataService: StayDetailService,
     private mapsAPILoader: MapsAPILoader,
     private toaster: ToastrService,
+    private authService: AuthService,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -310,7 +312,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.locales = listLocales();
     this.localeService.use(this.locale);
 
-    this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.minDate.setDate(this.minDate.getDate());
     this.bsRangeValue = [this.bsValue, this.maxDate];
     this.form.get('dateYMD').setValue(this.bsRangeValue);
@@ -389,6 +391,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.dataService.getReviewList(this.stayId).subscribe(
       data => {
         this.reviews = data;
+        console.log(data);
       },
       error => {
         console.log(error);
@@ -396,6 +399,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       () => {
         this.reviewsLoading$.next(false);
     });
+    const test = new Date(7776000000);
+    console.log(Date.parse(this.minDate.toDateString()), Date.parse(this.maxDate.toDateString()), test);
+    // 7776000000
   }
   requestRoom() {
     this.roomsLoading$.next(true);
@@ -467,10 +473,10 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
 
   gradeText(index: number) {
-    if (index === 0) { return '청결도'; }
-    if (index === 1) { return '편의성'; }
-    if (index === 2) { return '위치만족도'; }
-    if (index === 3) { return '친절도'; }
+    if (index === 0) { return '친절도'; }
+    if (index === 1) { return '청결도'; }
+    if (index === 2) { return '편의성'; }
+    if (index === 3) { return '서비스 만족도'; }
   }
 
 
@@ -503,6 +509,15 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.childrenCount = this.childrenCount - 1;
   }
 
+  dibStay() {
+    if (!this.authService.getToken()) {
+      this.router.navigate(['login']);
+      return;
+    }
+    this.dataService.postDibStay(this.stayId).subscribe(
+      data => console.log(data)
+    );
+  }
 
 
   openLocation(template: TemplateRef<any>) {
