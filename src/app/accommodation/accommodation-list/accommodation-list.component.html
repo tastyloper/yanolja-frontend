@@ -122,12 +122,15 @@
       <header class="alist-header">
         <h2 class="alist-header-h2">검색된 숙소 {{sstayList.length}}개</h2>
         <ul class="alist-header-nav">
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">추천순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 낮은순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">가격 높은순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">평점순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">거리순</button></li>
-          <li class="alist-header-nav-item"><button type="button" class="alist-sort-option">등급순</button></li>
+          <li class="alist-header-nav-item">
+            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">평점순</a>
+          </li>
+          <li class="alist-header-nav-item">
+            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">가격 낮은순</a>
+          </li>
+          <li class="alist-header-nav-item">
+            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">가격 높은순</a>
+          </li>
         </ul>
       </header>
       <div class="loading-wrap" *ngIf="isLoading$ | async">
