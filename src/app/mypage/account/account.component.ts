@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SubTitleService } from '../../core/services/sub-title.service';
 import { AuthService } from '../../core/services/auth.service';
 
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -21,7 +22,6 @@ export class AccountComponent implements OnInit {
   constructor(
     private subTitleService: SubTitleService,
     private modalService: BsModalService,
-    private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
@@ -31,16 +31,25 @@ export class AccountComponent implements OnInit {
     this.subTitleService.pagaTitle = '마이페이지';
     this.subTitleService.pagaDescription = '나의 정보들을 한눈에 확인하세요!';
 
-    this.secessionForm = this.fb.group({
-      userpw: ['', [
-        Validators.required,
-        Validators.minLength(6)
-      ]]
-    });
     this.getData();
   }
 
-  getData() {
+  btnSecession() {
+    this.authService.secession().subscribe(
+      success => {
+        this.toastr.error('정상적으로 탈퇴되었습니다.');
+        this.router.navigate(['']);
+        this.authService.removeToken();
+      },
+      error => {
+        console.log(error);
+        this.toastr.error('시스템 오류로 인해 관리자에게 문의해주세요');
+        this.router.navigate(['']);
+      }
+    );
+  }
+
+   getData() {
     // 가데이터
     // this.account = {
     //   nickname: '연희내꺼야',
@@ -62,14 +71,5 @@ export class AccountComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-  }
-
-  onSubmit() {
-    console.log(this.secessionForm);
-    this.secessionForm.reset();
-  }
-
-  get userpw() {
-    return this.secessionForm.get('userpw');
   }
 }

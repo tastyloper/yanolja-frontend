@@ -26,6 +26,7 @@ import { Review } from 'src/app/core/types/review.interface';
 import { environment } from '../../../environments/environment';
 import { StayDetailService } from 'src/app/core/services/stay-detail.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -82,7 +83,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   lng: number;
 
   // dummy data
-//   averageGrade = 0;
+
 //   data: StayDetail = {
 //     name: '역삼마레',
 //     category: '모텔',
@@ -282,6 +283,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     private modalService: BsModalService,
     private dataService: StayDetailService,
     private mapsAPILoader: MapsAPILoader,
+    private toaster: ToastrService,
     private route: ActivatedRoute
   ) {}
 
@@ -298,9 +300,11 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.form = new FormGroup({
       dateYMD: new FormControl(new Date())
     });
+
     this.locale = 'ko';
     this.locales = listLocales();
     this.localeService.use(this.locale);
+
     this.maxDate.setDate(this.maxDate.getDate() + 1);
     this.minDate.setDate(this.minDate.getDate());
     this.bsRangeValue = [this.bsValue, this.maxDate];
@@ -333,13 +337,28 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.childrenCount = 0;
 
     this.route.paramMap
-      .subscribe(param => this.dummyStayId = +param.get('id'));
+      .subscribe(param => {
+        this.dummyStayId = +param.get('id');
+      });
+    this.route.queryParamMap
+      .subscribe(queryParam => {
+        console.log(Date.parse(this.bsValue.toDateString()));
+        this.bsRangeValue =
+        [
+          new Date(queryParam.get('bsRangeValue[0]')),
+          new Date(queryParam.get('bsRangeValue[1]'))
+        ];
+        console.log(this.bsRangeValue);
+      });
 
     this.stayDetailLoading$.next(true);
     this.dataService.getStayDetail(595).subscribe(
       data => {
         this.data = data;
         this.address = data.location;
+        this.mapsAPILoader.load().then(() => {
+          this.getLocationAddress();
+        });
       },
       error => {
         console.log(error);
@@ -369,31 +388,67 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       () => {
         this.reviewsLoading$.next(false);
     });
-
-    this.mapsAPILoader.load().then(() => {
-      this.getLocationAddress();
-    });
   }
 
   openMore() {
     this.facilitiesStatus = !this.facilitiesStatus;
   }
+
   modalToggle() {
     this.checkPersonModalStatus = !this.checkPersonModalStatus;
   }
+
   modalHide() {
     this.checkPersonModalStatus = false;
   }
+
   copyText() {
     // document.execCommand('copy', true, this.address);
-    alert('주소가 클립보드에 저장되었어요!');
     const text = document.createElement('textarea');
     document.body.appendChild(text);
     text.value = this.address;
     text.select();
     document.execCommand('copy');
     document.body.removeChild(text);
+
+    this.toaster.success('주소가 클립보드에 복사되었어요!');
   }
+
+
+  evaluationText() {
+    if (this.data.averageGrade >= 4.5) { return '우수함'; }
+    if (this.data.averageGrade >= 4 && this.data.averageGrade < 4.5) { return '좋음'; }
+    if (this.data.averageGrade >= 3.5 && this.data.averageGrade < 4) { return '보통'; }
+    if (this.data.averageGrade < 3.5) { return '비추'; }
+  }
+
+  serviceText(serviceKind: string) {
+    if (serviceKind === 'park') { return '주차'; }
+    if (serviceKind === 'restaurant') { return '레스토랑'; }
+    if (serviceKind === 'coffeeShop') { return '카페'; }
+    if (serviceKind === 'paidLaundry') { return '유료 세탁'; }
+    if (serviceKind === 'noSmoking') { return '금연'; }
+    if (serviceKind === 'banquetHall') { return '연회장'; }
+    if (serviceKind === 'business') { return '비즈니스'; }
+    if (serviceKind === 'wifi') { return '와이파이'; }
+    if (serviceKind === 'breakfast') { return '조식 제공'; }
+    if (serviceKind === 'spa') { return '스파'; }
+    if (serviceKind === 'swimmingPool') { return '수영장'; }
+    if (serviceKind === 'partyRoom') { return '파티룸'; }
+    if (serviceKind === 'unmanned') { return '무인텔'; }
+    if (serviceKind === 'couplePC') { return '커플pc'; }
+    if (serviceKind === 'barbecue') { return '바베큐'; }
+    if (serviceKind === 'jokgu') { return '족구장'; }
+  }
+
+  gradeText(index: number) {
+    if (index === 0) { return '청결도'; }
+    if (index === 1) { return '편의성'; }
+    if (index === 2) { return '위치만족도'; }
+    if (index === 3) { return '친절도'; }
+  }
+
+
 
   getGrade(grades: number[]) {
     return grades.reduce((pre, val, idx, arr) => idx === arr.length - 1 ? (pre + val) / arr.length : pre + val).toFixed(1);
@@ -401,12 +456,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   splitDate(date: string) {
     return date.split('T')[0];
   }
-  evaluationText() {
-    if (this.data.averageGrade >= 4.5) { return '우수함'; }
-    if (this.data.averageGrade >= 4 && this.data.averageGrade < 4.5) { return '좋음'; }
-    if (this.data.averageGrade >= 3.5 && this.data.averageGrade < 4) { return '보통'; }
-    if (this.data.averageGrade < 3.5) { return '비추'; }
-  }
+
 
   adultCountUp() {
     this.adultCount = this.adultCount + 1;
@@ -425,6 +475,8 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.childrenCount = this.childrenCount - 1;
   }
 
+
+
   openLocation(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
@@ -434,6 +486,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   closeLocation() {
     this.modalRef.hide();
   }
+
   getLocationAddress() {
     if (navigator.geolocation) {
       const geocoder = new google.maps.Geocoder();
@@ -448,11 +501,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
           } else {
             alert('No address available!');
           }
+          console.log(this.lat, this.lng);
         }
       });
     }
   }
-  // test() {
-  //   console.log('a');
-  // }
 }

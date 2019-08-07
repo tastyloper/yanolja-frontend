@@ -71,72 +71,25 @@
 }
 
 // modal
-::ng-deep .modal {
-  .modal-header {
-    text-align: center;
-  }
-  .modal-body {
-    .modal-q {
-      margin-bottom: 40px;
-      margin-top: 20px;
-      text-align: center;
-    }
-    .modal-q-agree {
-      font-weight: 600;
-    }
-    .modal-q-color {
-      color: $primary-color;
-    }
-  }
-  .form-input {
-    font-size: 12px;
-    height: 40px;
-    padding: 3px 7px 3px 12px;
-    background-color: #FFF;
-    border: 1px solid #CED4DA;
-    border-radius: 2px;
-    transition: all 0.08s ease;
-    width: 100%;
-    border-color: $primary-color;
-    &:focus {
-      border-color: #FF416F;
-      box-shadow: inset 0 0 0 1px #FF5983;
-      outline: none;
-    } 
-  }
-  .form-error-msg {
-    display: block;
-    padding: 5px 12px;
-    color: $primary-color;
-    font-size: 12px;
-  }
-}
-.submit-btn {
-  display: block;
-  width: 100%;
-  height: 40px;
-  // height: 48px;
-  margin-bottom: 20px;
-  padding: 0;
-  color: #FFF;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 40px;
+.modal-q {
   text-align: center;
-  background-color: #FF5983;
-  border: 0;
-  border-radius: 2px;
-  transition: all 0.1s ease-out;
-  cursor: pointer;
-  &:hover {
-    background-color: #FF416F;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .3);
-  }
-  &[disabled],
-  &[disabled]:hover {
-    color: #FFF;
-  background-color: #DEE2E6;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  cursor: default;
-  }
+}
+.modal-q-agree {
+  text-decoration: underline;
+  font-weight: 550;
+}
+.modal-q-color {
+  margin-top: 3px;
+}
+.modal-btn {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+.btn-primary {
+  width: 40%;
+  margin-right: 5px;
+}
+.btn-secondary {
+  width: 40%;
 }
