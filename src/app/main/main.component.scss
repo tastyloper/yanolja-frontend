@@ -43,7 +43,7 @@
   }
 }
 .main-header {
-  height: 320px;
+  height: 400px;
   margin-bottom: 90px;
   padding-top: 50px;
   background-color: $primary-color;
@@ -56,9 +56,259 @@
     text-align: center;
   }
   .search-panel {
-    width: 880px;
-    height: 72px;
-    margin: 0 auto 50px;
+    margin: 50px auto 70px;
+    .alist-search-type {
+      width: 130px;
+      border: none;
+    }
+    .search-box {
+      height: 45px;
+      background-color: #FFF;
+      border-radius: 2px;
+    }
+    .alist-search-frame {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 100%;
+      padding: 0 2px;
+      i {
+        margin-left: 12px;
+        color: $primary-color;
+      }
+    }
+    .alist-search-inputbox {
+      display: flex;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      color: #343A40;
+      font-weight: 600;
+      background-color: #FFF;
+      white-space: nowrap;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      border: none;
+      outline-style: none;
+    }
+    .alist-popup-container {
+      position: absolute;
+      z-index: 2;
+      margin-top: 4px;
+      border-radius: 2px;
+      background-color: #FFF;
+      box-shadow: 0 0 10px 0 #AAA;
+    }
+    .alist-type-popup-module {
+      width: 395px;
+      padding: 15px;
+      background-color: #FFF;
+      border-radius: 2px;
+    }
+    .alist-popup-type-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .alist-popup-type-item {
+      display: inline-block;
+      padding: 15px;
+      -webkit-transition: all 0.35s;
+      -moz-transition: all 0.35s;
+      transition: all 0.35s;
+      cursor: pointer;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+    .alist-search-loc {
+      width: 360px;
+    }
+    .alist-search-location-container {
+      position: absolute;
+      z-index: 2;
+      width: 782px;
+      margin-top: 4px;
+      padding: 15px;
+      background-color: #FFF;
+      border-radius: 2px;
+      box-shadow: 0 0 10px 0 #AAA;
+    }
+    .open-map-btn {
+      display: inline-block;
+      margin: 0 0 10px 10px;
+      .fa-location-arrow {
+        color: $primary-color;
+      }
+    }
+    .alist-location-header-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background-color: #F5F6F7;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 94px;
+        height: 40px;
+        background-color: #F5F6F7;
+        -webkit-transition: all 0.35s;
+        -moz-transition: all 0.35s;
+        transition: all 0.35s;
+        cursor: pointer;
+        &:hover, &.active {
+          color: $primary-color;
+          background-color: #FFF;
+        }
+      }
+    }
+    .alist-search-bottom-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+      li {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        padding: 0 20px;
+        background-color: #FFF;
+        -webkit-transition: all 0.35s;
+        -moz-transition: all 0.35s;
+        transition: all 0.35s;
+        cursor: pointer;
+        &:hover {
+          color: #FF3478;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    .datePicker {
+      width: 100%;
+      margin-bottom: 0;
+      border: none;
+    }
+    .datePicker-input {
+      height: 33px;
+      padding: 0;
+      color: #343A40;
+      font-size: 14px;
+      font-family: inherit;
+      font-weight: 600;
+      outline: none;
+      border: none;
+      box-shadow: none;
+      cursor: pointer;
+      &[readonly] {
+        background-color: #FFF;
+      }
+      &::placeholder {
+        color: #343A40;
+        font-size: 14px;
+        font-family: inherit;
+        font-weight: 600;
+      }
+    }
+    .alist-search-date {
+      position: relative;
+      width: 255px;
+    }
+    .alist-popup-container-member {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+    .alist-popup-wrapper {
+      position: relative;
+    }
+    .alist-popup-module {
+      padding: 20px;
+    }
+    .alist-date-popup-h4 {
+      margin-bottom: 20px;
+      line-height: 16px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .alist-date-popup-content-person {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+    .popup-btn-stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stepper-modifier {
+      border-radius: 24px;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ced4da;
+    }
+    .stepper-value {
+      width: 36px;
+      height: 22px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #343a40;
+      text-align: center;
+      line-height: 20px;
+    }
+    .popup-btn-stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-popup-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+    }
+    .btn-close {
+      padding: 0;
+      border: none;
+      background: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    .keyword-wrap {
+      position: relative;
+      margin-right: 8px;
+      .fa {
+        @include vertical-center;
+        left: 15px;
+        z-index: 1;
+        color: $primary-color;
+      }
+      .keyword-input {
+        width: 100%;
+        padding: 0 10px 0 40px;
+        border: 0;
+        &::placeholder {
+          color: #343a40;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+    }
+    .btn-submit-container {
+      width: 80px;
+      height: 100%;
+    }
   }
   .swiper-panel {
     position: relative;
