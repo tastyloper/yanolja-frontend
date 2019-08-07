@@ -2,6 +2,15 @@
   <div class="container">
     <h2>{{ subTitleService.pagaTitle }}</h2>
     <p>{{ subTitleService.pagaDescription }}</p>
+    <div class="sub-content">
+      <img src="assets/img//sub-title/comma.png" alt="back-logo">
+      <div *ngIf="subTitleService.isDetail">
+        <span class="grade">{{ subTitleService.grade }}</span>
+        <div class="content clearFix">
+          <p class="recommendation">{{ subTitleService.recommendation }}</p>
+          <p class="review">{{ subTitleService.review }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <img src="assets/img//sub-title/comma.png" alt="back-logo">
 </section>
