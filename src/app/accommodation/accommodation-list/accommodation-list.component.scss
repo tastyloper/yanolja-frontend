@@ -9,25 +9,20 @@ button:not(.btn-primary):not(.btn-secondary) {
   margin-bottom: 100px;
 }
 .head-wrap {
-  width: 100%;
-  height: 91px;
+  padding: 50px 0;
   background-color: $primary-color;
   z-index: 80;
 }
 .alist-search-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 91px;
-  padding: 7px 0;
 }
 .alist-search-items-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   & + .alist-search-items-container {
-    margin-top: 7px;
+    margin-top: 15px;
   }
 }
 .open-map-btn {
@@ -52,7 +47,7 @@ button:not(.btn-primary):not(.btn-secondary) {
 .search-box {
   border-radius: 2px;
   background: #FFF;
-  height: 35px;
+  height: 45px;
   z-index: 100;
 }
 .keyword-wrap {
