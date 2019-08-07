@@ -307,6 +307,10 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
     this.subTitleService.pagaTitle = `역삼 VERY SIX`;
     this.subTitleService.pagaDescription = '4성급 · 서울특별시 강남구 테헤란로38길 7 (역삼동)';
+    this.subTitleService.grade = 2.5;
+    this.subTitleService.recommendation = '비추천';
+    this.subTitleService.review = '2개의 이용 후기';
+
 
     this.locale = 'ko';
     this.locales = listLocales();

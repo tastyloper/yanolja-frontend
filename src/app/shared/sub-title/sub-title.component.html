@@ -2,13 +2,15 @@
   <div class="container">
     <h2>{{ subTitleService.pagaTitle }}</h2>
     <p>{{ subTitleService.pagaDescription }}</p>
-  </div>
-  <div class="sub-content">
-    <img src="assets/img//sub-title/comma.png" alt="back-logo">
-    <div class="content clearFix">
-      <span class="point">2.5</span>
-      <span class="status">비추</span>
-      <span class="review">2개의 이용 후기</span>
-    </div>  
+    <div class="sub-content">
+      <img src="assets/img//sub-title/comma.png" alt="back-logo">
+      <div *ngIf="subTitleService.isDetail">
+        <span class="grade">{{ subTitleService.grade }}</span>
+        <div class="content clearFix">
+          <p class="recommendation">{{ subTitleService.recommendation }}</p>
+          <p class="review">{{ subTitleService.review }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
