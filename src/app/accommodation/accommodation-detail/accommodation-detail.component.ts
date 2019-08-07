@@ -1,22 +1,18 @@
 import { Component, AfterViewInit, ViewChild, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { BehaviorSubject } from 'rxjs';
+
 // swiper
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-
 // DateRangePicker
 import { BsDaterangepickerDirective } from 'ngx-bootstrap/datepicker';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
-
 // toastr
 import { ToastrService } from 'ngx-toastr';
-
 // Locales
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
-
 // Map modal
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MapsAPILoader } from '@agm/core';
@@ -25,14 +21,14 @@ declare const google: any;
 // types
 import { StayDetail } from '../../core/types/stay-detail.interface';
 import { Room } from '../../core/types/room.interface';
-import { Review } from 'src/app/core/types/review.interface';
+import { Review } from '../../core/types/review.interface';
 
 // services
-import { StayDetailService } from 'src/app/core/services/stay-detail.service';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { StayDetailService } from '../../core/services/stay-detail.service';
+import { SubTitleService } from '../../core/services/sub-title.service';
+import { AuthService } from '../../core/services/auth.service';
 
 import { environment } from '../../../environments/environment';
-
 
 @Component({
   selector: 'app-accommodation-detail',
@@ -284,6 +280,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
 
   constructor(
+    private subTitleService: SubTitleService,
     private localeService: BsLocaleService,
     private modalService: BsModalService,
     private dataService: StayDetailService,
@@ -307,6 +304,13 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.form = new FormGroup({
       dateYMD: new FormControl(new Date())
     });
+
+    this.subTitleService.pagaTitle = `역삼 VERY SIX`;
+    this.subTitleService.pagaDescription = '4성급 · 서울특별시 강남구 테헤란로38길 7 (역삼동)';
+    this.subTitleService.grade = 2.5;
+    this.subTitleService.recommendation = '비추천';
+    this.subTitleService.review = '2개의 이용 후기';
+
 
     this.locale = 'ko';
     this.locales = listLocales();
