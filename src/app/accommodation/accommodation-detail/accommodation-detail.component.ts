@@ -27,6 +27,7 @@ import { environment } from '../../../environments/environment';
 import { StayDetailService } from 'src/app/core/services/stay-detail.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { SubTitleService } from 'src/app/core/services/sub-title.service';
 
 
 @Component({
@@ -279,6 +280,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
 
   constructor(
+    private subTitleService: SubTitleService,
     private localeService: BsLocaleService,
     private modalService: BsModalService,
     private dataService: StayDetailService,
@@ -300,6 +302,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.form = new FormGroup({
       dateYMD: new FormControl(new Date())
     });
+
+    this.subTitleService.pagaTitle = `역삼 VERY SIX`;
+    this.subTitleService.pagaDescription = '4성급 · 서울특별시 강남구 테헤란로38길 7 (역삼동)';
 
     this.locale = 'ko';
     this.locales = listLocales();
