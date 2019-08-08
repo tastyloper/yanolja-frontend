@@ -1982,6 +1982,10 @@ export class AccommodationListComponent implements OnInit {
         this.priceLow =  params.priceLow ? params.priceLow : this.priceLow;
         this.review =  params.review ? params.review : this.review;
         this.wish = params.wish ? params.wish : this.wish;
+
+        this.sstayList = [];
+        this.type = false;
+        this.getList();
       }
     });
 
