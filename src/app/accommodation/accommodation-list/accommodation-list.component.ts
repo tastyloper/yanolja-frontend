@@ -1544,18 +1544,30 @@ export class AccommodationListComponent implements OnInit {
   locale = 'ko';
   locales = listLocales();
   bsValue = new Date();
-  bsRangeValue: Date[];
+  bsRangeValue: Date[] ;
   navClicked = false;
   datePickerConfig: Partial<BsDatepickerConfig>;
   category: string;
   selectRegion = `강남/역삼/선릉/삼성`;
+  currentAddress: string;
+  requestCheckIn: string;
+  requestCheckOut: string;
+  searchKeyword: string;
+  popularKeyword: string;
+  priceHigh: string;
+  priceLow: string;
+  review: string;
+  wish: string;
+
   person = false;
   type = false;
   location = false;
   numberAdult = 2;
   numberChildren = 0;
+  personnel: string;
   minDate: Date;
   maxDate: Date;
+  keyword: string;
   searchBar = {
     type: '',
     location: '',
@@ -1916,9 +1928,8 @@ export class AccommodationListComponent implements OnInit {
     this.localeService.use(this.locale);
     this.minDate = new Date();
     this.maxDate = new Date();
-    this.minDate.setDate(this.minDate.getDate() - 1);
-    this.maxDate.setDate(this.maxDate.getDate() + 14);
-
+    this.minDate.setDate(this.minDate.getDate());
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-yanolja',
       dateInputFormat: 'YYYY-MM-DD',
@@ -1930,9 +1941,24 @@ export class AccommodationListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.allPagedItems = [];
+    this.bsRangeValue = [this.minDate,  new Date(new Date().setDate(new Date().getDate() + 1))];
+    console.log('OnInit**');
     this.route.queryParams.subscribe(params => {
+      console.log('params', params.priceLow);
       this.selectType(params.category);
-      this.allPagedItems = [];
+      this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
+      this.personnel = params.personnel;
+      this.requestCheckIn = params.requestCheckIn;
+      this.requestCheckOut = params.requestCheckOut;
+      this.searchKeyword = params.searchKeyword;
+      this.currentAddress = params.currentAddress;
+      this.popularKeyword = params.popularKeyword;
+      this.priceHigh =  params.priceHigh ? params.priceHigh : this.priceHigh;
+      this.priceLow =  params.priceLow ? params.priceLow : this.priceLow;
+      this.review =  params.review ? params.review : this.review;
+      this.wish = params.wish ? params.wish : this.wish;
+
       this.sstayList = [];
       this.type = false;
       this.getList();
@@ -1942,15 +1968,26 @@ export class AccommodationListComponent implements OnInit {
   }
 
   getList() {
-    console.log(this.selectRegion);
-    this.sstayList = [];
+    this.allPagedItems = [];
+    if (!this.personnel) {
+      this.personnel = '2';
+    }
+
+    this.requestCheckIn = this.formatDate(this.bsRangeValue[0]) + `+11:00:00`;
+    this.requestCheckOut = this.formatDate(this.bsRangeValue[1]) + `+11:00:00`;
     const payload = {
       category: this.category,
-      selectRegion : this.selectRegion,
-      personnel: '2',
-      requestCheckIn: '2019-09-01+22:00:00',
-      requestCheckOut: '2019-09-02+22:00:00',
-      // popularKeyword: ''
+      selectRegion : this.keyword ? '' : this.selectRegion,
+      personnel: this.personnel,
+      requestCheckIn: this.requestCheckIn,
+      requestCheckOut: this.requestCheckOut,
+      searchKeyword: this.keyword ? this.keyword : '',
+      popularKeyword: '',
+      priceHigh: 'False',
+      currentAddress: this.currentAddress ? this.currentAddress : '',
+      priceLow: 'False',
+      review: 'False',
+      wish: 'False'
     };
     this.isLoading$.next(true);
     this.stayList.getAList(payload).subscribe(
@@ -2000,6 +2037,7 @@ export class AccommodationListComponent implements OnInit {
     } else if (person === 'children') {
       this.numberChildren = this.numberChildren - 1;
     }
+    this.totalMember();
   }
 
   plus(person: string) {
@@ -2008,23 +2046,62 @@ export class AccommodationListComponent implements OnInit {
     } else if (person === 'children') {
       this.numberChildren = this.numberChildren + 1;
     }
+    this.totalMember();
+  }
+
+  totalMember() {
+    this.personnel = `${this.numberAdult + this.numberChildren}`;
+  }
+
+  keywordChange(keyword: HTMLInputElement) {
+    this.searchKeyword = keyword.value;
   }
 
   submitNav() {
+    // this.allPagedItems = [];
     this.person = false;
     this.location = false;
     this.type = false;
-
-    this.searchParams = {
+    if (!this.bsRangeValue) {
+      this.bsRangeValue = [new Date(), new Date(new Date().setDate(new Date().getDate() + 1))];
+    }
+    if (!this.personnel) {
+      this.personnel = '2';
+    }
+    const payload = {
       category: this.category,
-      personnel: this.numberAdult,
-      selectRegion: this.selectRegion
+      selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
+      personnel: this.personnel,
+      requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
+      requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
+      searchKeyword: this.searchKeyword ? this.searchKeyword : '',
+      currentAddress: this.currentAddress ? this.currentAddress : '',
+      popularKeyword: '',
+      priceHigh: this.priceHigh,
+      priceLow: this.priceLow,
+      review: this.review,
+      wish: this.wish
     };
+    this.isLoading$.next(true);
+    this.stayList.getAList(payload).subscribe(
+      list => {
+        this.allPagedItems = [];
+        const copyList = list;
+        this.sstayList = copyList;
+        this.setPage(1);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
   }
 
   selectType(type: string) {
     this.toggle('type');
-    this.category = type;
+    this.category = type === '모텔' ? '모텔' : (type === '호텔/리조트' ?  '호텔/리조트' : (type === '게스트하우스' ?  '게스트하우스' : (type === '펜션/풀빌라' ? '펜션/풀빌라' : '숙박종류')));
     this.searchBar.type = type;
     this.searchBarShow = type === '모텔' ? '모텔' : (type === '호텔/리조트' ?  '호텔/리조트' : (type === '게스트하우스' ?  '게스트하우스' : (type === '펜션/풀빌라' ? '펜션/풀빌라' : '숙박종류')));
     return(this.searchBar);
@@ -2036,8 +2113,16 @@ export class AccommodationListComponent implements OnInit {
     this.searchBarLocShow = item;
   }
 
-  selectDate(dateRange) {
-    // console.log(this.bsRangeValue[0]);
+  formatDate(date: Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
   }
 
   onScroll() {
@@ -2047,12 +2132,14 @@ export class AccommodationListComponent implements OnInit {
 
   setPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {
-      return;
+      if (this.pager.totalPages) {
+        this.allPagedItems = this.sstayList;
+        return;
+      }
     }
     this.pager = this.getPager(this.sstayList.length, page);
     this.pagedItems = this.sstayList.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.allPagedItems = [ ...this.allPagedItems , ...this.pagedItems];
-
   }
 
   getPager(totalItems: number, currentPage: number = 1, pageSize: number = 10) {
@@ -2158,7 +2245,9 @@ export class AccommodationListComponent implements OnInit {
 
   locationComplete() {
     this.modalRef.hide();
-    this.selectLoc(this.address);
+
+    this.currentAddress = this.address;
+    this.searchBarLocShow = this.address;
   }
 
   getLocationAddress() {
@@ -2184,22 +2273,32 @@ export class AccommodationListComponent implements OnInit {
     }
   }
 
+  onValueChange(value: Date[]) {
+    this.bsRangeValue = value;
+  }
+
   sorting(select: string) {
-    if (select === 'reviewPoint') {
-      return;
-    } else if (select === 'priceHigh') {
+    if (select === 'review') {
+      console.log('review');
+      this.review = 'True';
+      this.priceHigh = 'False';
+      this.priceLow = 'False';
       const payload = {
         category: this.category,
-        selectRegion : this.selectRegion,
-        personnel: '2',
-        requestCheckIn: '2019-09-01+22:00:00',
-        requestCheckOut: '2019-09-02+22:00:00',
+        selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
+        personnel: this.personnel,
+        requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
+        requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
+        searchKeyword: this.searchKeyword ? this.searchKeyword : '',
+        currentAddress: this.currentAddress ? this.currentAddress : '',
         popularKeyword: '',
-        priceHigh: 'True'
+        review: this.review,
       };
+
       this.isLoading$.next(true);
-      this.stayList.getAList(payload).subscribe(
+      this.stayList.getAListReview(payload).subscribe(
         list => {
+          this.allPagedItems = [];
           const copyList = list;
           this.sstayList = copyList;
           this.setPage(1);
@@ -2211,20 +2310,61 @@ export class AccommodationListComponent implements OnInit {
           this.isLoading$.next(false);
         }
       );
+
     } else if (select === 'priceLow') {
+      this.priceLow = 'True';
+      console.log('끼요오오오');
+      this.review = 'False';
+      this.priceHigh = 'False';
+      const payload = {
+        category: this.category,
+        selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
+        personnel: this.personnel,
+        requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
+        requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
+        searchKeyword: this.searchKeyword ? this.searchKeyword : '',
+        currentAddress: this.currentAddress ? this.currentAddress : '',
+        popularKeyword: '',
+        priceLow: this.priceLow,
+      };
+
+      this.isLoading$.next(true);
+      this.stayList.getAListPriceLow(payload).subscribe(
+        list => {
+          this.allPagedItems = [];
+          const copyList = list;
+          this.sstayList = copyList;
+          this.setPage(1);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          this.isLoading$.next(false);
+        }
+      );
+
+    } else if (select === 'priceHigh') {
+      this.priceHigh = 'True';
+      this.priceLow = 'False';
+      this.review = 'False';
 
       const payload = {
         category: this.category,
-        selectRegion : this.selectRegion,
-        personnel: '2',
-        requestCheckIn: '2019-09-01+22:00:00',
-        requestCheckOut: '2019-09-02+22:00:00',
+        selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
+        personnel: this.personnel,
+        requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
+        requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
+        searchKeyword: this.searchKeyword ? this.searchKeyword : '',
+        currentAddress: this.currentAddress ? this.currentAddress : '',
         popularKeyword: '',
-        priceLow: 'True'
+        priceHigh: this.priceHigh,
       };
+
       this.isLoading$.next(true);
-      this.stayList.getAList(payload).subscribe(
+      this.stayList.getAListPriceHigh(payload).subscribe(
         list => {
+          this.allPagedItems = [];
           const copyList = list;
           this.sstayList = copyList;
           this.setPage(1);
@@ -2237,18 +2377,6 @@ export class AccommodationListComponent implements OnInit {
         }
       );
     }
-
   }
 
-  setSortingParams(sort: string) {
-    this.queryParams.category = '모텔';
-    this.queryParams.selectRegion = '강남';
-    this.queryParams.personnel = `2`;
-    this.queryParams.requestCheckIn = '2019-09-01+22:00:00';
-    this.queryParams.requestCheckOut = `2019-09-02+22:00:00`;
-    // this.queryParams.review = sort === 'review' ? 'True' : 'False';
-    this.queryParams.review = 'True';
-    this.queryParams.priceLow = sort === 'priceLow' ? 'True' : 'False';
-    this.queryParams.priceHigh = sort === 'priceHigh' ? 'True' : 'False';
-  }
 }
