@@ -1,4 +1,5 @@
 import { Component, TemplateRef, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
@@ -148,8 +149,8 @@ export class MainComponent implements OnInit {
   person = false;
   type = false;
   location = false;
-  searchBarShow = '숙박종류';
-  searchBarLocShow = '지역을 고르세요';
+  searchBarShow = '모텔';
+  searchBarLocShow = '강남/역삼/삼성/논현';
   searchBarDateShow: string;
   searchBarMemberShow: string;
   locationArr = [
@@ -399,8 +400,12 @@ export class MainComponent implements OnInit {
   ];
   locationSelect = '서울';
   detailLocationArr = this.locationArr.find(v => v.val === this.locationSelect).arr;
+  today = `${this.formatDate(new Date())}+09:00:00`;
+  tomorrow = `${this.formatDate(new Date(new Date().getTime() + 1 * 1000 * 60 * 60 * 24))}+09:00:00`;
   bsValue = new Date();
-  bsRangeValue: Date[];
+  bsRangeValue: Date[] = [
+    new Date(), new Date(new Date().getTime() + 1 * 1000 * 60 * 60 * 24)
+  ];
   datePickerConfig: Partial<BsDatepickerConfig>;
   locale = 'ko';
   locales = listLocales();
@@ -408,13 +413,19 @@ export class MainComponent implements OnInit {
   maxDate: Date;
   numberAdult = 2;
   numberChildren = 0;
+  sendAddress: string;
+  selectRegion: string;
+  requestCheckIn: string;
+  requestCheckOut: string;
+  searchKeyword = '';
 
   constructor(
     private modalService: BsModalService,
     private mapsAPILoader: MapsAPILoader,
     private mainService: MainService,
     private localeService: BsLocaleService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.localeService.use(this.locale);
     this.minDate = new Date();
@@ -871,6 +882,8 @@ export class MainComponent implements OnInit {
   locationComplete() {
     this.modalRef.hide();
     this.searchBarLocShow = this.address;
+    this.sendAddress = this.address;
+    this.selectRegion = '';
   }
 
   toggle(option: string) {
@@ -916,12 +929,25 @@ export class MainComponent implements OnInit {
   selectLoc(item: string) {
     this.toggle('location');
     this.searchBarLocShow = item;
+    this.sendAddress = '';
+    this.selectRegion = item;
   }
 
   submitNav() {
+    this.requestCheckIn = `${this.formatDate(this.bsRangeValue[0])}+09:00:00`;
+    this.requestCheckOut = `${this.formatDate(this.bsRangeValue[1])}+09:00:00`;
     this.person = false;
     this.location = false;
     this.type = false;
+    this.router.navigate(['accommodation'], { queryParams: {
+      category: this.searchBarShow,
+      selectRegion: this.searchBarLocShow,
+      personnel: this.numberAdult + this.numberChildren,
+      requestCheckIn: this.requestCheckIn,
+      requestCheckOut: this.requestCheckOut,
+      searchKeyword: this.searchKeyword,
+      currentAddress: this.sendAddress
+    }});
   }
 
   minus(person: string) {
@@ -941,5 +967,21 @@ export class MainComponent implements OnInit {
     } else if (person === 'children') {
       this.numberChildren = this.numberChildren + 1;
     }
+  }
+
+  keyword(val: string) {
+    this.searchKeyword = val;
+  }
+
+  formatDate(date: Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
   }
 }
