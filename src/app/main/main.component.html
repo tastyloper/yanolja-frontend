@@ -118,7 +118,7 @@
             </div>
             <div class="keyword-wrap">
               <i class="fa fa-search"></i>
-              <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요.">
+              <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요." (input)="keyword(keywordInput.value)" #keywordInput>
             </div>
           </div>
           <div class="align-self-stretch">
@@ -134,7 +134,16 @@
         <div class="swiper-container" [swiper]="headerConfig">
           <div class="swiper-wrapper">
             <div class="swiper-slide" *ngFor="let popularKeyword of popularKeywords">
-              <a routerLink="/accommodation" [queryParams]="{ totalComments: 1000 }" class="hash-item" [style.background-image]="popularKeyword.img">
+              <a routerLink="/accommodation" class="hash-item" [style.background-image]="popularKeyword.img"
+                [queryParams]="{
+                  category: '모텔',
+                  selectRegion: '강남/역삼/삼성/논현',
+                  personnel: 2,
+                  requestCheckIn: today,
+                  requestCheckOut: tomorrow,
+                  searchKeyword: '',
+                  currentAddress: '',
+                  popularKeyword: popularKeyword.name }">
                 <div class="hash-bg"></div>
                 <h3>{{ popularKeyword.name }}</h3>
               </a>
