@@ -434,7 +434,6 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   width: 390px;
   height: 200px;
   vertical-align: top;
-  background: lime;
   position: relative;
 }
 .alist-item-box-imgDetail{
@@ -499,18 +498,22 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
 }
 
 .alist-hotel-score {
-  width: 28px;
-  height: 28px;
-  // border-radius: 4px 4px 4px 0;
-  // background-color: #003580;
+  width: 45px;
+  height: 45px;
   font-size: 14px;
   font-weight: 600;
   line-height: 28px;
-  
-  // color: #ffff;
   letter-spacing: 1px;
   text-align: center;
-  background-image: url('../../../assets/img/sub-title/comma.png');
+  background-image: url('/assets/img/common/comma-y.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  span {
+    display: inline-block;
+    color: #ffff;
+    margin-top: 6px;
+  }
 }
 
 .alist-hotel-score span {
@@ -519,6 +522,7 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
 
 .alist-hotel-review-label {
   margin-left: 10px;
+  margin-top: 8px;
 }
 
 .alist-hotel-review-label h3 {
