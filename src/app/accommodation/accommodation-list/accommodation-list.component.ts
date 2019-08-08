@@ -1944,11 +1944,8 @@ export class AccommodationListComponent implements OnInit {
   ngOnInit() {
     this.allPagedItems = [];
     this.bsRangeValue = [this.minDate,  new Date(new Date().setDate(new Date().getDate() + 1))];
-    console.log('OnInit**');
     this.route.queryParams.subscribe(params => {
       if (params.popularKeyword) {
-        console.log('popular');
-        console.log(params, 'popular');
         this.selectType(params.category);
         this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
         this.personnel = params.personnel;
@@ -2037,7 +2034,6 @@ export class AccommodationListComponent implements OnInit {
     this.isLoading$.next(true);
     this.stayList.getAListPopular(payload).subscribe(
       list => {
-        console.log('popularList', list);
         const copyList = list;
         this.sstayList = copyList;
         this.setPage(1);
@@ -2325,7 +2321,6 @@ export class AccommodationListComponent implements OnInit {
 
   sorting(select: string) {
     if (select === 'review') {
-      console.log('review');
       this.review = 'True';
       this.priceHigh = 'False';
       this.priceLow = 'False';
@@ -2359,7 +2354,6 @@ export class AccommodationListComponent implements OnInit {
 
     } else if (select === 'priceLow') {
       this.priceLow = 'True';
-      console.log('끼요오오오');
       this.review = 'False';
       this.priceHigh = 'False';
       const payload = {
