@@ -21,13 +21,59 @@ export class StayListService {
       .set('requestCheckIn', payload.requestCheckIn)
       .set('requestCheckOut', payload.requestCheckOut)
       .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('searchKeyword', payload.searchKeyword)
+      .set('currentAddress', payload.currentAddress)
       .set('review', payload.review)
       .set('wish', payload.wish)
       .set('priceLow', payload.priceLow)
       .set('priceHigh', payload.priceHigh);
-    console.log(params, '::', payload);
-    
+    console.log(payload.priceLow , 'service');
+
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
 
+  getAListReview(payload: StayList) {
+    const params = new HttpParams()
+      .set('selectRegion', payload.selectRegion)
+      .set('category', payload.category)
+      .set('personnel', payload.personnel)
+      .set('requestCheckIn', payload.requestCheckIn)
+      .set('requestCheckOut', payload.requestCheckOut)
+      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('searchKeyword', payload.searchKeyword)
+      .set('currentAddress', payload.currentAddress)
+      .set('review', payload.review);
+    console.log(payload.review , 'service-review');
+    return this.http.get<Stay[]>(this.appUrl, { params });
+  }
+
+  getAListPriceLow(payload: StayList) {
+    const params = new HttpParams()
+      .set('selectRegion', payload.selectRegion)
+      .set('category', payload.category)
+      .set('personnel', payload.personnel)
+      .set('requestCheckIn', payload.requestCheckIn)
+      .set('requestCheckOut', payload.requestCheckOut)
+      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('searchKeyword', payload.searchKeyword)
+      .set('currentAddress', payload.currentAddress)
+      .set('priceLow', payload.priceLow);
+    console.log(payload.priceLow , 'service-priceLow');
+    return this.http.get<Stay[]>(this.appUrl, { params });
+  }
+
+  getAListPriceHigh(payload: StayList) {
+    const params = new HttpParams()
+      .set('selectRegion', payload.selectRegion)
+      .set('category', payload.category)
+      .set('personnel', payload.personnel)
+      .set('requestCheckIn', payload.requestCheckIn)
+      .set('requestCheckOut', payload.requestCheckOut)
+      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('searchKeyword', payload.searchKeyword)
+      .set('currentAddress', payload.currentAddress)
+      .set('priceHigh', payload.priceHigh);
+    console.log(payload.priceHigh , 'service-priceHigh');
+    return this.http.get<Stay[]>(this.appUrl, { params });
+  }
 }

@@ -325,6 +325,9 @@ button:not(.btn-primary):not(.btn-secondary) {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  .active a{
+    color: #FF3478; 
+  }
 }
 
 .alist-header-nav-item {
@@ -332,18 +335,6 @@ button:not(.btn-primary):not(.btn-secondary) {
   color: #343a40;
   margin-right: 10px;
   font-size: 13px;
-}
-
-.alist-header-nav-item::before {
-  background-color: #343a40;
-  width: 4px;
-  height: 4px;
-  display: inline-block;
-  content: "";
-  position: absolute;
-  top: 6px;
-  border-radius: 2px;
-  // background-color: #ced4da;
 }
 
 .alist-sort-option {
@@ -355,7 +346,12 @@ button:not(.btn-primary):not(.btn-secondary) {
 }
 
 .alist-content-outter {
-
+  a {
+    display: block;
+    &:hover{
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 6px 0 rgba(0, 0, 0, .05), 0 8px 12px 0 rgba(0, 0, 0, .2);
+    }
+  }
 }
 
 .alist-content-ul-item a {
@@ -371,10 +367,7 @@ button:not(.btn-primary):not(.btn-secondary) {
   border-radius: 2px;
   box-shadow: inset 0 0 0 1px rgba(102,109,117,.2);
   transition: box-shadow .2s;
-
 }
-
-
 
 .alist-item-box-image-container {
   width: 390px;
@@ -514,6 +507,16 @@ button:not(.btn-primary):not(.btn-secondary) {
   padding: 22px 24px 22px;
 }
 
+.priceBox {
+  font-size: 16px;
+
+  .text-lineThrough {
+    font-size: 10px;
+    text-decoration: line-through;
+    color: #495056;
+  }
+}
+
 .alist-rightbox-price {
 
 }
@@ -575,13 +578,15 @@ button:not(.btn-primary):not(.btn-secondary) {
   padding: 10px 24px 18px;
 }
 
+
+
 .alist-rightbox-priceOption::before {
   content: "";
   width: calc(100% - 48px);
   height: 1px;
   background-color: #e9ecef;
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 24px;
 }
 
@@ -608,6 +613,24 @@ button:not(.btn-primary):not(.btn-secondary) {
   font-weight: 600;
   line-height: 14px;
   letter-spacing: -.3px;
+}
+
+.housrDisable {
+  color: #FF3478;
+}
+
+.maxHour {
+  font-size: 8px;
+  margin-top: 0px;
+  margin-left: -10px;
+  color: #495056;
+}
+
+.maxHours {
+  font-size: 8px;
+  margin-top: 1px;
+  margin-left: -20px;
+  color: #495056;
 }
 
 .loading-wrap {
