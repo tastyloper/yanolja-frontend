@@ -20,7 +20,7 @@ export class StayListService {
       .set('personnel', payload.personnel)
       .set('requestCheckIn', payload.requestCheckIn)
       .set('requestCheckOut', payload.requestCheckOut)
-      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('popularKeyword', payload.popularKeyword ? payload.popularKeyword : '')
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('review', payload.review)
@@ -32,6 +32,19 @@ export class StayListService {
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
 
+  getAListPopular(payload: StayList) {
+    const params = new HttpParams()
+      .set('selectRegion', payload.selectRegion)
+      .set('category', payload.category)
+      .set('personnel', payload.personnel)
+      .set('requestCheckIn', payload.requestCheckIn)
+      .set('requestCheckOut', payload.requestCheckOut)
+      .set('popularKeyword', payload.popularKeyword)
+      .set('currentAddress', payload.currentAddress);
+      console.log('popularParams', params);
+    return this.http.get<Stay[]>(this.appUrl, { params });
+  }
+
   getAListReview(payload: StayList) {
     const params = new HttpParams()
       .set('selectRegion', payload.selectRegion)
@@ -39,7 +52,7 @@ export class StayListService {
       .set('personnel', payload.personnel)
       .set('requestCheckIn', payload.requestCheckIn)
       .set('requestCheckOut', payload.requestCheckOut)
-      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('popularKeyword', payload.popularKeyword ? payload.popularKeyword : '')
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('review', payload.review);
@@ -54,7 +67,7 @@ export class StayListService {
       .set('personnel', payload.personnel)
       .set('requestCheckIn', payload.requestCheckIn)
       .set('requestCheckOut', payload.requestCheckOut)
-      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('popularKeyword', payload.popularKeyword ? payload.popularKeyword : '')
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('priceLow', payload.priceLow);
@@ -69,7 +82,7 @@ export class StayListService {
       .set('personnel', payload.personnel)
       .set('requestCheckIn', payload.requestCheckIn)
       .set('requestCheckOut', payload.requestCheckOut)
-      .set('poplularKeyword', payload.poplularKeyword ? payload.poplularKeyword : '')
+      .set('popularKeyword', payload.popularKeyword ? payload.popularKeyword : '')
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('priceHigh', payload.priceHigh);
