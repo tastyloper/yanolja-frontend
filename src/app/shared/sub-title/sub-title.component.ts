@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { SubTitleService } from '../../core/services/sub-title.service';
 
 @Component({
@@ -6,11 +7,6 @@ import { SubTitleService } from '../../core/services/sub-title.service';
   templateUrl: './sub-title.component.html',
   styleUrls: ['./sub-title.component.scss']
 })
-export class SubTitleComponent implements OnInit {
-
+export class SubTitleComponent {
   constructor(public subTitleService: SubTitleService) {}
-
-  ngOnInit() {
-  }
-
 }

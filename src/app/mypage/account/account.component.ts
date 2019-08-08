@@ -1,12 +1,15 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 
 import { SubTitleService } from '../../core/services/sub-title.service';
 import { AuthService } from '../../core/services/auth.service';
+
+import { User } from '../../core/types/user.interface';
 
 
 @Component({
@@ -15,9 +18,10 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   secessionForm: FormGroup;
   modalRef: BsModalRef;
-  accountdata = {};
+  accountdata: User;
 
   constructor(
     private subTitleService: SubTitleService,
@@ -37,7 +41,7 @@ export class AccountComponent implements OnInit {
   btnSecession() {
     this.authService.secession().subscribe(
       success => {
-        this.toastr.error('정상적으로 탈퇴되었습니다.');
+        this.toastr.success('정상적으로 탈퇴되었습니다.');
         this.router.navigate(['']);
         this.authService.removeToken();
       },
@@ -47,15 +51,17 @@ export class AccountComponent implements OnInit {
         this.router.navigate(['']);
       }
     );
+    this.modalRef.hide();
   }
 
-   getData() {
+  getData() {
     // 가데이터
     // this.account = {
     //   nickname: '연희내꺼야',
     //   email: 'tak@gmail.com',
     //   phoneNumber: '01042221234'
     // };
+    this.isLoading$.next(true);
     this.authService.getUser().subscribe(
       success => {
         this.accountdata = success;
@@ -65,6 +71,9 @@ export class AccountComponent implements OnInit {
         this.authService.removeToken();
         this.toastr.error('유저 정보를 찾을 수 없습니다.');
         this.router.navigate(['login']);
+      },
+      () => {
+        this.isLoading$.next(false);
       }
     );
   }

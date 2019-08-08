@@ -1,15 +1,9 @@
-<ng-container>
+<app-sub-title></app-sub-title>
 <section class="room-detail">
   <h1>객실 상세 페이지</h1>
   <div class="container">
-    
     <section class="room-container">
       <h2>객실 정보</h2>
-      <section class="room-title" *ngIf="!!data">
-        <h3>{{data.name}}</h3>
-        <i class="fa fa-map-marker" aria-hidden="true"></i>
-        <span>{{data.stay}}</span>
-      </section>
       <section class="room-img" >
         <h3>객실 사진 캐러셀</h3>
           <div class="all-wrpper">
@@ -37,7 +31,7 @@
       </section>
       <section class="reservation-notice" *ngIf="!!data">
         <h3>예약공지</h3>
-        <pre *ngFor="let text of data.reservationNotice">{{text}}</pre>
+        <li *ngFor="let text of data.reservationNotice">{{text}}</li>
       </section>
       <section class="cancel-rule" *ngIf="!!data">
         <h3>취소규정</h3>
@@ -137,5 +131,4 @@
     </nav>
   </div>
 </section>
-</ng-container>
 <app-footer></app-footer>

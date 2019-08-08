@@ -32,4 +32,34 @@
     transform: translate(500px, -50%);
     width: 50px;
   }
+
+  .grade {
+    position: absolute;
+    color: $primary-color;
+    top: 1px;
+    font-weight: 700;
+    font-size: 19px;
+    text-align: center;
+    width: 50px;
+    right: 20px;
+  }
+  .content {
+    position: absolute;
+    top: 0px;
+    right: 80px;
+    text-align: right;
+    width:120px;
+
+    .recommendation {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .review {
+      font-size: 12px;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
 }

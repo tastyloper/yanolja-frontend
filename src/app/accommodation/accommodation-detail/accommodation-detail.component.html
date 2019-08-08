@@ -1,34 +1,11 @@
-
+<app-sub-title></app-sub-title>
 <section class="accommodation-detail fix-height">
   <div class="container">
-    <section class="header-section" *ngIf="!(stayDetailLoading$ | async)">
-      <div class="header-div">
-        
-        <h1 class="accomodation-name">{{data.name}}</h1>
-        <i class="stars">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-        </i>
-        <span class="header-location">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            {{data.location}}</span>
-            
-    <!-- <button (click)="dibStay()">찜하기</button>
-    <i class="fa fa-heart-o fa-3x" aria-hidden="true" *ngIf=""></i>
-    <i class="fa fa-heart fa-3x" aria-hidden="true" *ngIf=""></i> -->
-      </div>
-      <div class="review-container">
-        <span class="evaluation">{{evaluationText()}}</span>
-
-        <span class="review-count">{{data.totalComments}}개의 이용 후기</span>
-        <i>{{data.averageGrade}}</i>
-      </div>
-    </section>
-  
     <section class="accomodation-detail">
       <h1>숙소 상세 페이지</h1>
+      <!-- <button (click)="dibStay()">찜하기</button> -->
+      <i class="fa fa-heart-o dib-heart" aria-hidden="true" *ngIf="!dibStatus" (click)="dibStay()"></i>
+      <i class="fa fa-heart dib-heart" aria-hidden="true" *ngIf="dibStatus" (click)="dibStay()"></i>
       <section class="accomodation-imgs-section">
         <h2>숙소 사진</h2>
       <div class="all-wrpper">
@@ -55,7 +32,7 @@
       </div>
       </section>
       <section class="compare-price-section">
-        <h2>객실 가격비교</h2>
+        <h2>객실 리스트</h2>
         <section class="compare-condition" *ngIf="!(stayDetailLoading$ | async)">
           <h3>비교 조건 선택</h3>
           <div class="check-date">
@@ -124,7 +101,7 @@
         <h3>객실 리스트</h3>
         <ul class="rooms-list">
           <li class="room" [routerLink]="room.roomId"
-          [queryParams]="{ checkIn: bsRangeValue[0].toDateString(), checkOut: bsRangeValue[1].toDateString()}"
+          [queryParams]="{ checkIn: bsRangeValue[0]?.toDateString(), checkOut: bsRangeValue[1]?.toDateString()}"
           *ngFor="let room of rooms">
             <div>
               <img [src]="room.urlImage[0]">
@@ -143,7 +120,11 @@
                     <span class="room-type">대실</span>
                     <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
                   </div>
-                  <span class="room-price">{{room.saleHoursPrice | number}}원</span>
+                  <div *ngIf="room.saleHoursPrice" class="room-price-div">
+                    <span class="room-shocking-price">{{room.hoursPrice | number}}원</span>
+                    <span class="room-price">{{room.saleHoursPrice | number}}원</span>
+                  </div>
+                  <span class="room-price" *ngIf="!room.saleHoursPrice">{{room.saleHoursPrice | number}}원</span>
                 </ng-container>
                 <span class="reservation-done" *ngIf="!room.rentalAvailable">예약마감</span>
                 </div>
@@ -155,7 +136,11 @@
                     <span class="room-type">숙박</span>
                     <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
                   </div>
-                  <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                  <div *ngIf="room.saleDaysPrice" class="room-price-div">
+                    <span class="room-shocking-price">{{room.daysPrice | number}}원</span>
+                    <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                  </div>
+                  <span class="room-price" *ngIf="!room.saleDaysPrice">{{room.saleDaysPrice | number}}원</span>
                   </ng-container>
                   <span class="reservation-done" *ngIf="!room.stayAvailable">예약마감</span>
                 </div>

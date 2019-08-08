@@ -1,4 +1,5 @@
-<div class="mypage-router-wrap">
+<div *ngIf="isLoading$ | async" class="loading"><img src="/assets/img/common/loading.gif" alt="loading"></div>
+<div class="mypage-router-wrap" *ngIf="!(isLoading$ | async)">
   <div class="mypage-body-wrapper clearfix">
     <a class="btn-edit" routerLink="/mypage/accountEdit">편집</a>
     <div class="body-content">
@@ -14,7 +15,6 @@
         <div class="member-key">이메일</div>
         <div class="member-value">{{ accountdata.email }}</div>
       </div>
-   
       <div class="member-group clearfix">
         <div class="member-key">비밀번호</div>
         <div class="member-value">●●●●●●●●●●</div>
