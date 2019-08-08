@@ -1,0 +1,29 @@
+@import '../../../output-scss/common.scss';
+.not-found {
+  h1 {
+    height: 1px;
+    width: 1px;
+    padding: 1px;
+    overflow: hidden;
+    position: absolute;
+  }
+  img {
+    @include horizontal-center;
+    transform: translateX(-50%);
+    left: 58%;
+  }
+}
+.container {
+  padding-left: 280px;
+  padding-top: 100px;
+  .error-type {
+    font-size: 58px;
+    color: $primary-dark-color;
+    display: inline-block;
+  }
+  .error-message {
+    display: block;
+    color: $primary-color;
+  }
+}
+
