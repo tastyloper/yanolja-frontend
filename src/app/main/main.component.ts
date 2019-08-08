@@ -430,7 +430,7 @@ export class MainComponent implements OnInit {
     this.localeService.use(this.locale);
     this.minDate = new Date();
     this.maxDate = new Date();
-    this.minDate.setDate(this.minDate.getDate() - 1);
+    this.minDate.setDate(this.minDate.getDate());
     this.maxDate.setDate(this.maxDate.getDate() + 14);
 
     this.datePickerConfig = Object.assign({}, {
