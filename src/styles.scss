@@ -364,6 +364,7 @@ a, button {
 /* datepicker */
 bs-daterangepicker-container {
   border-radius: 2px;
+  z-index: 1;
 }
 .accommodation-list bs-daterangepicker-container {
   top: 10px !important;
