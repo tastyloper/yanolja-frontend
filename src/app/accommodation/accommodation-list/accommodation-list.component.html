@@ -262,10 +262,10 @@
                   <div class="alist-box-right-outter">
                     <div class="alist-rightbox-wrapper">
                       <div class="alist-rightbox-price">
-                        <h2 class="alist-price-total">{{list.daysPrice | number}} <span>원</span></h2>
+                        <h2 class="alist-price-total">{{(list.saleDaysPrice ? list.saleDaysPrice : list.dayPrice) | number}} 원</h2>
                         <p class="alist-price-avg">
                           1박평균
-                          {{list.daysPrice | number}} 원
+                          {{(list.saleDaysPrice ? list.saleDaysPrice : list.dayPrice) | number}} 원
                         </p>
                       </div>
                       <div class="alist-rightbox-btnBox">

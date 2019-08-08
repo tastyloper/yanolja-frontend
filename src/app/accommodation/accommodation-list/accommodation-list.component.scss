@@ -480,14 +480,16 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
 .alist-hotel-score {
   width: 28px;
   height: 28px;
-  border-radius: 4px 4px 4px 0;
+  // border-radius: 4px 4px 4px 0;
+  // background-color: #003580;
   font-size: 14px;
   font-weight: 600;
   line-height: 28px;
-  background-color: #003580;
-  color: #ffff;
+  
+  // color: #ffff;
   letter-spacing: 1px;
   text-align: center;
+  background-image: url('../../../assets/img/sub-title/comma.png');
 }
 
 .alist-hotel-score span {
