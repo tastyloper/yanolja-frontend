@@ -7,7 +7,9 @@
           숙소이용내역이 없습니다.
         </div>
         <div class="col-4" *ngFor="let list of pagedItems">
-          <a routerLink="/mypage/reservation/{{ list.reservationId }}" class="content-item">
+          <a routerLink="/mypage/reservation/{{ list.reservationId }}/"
+          [queryParams]="{ stayId: list.stayId }"
+          class="content-item">
             <div class="content-text-wrap">
               <div class="reservation-list-header">
                 <p class="reservation-list-status">
