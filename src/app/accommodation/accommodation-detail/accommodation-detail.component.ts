@@ -33,7 +33,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-accommodation-detail',
   templateUrl: './accommodation-detail.component.html',
-  styleUrls: ['./accommodation-detail.component.scss']
+  styleUrls: ['./accommodation-detail.component.scss'],
 })
 export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   @ViewChild('galleryTop', { static: true }) galleryTop;
