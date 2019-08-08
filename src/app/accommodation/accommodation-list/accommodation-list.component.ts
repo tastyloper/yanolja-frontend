@@ -20,7 +20,7 @@ declare const google: any;
 @Component({
   selector: 'app-accommodation-list',
   templateUrl: './accommodation-list.component.html',
-  styleUrls: ['./accommodation-list.component.scss']
+  styleUrls: ['./accommodation-list.component.scss'],
 })
 export class AccommodationListComponent implements OnInit {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
