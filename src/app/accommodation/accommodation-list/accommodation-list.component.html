@@ -11,10 +11,10 @@
             <div class="alist-popup-container" *ngIf="type">
               <div class="alist-type-popup-module">
                 <ul class="alist-popup-type-container alist-type-container-type">
-                  <li class="alist-popup-type-item" (click)="selectType('motel')">모텔</li>
-                  <li class="alist-popup-type-item" (click)="selectType('hotel')">호텔</li>
-                  <li class="alist-popup-type-item" (click)="selectType('guestHouse')">게스트하우스</li>
-                  <li class="alist-popup-type-item" (click)="selectType('pension')">펜션</li>
+                  <li class="alist-popup-type-item" (click)="selectType('모텔')">모텔</li>
+                  <li class="alist-popup-type-item" (click)="selectType('호텔/리조트')">호텔</li>
+                  <li class="alist-popup-type-item" (click)="selectType('게스트하우스')">게스트하우스</li>
+                  <li class="alist-popup-type-item" (click)="selectType('펜션/풀빌라')">펜션</li>
                 </ul>
               </div>
             </div>
@@ -42,14 +42,15 @@
               </div>
             </div>
           </div>
-          <div class="alist-search-date search-box" (click)="selectDate(inputDate)" (click)="toggle('calendar')">
+          <div class="alist-search-date search-box" (click)="toggle('calendar')">
             <div class="alist-search-frame">
               <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
               <button class="alist-search-inputbox">
                 <div class="form-group datePicker">
                   <input type="text" placeholder="예약하실 날짜를 선택하세요" class="form-control datePicker-input"
                     [bsConfig]="datePickerConfig" bsDaterangepicker [(ngModel)]="bsRangeValue" [container]="'.container-wrapper'"
-                    [bsValue]="bsValue" readonly #inputDate>
+                    [bsValue]="bsValue" readonly
+                    #inputDate>
                 </div>
               </button>
             </div>
@@ -106,13 +107,29 @@
           </div>
           <div class="btn-submit-container search-box" (click)="submitNav()">
             <div class="alist-search-frame">
-              <button class="alist-search-inputbox">검색</button>
+              <button class="alist-search-inputbox"><a routerLink="/accommodation" 
+                [queryParams]="{
+                  category:category, 
+                  selectRegion:selectRegion, 
+                  personnel:personnel,
+                  requestCheckIn:requestCheckIn,
+                  requestCheckOut:requestCheckOut,
+                  searchKeyword:searchKeyword,
+                  currentAddress:currentAddress,
+                  popularKeyword:popularKeyword,
+                  priceHigh:priceHigh,
+                  priceLow:priceLow,
+                  review:review,
+                  wish:wish
+                }">검색
+             
+              </a></button>
             </div>
           </div>
         </div>
         <div class="alist-search-items-container keyword-wrap">
           <i class="fa fa-search"></i>
-          <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요.">
+          <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요."(keyup)="keywordChange(input)" #input>
         </div>
       </section>
     </div>
@@ -120,16 +137,62 @@
   <div class="container">
     <article class="alist-whole-wrapper">
       <header class="alist-header">
+        {{review}}{{priceLow}}{{priceHigh}}
         <h2 class="alist-header-h2">검색된 숙소 {{sstayList.length}}개</h2>
         <ul class="alist-header-nav">
-          <li class="alist-header-nav-item">
-            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">평점순</a>
+            
+          <li class="alist-header-nav-item" (click)="sorting('review')" [class.active]="review === 'True'">
+            <a routerLink="/accommodation" [queryParams]="{
+                category:category, 
+                selectRegion:selectRegion, 
+                personnel:personnel,
+                requestCheckIn:requestCheckIn,
+                requestCheckOut:requestCheckOut,
+                searchKeyword:searchKeyword,
+                currentAddress:currentAddress,
+                popularKeyword:popularKeyword,
+                priceHigh:priceHigh,
+                priceLow:priceLow,
+                review:review,
+                wish:wish
+              }" class="alist-sort-option">
+              평점순
+            </a>
           </li>
-          <li class="alist-header-nav-item">
-            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">가격 낮은순</a>
+        
+          <li class="alist-header-nav-item"  [class.active]="priceLow === 'True'">
+            <a (click)="sorting('priceLow')" routerLink="/accommodation" [queryParams]="{
+              category:category, 
+              selectRegion:selectRegion, 
+              personnel:personnel,
+              requestCheckIn:requestCheckIn,
+              requestCheckOut:requestCheckOut,
+              searchKeyword:searchKeyword,
+              currentAddress:currentAddress,
+              popularKeyword:popularKeyword,
+              priceHigh:priceHigh,
+              priceLow:priceLow,
+              review:review,
+              wish:wish
+            }" class="alist-sort-option">
+            가격 낮은순
+            </a>
           </li>
-          <li class="alist-header-nav-item">
-            <a routerLink="/accommodation" [queryParams]="queryParams" class="alist-sort-option">가격 높은순</a>
+          <li class="alist-header-nav-item" (click)="sorting('priceHigh')"  [class.active]="priceHigh === 'True'">
+            <a routerLink="/accommodation" [queryParams]="{
+              category:category, 
+              selectRegion:selectRegion, 
+              personnel:personnel,
+              requestCheckIn:requestCheckIn,
+              requestCheckOut:requestCheckOut,
+              searchKeyword:searchKeyword,
+              currentAddress:currentAddress,
+              popularKeyword:popularKeyword,
+              priceHigh:priceHigh,
+              priceLow:priceLow,
+              review:review,
+              wish:wish
+            }" class="alist-sort-option">가격 높은순</a>
           </li>
         </ul>
       </header>
@@ -139,7 +202,8 @@
       <section class="alist-content-wrapper" *ngIf="!(isLoading$ | async)">
         <div class="alist-content-container" infiniteScroll [infiniteScrollDistance]="0.5" (scrolled)="onScroll($event)">
           <div class="alist-content-outter" *ngFor="let list of allPagedItems">
-              <a routerLink="/accommodation/{{list.stayId}}">
+              <a routerLink="/accommodation/{{list.stayId}}"
+              queryParams="{ minDate: bsRangeValue[0].toString(), maxDate: bsRangeValue[1].toString()}">
               <section class="alist-item-box">
                 <div class="alist-item-box-image-container">
                   <div class="alist-item-box-imgDetail"  [ngStyle]="{ 'background-image': 'url(' + list.mainImage + ')'}" title="호텔이름"></div>
@@ -182,19 +246,26 @@
                       </div>
                     </div>
                     <div class="alist-rightbox-priceOption">
-                      <div class="alist-priceOption">
+                      <div class="alist-priceOption" *ngIf="list.hoursPrice !== '0'">
                         <h4>대실</h4>
-                        <p *ngIf="list.hoursPrice">
-                          {{list.hoursPrice | number}}원
+                        <span class="maxHours">최대 {{ list.hoursAvailable }}시간</span>
+                        <p *ngIf="list.hoursPrice" class="priceBox">
+                            <span class="text-lineThrough">{{list.hoursPrice | number}}원</span>
+                          {{list.saleHoursPrice | number}}원
                         </p>
-                        <p *ngIf="!list.hoursPrice">
-                          - 원
-                          </p>
                       </div>
+                      <div class="alist-priceOption" *ngIf="list.hoursPrice === '0'">
+                          <h4>대실</h4>
+                          <p class="housrDisable">
+                            대실불가
+                          </p>
+                        </div>
                       <div class="alist-priceOption">
                         <h4>숙박</h4>
-                        <p>
-                          {{list.daysPrice | number}}원
+                        <span class="maxHour">{{list.daysCheckIn}}:00 시부터</span>
+                        <p *ngIf="list.saleDaysPrice" class="priceBox">
+                          <span class="text-lineThrough">{{list.daysPrice | number}}원</span>
+                          {{list.saleDaysPrice | number}}원
                         </p>
                       </div>
                     </div>
