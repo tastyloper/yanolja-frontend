@@ -37,17 +37,4 @@
       </ul>
     </nav>
   </div>
-  <ul class="temp-header">
-    <li><a routerLink="/accommodation">숙소리스트</a></li>
-    <li><a routerLink="/accommodation/595"
-      [queryParams]="{ minDate: 'Tue Aug 06 2019', maxDate: 'Tue Aug 08 2019'}">숙소상세</a></li>
-      <!--[queryParams]="{ minDate: bsRangeValue[0].toDateString(), maxDate: bsRangeValue[1].toDateString()}"-->
-    <li><a routerLink="/accommodation/1/review"
-      [queryParams]="{ totalComments: 1000, averageGrade: 4.5, totalGrade1: 4.6, totalGrade2: 4.2, totalGrade3: 4.4, totalGrade4: 4.7, stayId: 578 }">후기페이지</a></li>
-    <li><a routerLink="/accommodation/1/1">룸상세</a></li>
-    <li><a routerLink="/accommodation/1/37/payment"
-      [queryParams]="{ stay: '역삼 Hotel The Artist', hoursUntil: 22, hoursAvailable: 6, daysCheckIn: 15, daysCheckOut: 13, checkIn: '2019-08-10', checkOut: '2019-08-11', type: 0 }">결제</a></li> <!-- type : 0 = 대실, type : 1 = 숙박  -->
-    <li><a routerLink="/mypage">마이페이지</a></li>
-    <li><a routerLink="/ui">UI 모음</a></li>
-  </ul>
 </header>
