@@ -386,6 +386,27 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   background-color: rgba(0,0,0,0);
 }
 
+.noResults {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  align-items: center;
+  flex-direction: column;
+  .noResults-img{
+    width: 8%;
+    height: 8%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  span {
+    display: inline-block;
+    margin-top: 30px;
+  }
+}
+
 .alist-content-outter {
   a {
     display: block;
