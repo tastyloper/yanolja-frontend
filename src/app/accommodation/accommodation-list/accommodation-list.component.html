@@ -262,7 +262,7 @@
                         <span>{{list.averageGrade}}</span>
                       </div>
                       <div class="alist-hotel-review-label">
-                        <h3>좋음</h3>
+                        <h3>{{list.averageGrade >= 4.5 ? '우수' : list.averageGrade >= 3.5 ? '좋음' : list.averageGrade >= 2.5 ? '보통' : '별로'}}</h3>
                         <p>
                           {{list.totalComments}}개의 이용 후기
                         </p>

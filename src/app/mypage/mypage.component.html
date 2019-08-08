@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="mypage-body" [@fadeAnimation]="getRouterOutletState(outlet)">
-        <router-outlet #outlet="outlet"></router-outlet>
+        <router-outlet #outlet="outlet" (activate)="getUserInfo()"></router-outlet>
       </div>
     </div> 
   </div>

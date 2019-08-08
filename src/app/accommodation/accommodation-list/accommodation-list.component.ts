@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MapsAPILoader } from '@agm/core';
 import { ToastrService } from 'ngx-toastr';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
+import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 
 // StayListService import
 import { StayListService } from 'src/app/core/services/stay-list.service';
@@ -23,6 +24,8 @@ declare const google: any;
   styleUrls: ['./accommodation-list.component.scss'],
 })
 export class AccommodationListComponent implements OnInit {
+  @ViewChild(SwiperComponent, { static: true }) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isMapLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 //   tempList = [
@@ -1840,6 +1843,7 @@ export class AccommodationListComponent implements OnInit {
   contentConfig: SwiperConfigInterface = {
     slidesPerView: 'auto',
     freeMode: true,
+    loop: true,
     navigation: {
       nextEl: '.tag-swiper-button-next',
       prevEl: '.tag-swiper-button-prev',
@@ -1944,11 +1948,8 @@ export class AccommodationListComponent implements OnInit {
   ngOnInit() {
     this.allPagedItems = [];
     this.bsRangeValue = [this.minDate,  new Date(new Date().setDate(new Date().getDate() + 1))];
-    console.log('OnInit**');
     this.route.queryParams.subscribe(params => {
       if (params.popularKeyword) {
-        console.log('popular');
-        console.log(params, 'popular');
         this.selectType(params.category);
         this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
         this.personnel = params.personnel;
@@ -1959,6 +1960,15 @@ export class AccommodationListComponent implements OnInit {
         this.sstayList = [];
         this.type = false;
         this.getListPopular();
+        this.popularKeywords = this.popularKeywords.map((item, idx) => {
+          if (item.name === this.popularKeyword) {
+            item = { ...item, active: true };
+            this.directiveRef.setIndex(idx);
+          } else {
+            item = { ...item, active: false };
+          }
+          return item;
+        });
       } else {
         this.selectType(params.category);
         this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
@@ -2037,7 +2047,6 @@ export class AccommodationListComponent implements OnInit {
     this.isLoading$.next(true);
     this.stayList.getAListPopular(payload).subscribe(
       list => {
-        console.log('popularList', list);
         const copyList = list;
         this.sstayList = copyList;
         this.setPage(1);
@@ -2325,7 +2334,6 @@ export class AccommodationListComponent implements OnInit {
 
   sorting(select: string) {
     if (select === 'review') {
-      console.log('review');
       this.review = 'True';
       this.priceHigh = 'False';
       this.priceLow = 'False';
@@ -2359,7 +2367,6 @@ export class AccommodationListComponent implements OnInit {
 
     } else if (select === 'priceLow') {
       this.priceLow = 'True';
-      console.log('끼요오오오');
       this.review = 'False';
       this.priceHigh = 'False';
       const payload = {
