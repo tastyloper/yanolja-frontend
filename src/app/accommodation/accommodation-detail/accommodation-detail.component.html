@@ -255,8 +255,8 @@
             </div>
           </section>
           <section class="review-list" *ngIf="!!reviews">
-            <ng-container *ngFor="let comment of reviews">
-              <div class="review-item" *ngIf="!!comment">
+            <ng-container *ngFor="let comment of reviews let i = index">
+              <div class="review-item" *ngIf="!!comment && i < 2">
                 <div class="review-item-header">
                   <div class="grade">
                     <span [innerText]="getGrade(comment.grade)"></span>
