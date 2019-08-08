@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MapsAPILoader } from '@agm/core';
 import { ToastrService } from 'ngx-toastr';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
+import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 
 // StayListService import
 import { StayListService } from 'src/app/core/services/stay-list.service';
@@ -23,6 +24,8 @@ declare const google: any;
   styleUrls: ['./accommodation-list.component.scss'],
 })
 export class AccommodationListComponent implements OnInit {
+  @ViewChild(SwiperComponent, { static: true }) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isMapLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 //   tempList = [
@@ -1840,6 +1843,7 @@ export class AccommodationListComponent implements OnInit {
   contentConfig: SwiperConfigInterface = {
     slidesPerView: 'auto',
     freeMode: true,
+    loop: true,
     navigation: {
       nextEl: '.tag-swiper-button-next',
       prevEl: '.tag-swiper-button-prev',
@@ -1963,6 +1967,18 @@ export class AccommodationListComponent implements OnInit {
       this.sstayList = [];
       this.type = false;
       this.getList();
+
+      if (this.popularKeyword) {
+        this.popularKeywords = this.popularKeywords.map((item, idx) => {
+          if (item.name === this.popularKeyword) {
+            item = { ...item, active: true };
+            this.directiveRef.setIndex(idx);
+          } else {
+            item = { ...item, active: false };
+          }
+          return item;
+        });
+      }
     });
 
     this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
