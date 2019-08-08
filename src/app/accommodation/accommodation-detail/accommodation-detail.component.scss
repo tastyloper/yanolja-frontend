@@ -87,17 +87,31 @@ button {
   margin-bottom: 120px;
   position: relative;
 }
+.accomodation-detail {
+  position: relative;
+}
 .accomodation-detail h1 {
   height: 1px;
   width: 1px;
   padding: 1px;
   overflow: hidden;
+  position: absolute;
 }
 .accomodation-imgs-section h2 {
   height: 1px;
   width: 1px;
   padding: 1px;
   overflow: hidden;
+  position: absolute;
+}
+.dib-heart {
+  position: absolute;
+  top: 20px;
+  right: 90px;
+  z-index: 2;
+  font-size: 25px;
+  color: $primary-color;
+  cursor: pointer;
 }
 /*캐러셀*/
 .gallery-top .swiper-slide {

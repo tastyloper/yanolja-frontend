@@ -29,30 +29,32 @@
       </div>
     </section>
     <section class="review-list">
-      <div class="review-item" *ngFor="let comment of comments">
-        <div class="review-item-header">
-          <div class="grade"><span [innerText]="getGrade(comment.grade)"></span> <img src="/assets/img/common/comma-y.png"></div>
-          <p class="review-info">{{ comment.nickname }} | {{ comment.stay }} - {{ comment.reservedRoom }}</p>
-          <p class="review-date" [innerText]="splitDate(comment.created)"></p>
+      <ng-container *ngFor="let comment of comments">
+        <div class="review-item" *ngIf="comment">
+          <div class="review-item-header">
+            <div class="grade"><span [innerText]="getGrade(comment.grade)"></span> <img src="/assets/img/common/comma-y.png"></div>
+            <p class="review-info">{{ comment.nickname }} | {{ comment.stay }} - {{ comment.reservedRoom }}</p>
+            <p class="review-date" [innerText]="splitDate(comment.created)"></p>
+          </div>
+          <p class="review-content">{{ comment.text }}</p>
+          <div class="owner" *ngIf="comment['ownerComment-1']">
+            <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-1'])"></span></h5>
+            <p>{{ comment['ownerComment-1'] }}</p>
+          </div>
+          <div class="owner" *ngIf="comment['ownerComment-2']">
+            <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-2'])"></span></h5>
+            <p>{{ comment['ownerComment-2'] }}</p>
+          </div>
+          <div class="owner" *ngIf="comment['ownerComment-3']">
+            <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-3'])"></span></h5>
+            <p>{{ comment['ownerComment-3'] }}</p>
+          </div>
+          <div class="owner" *ngIf="comment['ownerComment-4']">
+            <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-4'])"></span></h5>
+            <p>{{ comment['ownerComment-4'] }}</p>
+          </div>
         </div>
-        <p class="review-content">{{ comment.text }}</p>
-        <div class="owner" *ngIf="comment['ownerComment-1']">
-          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-1'])"></span></h5>
-          <p>{{ comment['ownerComment-1'] }}</p>
-        </div>
-        <div class="owner" *ngIf="comment['ownerComment-2']">
-          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-2'])"></span></h5>
-          <p>{{ comment['ownerComment-2'] }}</p>
-        </div>
-        <div class="owner" *ngIf="comment['ownerComment-3']">
-          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-3'])"></span></h5>
-          <p>{{ comment['ownerComment-3'] }}</p>
-        </div>
-        <div class="owner" *ngIf="comment['ownerComment-4']">
-          <h5>사장님 댓글 <span [innerText]="splitDate(comment['ownerCommentCreated-4'])"></span></h5>
-          <p>{{ comment['ownerComment-4'] }}</p>
-        </div>
-      </div>
+      </ng-container>
     </section>
   </div>
 </section>

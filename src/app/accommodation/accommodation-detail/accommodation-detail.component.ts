@@ -46,7 +46,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
   // datepicker
   dateCustomClasses: DatepickerDateCustomClasses[];
-  bsValue: Date;
   bsRangeValue: Date[];
   maxDate: Date;
   minDate: Date;
@@ -63,6 +62,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   galleryThumbsConfig: SwiperConfigInterface;
 
   // component status
+  dibStatus: boolean;
   checkPersonModalStatus: boolean;
   facilitiesStatus: boolean;
   adultCount: number;
@@ -298,18 +298,11 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.bsValue = new Date();
     this.maxDate = new Date();
     this.minDate = new Date();
     this.form = new FormGroup({
       dateYMD: new FormControl(new Date())
     });
-
-    this.subTitleService.pagaTitle = `역삼 VERY SIX`;
-    this.subTitleService.pagaDescription = '4성급 · 서울특별시 강남구 테헤란로38길 7 (역삼동)';
-    this.subTitleService.grade = 2.5;
-    this.subTitleService.recommendation = '비추천';
-    this.subTitleService.review = '2개의 이용 후기';
 
 
     this.locale = 'ko';
@@ -318,7 +311,10 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
     this.maxDate.setDate(this.maxDate.getDate() + 90);
     this.minDate.setDate(this.minDate.getDate());
-    this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.bsRangeValue = [
+      new Date(),
+      new Date(new Date().setDate(new Date().getDate() + 1))
+    ];
     this.form.get('dateYMD').setValue(this.bsRangeValue);
 
     this.galleryTopConfig = {
@@ -347,12 +343,14 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.adultCount = 2;
     this.childrenCount = 0;
 
+
     this.route.paramMap
       .subscribe(param => {
         this.stayId = +param.get('id');
       });
     this.route.queryParamMap
       .subscribe(queryParam => {
+        if (!queryParam.get('minDate') || queryParam.get('maxDate')) { return; }
         const bsRangeValue =
         [
           new Date(Date.parse(queryParam.get('minDate'))),
@@ -361,14 +359,22 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
         this.form.get('dateYMD').setValue(bsRangeValue);
       });
 
+
     this.stayDetailLoading$.next(true);
     this.dataService.getStayDetail(this.stayId).subscribe(
       data => {
+        console.log(data);
         this.data = data;
         this.address = data.location;
         this.mapsAPILoader.load().then(() => {
           this.getLocationAddress();
         });
+
+        this.subTitleService.pagaTitle = this.data.name;
+        this.subTitleService.pagaDescription = `4성급 · ${this.data.location}`;
+        this.subTitleService.grade = this.data.averageGrade;
+        this.subTitleService.recommendation = this.evaluationText();
+        this.subTitleService.review = `${this.data.totalComments}개의 이용 후기`;
       },
       error => {
         console.log(error);
@@ -395,7 +401,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.dataService.getReviewList(this.stayId).subscribe(
       data => {
         this.reviews = data;
-        console.log(data);
       },
       error => {
         console.log(error);
@@ -403,10 +408,10 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       () => {
         this.reviewsLoading$.next(false);
     });
-    const test = new Date(7776000000);
-    console.log(Date.parse(this.minDate.toDateString()), Date.parse(this.maxDate.toDateString()), test);
-    // 7776000000
+    this.filterGetDibStay();
   }
+
+
   requestRoom() {
     this.roomsLoading$.next(true);
     this.dataService.getRoomList(
@@ -492,6 +497,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     return date.split('T')[0];
   }
   onValueChange(value: Date[]) {
+    if (!(value[0] || value[1])) { return; }
     this.bsRangeValue = value;
   }
 
@@ -519,7 +525,20 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       return;
     }
     this.dataService.postDibStay(this.stayId).subscribe(
-      data => console.log(data)
+      data => {
+        this.dibStatus = data.like;
+      }
+    );
+  }
+  filterGetDibStay() {
+    if (!this.authService.getToken()) { return; }
+    this.dataService.getDibStay().subscribe(
+      stays => {
+        stays.forEach(stay => {
+          if (stay.stayId !== this.data.stayId) { return; }
+          this.dibStatus = true;
+        });
+      }
     );
   }
 
@@ -552,7 +571,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       });
     }
   }
-  formatDate(date: Date) {
+  formatDate(date: Date): string {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();

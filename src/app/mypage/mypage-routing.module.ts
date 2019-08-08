@@ -8,8 +8,11 @@ import { AccountComponent } from './account/account.component';
 import { WishlistsComponent } from './wishlists/wishlists.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 
+import { AuthGuard } from '../core/guard/auth.guard';
+
 const routes: Routes = [
-  { path: 'mypage', component: MypageComponent, children: [
+  { path: 'mypage', component: MypageComponent, canActivate: [ AuthGuard ],
+    children: [
     { path: '', redirectTo: 'account', pathMatch: 'full' },
     { path: 'account', component: AccountComponent },
     { path: 'accountEdit', component: AccountEditComponent },
