@@ -164,8 +164,8 @@
   <div class="container">
     <article class="alist-whole-wrapper">
       <header class="alist-header">
-        {{review}}{{priceLow}}{{priceHigh}}
-        <h2 class="alist-header-h2">검색된 숙소 {{sstayList.length}}개</h2>
+        <h2 class="alist-header-h2" *ngIf="allPagedItems.length">검색된 숙소 {{sstayList.length}}개</h2>
+        <h2 class="alist-header-h2" *ngIf="!allPagedItems.length"></h2>
         <ul class="alist-header-nav">
             
           <li class="alist-header-nav-item" (click)="sorting('review')" [class.active]="review === 'True'">
@@ -228,6 +228,16 @@
       </div>
       <section class="alist-content-wrapper" *ngIf="!(isLoading$ | async)">
         <div class="alist-content-container" infiniteScroll [infiniteScrollDistance]="0.5" (scrolled)="onScroll($event)">
+
+          <div *ngIf="!allPagedItems.length">
+            <div class="noResults">
+              <div class="noResults-img">
+                <img src="../../../assets/img/accommodation/icon/no_results.png">
+              </div>
+              <span>검색 결과가 없습니다.</span>
+            </div>
+          </div>
+          <div *ngIf="allPagedItems.length">
           <div class="alist-content-outter" *ngFor="let list of allPagedItems">
               <a routerLink="/accommodation/{{list.stayId}}"
               queryParams="{ minDate: bsRangeValue[0].toString(), maxDate: bsRangeValue[1].toString()}">
@@ -262,10 +272,10 @@
                   <div class="alist-box-right-outter">
                     <div class="alist-rightbox-wrapper">
                       <div class="alist-rightbox-price">
-                        <h2 class="alist-price-total">{{list.daysPrice | number}} <span>원</span></h2>
+                        <h2 class="alist-price-total">{{(list.saleDaysPrice ? list.saleDaysPrice : list.dayPrice) | number}} 원</h2>
                         <p class="alist-price-avg">
                           1박평균
-                          {{list.daysPrice | number}} 원
+                          {{(list.saleDaysPrice ? list.saleDaysPrice : list.dayPrice) | number}} 원
                         </p>
                       </div>
                       <div class="alist-rightbox-btnBox">
@@ -300,6 +310,7 @@
                 </div>
               </section>
             </a>
+          </div>
           </div>
         </div>
       </section>

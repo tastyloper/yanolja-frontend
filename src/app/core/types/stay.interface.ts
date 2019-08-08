@@ -21,7 +21,7 @@ export interface StayList {
   personnel: string;
   requestCheckIn: string;
   requestCheckOut: string;
-  poplularKeyword?: string;
+  popularKeyword?: string;
   review?: string;
   wish?: string;
   priceLow?: string;
