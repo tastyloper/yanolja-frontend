@@ -412,11 +412,11 @@ button {
   background-color: $primary-color;
   margin-left: 30px;
   height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
   width: 120px;
-  font-size: 600;
   color: #fff;
   text-align: center;
-  padding-top: 6px;
 }
 .not-available {
   background-color: #848c94;

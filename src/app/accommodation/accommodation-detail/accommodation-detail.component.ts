@@ -363,6 +363,7 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.stayDetailLoading$.next(true);
     this.dataService.getStayDetail(this.stayId).subscribe(
       data => {
+        console.log(data);
         this.data = data;
         this.address = data.location;
         this.mapsAPILoader.load().then(() => {
@@ -370,10 +371,10 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
         });
 
         this.subTitleService.pagaTitle = this.data.name;
-        this.subTitleService.pagaDescription = `4성급 · ${this.data.location}`;
         this.subTitleService.grade = this.data.averageGrade;
         this.subTitleService.recommendation = this.evaluationText();
         this.subTitleService.review = `${this.data.totalComments}개의 이용 후기`;
+        this.filterCategory();
       },
       error => {
         console.log(error);
@@ -409,8 +410,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     });
     this.filterGetDibStay();
   }
-
-
   requestRoom() {
     this.roomsLoading$.next(true);
     this.dataService.getRoomList(
@@ -427,6 +426,13 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
       () => {
         this.roomsLoading$.next(false);
     });
+  }
+
+  filterCategory() {
+    this.subTitleService.pagaDescription = this.data.location;
+    if (this.data.category === '호텔/리조트') {
+      this.subTitleService.pagaDescription = `4성급 · ${this.data.location}`;
+    }
   }
 
   openMore() {
