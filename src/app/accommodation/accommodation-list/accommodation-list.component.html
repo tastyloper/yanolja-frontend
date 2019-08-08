@@ -146,7 +146,7 @@
         <div class="swiper-container" [swiper]="contentConfig">
           <div class="swiper-wrapper">
             <div class="swiper-slide" *ngFor="let popularKeyword of popularKeywords">
-              <a routerLink="/accommodation" class="tag-item" [class.active]="popularKeyword.active">
+              <a routerLink="/accommodation" class="tag-item" [class.active]="popularKeyword.active" (click)="popularClick(popularKeyword.name)">
                 # {{ popularKeyword.name }}
               </a>
             </div>
