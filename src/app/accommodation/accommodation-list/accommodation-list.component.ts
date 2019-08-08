@@ -8,6 +8,7 @@ import { listLocales } from 'ngx-bootstrap/chronos';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MapsAPILoader } from '@agm/core';
 import { ToastrService } from 'ngx-toastr';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interfaces';
 
 // StayListService import
 import { StayListService } from 'src/app/core/services/stay-list.service';
@@ -1824,6 +1825,84 @@ export class AccommodationListComponent implements OnInit {
   lng = 127.061167;
   zoom = 15;
   address = '서울특별시 성동구 성수동2가 277-43';
+  contentConfig: SwiperConfigInterface = {
+    slidesPerView: 'auto',
+    freeMode: true,
+    navigation: {
+      nextEl: '.tag-swiper-button-next',
+      prevEl: '.tag-swiper-button-prev',
+    }
+  };
+  popularKeywords = [
+    {
+      name: '프랜차이즈',
+      active: true
+    },
+    {
+      name: '신축/리모델링',
+      active: false
+    },
+    {
+      name: '초특가 할인',
+      active: false
+    },
+    {
+      name: '인기숙소',
+      active: false
+    },
+    {
+      name: '파티룸',
+      active: false
+    },
+    {
+      name: '무료영화',
+      active: false
+    },
+    {
+      name: '스파펜션',
+      active: false
+    },
+    {
+      name: '수영장호텔',
+      active: false
+    },
+    {
+      name: '오션뷰호텔',
+      active: false
+    },
+    {
+      name: '개별바베큐',
+      active: false
+    },
+    {
+      name: '추천리조트',
+      active: false
+    },
+    {
+      name: '초특가호텔',
+      active: false
+    },
+    {
+      name: '독채펜션',
+      active: false
+    },
+    {
+      name: '조식제공',
+      active: false
+    },
+    {
+      name: '투어/체험',
+      active: false
+    },
+    {
+      name: '커플룸',
+      active: false
+    },
+    {
+      name: '파티가능',
+      active: false
+    }
+  ];
 
   constructor(
     private modalService: BsModalService,
