@@ -1,4 +1,5 @@
 @import '../../../output-scss/common.scss';
+@import '~swiper/dist/css/swiper.min.css';
 
 button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   outline: none;
@@ -283,12 +284,60 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
   right: 0;
   width: 100%;
 }
-
 .alist-date-popup-h4 {
   margin-bottom: 20px;
   line-height: 16px;
   font-size: 14px;
   font-weight: 700;
+}
+.swiper-panel {
+  position: relative;
+  margin-top: 15px;
+  .swiper-container {
+    margin-right: 88px;
+  }
+  .swiper-slide {
+    display: inline-block;
+    width: auto;
+    padding: 8px 5px;
+    .tag-item {
+      padding: 5px 10px;
+      color: #FFF;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      &.active {
+        border-color: #FFF;
+      }
+    }
+  }
+  .tag-swiper-button {
+    position: absolute;
+    top: 0;
+    width: 39px;
+    height: 35px;
+    font-size: 25px;
+    color: #FFF;
+    border-radius: 2px;
+    cursor: pointer;
+    -webkit-transition: all 0.35s;
+    -moz-transition: all 0.35s;
+    transition: all 0.35s;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    i {
+      @include both-center;
+    }
+  }
+  .tag-swiper-button-prev {
+    right: 41px;
+  }
+  .tag-swiper-button-next {
+    right: 0;
+  }
 }
 
 // 숙소리스트 컨텐츠 전체 wrapper

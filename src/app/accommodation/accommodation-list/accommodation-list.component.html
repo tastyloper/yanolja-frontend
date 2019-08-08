@@ -127,6 +127,23 @@
           </div>
         </div>
       </div>
+      <div class="swiper-panel">
+        <div class="swiper-container" [swiper]="contentConfig">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" *ngFor="let popularKeyword of popularKeywords">
+              <a routerLink="/accommodation" class="tag-item" [class.active]="popularKeyword.active">
+                # {{ popularKeyword.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="tag-swiper-button tag-swiper-button-prev">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </div>
+        <div class="tag-swiper-button tag-swiper-button-next">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </div>
+      </div>
     </div>
   </div>
   <div class="container">
