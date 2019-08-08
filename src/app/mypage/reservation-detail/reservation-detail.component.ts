@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Template } from '@angular/compiler/src/render3/r3_ast';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -25,20 +25,34 @@ export class ReservationDetailComponent implements OnInit {
   isCheck: false;
   bookData: ReservationDetail;
   reservationId: string;
+  stayId: string;
 
   constructor(
     private subTitleService: SubTitleService,
     private modalService: BsModalService,
     private reservationService: ReservationService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.subTitleService.pagaTitle = '예약상세';
     this.subTitleService.pagaDescription = '내역을 확인해보세요!';
+    // original code getting reservationId
+    this.reservationId = (this.router.url).split('/')[3].split('?')[0];
 
-    this.reservationId = (this.router.url).split('/')[3];
+    // another code getting reservationId
+    // this.activatedRoute.paramMap.subscribe(
+    //   param => {
+    //     this.reservationId =  param.get('id');
+    //   }
+    // );
+    this.activatedRoute.queryParamMap.subscribe(
+      data => {
+        this.stayId = data.get('stayId');
+      }
+    );
 
     this.getData();
   }
