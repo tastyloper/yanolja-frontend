@@ -120,7 +120,11 @@
                     <span class="room-type">대실</span>
                     <span class="room-available-time">최대 {{room.hoursAvailable}}시간</span>
                   </div>
-                  <span class="room-price">{{room.saleHoursPrice | number}}원</span>
+                  <div *ngIf="true" class="room-price-div">
+                    <span class="room-shocking-price">{{room.hoursPrice | number}}원</span>
+                    <span class="room-price">{{room.saleHoursPrice | number}}원</span>
+                  </div>
+                  <span class="room-price" *ngIf="false">{{room.saleHoursPrice | number}}원</span>
                 </ng-container>
                 <span class="reservation-done" *ngIf="!room.rentalAvailable">예약마감</span>
                 </div>
@@ -132,7 +136,11 @@
                     <span class="room-type">숙박</span>
                     <span class="room-available-time">{{room.daysCheckIn}}:00 부터</span>
                   </div>
-                  <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                  <div *ngIf="true" class="room-price-div">
+                    <span class="room-shocking-price">{{room.daysPrice | number}}원</span>
+                    <span class="room-price">{{room.saleDaysPrice | number}}원</span>
+                  </div>
+                  <span class="room-price" *ngIf="false">{{room.saleDaysPrice | number}}원</span>
                   </ng-container>
                   <span class="reservation-done" *ngIf="!room.stayAvailable">예약마감</span>
                 </div>
