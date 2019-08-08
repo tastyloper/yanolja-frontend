@@ -3,6 +3,9 @@
     <div class="box">
       <!-- <h3 class="box-title">예약된 숙소</h3> -->
       <div class="row">
+        <div class="col-12" *ngIf="!pagedItems?.length">
+          숙소이용내역이 없습니다.
+        </div>
         <div class="col-4" *ngFor="let list of pagedItems">
           <a routerLink="/mypage/reservation/{{ list.reservationId }}" class="content-item">
             <div class="content-text-wrap">
