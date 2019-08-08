@@ -2112,7 +2112,7 @@ export class AccommodationListComponent implements OnInit {
   }
 
   submitNav() {
-    // this.allPagedItems = [];
+    this.keywordReset();
     this.person = false;
     this.location = false;
     this.type = false;
@@ -2122,35 +2122,49 @@ export class AccommodationListComponent implements OnInit {
     if (!this.personnel) {
       this.personnel = '2';
     }
-    const payload = {
+    this.router.navigate(['accommodation'], { queryParams: {
       category: this.category,
-      selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
+      selectRegion: this.selectRegion,
       personnel: this.personnel,
-      requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
-      requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
-      searchKeyword: this.searchKeyword ? this.searchKeyword : '',
-      currentAddress: this.currentAddress ? this.currentAddress : '',
+      requestCheckIn: this.requestCheckIn,
+      requestCheckOut: this.requestCheckOut,
+      searchKeyword: this.searchKeyword,
+      currentAddress: this.currentAddress,
       popularKeyword: '',
       priceHigh: this.priceHigh,
       priceLow: this.priceLow,
       review: this.review,
       wish: this.wish
-    };
-    this.isLoading$.next(true);
-    this.stayList.getAList(payload).subscribe(
-      list => {
-        this.allPagedItems = [];
-        const copyList = list;
-        this.sstayList = copyList;
-        this.setPage(1);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this.isLoading$.next(false);
-      }
-    );
+    } });
+    // const payload = {
+    //   category: this.category,
+    //   selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
+    //   personnel: this.personnel,
+    //   requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
+    //   requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
+    //   searchKeyword: this.searchKeyword ? this.searchKeyword : '',
+    //   currentAddress: this.currentAddress ? this.currentAddress : '',
+    //   popularKeyword: '',
+    //   priceHigh: this.priceHigh,
+    //   priceLow: this.priceLow,
+    //   review: this.review,
+    //   wish: this.wish
+    // };
+    // this.isLoading$.next(true);
+    // this.stayList.getAList(payload).subscribe(
+    //   list => {
+    //     this.allPagedItems = [];
+    //     const copyList = list;
+    //     this.sstayList = copyList;
+    //     this.setPage(1);
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   },
+    //   () => {
+    //     this.isLoading$.next(false);
+    //   }
+    // );
   }
 
   selectType(type: string) {
@@ -2429,5 +2443,9 @@ export class AccommodationListComponent implements OnInit {
         }
       );
     }
+  }
+
+  keywordReset() {
+    this.popularKeywords = this.popularKeywords.map(item => ({ ...item, active: false }));
   }
 }
