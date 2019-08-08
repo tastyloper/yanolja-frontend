@@ -1950,25 +1950,19 @@ export class AccommodationListComponent implements OnInit {
     this.bsRangeValue = [this.minDate,  new Date(new Date().setDate(new Date().getDate() + 1))];
     console.log('OnInit**');
     this.route.queryParams.subscribe(params => {
-      console.log('params', params.priceLow);
-      this.selectType(params.category);
-      this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
-      this.personnel = params.personnel;
-      this.requestCheckIn = params.requestCheckIn;
-      this.requestCheckOut = params.requestCheckOut;
-      this.searchKeyword = params.searchKeyword;
-      this.currentAddress = params.currentAddress;
-      this.popularKeyword = params.popularKeyword;
-      this.priceHigh =  params.priceHigh ? params.priceHigh : this.priceHigh;
-      this.priceLow =  params.priceLow ? params.priceLow : this.priceLow;
-      this.review =  params.review ? params.review : this.review;
-      this.wish = params.wish ? params.wish : this.wish;
-
-      this.sstayList = [];
-      this.type = false;
-      this.getList();
-
-      if (this.popularKeyword) {
+      if (params.popularKeyword) {
+        console.log('popular');
+        console.log(params, 'popular');
+        this.selectType(params.category);
+        this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
+        this.personnel = params.personnel;
+        this.requestCheckIn = params.requestCheckIn;
+        this.requestCheckOut = params.requestCheckOut;
+        this.currentAddress = params.currentAddress;
+        this.popularKeyword = params.popularKeyword;
+        this.sstayList = [];
+        this.type = false;
+        this.getListPopular();
         this.popularKeywords = this.popularKeywords.map((item, idx) => {
           if (item.name === this.popularKeyword) {
             item = { ...item, active: true };
@@ -1978,18 +1972,29 @@ export class AccommodationListComponent implements OnInit {
           }
           return item;
         });
+      } else {
+        this.selectType(params.category);
+        this.selectRegion = params.selectRegion ? params.selectRegion : this.selectRegion;
+        this.personnel = params.personnel;
+        this.requestCheckIn = params.requestCheckIn;
+        this.requestCheckOut = params.requestCheckOut;
+        this.searchKeyword = params.searchKeyword;
+        this.currentAddress = params.currentAddress;
+        this.popularKeyword = params.popularKeyword;
+        this.priceHigh =  params.priceHigh ? params.priceHigh : this.priceHigh;
+        this.priceLow =  params.priceLow ? params.priceLow : this.priceLow;
+        this.review =  params.review ? params.review : this.review;
+        this.wish = params.wish ? params.wish : this.wish;
       }
     });
 
-    this.searchBarLocShow = this.searchBar.location ? this.searchBar.location : '지역을 고르세요';
+    this.searchBarLocShow = this.selectRegion ? this.selectRegion : '지역을 고르세요';
   }
-
   getList() {
     this.allPagedItems = [];
     if (!this.personnel) {
       this.personnel = '2';
     }
-
     this.requestCheckIn = this.formatDate(this.bsRangeValue[0]) + `+11:00:00`;
     this.requestCheckOut = this.formatDate(this.bsRangeValue[1]) + `+11:00:00`;
     const payload = {
@@ -2009,6 +2014,39 @@ export class AccommodationListComponent implements OnInit {
     this.isLoading$.next(true);
     this.stayList.getAList(payload).subscribe(
       list => {
+        const copyList = list;
+        this.sstayList = copyList;
+        this.setPage(1);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.isLoading$.next(false);
+      }
+    );
+  }
+
+  getListPopular() {
+    this.allPagedItems = [];
+    if (!this.personnel) {
+      this.personnel = '2';
+    }
+    this.requestCheckIn = this.formatDate(this.bsRangeValue[0]) + `+11:00:00`;
+    this.requestCheckOut = this.formatDate(this.bsRangeValue[1]) + `+11:00:00`;
+    const payload = {
+      category: this.category,
+      selectRegion : this.keyword ? '' : this.selectRegion,
+      personnel: this.personnel,
+      requestCheckIn: this.requestCheckIn,
+      requestCheckOut: this.requestCheckOut,
+      popularKeyword: this.popularKeyword,
+      currentAddress: this.currentAddress ? this.currentAddress : ''
+    };
+    this.isLoading$.next(true);
+    this.stayList.getAListPopular(payload).subscribe(
+      list => {
+        console.log('popularList', list);
         const copyList = list;
         this.sstayList = copyList;
         this.setPage(1);
