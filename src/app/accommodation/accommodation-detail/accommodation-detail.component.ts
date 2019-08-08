@@ -363,7 +363,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.stayDetailLoading$.next(true);
     this.dataService.getStayDetail(this.stayId).subscribe(
       data => {
-        console.log(data);
         this.data = data;
         this.address = data.location;
         this.mapsAPILoader.load().then(() => {
