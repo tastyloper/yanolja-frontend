@@ -366,6 +366,10 @@ bs-daterangepicker-container {
   border-radius: 2px;
   z-index: 1;
 }
+.main-wrapper bs-daterangepicker-container {
+  top: 10px !important;
+  left: 157px !important;
+}
 .accommodation-list bs-daterangepicker-container {
   top: 10px !important;
   left: 157px !important;
