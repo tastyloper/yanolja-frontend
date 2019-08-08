@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -1922,7 +1922,8 @@ export class AccommodationListComponent implements OnInit {
     private route: ActivatedRoute,
     private localeService: BsLocaleService,
     private toastr: ToastrService,
-    private stayList: StayListService
+    private stayList: StayListService,
+    private router: Router
   ) {
 
     this.localeService.use(this.locale);
@@ -2379,4 +2380,31 @@ export class AccommodationListComponent implements OnInit {
     }
   }
 
+  popularClick(name: string) {
+    this.popularKeywords = this.popularKeywords.map(item => {
+      if (item.name === name) {
+        item = { ...item, active: true };
+      } else {
+        item = { ...item, active: false };
+      }
+      return item;
+    });
+
+    this.popularKeyword = name;
+
+    this.router.navigate(['accommodation'], { queryParams: {
+      category: this.category,
+      selectRegion: this.selectRegion,
+      personnel: this.personnel,
+      requestCheckIn: this.requestCheckIn,
+      requestCheckOut: this.requestCheckOut,
+      searchKeyword: this.searchKeyword,
+      currentAddress: this.currentAddress,
+      popularKeyword: this.popularKeyword,
+      priceHigh: this.priceHigh,
+      priceLow: this.priceLow,
+      review: this.review,
+      wish: this.wish
+    }});
+  }
 }
