@@ -24,10 +24,6 @@ export class MypageComponent implements OnInit {
 
   ngOnInit() {
     this.getUserInfo();
-
-    this.router.events.subscribe(_ => {
-      this.getUserInfo();
-    });
   }
 
   getRouterOutletState(outlet) {
@@ -35,14 +31,16 @@ export class MypageComponent implements OnInit {
   }
 
   getUserInfo() {
-    this.authService.getUser().subscribe(
-      data => {
-        this.nickname = data.nickname;
-        this.reservedCount = data.reservedCount;
-      },
-      error => {
-        this.toastr.error('회원정보를 가져오는데 에러가 났습니다.');
-      }
-    );
+    if (this.authService.getToken()) {
+      this.authService.getUser().subscribe(
+        data => {
+          this.nickname = data.nickname;
+          this.reservedCount = data.reservedCount;
+        },
+        error => {
+          this.toastr.error('회원정보를 가져오는데 에러가 났습니다.');
+        }
+      );
+    }
   }
 }
