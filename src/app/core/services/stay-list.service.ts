@@ -27,7 +27,6 @@ export class StayListService {
       .set('wish', payload.wish)
       .set('priceLow', payload.priceLow)
       .set('priceHigh', payload.priceHigh);
-    console.log(payload.priceLow , 'service');
 
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
@@ -41,7 +40,7 @@ export class StayListService {
       .set('requestCheckOut', payload.requestCheckOut)
       .set('popularKeyword', payload.popularKeyword)
       .set('currentAddress', payload.currentAddress);
-      console.log('popularParams', params);
+
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
 
@@ -56,7 +55,7 @@ export class StayListService {
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('review', payload.review);
-    console.log(payload.review , 'service-review');
+
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
 
@@ -71,7 +70,6 @@ export class StayListService {
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('priceLow', payload.priceLow);
-    console.log(payload.priceLow , 'service-priceLow');
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
 
@@ -86,7 +84,6 @@ export class StayListService {
       .set('searchKeyword', payload.searchKeyword)
       .set('currentAddress', payload.currentAddress)
       .set('priceHigh', payload.priceHigh);
-    console.log(payload.priceHigh , 'service-priceHigh');
     return this.http.get<Stay[]>(this.appUrl, { params });
   }
 }
