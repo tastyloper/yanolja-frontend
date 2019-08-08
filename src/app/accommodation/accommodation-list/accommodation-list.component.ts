@@ -1843,7 +1843,6 @@ export class AccommodationListComponent implements OnInit {
   contentConfig: SwiperConfigInterface = {
     slidesPerView: 'auto',
     freeMode: true,
-    loop: true,
     navigation: {
       nextEl: '.tag-swiper-button-next',
       prevEl: '.tag-swiper-button-prev',
@@ -1852,7 +1851,7 @@ export class AccommodationListComponent implements OnInit {
   popularKeywords = [
     {
       name: '프랜차이즈',
-      active: true
+      active: false
     },
     {
       name: '신축/리모델링',
@@ -2430,33 +2429,5 @@ export class AccommodationListComponent implements OnInit {
         }
       );
     }
-  }
-
-  popularClick(name: string) {
-    this.popularKeywords = this.popularKeywords.map(item => {
-      if (item.name === name) {
-        item = { ...item, active: true };
-      } else {
-        item = { ...item, active: false };
-      }
-      return item;
-    });
-
-    this.popularKeyword = name;
-
-    this.router.navigate(['accommodation'], { queryParams: {
-      category: this.category,
-      selectRegion: this.selectRegion,
-      personnel: this.personnel,
-      requestCheckIn: this.requestCheckIn,
-      requestCheckOut: this.requestCheckOut,
-      searchKeyword: this.searchKeyword,
-      currentAddress: this.currentAddress,
-      popularKeyword: this.popularKeyword,
-      priceHigh: this.priceHigh,
-      priceLow: this.priceLow,
-      review: this.review,
-      wish: this.wish
-    }});
   }
 }

@@ -146,7 +146,21 @@
         <div class="swiper-container" [swiper]="contentConfig">
           <div class="swiper-wrapper">
             <div class="swiper-slide" *ngFor="let popularKeyword of popularKeywords">
-              <a routerLink="/accommodation" class="tag-item" [class.active]="popularKeyword.active" (click)="popularClick(popularKeyword.name)">
+              <a routerLink="/accommodation"  class="tag-item" [class.active]="popularKeyword.active"
+                [queryParams]="{
+                  category:category, 
+                  selectRegion:selectRegion, 
+                  personnel:personnel,
+                  requestCheckIn:requestCheckIn,
+                  requestCheckOut:requestCheckOut,
+                  searchKeyword:searchKeyword,
+                  currentAddress:currentAddress,
+                  popularKeyword:popularKeyword.name,
+                  priceHigh:priceHigh,
+                  priceLow:priceLow,
+                  review:review,
+                  wish:wish
+                }">
                 # {{ popularKeyword.name }}
               </a>
             </div>
