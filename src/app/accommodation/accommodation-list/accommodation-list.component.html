@@ -165,62 +165,20 @@
   <div class="container">
     <article class="alist-whole-wrapper">
       <header class="alist-header">
-        <h2 class="alist-header-h2" *ngIf="allPagedItems.length">검색된 숙소 {{sstayList.length}}개</h2>
-        <h2 class="alist-header-h2" *ngIf="!allPagedItems.length"></h2>
+        <h2 class="alist-header-h2">검색된 숙소 {{sstayList.length}}개</h2>
         <ul class="alist-header-nav">
-            
-          <li class="alist-header-nav-item" (click)="sorting('review')" [class.active]="review === 'True'">
-            <a routerLink="/accommodation" [queryParams]="{
-                category:category, 
-                selectRegion:selectRegion, 
-                personnel:personnel,
-                requestCheckIn:requestCheckIn,
-                requestCheckOut:requestCheckOut,
-                searchKeyword:searchKeyword,
-                currentAddress:currentAddress,
-                popularKeyword:popularKeyword,
-                priceHigh:priceHigh,
-                priceLow:priceLow,
-                review:review,
-                wish:wish
-              }" class="alist-sort-option">
-              평점순
+          <li class="alist-header-nav-item" [class.active]="review === 'True'">
+            <a (click)="sorting('review')" class="alist-sort-option">
+              후기 많은순
             </a>
           </li>
-        
-          <li class="alist-header-nav-item"  [class.active]="priceLow === 'True'">
-            <a (click)="sorting('priceLow')" routerLink="/accommodation" [queryParams]="{
-              category:category, 
-              selectRegion:selectRegion, 
-              personnel:personnel,
-              requestCheckIn:requestCheckIn,
-              requestCheckOut:requestCheckOut,
-              searchKeyword:searchKeyword,
-              currentAddress:currentAddress,
-              popularKeyword:popularKeyword,
-              priceHigh:priceHigh,
-              priceLow:priceLow,
-              review:review,
-              wish:wish
-            }" class="alist-sort-option">
+          <li class="alist-header-nav-item" [class.active]="priceLow === 'True'">
+            <a (click)="sorting('priceLow')" class="alist-sort-option">
             가격 낮은순
             </a>
           </li>
-          <li class="alist-header-nav-item" (click)="sorting('priceHigh')"  [class.active]="priceHigh === 'True'">
-            <a routerLink="/accommodation" [queryParams]="{
-              category:category, 
-              selectRegion:selectRegion, 
-              personnel:personnel,
-              requestCheckIn:requestCheckIn,
-              requestCheckOut:requestCheckOut,
-              searchKeyword:searchKeyword,
-              currentAddress:currentAddress,
-              popularKeyword:popularKeyword,
-              priceHigh:priceHigh,
-              priceLow:priceLow,
-              review:review,
-              wish:wish
-            }" class="alist-sort-option">가격 높은순</a>
+          <li class="alist-header-nav-item" [class.active]="priceHigh === 'True'">
+            <a (click)="sorting('priceHigh')" class="alist-sort-option">가격 높은순</a>
           </li>
         </ul>
       </header>
@@ -254,9 +212,6 @@
                         <i class="alist-search-icon fa fa-map-marker"></i>
                         {{list.directions}}
                       </p>
-                      <!-- <div class="alist-hotel-service">
-                        <span class="alist-hotel-service-label">무료 Wi-Fi</span>
-                      </div> -->
                     </div>
                     <div class="alist-hotel-review-container">
                       <div class="alist-hotel-score">
