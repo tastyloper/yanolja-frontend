@@ -201,8 +201,8 @@
             </a>
           </li>
         
-          <li class="alist-header-nav-item"  [class.active]="priceLow === 'True'">
-            <a (click)="sorting('priceLow')" routerLink="/accommodation" [queryParams]="{
+          <li class="alist-header-nav-item"  [class.active]="priceLow === 'True'" (click)="sorting('priceLow')">
+            <a routerLink="/accommodation" [queryParams]="{
               category:category, 
               selectRegion:selectRegion, 
               personnel:personnel,
