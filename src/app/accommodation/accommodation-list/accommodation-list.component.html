@@ -116,28 +116,15 @@
           </div>
           <div class="keyword-wrap">
             <i class="fa fa-search"></i>
-            <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요." (input)="keywordChange(input)" #input>
+            <input type="text" class="search-box keyword-input" placeholder="키워드를 입력해주세요."
+                  (input)="keywordChange(input)" #input [(ngModel)]="searchKeyword">
           </div>
         </div>
         <div class="align-self-stretch">
-          <div class="btn-submit-container search-box" (click)="submitNav()">
+          <div class="btn-submit-container search-box">
             <div class="alist-search-frame">
-              <button class="alist-search-inputbox"><a routerLink="/accommodation" 
-                [queryParams]="{
-                  category:category, 
-                  selectRegion:selectRegion, 
-                  personnel:personnel,
-                  requestCheckIn:requestCheckIn,
-                  requestCheckOut:requestCheckOut,
-                  searchKeyword:searchKeyword,
-                  currentAddress:currentAddress,
-                  popularKeyword:popularKeyword,
-                  priceHigh:priceHigh,
-                  priceLow:priceLow,
-                  review:review,
-                  wish:wish
-                }">검색
-              </a></button>
+              <a class="alist-search-inputbox" (click)="submitNav()">검색
+              </a>
             </div>
           </div>
         </div>
