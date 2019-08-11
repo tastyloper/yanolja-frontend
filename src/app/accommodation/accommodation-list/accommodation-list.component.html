@@ -172,27 +172,8 @@
               후기 많은순
             </a>
           </li>
-<<<<<<< HEAD
-        
-          <li class="alist-header-nav-item"  [class.active]="priceLow === 'True'" (click)="sorting('priceLow')">
-            <a routerLink="/accommodation" [queryParams]="{
-              category:category, 
-              selectRegion:selectRegion, 
-              personnel:personnel,
-              requestCheckIn:requestCheckIn,
-              requestCheckOut:requestCheckOut,
-              searchKeyword:searchKeyword,
-              currentAddress:currentAddress,
-              popularKeyword:popularKeyword,
-              priceHigh:priceHigh,
-              priceLow:priceLow,
-              review:review,
-              wish:wish
-            }" class="alist-sort-option">
-=======
           <li class="alist-header-nav-item" [class.active]="priceLow === 'True'">
             <a (click)="sorting('priceLow')" class="alist-sort-option">
->>>>>>> rmorigin/develop
             가격 낮은순
             </a>
           </li>
