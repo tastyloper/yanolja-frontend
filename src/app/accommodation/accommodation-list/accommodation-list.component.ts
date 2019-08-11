@@ -12,9 +12,9 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper/dist/lib/swiper.interf
 import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 
 // StayListService import
-import { StayListService } from 'src/app/core/services/stay-list.service';
+import { StayListService } from '../../core/services/stay-list.service';
 // Interface of Stay import
-import { Stay, StayList } from '../../core/types/stay.interface';
+import { StayList } from '../../core/types/stay.interface';
 
 declare const google: any;
 
@@ -1918,6 +1918,7 @@ export class AccommodationListComponent implements OnInit {
       active: false
     }
   ];
+  filter: number;
 
   constructor(
     private modalService: BsModalService,
@@ -1997,6 +1998,7 @@ export class AccommodationListComponent implements OnInit {
     }
     this.requestCheckIn = this.formatDate(this.bsRangeValue[0]) + `+11:00:00`;
     this.requestCheckOut = this.formatDate(this.bsRangeValue[1]) + `+11:00:00`;
+
     const payload = {
       category: this.category,
       selectRegion : this.keyword ? '' : this.selectRegion,
@@ -2005,12 +2007,18 @@ export class AccommodationListComponent implements OnInit {
       requestCheckOut: this.requestCheckOut,
       searchKeyword: this.keyword ? this.keyword : '',
       popularKeyword: '',
-      priceHigh: 'False',
       currentAddress: this.currentAddress ? this.currentAddress : '',
-      priceLow: 'False',
-      review: 'False',
-      wish: 'False'
+      priceHigh: '',
+      priceLow: '',
+      review: ''
     };
+    if (this.priceHigh === 'True') {
+      payload.priceHigh = 'True';
+    } else if (this.priceLow === 'True') {
+      payload.priceLow = 'True';
+    } else if (this.review === 'True') {
+      payload.review = 'True';
+    }
     this.isLoading$.next(true);
     this.stayList.getAList(payload).subscribe(
       list => {
@@ -2131,40 +2139,10 @@ export class AccommodationListComponent implements OnInit {
       searchKeyword: this.searchKeyword,
       currentAddress: this.currentAddress,
       popularKeyword: '',
-      priceHigh: this.priceHigh,
-      priceLow: this.priceLow,
-      review: this.review,
-      wish: this.wish
+      priceHigh: this.priceHigh === 'True' ? this.priceHigh : '',
+      priceLow: this.priceLow === 'True' ? this.priceHigh : '',
+      review: this.review === 'True' ? this.priceHigh : ''
     } });
-    // const payload = {
-    //   category: this.category,
-    //   selectRegion : (this.searchKeyword || this.currentAddress) ? '' : this.selectRegion,
-    //   personnel: this.personnel,
-    //   requestCheckIn: this.formatDate(this.bsRangeValue[0]) + `+11:00:00`,
-    //   requestCheckOut: this.formatDate(this.bsRangeValue[1]) + `+11:00:00`,
-    //   searchKeyword: this.searchKeyword ? this.searchKeyword : '',
-    //   currentAddress: this.currentAddress ? this.currentAddress : '',
-    //   popularKeyword: '',
-    //   priceHigh: this.priceHigh,
-    //   priceLow: this.priceLow,
-    //   review: this.review,
-    //   wish: this.wish
-    // };
-    // this.isLoading$.next(true);
-    // this.stayList.getAList(payload).subscribe(
-    //   list => {
-    //     this.allPagedItems = [];
-    //     const copyList = list;
-    //     this.sstayList = copyList;
-    //     this.setPage(1);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   },
-    //   () => {
-    //     this.isLoading$.next(false);
-    //   }
-    // );
   }
 
   selectType(type: string) {
@@ -2179,6 +2157,7 @@ export class AccommodationListComponent implements OnInit {
     this.toggle('location');
     this.selectRegion = item;
     this.searchBarLocShow = item;
+    this.currentAddress = '';
   }
 
   formatDate(date: Date) {
@@ -2313,7 +2292,7 @@ export class AccommodationListComponent implements OnInit {
 
   locationComplete() {
     this.modalRef.hide();
-
+    this.selectRegion = '';
     this.currentAddress = this.address;
     this.searchBarLocShow = this.address;
   }
@@ -2362,21 +2341,7 @@ export class AccommodationListComponent implements OnInit {
         review: this.review,
       };
 
-      this.isLoading$.next(true);
-      this.stayList.getAListReview(payload).subscribe(
-        list => {
-          this.allPagedItems = [];
-          const copyList = list;
-          this.sstayList = copyList;
-          this.setPage(1);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          this.isLoading$.next(false);
-        }
-      );
+      this.router.navigate(['accommodation'], { queryParams: payload });
 
     } else if (select === 'priceLow') {
       this.priceLow = 'True';
@@ -2394,21 +2359,7 @@ export class AccommodationListComponent implements OnInit {
         priceLow: this.priceLow,
       };
 
-      this.isLoading$.next(true);
-      this.stayList.getAListPriceLow(payload).subscribe(
-        list => {
-          this.allPagedItems = [];
-          const copyList = list;
-          this.sstayList = copyList;
-          this.setPage(1);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          this.isLoading$.next(false);
-        }
-      );
+      this.router.navigate(['accommodation'], { queryParams: payload });
 
     } else if (select === 'priceHigh') {
       this.priceHigh = 'True';
@@ -2427,21 +2378,7 @@ export class AccommodationListComponent implements OnInit {
         priceHigh: this.priceHigh,
       };
 
-      this.isLoading$.next(true);
-      this.stayList.getAListPriceHigh(payload).subscribe(
-        list => {
-          this.allPagedItems = [];
-          const copyList = list;
-          this.sstayList = copyList;
-          this.setPage(1);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          this.isLoading$.next(false);
-        }
-      );
+      this.router.navigate(['accommodation'], { queryParams: payload });
     }
   }
 

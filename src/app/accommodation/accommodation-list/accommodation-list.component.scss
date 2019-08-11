@@ -362,28 +362,20 @@ button:not(.btn-primary):not(.btn-secondary):not(.stepper-modifier) {
 }
 
 .alist-header-nav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  .active a{
-    color: #FF3478; 
-  }
-}
-
-.alist-header-nav-item {
-  font-weight: 700;
-  color: #343a40;
   margin-right: 10px;
-  font-size: 13px;
-}
-
-.alist-sort-option {
-  color: #343a40;
-  font-weight: 700;
-  padding-left: 8px;
-  font-size: 13px;
-  background-color: rgba(0,0,0,0);
+  .alist-header-nav-item {
+    display: inline-block;
+    margin-left: 15px;
+    .alist-sort-option {
+      display: block;
+      color: #343a40;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    &.active .alist-sort-option {
+      color: $primary-color;
+    }
+  }
 }
 
 .noResults {
