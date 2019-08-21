@@ -363,7 +363,6 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
     this.stayDetailLoading$.next(true);
     this.dataService.getStayDetail(this.stayId).subscribe(
       data => {
-        console.log(data);
         this.data = data;
         this.address = data.location;
         this.mapsAPILoader.load().then(() => {
@@ -462,9 +461,9 @@ export class AccommodationDetailComponent implements AfterViewInit, OnInit {
 
   evaluationText() {
     if (this.data.averageGrade >= 4.5) { return '우수함'; }
-    if (this.data.averageGrade >= 4 && this.data.averageGrade < 4.5) { return '좋음'; }
-    if (this.data.averageGrade >= 3.5 && this.data.averageGrade < 4) { return '보통'; }
-    if (this.data.averageGrade < 3.5) { return '비추'; }
+    if (this.data.averageGrade >= 3.5 && this.data.averageGrade < 4.5) { return '좋음'; }
+    if (this.data.averageGrade >= 2.5 && this.data.averageGrade < 3.5) { return '보통'; }
+    if (this.data.averageGrade < 2.5) { return '별로'; }
   }
 
   serviceText(serviceKind: string) {
